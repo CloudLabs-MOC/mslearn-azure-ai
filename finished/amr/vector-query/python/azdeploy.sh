@@ -2,6 +2,9 @@
 
 # Change the values of these variables as needed
 
+# rg="<your-resource-group-name>"  # Resource Group name
+# location="<your-azure-region>"   # Azure region for the resources
+
 rg="rg-exercises" # Resource Group name
 location="westus2" # Azure region for the resources
 
@@ -9,12 +12,39 @@ location="westus2" # Azure region for the resources
 # DON'T CHANGE ANYTHING BELOW THIS LINE.
 # ============================================================================
 
-# Generate consistent hash from username (always produces valid Azure resource name)
-user_hash=$(echo -n "$USER" | sha1sum | cut -c1-8)
+# Generate consistent hash from Azure user object ID (based on az login account)
+user_object_id=$(az ad signed-in-user show --query "id" -o tsv 2>/dev/null)
+if [ -z "$user_object_id" ]; then
+    echo "Error: Not authenticated with Azure. Please run: az login"
+    exit 1
+fi
+user_hash=$(echo -n "$user_object_id" | sha1sum | cut -c1-8)
 cache_name="amr-exercise-${user_hash}"
+
+# Function to create resource group if it doesn't exist
+create_resource_group() {
+    echo "Checking resource group '$rg'..."
+    local exists=$(az group exists --name $rg)
+    if [ "$exists" = "false" ]; then
+        az group create --name $rg --location $location > /dev/null 2>&1
+        echo "Resource group created: $rg"
+    else
+        echo "Resource group already exists: $rg"
+    fi
+}
 
 # Function to create Azure Managed Redis resource
 create_redis_resource() {
+    create_resource_group
+    echo ""
+
+    # Check if the cluster already exists
+    local cluster_state=$(az redisenterprise show --resource-group $rg --name $cache_name --query "provisioningState" -o tsv 2>/dev/null)
+    if [ -n "$cluster_state" ]; then
+        echo "Azure Managed Redis resource already exists: $cache_name (State: $cluster_state)"
+        return 0
+    fi
+
     echo "Creating Azure Managed Redis Enterprise cluster '$cache_name'..."
 
     # Create the Redis Enterprise cluster (E10 is the cheapest SKU that supports modules)
@@ -24,9 +54,8 @@ create_redis_resource() {
         --location $location \
         --sku Enterprise_E10 \
         --public-network-access "Enabled" \
-        --clustering-policy "EnterpriseCluster" \
-        --eviction-policy "NoEviction" \
-        --modules "name=RediSearch" \
+        --access-keys-auth "Enabled" \
+        --no-database \
         --no-wait
 
     echo "The Azure Managed Redis Enterprise cluster is being created and takes 5-10 minutes to complete."
@@ -36,59 +65,84 @@ create_redis_resource() {
 # Function to check deployment status
 check_deployment_status() {
     echo "Checking deployment status..."
-    az redisenterprise show --resource-group $rg --name $cache_name --query "provisioningState"
+    echo ""
+
+    echo "Cluster ($cache_name):"
+    local cluster_state=$(az redisenterprise show --resource-group $rg --name $cache_name --query "provisioningState" -o tsv 2>/dev/null)
+    if [ -n "$cluster_state" ]; then
+        echo "  Provisioning state: $cluster_state"
+    else
+        echo "  Status: Not created"
+    fi
+
+    echo ""
+    echo "Database:"
+    local db_state=$(az redisenterprise database show --resource-group $rg --cluster-name $cache_name --query "provisioningState" -o tsv 2>/dev/null)
+    if [ -n "$db_state" ]; then
+        echo "  Provisioning state: $db_state"
+    else
+        echo "  Status: Not created"
+    fi
 }
 
-# Function to retrieve endpoint and access key
-retrieve_endpoint_and_key() {
+# Function to create database and retrieve endpoint and access key
+create_database_and_get_key() {
 
-    echo "Enabling access key authentication to trigger key generation..."
+    # Check if cluster is provisioned
+    local cluster_state=$(az redisenterprise show --resource-group $rg --name $cache_name --query "provisioningState" -o tsv 2>/dev/null)
+    if [ "$cluster_state" != "Succeeded" ]; then
+        echo "Error: Cluster is not ready (State: ${cluster_state:-Not created})."
+        echo "Please check the deployment status (option 2) and wait until provisioning succeeds."
+        return 1
+    fi
 
-    # Enable access key authentication on the database to trigger key generation
-    az redisenterprise database update \
-        --resource-group $rg \
-        --cluster-name $cache_name \
-        --access-keys-auth "Enabled" \
-        > /dev/null
+    # Check if database already exists
+    local db_state=$(az redisenterprise database show --resource-group $rg --cluster-name $cache_name --query "provisioningState" -o tsv 2>/dev/null)
+    if [ -n "$db_state" ]; then
+        echo "Database already exists (State: $db_state). Enabling access key auth..."
+        az redisenterprise database update \
+            --resource-group $rg \
+            --cluster-name $cache_name \
+            --access-keys-auth "Enabled" \
+            > /dev/null 2>&1
+    else
+        echo "Creating database with RediSearch module and access key authentication..."
+        az redisenterprise database create \
+            --resource-group $rg \
+            --cluster-name $cache_name \
+            --clustering-policy "EnterpriseCluster" \
+            --eviction-policy "NoEviction" \
+            --modules name="RediSearch" \
+            --access-keys-auth "Enabled" \
+            > /dev/null 2>&1
+
+        if [ $? -ne 0 ]; then
+            echo "Error: Failed to create database."
+            return 1
+        fi
+    fi
 
     echo "Retrieving endpoint and access key..."
 
-    # Get the endpoint (hostname and port)
-    hostname=$(az redisenterprise show --resource-group $rg --name $cache_name --query "hostName" -o tsv 2>/dev/null)
+    # Get the endpoint (hostname)
+    local hostname=$(az redisenterprise show --resource-group $rg --name $cache_name --query "hostName" -o tsv 2>/dev/null)
 
     # Get the primary access key
-    primaryKey=$(az redisenterprise database list-keys --cluster-name $cache_name -g $rg --query "primaryKey" -o tsv 2>/dev/null)
+    local primaryKey=$(az redisenterprise database list-keys --cluster-name $cache_name -g $rg --query "primaryKey" -o tsv 2>/dev/null)
 
     # Check if values are empty
     if [ -z "$hostname" ] || [ -z "$primaryKey" ]; then
         echo ""
-        echo "Unable to retrieve endpoint or access key."
+        echo "Error: Unable to retrieve endpoint or access key."
         echo "Please check the deployment status to ensure the resource is fully provisioned."
-        echo "Use menu option 2 to check deployment status."
         return 1
     fi
 
-    # Create or update .env file
-    if [ -f ".env" ]; then
-        # Update existing .env file
-        if grep -q "^REDIS_HOST=" .env; then
-            sed -i "s|^REDIS_HOST=.*|REDIS_HOST=$hostname|" .env
-        else
-            echo "REDIS_HOST=$hostname" >> .env
-        fi
-
-        if grep -q "^REDIS_KEY=" .env; then
-            sed -i "s|^REDIS_KEY=.*|REDIS_KEY=$primaryKey|" .env
-        else
-            echo "REDIS_KEY=$primaryKey" >> .env
-        fi
-        echo "Updated existing .env file"
-    else
-        # Create new .env file
-        echo "REDIS_HOST=$hostname" > .env
-        echo "REDIS_KEY=$primaryKey" >> .env
-        echo "Created new .env file"
-    fi
+    # Write .env file
+    cat > .env << EOF
+REDIS_HOST=$hostname
+REDIS_KEY=$primaryKey
+EOF
 
     clear
     echo ""
@@ -112,7 +166,7 @@ show_menu() {
     echo "====================================================================="
     echo "1. Create Azure Managed Redis resource"
     echo "2. Check deployment status"
-    echo "3. Configure for search and retrieve endpoint and access key"
+    echo "3. Create database and retrieve endpoint and access key"
     echo "4. Exit"
     echo "====================================================================="
 }
@@ -137,7 +191,7 @@ while true; do
             ;;
         3)
             echo ""
-            retrieve_endpoint_and_key
+            create_database_and_get_key
             echo ""
             read -p "Press Enter to continue..."
             ;;
@@ -156,4 +210,3 @@ while true; do
 
     echo ""
 done
-
