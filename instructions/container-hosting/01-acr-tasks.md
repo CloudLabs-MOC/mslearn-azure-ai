@@ -169,17 +169,17 @@ In this section you confirm the image exists in your registry by listing reposit
 
     **Bash**
     ```bash
-    az acr repository show-manifests \
-        --name $ACR_NAME \
-        --repository inference-api \
+    az acr manifest list-metadata \
+        --registry $ACR_NAME \
+        --name inference-api \
         --output table
     ```
 
     **PowerShell**
     ```powershell
-    az acr repository show-manifests \
-        --name $env:ACR_NAME \
-        --repository inference-api \
+    az acr manifest list-metadata `
+        --registry $env:ACR_NAME `
+        --name inference-api `
         --output table
     ```
 
