@@ -365,7 +365,7 @@ In this section you start the Flask web application and use its interface to tes
 1. Run the following command to start the Flask application.
 
     ```bash
-    flask run
+    python app.py
     ```
 
 1. Open a browser and navigate to `http://127.0.0.1:5000` to view the application.
@@ -486,7 +486,7 @@ If you encounter issues during this exercise, try these steps:
 - Ensure Python virtual environment is activated (you should see **(.venv)** in your terminal prompt)
 - Ensure dependencies are installed: **pip install -r requirements.txt**
 - Ensure environment variables are loaded by running **source .env** (Bash) or **. .\.env.ps1** (PowerShell)
-- Ensure you are in the *client* directory when running **flask run**
+- Ensure you are in the *client* directory when running **python app.py**
 
 **Authentication or access denied errors**
 - Ensure Entra ID access was configured by running the deployment script option **2**
