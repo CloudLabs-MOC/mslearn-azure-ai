@@ -195,7 +195,7 @@ In this section you use the **az acr run** command to execute a command inside y
     ```bash
     az acr run \
         --registry $ACR_NAME \
-        --cmd "$ACR_NAME.azurecr.io/inference-api:v1.0.0 python -c 'from app import app; print(\"Application loaded successfully\")'" \
+        --cmd "$ACR_NAME.azurecr.io/inference-api:v1.0.0 python -c 'from app import app'" \
         /dev/null
     ```
 
@@ -203,11 +203,11 @@ In this section you use the **az acr run** command to execute a command inside y
     ```powershell
     az acr run `
         --registry $env:ACR_NAME `
-        --cmd "$env:ACR_NAME.azurecr.io/inference-api:v1.0.0 python -c 'from app import app; print(`"Application loaded successfully`")'" `
+        --cmd "$env:ACR_NAME.azurecr.io/inference-api:v1.0.0 python -c 'from app import app'" `
         /dev/null
     ```
 
-    The output includes Docker pull progress as it downloads the image. Look for **Application loaded successfully** near the end of the output. This confirms the container runs correctly and the Flask application imports without errors.
+    The output includes Docker pull progress as it downloads the image. A successful run ends with **Run ID: xxx was successful after xxx**. This confirms the container runs correctly and the Flask application imports without errors.
 
 ## Build with a different tag
 
