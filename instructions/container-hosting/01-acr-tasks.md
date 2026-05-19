@@ -298,7 +298,6 @@ In this section you review the ACR task run history and lock an image to protect
     az acr repository show \
         --name $ACR_NAME \
         --image inference-api:v1.0.0 \
-        --output table
     ```
 
     **PowerShell**
@@ -306,7 +305,6 @@ In this section you review the ACR task run history and lock an image to protect
     az acr repository show `
         --name $env:ACR_NAME `
         --image inference-api:v1.0.0 `
-        --output table
     ```
 
     The **writeEnabled** field shows **False**, indicating the image is protected.
