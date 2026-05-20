@@ -213,6 +213,7 @@ function Build-AndPushImage {
         --registry $acrName `
         --image "${apiImageName}:latest" `
         --file api/Dockerfile `
+        --no-logs `
         api/ 2>$null | Out-Null
 
     if ($LASTEXITCODE -eq 0) {

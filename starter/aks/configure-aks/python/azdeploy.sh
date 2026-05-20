@@ -93,6 +93,7 @@ build_and_push_image() {
         --registry $acr_name \
         --image ${api_image_name}:latest \
         --file api/Dockerfile \
+        --no-logs \
         api/ > /dev/null 2>&1
 
     if [ $? -eq 0 ]; then

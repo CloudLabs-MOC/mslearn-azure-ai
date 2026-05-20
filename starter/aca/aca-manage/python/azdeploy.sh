@@ -90,6 +90,7 @@ create_acr_and_build_image() {
         --registry $acr_name \
         --image $container_image \
         --file api/Dockerfile \
+        --no-logs \
         api/ > /dev/null 2>&1
 
     if [ $? -eq 0 ]; then
