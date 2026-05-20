@@ -263,8 +263,14 @@ In this section you enable the pgvector extension and create the products table 
 
 1. Run the following command to connect to the PostgreSQL server using **psql**. The command uses the environment variables you loaded in the previous step.
 
+    **Bash**
     ```bash
     psql "host=$DB_HOST dbname=$DB_NAME user=$DB_USER sslmode=require"
+    ```
+
+    **PowerShell**
+    ```powershell
+    psql "host=$env:DB_HOST port=5432 dbname=$env:DB_NAME user=$env:DB_USER sslmode=require"
     ```
 
 1. Enable the pgvector extension. This extension must be enabled before you can use vector data types.
