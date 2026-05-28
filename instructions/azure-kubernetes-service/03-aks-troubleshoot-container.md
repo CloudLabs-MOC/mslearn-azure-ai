@@ -183,18 +183,12 @@ A Service routes traffic to pods based on label selectors. When labels don't mat
     kubectl edit service api-service -n aks-troubleshoot
     ```
 
-    **Note:** The editor uses vi commands. The editor opens in **normal mode** where you navigate and run commands. Press **i** to enter **insert mode** where you can type and edit text. Press **Esc** to return to normal mode, then type commands like **:wq** to save and exit. Following is a quick reference:
+    **Note:** The **kubectl edit** command fetches the live resource configuration from the cluster and opens it in a local text editor. When you save and close the editor, kubectl automatically sends the changes back to the Kubernetes API server, which validates and applies them to the running cluster. The editor depends on your environment:
 
-    | Action | Command |
-    |--------|---------|
-    | Navigate | Arrow keys (**↑ ↓ ← →**) |
-    | Enter insert mode | **i** |
-    | Return to normal mode | **Esc** |
-    | Delete character (normal mode) | **x** |
-    | Save and exit (normal mode) | **:wq** + **Enter** |
-    | Exit without saving (normal mode) | **:q!** + **Enter** |
+    - **Bash:** Opens **vi** by default. Press **i** to enter insert mode, make your changes, press **Esc**, then type **:wq** and press **Enter** to save and exit. Type **:q!** to exit without saving.
+    - **PowerShell (Windows):** Opens **Notepad** by default. Make your changes, select **File > Save** (or **Ctrl+S**), then close the window. Closing without saving cancels the edit.
 
-1. In the editor, find the **selector** section. Press **i** to enter insert mode, then change **app: api-v2** to **app: api**. Press **Esc** to return to normal mode, then type **:wq** and press **Enter** to save and exit.
+1. In the editor, find the **selector** section and change **app: api-v2** to **app: api**. Save the changes and close the editor.
 
 1. Run the following command to verify the endpoint slice addresses are restored. The command should return an endpoint slice with an IP address listed.
 
@@ -242,7 +236,7 @@ When a container fails to start, Kubernetes repeatedly restarts it, resulting in
         ports:
     ```
 
-    Save the changes and exit the editor by selecting **Esc**, typing **:wq**, and then selecting **Enter**.
+    Save the changes and close the editor.
 
 1. Run the following command to watch the pod status. After a few moments, the pod enters **Running**. Enter **ctrl-c** to exit the command.
 
@@ -280,7 +274,7 @@ When a readiness probe fails, the pod shows **Running** but **0/1** containers a
     kubectl edit deployment api-deployment -n aks-troubleshoot
     ```
 
-    In the editor, find the **readinessProbe** section and change **path: /invalid-path** to **path: /healthz**. Save the changes and exit the editor by selecting **Esc**, typing **:wq**, and then selecting **Enter**.
+    In the editor, find the **readinessProbe** section and change **path: /invalid-path** to **path: /healthz**. Save the changes and close the editor.
 
 1. Run the following command to verify the new pod becomes ready and the old pod terminates. You should see only one pod with **Running** status and **1/1** in the READY column.
 
