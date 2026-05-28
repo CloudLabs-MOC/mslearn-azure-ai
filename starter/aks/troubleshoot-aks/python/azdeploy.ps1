@@ -141,7 +141,7 @@ function Create-AKSCluster {
             --load-balancer-sku standard `
             --enable-managed-identity `
             --network-plugin azure `
-            --generate-ssh-keys `
+            --no-ssh-key `
             --attach-acr $acrName 2>$null | Out-Null
 
         if ($LASTEXITCODE -ne 0) {
