@@ -134,7 +134,7 @@ create_aks_cluster() {
             --load-balancer-sku standard \
             --enable-managed-identity \
             --network-plugin azure \
-            --generate-ssh-keys \
+            --no-ssh-key \
             --attach-acr $acr_name > /dev/null 2>&1
 
         if [ $? -ne 0 ]; then
