@@ -125,8 +125,8 @@ function Create-Containers {
     }
 
     # Create container with vector embedding policy and indexing policy (DiskANN)
-    $indexingPolicy = '{"indexingMode":"consistent","automatic":true,"includedPaths":[{"path":"/*"}],"excludedPaths":[{"path":"/embedding/*"}],"vectorIndexes":[{"path":"/embedding","type":"diskANN"}]}'
-    $vectorPolicy = '{"vectorEmbeddings":[{"path":"/embedding","dataType":"float32","distanceFunction":"cosine","dimensions":256}]}'
+    $indexingPolicy = "{`"indexingMode`":`"consistent`",`"automatic`":true,`"includedPaths`":[{`"path`":`"/*`"}],`"excludedPaths`":[{`"path`":`"/embedding/*`"}],`"vectorIndexes`":[{`"path`":`"/embedding`",`"type`":`"diskANN`"}]}"
+    $vectorPolicy = "{`"vectorEmbeddings`":[{`"path`":`"/embedding`",`"dataType`":`"float32`",`"distanceFunction`":`"cosine`",`"dimensions`":256}]}"
 
     az cosmosdb sql container create `
         --resource-group $rg `
