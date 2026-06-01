@@ -111,7 +111,7 @@ function Create-Containers {
         return
     }
 
-    $vectorPolicy = '{"vectorEmbeddings":[{"path":"/embedding","dataType":"float32","distanceFunction":"cosine","dimensions":256}]}'
+    $vectorPolicy = "{`"vectorEmbeddings`":[{`"path`":`"/embedding`",`"dataType`":`"float32`",`"distanceFunction`":`"cosine`",`"dimensions`":256}]}"
     $created = 0
 
     # Define containers: name and index type
@@ -128,7 +128,7 @@ function Create-Containers {
         }
         else {
             Write-Host "Creating container '$($container.Name)' with $($container.Type) vector index..."
-            $indexingPolicy = '{"indexingMode":"consistent","automatic":true,"includedPaths":[{"path":"/*"}],"excludedPaths":[{"path":"/embedding/*"}],"vectorIndexes":[{"path":"/embedding","type":"' + $container.Type + '"}]}'
+            $indexingPolicy = "{`"indexingMode`":`"consistent`",`"automatic`":true,`"includedPaths`":[{`"path`":`"/*`"}],`"excludedPaths`":[{`"path`":`"/embedding/*`"}],`"vectorIndexes`":[{`"path`":`"/embedding`",`"type`":`"$($container.Type)`"}]}"
 
             az cosmosdb sql container create `
                 --resource-group $rg `
