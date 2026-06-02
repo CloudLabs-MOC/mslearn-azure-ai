@@ -57,7 +57,6 @@ function Create-RedisResource {
         --location $location `
         --sku Enterprise_E10 `
         --public-network-access "Enabled" `
-        --access-keys-auth "Enabled" `
         --no-database `
         --no-wait
 
