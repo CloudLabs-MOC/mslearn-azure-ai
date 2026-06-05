@@ -9,7 +9,6 @@ $location = "<your-azure-region>"   # Azure region for the resources
 # DON'T CHANGE ANYTHING BELOW THIS LINE.
 # ============================================================================
 
-
 function Get-UserHash {
     $userObjectId = (az ad signed-in-user show --query "id" -o tsv 2>$null)
     if ($LASTEXITCODE -ne 0 -or [string]::IsNullOrWhiteSpace($userObjectId)) {
