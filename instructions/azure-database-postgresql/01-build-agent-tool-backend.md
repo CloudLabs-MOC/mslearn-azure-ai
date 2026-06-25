@@ -1,27 +1,20 @@
-# Build an agent tool backend on Azure Database for PostgreSQL
+# Lab 12: Build an agent tool backend on Azure Database for PostgreSQL
+
+
+### Estimated Duration : 30 Minutes
+
+## Overview 
 
 In this exercise, you create an Azure Database for PostgreSQL instance that serves as a tool backend for an AI agent. The database stores conversation context and task state that an agent can read and write during operation. You design a schema for agent memory, build Python functions that serve as agent tools, and test the complete workflow. This pattern provides a foundation for building AI agents that maintain persistent memory across sessions and can resume interrupted tasks.
 
-Tasks performed in this exercise:
 
-- Download project starter files and configure the deployment script
-- Deploy an Azure Database for PostgreSQL Flexible Server with Microsoft Entra authentication
-- Build Python tool functions for conversation and task state management
-- Create a database schema for agent memory with tables for conversations, messages, and task checkpoints
-- Test the agent memory workflow using a provided test script
-- Query conversation context using SQL
+- **Task 1:** Download project starter files and configure the deployment script
+- **Task 2:** Deploy an Azure Database for PostgreSQL Flexible Server with Microsoft Entra authentication
+- **Task 3:** Build Python tool functions for conversation and task state management
+- **Task 4:** Create a database schema for agent memory with tables for conversations, messages, and task checkpoints
+- **Task 5:** Test the agent memory workflow using a provided test script
+- **Task 6:** Query conversation context using SQL
 
-This exercise takes approximately **30** minutes to complete.
-
-## Before you start
-
-To complete the exercise, you need:
-
-- An Azure subscription with the permissions to deploy the necessary Azure services. If you don't already have one, you can [sign up for one](https://azure.microsoft.com/).
-- [Visual Studio Code](https://code.visualstudio.com/) on one of the [supported platforms](https://code.visualstudio.com/docs/supporting/requirements#_platforms).
-- The latest version of the [Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli).
-- [Python 3.12](https://www.python.org/downloads/) or greater.
-- [PostgreSQL command-line tools](https://www.postgresql.org/download/) (**psql**)
 
 ## Download project starter files and deploy Azure services
 
@@ -454,3 +447,9 @@ If you encounter issues during this exercise, try these steps:
 - On Linux/macOS, use: **source .venv/bin/activate**
 - On Windows PowerShell, use: **.\.venv\Scripts\Activate.ps1**
 - If **activate** script is missing, reinstall **python3-venv** package and recreate the venv
+
+### Summary
+
+
+
+## You have successfully completed the Hands-on Lab!

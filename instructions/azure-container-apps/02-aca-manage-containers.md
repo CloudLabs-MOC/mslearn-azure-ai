@@ -1,26 +1,20 @@
-# Diagnose and fix a failing deployment
+# Lab 04: Diagnose and fix a failing deployment
+
+### Estimated Duration : 30 Minutes
+
+## Overview 
 
 In this exercise, you troubleshoot a failing container app and apply targeted fixes. You use revision status, logs, and the Azure CLI to isolate deployment issues. This workflow is common in AI solutions because startup behavior changes frequently when you update models and dependencies.
 
-Tasks performed in this exercise:
+## Lab Overview
 
-- Deploy a mock AI document processing API as a container app
-- Introduce and diagnose a missing environment variable error
-- Introduce and diagnose an ingress configuration issue
-- Query Log Analytics for historical troubleshooting data
+- **Task 1:** Deploy a mock AI document processing API as a container app
+- **Task 2:** Introduce and diagnose a missing environment variable error
+- **Task 3:** Introduce and diagnose an ingress configuration issue
+- **Task 4:** Query Log Analytics for historical troubleshooting data
 
-This exercise takes approximately **30** minutes to complete.
 
 >**Important:** Azure Container Registry task runs are temporarily paused from Azure free credits. This exercise requires a Pay-As-You-Go, or another paid plan.
-
-## Before you start
-
-To complete the exercise, you need:
-
-- An Azure subscription with the permissions to deploy the necessary Azure services. If you don't already have one, you can [sign up for one](https://azure.microsoft.com/).
-- [Visual Studio Code](https://code.visualstudio.com/) on one of the [supported platforms](https://code.visualstudio.com/docs/supporting/requirements#_platforms).
-- The latest version of the [Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli).
-- Optional: [Python 3.12](https://www.python.org/downloads/) or greater.
 
 ## Download project starter files and deploy Azure services
 
@@ -385,3 +379,9 @@ If you encounter issues during this exercise, try these steps:
 **Environment variables not taking effect**
 - Container Apps creates a new revision when you change environment variables. Verify the new revision is active.
 - Use **--replace-env-vars** carefully—it replaces all environment variables, not just the ones you specify.
+
+### Summary
+
+
+
+## You have successfully completed the Hands-on Lab!

@@ -1,26 +1,20 @@
-# Optimize vector search performance in Azure Database for PostgreSQL
+# Lab 14: Optimize vector search performance in Azure Database for PostgreSQL
+
+### Estimated Duration : 30 Minutes
+
+## Overview
 
 In this exercise, you deploy an Azure Database for PostgreSQL instance and optimize it for vector search workloads. You create test data with vector embeddings, analyze baseline performance, build and compare IVFFlat and HNSW indexes, and tune search parameters. These techniques are essential for production AI applications that require fast similarity search across large datasets.
 
-Tasks performed in this exercise:
+## Lab Objectives
 
-- Download project starter files and configure the deployment script
-- Deploy an Azure Database for PostgreSQL Flexible Server with Microsoft Entra authentication
-- Create a test dataset with vector embeddings
-- Analyze baseline vector search performance without indexes
-- Create and compare IVFFlat and HNSW vector indexes
-- Tune index parameters to balance speed and recall
+- **Task 1:** Download project starter files and configure the deployment script
+- **Task 2:** Deploy an Azure Database for PostgreSQL Flexible Server with Microsoft Entra authentication
+- **Task 3:** Create a test dataset with vector embeddings
+- **Task 4:** Analyze baseline vector search performance without indexes
+- **Task 5:** Create and compare IVFFlat and HNSW vector indexes
+- **Task 6:** Tune index parameters to balance speed and recall
 
-This exercise takes approximately **30** minutes to complete.
-
-## Before you start
-
-To complete the exercise, you need:
-
-- An Azure subscription with the permissions to deploy the necessary Azure services. If you don't already have one, you can [sign up for one](https://azure.microsoft.com/).
-- [Visual Studio Code](https://code.visualstudio.com/) on one of the [supported platforms](https://code.visualstudio.com/docs/supporting/requirements#_platforms).
-- The latest version of the [Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli).
-- [PostgreSQL command-line tools](https://www.postgresql.org/download/) (**psql**)
 
 ## Download project starter files and deploy Azure services
 
@@ -431,3 +425,9 @@ If you encounter issues during this exercise, try these steps:
 - HNSW indexes take longer to build than IVFFlat; allow 1-2 minutes for 100,000 vectors
 - If the build times out, check CPU and memory metrics in Azure Monitor
 - Consider reducing the dataset size for testing
+
+### Summary
+
+
+
+## You have successfully completed the Hands-on Lab!

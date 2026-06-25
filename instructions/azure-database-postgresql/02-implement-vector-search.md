@@ -1,27 +1,21 @@
-# Implement vector search on Azure Database for PostgreSQL
+# Lab 13: Implement vector search on Azure Database for PostgreSQL
+
+### Estimated Duration : 30 Minutes
+
+## Overview 
+
 
 In this exercise, you build a product similarity search application using Azure Database for PostgreSQL and the pgvector extension. You enable vector storage capabilities, create a database schema for products with embeddings, load sample data through a Flask web application, and perform similarity searches to find related products. This pattern provides a foundation for building recommendation systems, semantic search features, and other AI-powered applications.
 
-Tasks performed in this exercise:
+## Lab Overview
 
-- Download project starter files and configure the deployment script
-- Deploy an Azure Database for PostgreSQL Flexible Server with Microsoft Entra authentication
-- Complete the Flask application code while the server deploys
-- Enable the pgvector extension and create the products table schema
-- Run the Flask application to load products and perform similarity searches
-- Add new products and observe how similarity results change
+- **Task 1:** Download project starter files and configure the deployment script
+- **Task 2:**  Deploy an Azure Database for PostgreSQL Flexible Server with Microsoft Entra authentication
+- **Task 3:** Complete the Flask application code while the server deploys
+- **Task 4:** Enable the pgvector extension and create the products table schema
+- **Task 5:** Run the Flask application to load products and perform similarity searches
+- **Task 6:** Add new products and observe how similarity results change
 
-This exercise takes approximately **30** minutes to complete.
-
-## Before you start
-
-To complete the exercise, you need:
-
-- An Azure subscription with the permissions to deploy the necessary Azure services. If you don't already have one, you can [sign up for one](https://azure.microsoft.com/).
-- [Visual Studio Code](https://code.visualstudio.com/) on one of the [supported platforms](https://code.visualstudio.com/docs/supporting/requirements#_platforms).
-- The latest version of the [Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli).
-- [Python 3.12](https://www.python.org/downloads/) or greater.
-- [PostgreSQL command-line tools](https://www.postgresql.org/download/) (**psql**)
 
 ## Download project starter files and deploy Azure services
 
@@ -424,3 +418,9 @@ If you encounter issues during this exercise, try these steps:
 - On Linux/macOS, use: **source .venv/bin/activate**
 - On Windows PowerShell, use: **.\.venv\Scripts\Activate.ps1**
 - If using Git Bash on Windows, use: **source .venv/Scripts/activate**
+
+### Summary
+
+
+
+## You have successfully completed the Hands-on Lab!

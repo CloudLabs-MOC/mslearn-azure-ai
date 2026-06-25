@@ -1,4 +1,4 @@
-# Lab 01: Manage secrets with Azure Key Vault
+# Lab 21: Manage secrets with Azure Key Vault
 
 ### Estimated Duration : 20 Minutes
 

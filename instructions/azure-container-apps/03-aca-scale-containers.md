@@ -1,4 +1,8 @@
-# Configure autoscaling using KEDA triggers
+# Lab 05: Configure autoscaling using KEDA triggers
+
+### Estimated Duration : 30 Minutes
+
+## Overview 
 
 AI applications often experience unpredictable workloads—a surge in inference requests, batch jobs, or sudden spikes from an agent-based workflow. KEDA-based autoscaling in Azure Container Apps allows your workloads to scale to zero when idle (saving costs) and rapidly scale out when demand increases.
 
@@ -6,24 +10,14 @@ In this exercise, you deploy a simple mock agent API and configure autoscaling b
 
 Tasks performed in this exercise:
 
-- Create Azure Container Registry and Container Apps resources
-- Deploy a mock agent API container app
-- Configure an HTTP concurrency scale rule using KEDA
-- Generate concurrent requests to trigger scale-out and monitor replica count changes in real-time
-- Configure scale rules using YAML
+- **Task 1:** Create Azure Container Registry and Container Apps resources
+- **Task 2:** Deploy a mock agent API container app
+- **Task 3:** Configure an HTTP concurrency scale rule using KEDA
+- **Task 4:** Generate concurrent requests to trigger scale-out and monitor replica count changes in real-time
+- **Task 5:** Configure scale rules using YAML
 
-This exercise takes approximately **30** minutes to complete.
 
 >**Important:** Azure Container Registry task runs are temporarily paused from Azure free credits. This exercise requires a Pay-As-You-Go, or another paid plan.
-
-## Before you start
-
-To complete the exercise, you need:
-
-- An Azure subscription with the permissions to deploy the necessary Azure services. If you don't already have one, you can [sign up for one](https://azure.microsoft.com/).
-- [Visual Studio Code](https://code.visualstudio.com/) on one of the [supported platforms](https://code.visualstudio.com/docs/supporting/requirements#_platforms).
-- The latest version of the [Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli).
-- [Python 3.12](https://www.python.org/downloads/) or greater.
 
 ## Download project starter files and deploy Azure services
 
@@ -327,3 +321,9 @@ If you encounter issues during this exercise, try these steps:
 - Ensure the YAML file syntax is valid (check indentation)
 - Some read-only properties like **id**, **systemData**, and **type** may cause errors; remove them if needed
 - Verify the scale section follows the correct structure under **properties > template > scale**
+
+### Summary
+
+
+
+## You have successfully completed the Hands-on Lab!

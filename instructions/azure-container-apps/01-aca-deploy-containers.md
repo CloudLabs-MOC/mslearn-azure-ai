@@ -1,26 +1,20 @@
-# Deploy a containerized backend API to Azure Container Apps
+# Lab 03:  Deploy a containerized backend API to Azure Container Apps
+
+### Estimated Duration : 30 Minutes
+
+## Overview 
 
 In this exercise, you deploy a containerized backend API to Azure Container Apps. You use a managed identity to securely pull images from Azure Container Registry and configure secrets as environment variables.
 
-Tasks performed in this exercise:
+## Lab Overview
 
-- Download the project starter files and deploy Azure services
-- Deploy the container app with managed identity authentication
-- Configure secrets and reference them from environment variables
-- Verify the deployment by calling API endpoints and reviewing logs
-
-This exercise takes approximately **30** minutes to complete.
+- **Task 1:** Download the project starter files and deploy Azure services
+- **Task 2:** Deploy the container app with managed identity authentication
+- **Task 3:** Configure secrets and reference them from environment variables
+- **Task 4:** Verify the deployment by calling API endpoints and reviewing logs
 
 >**Important:** Azure Container Registry task runs are temporarily paused from Azure free credits. This exercise requires a Pay-As-You-Go, or another paid plan.
 
-## Before you start
-
-To complete the exercise, you need:
-
-- An Azure subscription with the permissions to deploy the necessary Azure services. If you don't already have one, you can [sign up for one](https://azure.microsoft.com/).
-- [Visual Studio Code](https://code.visualstudio.com/) on one of the [supported platforms](https://code.visualstudio.com/docs/supporting/requirements#_platforms).
-- The latest version of the [Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli).
-- Optional: [Python 3.12](https://www.python.org/downloads/) or greater.
 
 ## Download project starter files and deploy Azure services
 
@@ -310,3 +304,8 @@ If you encounter issues while completing this exercise, try the following troubl
     - **PowerShell:** **az containerapp secret list -n $env:CONTAINER_APP_NAME -g $env:RESOURCE_GROUP -o table**
 - Confirm the environment variable references the secret correctly by calling the root endpoint (**/**), which shows whether the API key is configured.
 
+### Summary
+
+
+
+## You have successfully completed the Hands-on Lab!
