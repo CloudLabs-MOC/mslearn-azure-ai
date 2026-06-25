@@ -1,26 +1,18 @@
-# Build and run a container image with ACR Tasks
+# Lab 01: Build and run a container image with ACR Tasks
+
+### Estimated Duration : 30 Minutes
+
+## Overview
 
 In this exercise, you use Azure Container Registry (ACR) Tasks to build and manage container images entirely in the cloud, without requiring a local Docker installation.
 
-Tasks performed in this exercise:
+## Lab Objectives
 
-- Download the project starter files
-- Deploy Azure Container Registry
-- Build and verify container images using ACR Tasks
-- Manage image versions and protect production images
+- **Task 1:** Download the project starter files
+- **Task 2:** Deploy Azure Container Registry
+- **Task 3:** Build and verify container images using ACR Tasks
+- **Task 4:** Manage image versions and protect production images
 
-This exercise takes approximately **30** minutes to complete.
-
->**Important:** Azure Container Registry task runs are temporarily paused from Azure free credits. This exercise requires a Pay-As-You-Go, or another paid plan.
-
-## Before you start
-
-To complete the exercise, you need:
-
-- An Azure subscription with the permissions to deploy the necessary Azure services. If you don't already have one, you can [sign up for one](https://azure.microsoft.com/).
-- [Visual Studio Code](https://code.visualstudio.com/) on one of the [supported platforms](https://code.visualstudio.com/docs/supporting/requirements#_platforms).
-- The latest version of the [Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli).
-- Optional: [Python 3.12](https://www.python.org/downloads/) or greater.
 
 ## Download project starter files and deploy Azure services
 
@@ -327,3 +319,8 @@ If you encounter issues while completing this exercise, try the following troubl
 - Verify you're running commands from the project root directory (where the *api* folder is located).
 - Run **az acr task list-runs --registry $ACR_NAME --output table** to see the status of recent builds.
 
+### Summary
+
+
+
+## You have successfully completed the Hands-on Lab!
