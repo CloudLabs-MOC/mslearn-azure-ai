@@ -1,0 +1,16 @@
+[
+    {
+        "Name": "Lab 01: Build and manage a container image with ACR Tasks",
+        "Language": "English",
+        "Files": [
+            {
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabs-MOC/mslearn-azure-ai/refs/heads/Prod/instructions/container-hosting/01-getting-started.md",
+                "Order": 1
+            },
+            {
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabs-MOC/mslearn-azure-ai/refs/heads/Prod/instructions/container-hosting/01-acr-tasks.md",
+                "Order": 2
+            }
+        ]
+    }
+]

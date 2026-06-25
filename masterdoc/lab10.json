@@ -1,0 +1,16 @@
+[
+    {
+        "Name": "Lab 10: Build a semantic search application with Azure Cosmos DB for NoSQL",
+        "Language": "English",
+        "Files": [
+            {
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabs-MOC/mslearn-azure-ai/refs/heads/Prod/instructions/cosmosdb/01-getting-started.md",
+                "Order": 1
+            },
+            {
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabs-MOC/mslearn-azure-ai/refs/heads/Prod/instructions/cosmosdb/02-build-semantic-search.md",
+                "Order": 2
+            }
+        ]
+    }
+]

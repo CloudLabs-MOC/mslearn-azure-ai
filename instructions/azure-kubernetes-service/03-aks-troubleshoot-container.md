@@ -1,15 +1,3 @@
----
-lab:
-  topic: Azure Kubernetes Service
-  title: Troubleshoot apps on Azure Kubernetes Service
-  description: Learn how to diagnose and resolve common Kubernetes issues including label mismatches, CrashLoopBackOff errors, and readiness probe failures.
-  level: 300
-  duration: 30
-  islab: true
-  primarytopics:
-    - Azure
----
-
 # Troubleshoot apps on Azure Kubernetes Service
 
 In this exercise, you deploy a containerized API to Azure Kubernetes Service (AKS) and then diagnose and resolve common Kubernetes issues. You use **kubectl** commands to identify problems, inspect pod status, check logs, and view events. You then use **kubectl edit** to fix misconfigurations including Service selector mismatches, missing environment variables, and invalid readiness probe paths.

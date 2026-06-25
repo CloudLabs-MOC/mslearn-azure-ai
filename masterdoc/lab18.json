@@ -1,0 +1,16 @@
+[
+    {
+        "Name": "Lab 18: Process messages with Azure Service Bus",
+        "Language": "English",
+        "Files": [
+            {
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabs-MOC/mslearn-azure-ai/refs/heads/Prod/instructions/integrate-services/01-getting-started.md",
+                "Order": 1
+            },
+            {
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabs-MOC/mslearn-azure-ai/refs/heads/Prod/instructions/integrate-services/01-svcbus-process-messages.md",
+                "Order": 2
+            }
+        ]
+    }
+]

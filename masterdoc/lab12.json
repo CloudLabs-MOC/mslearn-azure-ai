@@ -1,0 +1,16 @@
+[
+    {
+        "Name": "Lab 12: Build an agent tool backend on Azure Database for PostgreSQL",
+        "Language": "English",
+        "Files": [
+            {
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabs-MOC/mslearn-azure-ai/refs/heads/Prod/instructions/azure-database-postgresql/01-getting-started.md",
+                "Order": 1
+            },
+            {
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabs-MOC/mslearn-azure-ai/refs/heads/Prod/instructions/azure-database-postgresql/01-build-agent-tool-backend.md",
+                "Order": 2
+            }
+        ]
+    }
+]

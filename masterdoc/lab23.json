@@ -1,0 +1,16 @@
+[
+    {
+        "Name": "Lab 23: Instrument an app with the OpenTelemetry SDK",
+        "Language": "English",
+        "Files": [
+            {
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabs-MOC/mslearn-azure-ai/refs/heads/Prod/instructions/instrument-observe/01-getting-started.md",
+                "Order": 1
+            },
+            {
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabs-MOC/mslearn-azure-ai/refs/heads/Prod/instructions/instrument-observe/01-instrument-app-opentelemetry.md",
+                "Order": 2
+            }
+        ]
+    }
+]

@@ -1,0 +1,16 @@
+[
+    {
+        "Name": "Lab 24: Query logs with KQL",
+        "Language": "English",
+        "Files": [
+            {
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabs-MOC/mslearn-azure-ai/refs/heads/Prod/instructions/instrument-observe/01-getting-started.md",
+                "Order": 1
+            },
+            {
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabs-MOC/mslearn-azure-ai/refs/heads/Prod/instructions/instrument-observe/02-query-logs-kql.md",
+                "Order": 2
+            }
+        ]
+    }
+]

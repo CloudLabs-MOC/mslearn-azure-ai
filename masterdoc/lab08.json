@@ -1,0 +1,16 @@
+[
+    {
+        "Name": "Lab 08: Troubleshoot apps on Azure Kubernetes Service",
+        "Language": "English",
+        "Files": [
+            {
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabs-MOC/mslearn-azure-ai/refs/heads/Prod/instructions/azure-kubernetes-service/01-getting-started.md",
+                "Order": 1
+            },
+            {
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabs-MOC/mslearn-azure-ai/refs/heads/Prod/instructions/azure-kubernetes-service/03-aks-troubleshoot-container.md",
+                "Order": 2
+            }
+        ]
+    }
+]

@@ -1,16 +1,3 @@
----
-lab:
-  topic: Integrate backend services
-  title: Process messages with Azure Service Bus
-  description: Learn how to send, receive, and route messages using Azure Service Bus queues, topics, and subscriptions with the Python SDK.
-  level: 300
-  duration: 30
-  islab: true
-  primarytopics:
-    - Azure
-    - Azure Service Bus
----
-
 # Process messages with Azure Service Bus
 
 AI workflows often rely on messaging to decouple request intake from model inference and to route results to multiple downstream consumers. Azure Service Bus provides the reliability and routing layer that connects these components so each piece can scale and fail independently.

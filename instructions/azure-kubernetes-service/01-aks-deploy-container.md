@@ -1,15 +1,3 @@
----
-lab:
-  topic: Azure Kubernetes Service
-  title: Deploy an AI inference API to Azure Kubernetes Service
-  description: Learn how to create Kubernetes deployment and service manifests to deploy an AI inference API container to Azure Kubernetes Service.
-  level: 300
-  duration: 30
-  islab: true
-  primarytopics:
-    - Azure
----
-
 # Deploy an AI inference API to Azure Kubernetes Service
 
 In this exercise, you deploy Azure resources including a Microsoft Foundry AI model, Azure Container Registry (ACR), and Azure Kubernetes Service (AKS) cluster. You then complete Kubernetes manifest files to define container specifications, health probes, resource limits, and load balancing. After deploying the containerized API to AKS, you use a Python client application to test the deployed API endpoints including health checks, readiness validation, and AI model inference requests.

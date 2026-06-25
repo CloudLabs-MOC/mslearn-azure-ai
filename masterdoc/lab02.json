@@ -1,0 +1,16 @@
+[
+    {
+        "Name": "Lab 02: Deploy a container to Azure App Service",
+        "Language": "English",
+        "Files": [
+            {
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabs-MOC/mslearn-azure-ai/refs/heads/Prod/instructions/container-hosting/01-getting-started.md",
+                "Order": 1
+            },
+            {
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabs-MOC/mslearn-azure-ai/refs/heads/Prod/instructions/container-hosting/02-app-svc-container.md",
+                "Order": 2
+            }
+        ]
+    }
+]

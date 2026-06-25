@@ -1,0 +1,16 @@
+[
+    {
+        "Name": "Lab 09: Build a RAG document store on Azure Cosmos DB for NoSQL",
+        "Language": "English",
+        "Files": [
+            {
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabs-MOC/mslearn-azure-ai/refs/heads/Prod/instructions/cosmosdb/01-getting-started.md",
+                "Order": 1
+            },
+            {
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabs-MOC/mslearn-azure-ai/refs/heads/Prod/instructions/cosmosdb/01-build-rag-document-store.md",
+                "Order": 2
+            }
+        ]
+    }
+]

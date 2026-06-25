@@ -1,0 +1,16 @@
+[
+    {
+        "Name": "Lab 16: Publish and subscribe to events in Azure Managed Redis",
+        "Language": "English",
+        "Files": [
+            {
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabs-MOC/mslearn-azure-ai/refs/heads/Prod/instructions/azure-managed-redis/01-getting-started.md",
+                "Order": 1
+            },
+            {
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabs-MOC/mslearn-azure-ai/refs/heads/Prod/instructions/azure-managed-redis/02-amr-pub-sub.md",
+                "Order": 2
+            }
+        ]
+    }
+]

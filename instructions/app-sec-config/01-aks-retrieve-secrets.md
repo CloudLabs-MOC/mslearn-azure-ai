@@ -1,16 +1,3 @@
----
-lab:
-  topic: App secrets and configuration
-  title: Manage secrets with Azure Key Vault
-  description: Learn how to store, retrieve, version, and cache secrets using Azure Key Vault with the Python SDK.
-  level: 300
-  duration: 20
-  islab: true
-  primarytopics:
-    - Azure
-    - Azure Key Vault
----
-
 # Manage secrets with Azure Key Vault
 
 AI applications typically depend on sensitive credentials such as API keys, connection strings, and certificates to access model endpoints and data stores. Azure Key Vault provides a centralized, secure store for these secrets with RBAC access control, automatic versioning, and audit logging so applications never need to embed credentials in code or configuration files.

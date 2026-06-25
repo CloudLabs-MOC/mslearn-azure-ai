@@ -1,0 +1,16 @@
+[
+    {
+        "Name": "Lab 21: Manage secrets with Azure Key Vault",
+        "Language": "English",
+        "Files": [
+            {
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabs-MOC/mslearn-azure-ai/refs/heads/Prod/instructions/app-sec-config/01-getting-started.md",
+                "Order": 1
+            },
+            {
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabs-MOC/mslearn-azure-ai/refs/heads/Prod/instructions/app-sec-config/01-aks-retrieve-secrets.md",
+                "Order": 2
+            }
+        ]
+    }
+]

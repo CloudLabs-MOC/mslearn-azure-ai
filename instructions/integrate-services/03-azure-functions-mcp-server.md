@@ -1,16 +1,3 @@
----
-lab:
-  topic: Integrate backend services
-  title: Create an MCP server with Azure Functions
-  description: Learn how to create and test an MCP server using Azure Functions that exposes tool trigger functions for AI agents and language models to discover and invoke.
-  level: 300
-  duration: 25
-  islab: true
-  primarytopics:
-    - Azure
-    - Azure Functions
----
-
 # Create an MCP server with Azure Functions
 
 The Model Context Protocol (MCP) is an open standard that defines how AI agents and language models discover and invoke external tools. Azure Functions includes an MCP extension that lets you expose function apps as MCP servers, where each function becomes a tool that MCP clients can call.

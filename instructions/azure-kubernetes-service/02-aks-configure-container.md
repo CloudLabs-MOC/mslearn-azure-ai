@@ -1,15 +1,3 @@
----
-lab:
-  topic: Azure Kubernetes Service
-  title: Configure apps on Azure Kubernetes Service
-  description: 'Learn how to configure Kubernetes deployments with persistent storage, and store sensitive and non-sensitive settings. '
-  level: 300
-  duration: 30
-  islab: true
-  primarytopics:
-    - Azure
----
-
 # Configure apps on Azure Kubernetes Service
 
 In this exercise, you learn how to configure Kubernetes deployments with ConfigMaps for non-sensitive settings, Secrets for sensitive credentials, and PersistentVolumeClaims for persistent storage. You deploy a containerized API to Azure Kubernetes Service (AKS), configure it with various Kubernetes resources, and interact with it using a Python client application.

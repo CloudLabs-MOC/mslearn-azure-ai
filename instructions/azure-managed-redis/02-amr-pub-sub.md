@@ -1,16 +1,3 @@
----
-lab:
-  topic: Azure Managed Redis
-  title: Publish and subscribe to events in Azure Managed Redis
-  description: Learn how to build publisher and subscriber applications that implement pub/sub patterns in Azure Managed Redis using the redis-py Python library.
-  level: 300
-  duration: 30
-  islab: true
-  primarytopics:
-    - Azure
-    - Azure Managed Redis
----
-
 # Publish and subscribe to events in Azure Managed Redis
 
 In this exercise, you create an Azure Managed Redis resource and complete the code for a console-based publisher and a subscriber app. The publisher app sends event messages to Redis channels, while the subscriber app listens for those messages using a graphical interface built with **tkinter**. You implement core pub/sub patterns including direct channel subscriptions, wildcard pattern matching, message formatting, and background message listening.

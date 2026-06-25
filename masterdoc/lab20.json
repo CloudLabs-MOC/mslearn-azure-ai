@@ -1,0 +1,16 @@
+[
+    {
+        "Name": "Lab 20: Create an MCP server with Azure Functions",
+        "Language": "English",
+        "Files": [
+            {
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabs-MOC/mslearn-azure-ai/refs/heads/Prod/instructions/integrate-services/01-getting-started.md",
+                "Order": 1
+            },
+            {
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabs-MOC/mslearn-azure-ai/refs/heads/Prod/instructions/integrate-services/03-azure-functions-mcp-server.md",
+                "Order": 2
+            }
+        ]
+    }
+]

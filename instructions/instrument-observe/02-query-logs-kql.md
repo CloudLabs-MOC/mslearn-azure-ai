@@ -1,15 +1,3 @@
----
-lab:
-  topic: Instrument and observe apps
-  title: Query logs with KQL
-  description: Learn how to query requests, exceptions, and dependencies using KQL in Application Insights, and create a scheduled query alert rule with the Azure CLI.
-  level: 300
-  duration: 20
-  islab: true
-  primarytopics:
-    - Azure
----
-
 # Query logs with KQL
 
 Kusto Query Language (KQL) is the query language used to analyze log data in Application Insights. KQL queries let you filter, aggregate, and join telemetry tables such as requests, dependencies, and exceptions to diagnose application health and performance. The Logs blade in Application Insights provides an interactive query editor with autocomplete, visual results, and time range controls that make it the primary tool for investigating telemetry. Combined with scheduled query alert rules created through the Azure CLI, KQL enables proactive monitoring that notifies your team when failure rates or latency exceed acceptable thresholds.

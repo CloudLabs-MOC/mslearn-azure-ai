@@ -1,0 +1,16 @@
+[
+    {
+        "Name": "Lab 11: Optimize query performance with vector indexes on Azure Cosmos DB for NoSQL",
+        "Language": "English",
+        "Files": [
+            {
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabs-MOC/mslearn-azure-ai/refs/heads/Prod/instructions/cosmosdb/01-getting-started.md",
+                "Order": 1
+            },
+            {
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabs-MOC/mslearn-azure-ai/refs/heads/Prod/instructions/cosmosdb/03-optimize-query-performance.md",
+                "Order": 2
+            }
+        ]
+    }
+]

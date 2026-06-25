@@ -1,0 +1,16 @@
+[
+    {
+        "Name": "Lab 22: Retrieve settings and secrets from Azure App Configuration",
+        "Language": "English",
+        "Files": [
+            {
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabs-MOC/mslearn-azure-ai/refs/heads/Prod/instructions/app-sec-config/01-getting-started.md",
+                "Order": 1
+            },
+            {
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabs-MOC/mslearn-azure-ai/refs/heads/Prod/instructions/app-sec-config/02-exercise-retrieve-settings.md",
+                "Order": 2
+            }
+        ]
+    }
+]

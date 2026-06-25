@@ -1,0 +1,16 @@
+[
+    {
+        "Name": "Lab 05: Configure autoscaling using KEDA triggers",
+        "Language": "English",
+        "Files": [
+            {
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabs-MOC/mslearn-azure-ai/refs/heads/Prod/instructions/azure-container-apps/01-getting-started.md",
+                "Order": 1
+            },
+            {
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabs-MOC/mslearn-azure-ai/refs/heads/Prod/instructions/azure-container-apps/03-aca-scale-containers.md",
+                "Order": 2
+            }
+        ]
+    }
+]

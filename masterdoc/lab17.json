@@ -1,0 +1,16 @@
+[
+    {
+        "Name": "Lab 17: Implement semantic search in Azure Managed Redis",
+        "Language": "English",
+        "Files": [
+            {
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabs-MOC/mslearn-azure-ai/refs/heads/Prod/instructions/azure-managed-redis/01-getting-started.md",
+                "Order": 1
+            },
+            {
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabs-MOC/mslearn-azure-ai/refs/heads/Prod/instructions/azure-managed-redis/03-amr-vector-storage.md",
+                "Order": 2
+            }
+        ]
+    }
+]

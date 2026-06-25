@@ -1,13 +1,3 @@
----
-lab:
-    topic: Instrument and observe apps
-    title: 'Instrument an app with the OpenTelemetry SDK'
-    description: 'Learn how to instrument an application with OpenTelemetry, create custom spans and attributes, export telemetry to Application Insights, and diagnose performance issues using Transaction search and log queries.'
-    level: 300
-    duration: 25
-    islab: true
----
-
 # Instrument an app with OpenTelemetry
 
 OpenTelemetry is an open-source observability framework that provides a standardized way to collect traces, metrics, and logs from applications. The Azure Monitor OpenTelemetry Distro packages the OpenTelemetry SDK with the Azure Monitor exporter so Python applications can send telemetry to Application Insights with minimal configuration. Custom spans let you trace application-specific operations and add attributes that enrich trace data with business context.

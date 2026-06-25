@@ -1,16 +1,3 @@
----
-lab:
-  topic: Azure Container Apps
-  title: Diagnose and fix a failing deployment
-  description: Learn how to troubleshoot Azure Container Apps by diagnosing missing environment variables, ingress misconfigurations, and querying Log Analytics for historical troubleshooting.
-  level: 300
-  duration: 30
-  islab: true
-  primarytopics:
-    - Azure
-    - Azure Container Apps
----
-
 # Diagnose and fix a failing deployment
 
 In this exercise, you troubleshoot a failing container app and apply targeted fixes. You use revision status, logs, and the Azure CLI to isolate deployment issues. This workflow is common in AI solutions because startup behavior changes frequently when you update models and dependencies.

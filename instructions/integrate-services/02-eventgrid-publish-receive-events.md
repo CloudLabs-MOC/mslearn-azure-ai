@@ -1,16 +1,3 @@
----
-lab:
-  topic: Integrate backend services
-  title: Publish and receive events with Azure Event Grid
-  description: Learn how to publish, receive, and route content moderation events using Azure Event Grid Namespaces with pull delivery and filtered subscriptions.
-  level: 300
-  duration: 30
-  islab: true
-  primarytopics:
-    - Azure
-    - Azure Event Grid
----
-
 # Publish and receive events with Azure Event Grid
 
 AI content moderation systems generate a high volume of events as they classify and review submissions. Azure Event Grid provides the routing layer that directs these events to the right downstream consumers based on event type, so each handler receives only the events it needs without polling or manual filtering.

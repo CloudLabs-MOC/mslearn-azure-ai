@@ -1,16 +1,3 @@
----
-lab:
-  topic: App secrets and configuration
-  title: Retrieve settings and secrets from Azure App Configuration
-  description: Learn how to load, list, and dynamically refresh configuration settings using Azure App Configuration and Key Vault with the Python SDK.
-  level: 300
-  duration: 30
-  islab: true
-  primarytopics:
-    - Azure
-    - Azure App Configuration
----
-
 # Retrieve settings and secrets from Azure App Configuration
 
 AI applications depend on both non-sensitive configuration such as model endpoints and batch sizes, and sensitive credentials such as API keys. Azure App Configuration provides a centralized store for managing these settings with label-based environment overrides, Key Vault references for secrets, and sentinel-based dynamic refresh so applications can pick up configuration changes without restarting.

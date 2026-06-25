@@ -1,16 +1,3 @@
----
-lab:
-  topic: Azure Managed Redis
-  title: Perform data operations in Azure Managed Redis
-  description: Learn how to perform data operations in Azure Managed Redis using the redis-py Python library.
-  level: 300
-  duration: 30
-  islab: true
-  primarytopics:
-    - Azure
-    - Azure Managed Redis
----
-
 # Perform data operations in Azure Managed Redis
 
 In this exercise, you create an Azure Managed Redis resource and build a Python console application that performs common data operations using the **redis-py** library. You work with Redis hash data structures to store and retrieve key-value pairs, manage key expiration with Time-To-Live (TTL) settings, and delete keys from the cache.

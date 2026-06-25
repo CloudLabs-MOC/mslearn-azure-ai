@@ -1,0 +1,16 @@
+[
+    {
+        "Name": "Lab 13: Implement vector search on Azure Database for PostgreSQL",
+        "Language": "English",
+        "Files": [
+            {
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabs-MOC/mslearn-azure-ai/refs/heads/Prod/instructions/azure-database-postgresql/01-getting-started.md",
+                "Order": 1
+            },
+            {
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabs-MOC/mslearn-azure-ai/refs/heads/Prod/instructions/azure-database-postgresql/02-implement-vector-search.md",
+                "Order": 2
+            }
+        ]
+    }
+]

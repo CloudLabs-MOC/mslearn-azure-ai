@@ -1,16 +1,11 @@
-# Microsoft Lab Exercises
-<!-- Change the title above as appropriate -->
-[GitHub pages for the exercises](https://microsoftlearning.github.io/mslearn-azure-developer/)
+# AI-200: Develop AI cloud solutions on Azure
 
-This repo contains exercises and supporting files for Microsoft skilling content.
+## Overview
 
-The exercises may be used in both self-paced skilling experiences on [Microsoft Learn](https://learn.microsoft.com) and in Microsoft authorized instructor-led training.
-<!-- Update thr paragraph above with a link to a specific Learning Path or course as appropriate -->
+This course teaches developers how to create, monitor, and troubleshoot AI solutions on Microsoft Azure. Students will learn how to implement Azure compute and containerization patterns to host applications, build serverless APIs with Azure Functions, and integrate services using event‑driven and message‑based architectures such as Azure Service Bus and Event Grid. The course also covers working with Azure data services that support AI workloads, including designing and querying solutions with Cosmos DB for NoSQL, Azure Database for PostgreSQL with pg-vector, and Azure Managed Redis for caching, streaming, and vector search. By the end of the course, developers will be able to connect services, orchestrate AI workflows, and build secure, scalable, and observable AI‑driven applications on Azure.
 
-## Information for MCTs
-<!-- You can remove this section if the exercises will not be used to support Microsoft Official Curriculum ILT -->
+## Audience Profile
 
-**Are you an MCT?** - Have a look at our [GitHub User Guide for MCTs](https://microsoftlearning.github.io/MCT-User-Guide/)
+This course is designed for developers who build backend and AI‑driven applications on Azure and need practical skills in containerized compute, data services for AI, event‑driven workflows, and application security and monitoring.
 
-Any MCT (Microsoft Certified Trainer) can submit a pull request to the code or content in the GitHub repro. Microsoft and the course author will then triage and include content and lab code changes as needed. You can submit bugs, changes, improvement, and ideas. Find a new Azure or Microsoft 365 feature before we have? Submit a new demo!
-
+**Course Overview - [https://learn.microsoft.com/en-us/training/courses/ai-200t00](https://learn.microsoft.com/en-us/training/courses/ai-200t00)**

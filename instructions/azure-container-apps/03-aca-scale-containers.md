@@ -1,16 +1,3 @@
----
-lab:
-  topic: Azure Container Apps
-  title: Configure autoscaling for an API using KEDA
-  description: Learn how to configure KEDA-based autoscaling in Azure Container Apps using HTTP concurrency triggers.
-  level: 300
-  duration: 30
-  islab: true
-  primarytopics:
-    - Azure
-    - Azure Container Apps
----
-
 # Configure autoscaling using KEDA triggers
 
 AI applications often experience unpredictable workloads—a surge in inference requests, batch jobs, or sudden spikes from an agent-based workflow. KEDA-based autoscaling in Azure Container Apps allows your workloads to scale to zero when idle (saving costs) and rapidly scale out when demand increases.
