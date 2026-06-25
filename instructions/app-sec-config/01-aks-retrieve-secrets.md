@@ -1,26 +1,19 @@
-# Manage secrets with Azure Key Vault
+# Lab 01: Manage secrets with Azure Key Vault
+
+### Estimated Duration : 20 Minutes
+
+## Overview
 
 AI applications typically depend on sensitive credentials such as API keys, connection strings, and certificates to access model endpoints and data stores. Azure Key Vault provides a centralized, secure store for these secrets with RBAC access control, automatic versioning, and audit logging so applications never need to embed credentials in code or configuration files.
 
 In this exercise, you deploy an Azure Key Vault pre-loaded with sample secrets and build a Python Flask web application that demonstrates core secret management patterns using the Azure SDK. You retrieve secrets and inspect their metadata, list all secret properties without exposing values, create a new secret version to simulate credential rotation, and implement a time-based cache to reduce Key Vault API calls.
 
-Tasks performed in this exercise:
+## Lab Objectives
 
-- Download the project starter files
-- Create an Azure Key Vault and store sample secrets
-- Add code to the starter files to complete the app
-- Run the app to perform secret operations
-
-This exercise takes approximately **20** minutes to complete.
-
-## Before you start
-
-To complete the exercise, you need:
-
-- An Azure subscription. If you don't already have one, you can [sign up for one](https://azure.microsoft.com/).
-- [Visual Studio Code](https://code.visualstudio.com/) on one of the [supported platforms](https://code.visualstudio.com/docs/supporting/requirements#_platforms).
-- [Python 3.12](https://www.python.org/downloads/) or greater.
-- The latest version of the [Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli).
+- **Task 1:** Download the project starter files
+- **Task 2:** Create an Azure Key Vault and store sample secrets
+- **Task 3:** Add code to the starter files to complete the app
+- **Task 4:** Run the app to perform secret operations
 
 ## Download project starter files and deploy Azure Key Vault
 
@@ -397,3 +390,10 @@ If you encounter issues while completing this exercise, try the following troubl
 **Check Python environment and dependencies**
 - Confirm the virtual environment is activated before running the app.
 - Verify that all packages from *requirements.txt* were installed successfully by running **pip list**.
+
+
+### Summary
+
+
+
+## You have successfully completed the Hands-on Lab!
