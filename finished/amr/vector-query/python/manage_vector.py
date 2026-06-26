@@ -202,30 +202,30 @@ class VectorManager:
             return False, f"Error searching products: {e}"
     # END SEARCH SIMILAR PRODUCTS CODE SECTION
 
-    def delete_product(self, vector_key: str) -> tuple[bool, str]:
-        """Delete a product from Redis using del() method"""
+    def remove_product(self, vector_key: str) -> tuple[bool, str]:
+        """Remove a product from Redis using the del() method"""
         try:
-            # Delete the key using Redis del() command
+            # Remove the key using the Redis del() command
             result = self.r.delete(vector_key)
             if result == 1:
-                return True, f"Product '{vector_key}' deleted successfully"
+                return True, f"Product '{vector_key}' removed"
             else:
                 return False, f"Product '{vector_key}' does not exist"
         except Exception as e:
-            return False, f"Error deleting product: {e}"
+            return False, f"Error removing product: {e}"
 
-    def clear_all_products(self) -> tuple[bool, str]:
-        """Delete all products from Redis"""
+    def remove_all_products(self) -> tuple[bool, str]:
+        """Remove all products from Redis"""
         try:
-            # Retrieve all product keys and delete them in bulk
+            # Retrieve all product keys and remove them in bulk
             product_keys = self.r.keys("product:*")
             if product_keys:
-                self.r.delete(*product_keys)  # Delete all keys at once
-                return True, f"All {len(product_keys)} products deleted successfully"
+                self.r.delete(*product_keys)  # Remove all keys at once
+                return True, f"All {len(product_keys)} products removed"
             else:
-                return False, "No products to delete"
+                return False, "No products to remove"
         except Exception as e:
-            return False, f"Error clearing products: {e}"
+            return False, f"Error removing products: {e}"
 
     def list_all_products(self) -> tuple[bool, list | str]:
         """List all product keys available in Redis"""

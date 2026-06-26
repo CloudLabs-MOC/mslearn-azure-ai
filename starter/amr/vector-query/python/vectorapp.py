@@ -67,10 +67,10 @@ class VectorQueryGUI:
                  command=self.store_new_vector, **btn_style).pack(pady=8)
         tk.Button(left_frame, text="Find Similar Products",
                  command=self.search_vectors, **btn_style).pack(pady=8)
-        tk.Button(left_frame, text="Delete Product",
-                 command=self.delete_vector, **btn_style).pack(pady=8)
-        tk.Button(left_frame, text="Delete All Data",
-                 command=self.clear_all_vectors, **btn_style).pack(pady=8)
+        tk.Button(left_frame, text="Remove Product",
+                 command=self.remove_product, **btn_style).pack(pady=8)
+        tk.Button(left_frame, text="Remove All Products",
+                 command=self.remove_all_products, **btn_style).pack(pady=8)
 
         # Status label
         self.status_label = tk.Label(left_frame, text=f"Status: {self.connection_status}",
@@ -103,7 +103,7 @@ class VectorQueryGUI:
         self.output_box.pack(fill=tk.BOTH, expand=True, padx=5, pady=5)
 
         # Initial message
-        self.display_message("[+] Connected to Redis Vector Storage\n[i] Select an operation from the menu\n")
+        self.display_message("Connected to Redis Vector Storage\nSelect an operation from the menu\n")
 
     def display_message(self, msg):
         """Add a message to the output box"""
@@ -129,13 +129,13 @@ class VectorQueryGUI:
             return
 
         self.clear_output()
-        self.display_message("[*] Loading sample vectors...\n")
+        self.display_message("Working: Loading sample vectors...\n")
         success, message = self.manager.load_sample_products()
 
         if success:
-            self.display_message(f"[✓] {message}\n")
+            self.display_message(f"Success: {message}\n")
         else:
-            self.display_message(f"[✗] {message}\n")
+            self.display_message(f"Error: {message}\n")
 
     def list_products(self):
         """List all products"""
@@ -144,13 +144,13 @@ class VectorQueryGUI:
             return
 
         self.clear_output()
-        self.display_message("[*] Retrieving product list...\n")
+        self.display_message("Working: Retrieving product list...\n")
         success, result = self.manager.list_all_products()
 
         if success:
-            self.display_message(f"[✓] Found {len(result)} products:\n\n")
+            self.display_message(f"Success: Found {len(result)} products:\n\n")
             for key in result:
-                self.display_message(f" • Key: {key}\n")
+                self.display_message(f"  Key: {key}\n")
                 # Retrieve product details including embedding
                 prod_success, prod_data = self.manager.retrieve_product(key)
                 if prod_success and isinstance(prod_data, dict):
@@ -165,7 +165,7 @@ class VectorQueryGUI:
                         self.display_message(f"   Embedding: [{formatted_vector}]\n")
                 self.display_message("\n")
         else:
-            self.display_message(f"[✗] {result}\n")
+            self.display_message(f"Error: {result}\n")
 
     def store_new_vector(self):
         """Store a new vector with dialog"""
@@ -220,13 +220,13 @@ class VectorQueryGUI:
 
                 self.clear_output()
                 if success:
-                    self.display_message(f"[✓] {message}\n")
+                    self.display_message(f"Success: {message}\n")
                     if metadata:
                         self.display_message("Metadata:\n")
                         for k, v in metadata.items():
                             self.display_message(f"  {k}: {v}\n")
                 else:
-                    self.display_message(f"[✗] {message}\n")
+                    self.display_message(f"Error: {message}\n")
 
                 dialog.destroy()
             except ValueError as e:
@@ -274,14 +274,14 @@ class VectorQueryGUI:
                 prod_success, prod_data = self.manager.retrieve_product(product_key)
                 if not prod_success or not isinstance(prod_data, dict):
                     self.clear_output()
-                    self.display_message(f"[✗] Product not found: {product_key}\n")
+                    self.display_message(f"Error: Product not found: {product_key}\n")
                     dialog.destroy()
                     return
 
                 query_vector = prod_data.get("vector", [])
                 if not query_vector:
                     self.clear_output()
-                    self.display_message(f"[✗] Product has no embedding\n")
+                    self.display_message(f"Error: Product has no embedding\n")
                     dialog.destroy()
                     return
 
@@ -293,8 +293,8 @@ class VectorQueryGUI:
                 self.clear_output()
                 if success:
                     query_name = prod_data.get("name", "Unknown")
-                    self.display_message(f"[✓] Finding products similar to: {query_name}\n")
-                    self.display_message(f"[✓] Found {len(results)} similar products\n\n")
+                    self.display_message(f"Success: Finding products similar to: {query_name}\n")
+                    self.display_message(f"Success: Found {len(results)} similar products\n\n")
 
                     for idx, result in enumerate(results, 1):
                         self.display_message(f"{idx}. {result['name']} ({result['key']})\n")
@@ -303,7 +303,7 @@ class VectorQueryGUI:
                         self.display_message(f"   Similarity Score: {result['similarity']:.4f}\n")
                         self.display_message("\n")
                 else:
-                    self.display_message(f"[✗] {results}\n")
+                    self.display_message(f"Error: {results}\n")
 
                 dialog.destroy()
             except ValueError as e:
@@ -313,14 +313,14 @@ class VectorQueryGUI:
                  fg="white", font=self.button_font, width=20, height=1)
         search_btn.pack(pady=10, padx=15, anchor=tk.W)
 
-    def delete_vector(self):
-        """Delete a vector by key"""
+    def remove_product(self):
+        """Remove a product by key"""
         if not self.manager:
             messagebox.showerror("Error", "Not connected to Redis")
             return
 
         dialog = tk.Toplevel(self.root)
-        dialog.title("Delete Product")
+        dialog.title("Remove Product")
         dialog.transient(self.root)
         self.center_window(dialog, 400, 150)
 
@@ -329,38 +329,38 @@ class VectorQueryGUI:
         entry.pack(pady=5, padx=15, anchor=tk.W)
         entry.insert(0, "product:<id>")
 
-        def delete():
+        def remove():
             key = entry.get().strip()
             if not key:
                 messagebox.showwarning("Warning", "Enter a product key")
                 return
 
-            success, message = self.manager.delete_product(key)
+            success, message = self.manager.remove_product(key)
 
             self.clear_output()
             if success:
-                self.display_message(f"[✓] {message}\n")
+                self.display_message(f"Success: {message}\n")
             else:
-                self.display_message(f"[✗] {message}\n")
+                self.display_message(f"Error: {message}\n")
 
             dialog.destroy()
 
-        delete_btn = tk.Button(dialog, text="Delete", command=delete, bg="#4a4a4a", fg="white", font=self.button_font, width=20, height=1)
-        delete_btn.pack(pady=10, padx=15, anchor=tk.W)
+        remove_btn = tk.Button(dialog, text="Remove", command=remove, bg="#4a4a4a", fg="white", font=self.button_font, width=20, height=1)
+        remove_btn.pack(pady=10, padx=15, anchor=tk.W)
 
-    def clear_all_vectors(self):
-        """Clear all vectors with confirmation"""
+    def remove_all_products(self):
+        """Remove all products with confirmation"""
         if not self.manager:
             messagebox.showerror("Error", "Not connected to Redis")
             return
 
-        success, message = self.manager.clear_all_products()
+        success, message = self.manager.remove_all_products()
 
         self.clear_output()
         if success:
-            self.display_message(f"[✓] {message}\n")
+            self.display_message(f"Success: {message}\n")
         else:
-            self.display_message(f"[✗] {message}\n")
+            self.display_message(f"Error: {message}\n")
 
     def exit_app(self):
         """Exit the application"""
