@@ -48,19 +48,19 @@ function Create-RedisResource {
         return
     }
 
-    Write-Host "Creating Azure Managed Redis Enterprise cluster '$cache_name'..."
+    Write-Host "Creating Azure Managed Redis cluster '$cache_name'..."
 
-    # Create the Redis Enterprise cluster (E10 is the cheapest SKU that supports modules)
+    # Create the Azure Managed Redis cluster (Balanced_B0 is the cheapest SKU)
     az redisenterprise create `
         --resource-group $rg `
         --name $cache_name `
         --location $location `
-        --sku Enterprise_E10 `
+        --sku Balanced_B0 `
         --public-network-access "Enabled" `
         --no-database `
         --no-wait
 
-    Write-Host "The Azure Managed Redis Enterprise cluster is being created and takes 5-10 minutes to complete."
+    Write-Host "The Azure Managed Redis cluster is being created and takes 5-10 minutes to complete."
     Write-Host "You can check the deployment status from the menu later in the exercise."
 }
 
