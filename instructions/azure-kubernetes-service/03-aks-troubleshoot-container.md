@@ -1,27 +1,20 @@
-# Troubleshoot apps on Azure Kubernetes Service
+# Lab 08: Troubleshoot apps on Azure Kubernetes Service
+### Estimated Duration : 30 Minutes
+
+## Overview 
 
 In this exercise, you deploy a containerized API to Azure Kubernetes Service (AKS) and then diagnose and resolve common Kubernetes issues. You use **kubectl** commands to identify problems, inspect pod status, check logs, and view events. You then use **kubectl edit** to fix misconfigurations including Service selector mismatches, missing environment variables, and invalid readiness probe paths.
 
-Tasks performed in this exercise:
+## Lab Overview
 
-- Download the project starter files
-- Deploy resources to Azure (ACR, AKS cluster)
-- Diagnose and resolve some common issues
+- **Task 1:** Download the project starter files
+- **Task 2:** Deploy resources to Azure (ACR, AKS cluster)
+- **Task 3:** Diagnose and resolve some common issues
 - Clean up Azure resources
 
-This exercise takes approximately **30** minutes to complete.
 
 >**Important:** Azure Container Registry task runs are temporarily paused from Azure free credits. This exercise requires a Pay-As-You-Go, or another paid plan.
 
-## Before you start
-
-To complete the exercise, you need:
-
-- An Azure subscription with the permissions to deploy the necessary Azure services. If you don't already have one, you can [sign up for one](https://azure.microsoft.com/).
-- [Visual Studio Code](https://code.visualstudio.com/) on one of the [supported platforms](https://code.visualstudio.com/docs/supporting/requirements#_platforms).
-- The latest version of the [Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli).
-- The Kubernetes command-line tool, [kubectl](https://kubernetes.io/docs/tasks/tools/).
-- Optional: [Python 3.12](https://www.python.org/downloads/) or greater.
 
 ## Download project starter files and deploy Azure services
 
@@ -339,3 +332,10 @@ If you encounter issues while setting up this exercise, try the following troubl
 **Resetting the exercise**
 - If you need to start the troubleshooting scenarios over, run the deployment script option **5. Deploy applications to AKS** to redeploy the original working configuration.
 - This reapplies the base deployment and service files, resetting any changes made during the exercise.
+
+### Summary
+
+
+
+## You have successfully completed the Hands-on Lab!
+

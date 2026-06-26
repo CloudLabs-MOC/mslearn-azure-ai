@@ -1,25 +1,17 @@
-# Implement semantic search in Azure Managed Redis
+# Lab 17: Implement semantic search in Azure Managed Redis
+
+### Estimated Duration : 30 Minutes
+
+## Overview 
 
 In this exercise, you create an Azure Managed Redis resource and complete the code for a vector storage application. The application loads sample product data with embeddings, stores new products with vector embeddings and metadata, performs semantic similarity searches using vector embeddings, and displays related products based on cosine similarity. You implement core vector operations including storing vectors as binary data with metadata, creating a RediSearch index with HNSW algorithm configuration, and executing KNN queries to find semantically similar products.
 
-Tasks performed in this exercise:
+## Lab Overview
 
-- Download the project starter files
-- Create an Azure Managed Redis resource
-- Add code to complete business logic
-- Run the app to load sample data, store products with embeddings, and perform similarity searches
-
-This exercise takes approximately **30** minutes to complete.
-
-## Before you start
-
-To complete the exercise, you need:
-
-- An Azure subscription with the permission to create an Azure Managed Redis instance with an enterprise SKU. If you don't already have one, you can [sign up for one](https://azure.microsoft.com/).
-- [Visual Studio Code](https://code.visualstudio.com/) on one of the [supported platforms](https://code.visualstudio.com/docs/supporting/requirements#_platforms).
-- [Python 3.12](https://www.python.org/downloads/) or greater.
-- The latest version of the [Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli).
-- The Azure CLI **redisenterprise** extension. You can install it by running the **az extension add --name redisenterprise** command.
+- **Task 1:** Download the project starter files
+- **Task 2:** Create an Azure Managed Redis resource
+- **Task 3:** Add code to complete business logic
+- **Task 4:** Run the app to load sample data, store products with embeddings, and perform similarity searches
 
 ## Download project starter files and deploy Azure Managed Redis
 
@@ -418,3 +410,8 @@ If you encounter issues while completing this exercise, try the following troubl
 - Confirm the virtual environment is activated before running the app.
 - Verify that all packages from *requirements.txt* were installed successfully by running **pip list**.
 
+### Summary
+
+
+
+## You have successfully completed the Hands-on Lab!

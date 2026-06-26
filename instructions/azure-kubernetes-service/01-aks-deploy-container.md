@@ -1,27 +1,20 @@
-# Deploy an AI inference API to Azure Kubernetes Service
+# Lab 06: Deploy an AI inference API to Azure Kubernetes Service
+
+### Estimated Duration : 30 Minutes
+
+## Overview 
 
 In this exercise, you deploy Azure resources including a Microsoft Foundry AI model, Azure Container Registry (ACR), and Azure Kubernetes Service (AKS) cluster. You then complete Kubernetes manifest files to define container specifications, health probes, resource limits, and load balancing. After deploying the containerized API to AKS, you use a Python client application to test the deployed API endpoints including health checks, readiness validation, and AI model inference requests.
 
-Tasks performed in this exercise:
+## Lab Overview
 
-- Download the project starter files
-- Deploy resources to Azure
-- Complete the *deployment.yaml* and *service.yaml* files and deploy the container to AKS
-- Run the client app to test the API
-
-This exercise takes approximately **30** minutes to complete.
+- **Task 1:** Download the project starter files
+- **Task 2:** Deploy resources to Azure
+- **Task 3:** Complete the *deployment.yaml* and *service.yaml* files and deploy the container to AKS
+- **Task 4:** Run the client app to test the API
 
 >**Important:** Azure Container Registry task runs are temporarily paused from Azure free credits. This exercise requires a Pay-As-You-Go, or another paid plan.
 
-## Before you start
-
-To complete the exercise, you need:
-
-- An Azure subscription with the permissions to deploy the necessary Azure services. If you don't already have one, you can [sign up for one](https://azure.microsoft.com/).
-- [Visual Studio Code](https://code.visualstudio.com/) on one of the [supported platforms](https://code.visualstudio.com/docs/supporting/requirements#_platforms).
-- The latest version of the [Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli).
-- The Kubernetes command-line tool, [kubectl](https://kubernetes.io/docs/tasks/tools/).
-- Optional: [Python 3.12](https://www.python.org/downloads/) or greater.
 
 ## Download project starter files and deploy Azure services
 
@@ -300,3 +293,8 @@ If you encounter issues while completing this exercise, try the following troubl
 - Verify that all packages from *requirements.txt* were installed successfully by running **pip list**.
 - Ensure you're running the client from the *client* directory.
 
+### Summary
+
+
+
+## You have successfully completed the Hands-on Lab!

@@ -1,25 +1,18 @@
-# Perform data operations in Azure Managed Redis
+# Lab 15: Perform data operations in Azure Managed Redis
+
+### Estimated Duration : 30 Minutes
+
+## Overview 
 
 In this exercise, you create an Azure Managed Redis resource and build a Python console application that performs common data operations using the **redis-py** library. You work with Redis hash data structures to store and retrieve key-value pairs, manage key expiration with Time-To-Live (TTL) settings, and delete keys from the cache.
 
-Tasks performed in this exercise:
+## Lab Overview
 
-- Download the project starter files
-- Create an Azure Managed Redis resource
-- Add code to the starter files to complete the console app
-- Run the console app to perform data operations
+- **Task 1:** Download the project starter files
+- **Task 2:** Create an Azure Managed Redis resource
+- **Task 3:** Add code to the starter files to complete the console app
+- **Task 4:** Run the console app to perform data operations
 
-This exercise takes approximately **30** minutes to complete.
-
-## Before you start
-
-To complete the exercise, you need:
-
-- An Azure subscription. If you don't already have one, you can [sign up for one](https://azure.microsoft.com/).
-- [Visual Studio Code](https://code.visualstudio.com/) on one of the [supported platforms](https://code.visualstudio.com/docs/supporting/requirements#_platforms).
-- [Python 3.12](https://www.python.org/downloads/) or greater.
-- The latest version of the [Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli).
-- The Azure CLI **redisenterprise** extension. You can install it by running the **az extension add --name redisenterprise** command.
 
 ## Download project starter files and deploy Azure Managed Redis
 
@@ -321,3 +314,8 @@ If you encounter issues while completing this exercise, try the following troubl
 - Confirm the virtual environment is activated before running the app.
 - Verify that all packages from *requirements.txt* were installed successfully by running **pip list**.
 
+### Summary
+
+
+
+## You have successfully completed the Hands-on Lab!

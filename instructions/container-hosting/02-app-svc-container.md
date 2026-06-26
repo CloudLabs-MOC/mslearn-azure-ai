@@ -1,28 +1,22 @@
-# Deploy a container to Azure App Service
+# Lab 02: Deploy a container to Azure App Service
+
+### Estimated Duration : 30 Minutes
+
+## Overview 
 
 In this exercise, you deploy a Linux container image from Azure Container Registry (ACR) to Azure App Service. You configure the web app to use a system-assigned managed identity and the **AcrPull** role so App Service can pull images from your private registry without storing registry credentials in app settings.
 
-Tasks performed in this exercise:
+## Lab Overview
 
-- Download the project starter files
-- Deploy Azure Container Registry and build a container image using ACR Tasks
-- Deploy an App Service plan for Linux containers
-- Create and configure a Web App for Containers to pull from ACR using managed identity
-- Configure runtime settings and enable container logging
-- Verify the deployment and test the document processing endpoint
+- **Task 1:** Download the project starter files
+- **Task 2:** Deploy Azure Container Registry and build a container image using ACR Tasks
+- **Task 3:** Deploy an App Service plan for Linux containers
+- **Task 4:** Create and configure a Web App for Containers to pull from ACR using managed identity
+- **Task 5:** Configure runtime settings and enable container logging
+- **Task 6:** Verify the deployment and test the document processing endpoint
 
-This exercise takes approximately **30** minutes to complete.
 
 >**Important:** Azure Container Registry task runs are temporarily paused from Azure free credits. This exercise requires a Pay-As-You-Go, or another paid plan.
-
-## Before you start
-
-To complete the exercise, you need:
-
-- An Azure subscription with the permissions to deploy the necessary Azure services. If you don't already have one, you can [sign up for one](https://azure.microsoft.com/).
-- [Visual Studio Code](https://code.visualstudio.com/) on one of the [supported platforms](https://code.visualstudio.com/docs/supporting/requirements#_platforms).
-- The latest version of the [Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli).
-- Optional: [Python 3.12](https://www.python.org/downloads/) or greater.
 
 
 ## Download project starter files and deploy Azure services
@@ -516,3 +510,8 @@ If you encounter issues while completing this exercise, try the following troubl
 - Confirm the **WEBSITES_ENABLE_APP_SERVICE_STORAGE** setting is present and set to **true**.
 - Call the **/documents** endpoint after submitting a document to confirm results are being written to persistent storage.
 
+### Summary
+
+
+
+## You have successfully completed the Hands-on Lab!

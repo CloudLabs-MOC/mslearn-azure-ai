@@ -1,33 +1,27 @@
-# Configure apps on Azure Kubernetes Service
+# Lab 07: Configure apps on Azure Kubernetes Service
+
+### Estimated Duration : 30 Minutes
+
+## Overview 
+
 
 In this exercise, you learn how to configure Kubernetes deployments with ConfigMaps for non-sensitive settings, Secrets for sensitive credentials, and PersistentVolumeClaims for persistent storage. You deploy a containerized API to Azure Kubernetes Service (AKS), configure it with various Kubernetes resources, and interact with it using a Python client application.
 
 Tasks performed in this exercise:
 
-- Download the project starter files
-- Deploy resources to Azure (ACR, AKS cluster)
-- Build and push a container image to Azure Container Registry
-- Configure kubectl credentials for AKS cluster access
-- Apply updated YAML files to AKS to create the pod and expose the API with a LoadBalancer
-- Run the client app to test the API endpoints
-- View API logs stored on persistent volume
+- **Task 1:** Download the project starter files
+- **Task 2:** Deploy resources to Azure (ACR, AKS cluster)
+- **Task 3:** Build and push a container image to Azure Container Registry
+- **Task 4:** Configure kubectl credentials for AKS cluster access
+- **Task 5:** Apply updated YAML files to AKS to create the pod and expose the API with a LoadBalancer
+- **Task 6:** Run the client app to test the API endpoints
+- **Task 7:** View API logs stored on persistent volume
 - Clean up Azure resources
 
-This exercise takes approximately **30** minutes to complete.
 
 >**IMPORTANT:** The persistent storage implementation in this exercise is for demonstration purposes only. For logging, production applications should use a centralized logging solution like Azure Monitor or Application Insights instead of storing logs on persistent volumes. If persistent storage is required, implement log rotation policies to prevent storage from filling up, which can cause container failures and pod evictions.
 
 >**Important:** Azure Container Registry task runs are temporarily paused from Azure free credits. This exercise requires a Pay-As-You-Go, or another paid plan.
-
-## Before you start
-
-To complete the exercise, you need:
-
-- An Azure subscription with the permissions to deploy the necessary Azure services. If you don't already have one, you can [sign up for one](https://azure.microsoft.com/).
-- [Visual Studio Code](https://code.visualstudio.com/) on one of the [supported platforms](https://code.visualstudio.com/docs/supporting/requirements#_platforms).
-- The latest version of the [Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli).
-- The Kubernetes command-line tool, [kubectl](https://kubernetes.io/docs/tasks/tools/).
-- Optional: [Python 3.12](https://www.python.org/downloads/) or greater.
 
 ## Download project starter files and deploy Azure services
 
@@ -360,3 +354,9 @@ If you encounter issues while completing this exercise, try the following troubl
 - Confirm the virtual environment is activated before running the client app.
 - Verify that all packages from *requirements.txt* were installed successfully by running **pip list**.
 - Ensure you're running the client from the *client* directory.
+
+### Summary
+
+
+
+## You have successfully completed the Hands-on Lab!

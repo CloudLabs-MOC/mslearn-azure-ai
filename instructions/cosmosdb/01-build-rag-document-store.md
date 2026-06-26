@@ -1,25 +1,20 @@
-# Build a RAG document store on Azure Cosmos DB for NoSQL
+# Lab 09: Build a RAG document store on Azure Cosmos DB for NoSQL
+
+### Estimated Duration : 30 Minutes
+
+## Overview 
 
 In this exercise, you create an Azure Cosmos DB for NoSQL database that serves as a document store for retrieval-augmented generation (RAG) applications. The database stores chunked documents with metadata that an AI application can retrieve to provide context to language models. You design a schema optimized for document retrieval, build Python functions that store and query document chunks, and test the complete workflow using a Flask web application. This pattern provides a foundation for building AI applications that ground language model responses in your organization's documents.
 
-Tasks performed in this exercise:
+## Lab Overview
 
-- Download project starter files and configure the deployment script
-- Deploy an Azure Cosmos DB for NoSQL account with a database and container
-- Build Python functions for storing and retrieving document chunks
-- Test the RAG functions using a Flask web application
-- Query document context using the Cosmos DB SQL API
+- **Task 1:** Download project starter files and configure the deployment script
+- **Task 2:** Deploy an Azure Cosmos DB for NoSQL account with a database and container
+- **Task 3:** Build Python functions for storing and retrieving document chunks
+- **Task 4:** Test the RAG functions using a Flask web application
+- **Task 5:** Query document context using the Cosmos DB SQL API
 
-This exercise takes approximately **30** minutes to complete.
 
-## Before you start
-
-To complete the exercise, you need:
-
-- An Azure subscription with the permissions to deploy the necessary Azure services. If you don't already have one, you can [sign up for one](https://azure.microsoft.com/).
-- [Visual Studio Code](https://code.visualstudio.com/) on one of the [supported platforms](https://code.visualstudio.com/docs/supporting/requirements#_platforms).
-- The latest version of the [Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli).
-- [Python 3.12](https://www.python.org/downloads/) or greater.
 
 ## Download project starter files and deploy Azure services
 
@@ -493,3 +488,10 @@ If you encounter issues during this exercise, try these steps:
 - On Linux/macOS, use: **source .venv/bin/activate**
 - On Windows PowerShell, use: **.\venv\Scripts\Activate.ps1**
 - If **activate** script is missing, reinstall **python3-venv** package and recreate the venv
+
+
+### Summary
+
+
+
+## You have successfully completed the Hands-on Lab!

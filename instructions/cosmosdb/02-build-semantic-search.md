@@ -1,25 +1,19 @@
-# Build a semantic search application with Azure Cosmos DB for NoSQL
+# Lab 10: Build a semantic search application with Azure Cosmos DB for NoSQL
+
+### Estimated Duration : 30 Minutes
+
+## Overview 
 
 In this exercise, you implement vector similarity search using Azure Cosmos DB for NoSQL. Vector search enables semantic matching by comparing high-dimensional vector representations of text, finding relevant results even when exact terms don't match. You configure a container with vector embedding and indexing policies, load support tickets with pre-computed embeddings, and execute similarity queries using the **VectorDistance** function. This pattern provides a foundation for building AI applications that perform semantic search, such as finding similar support cases to help resolve customer issues faster.
 
-Tasks performed in this exercise:
+## Lab Overview
 
-- Download project starter files and configure the deployment script
-- Deploy an Azure Cosmos DB for NoSQL account with vector search capability
-- Build Python functions for vector similarity search
-- Create a container with vector embedding and indexing policies
-- Test vector search using a Flask web application
+- **Task 1:** Download project starter files and configure the deployment script
+- **Task 2:** Deploy an Azure Cosmos DB for NoSQL account with vector search capability
+- **Task 3:** Build Python functions for vector similarity search
+- **Task 4:** Create a container with vector embedding and indexing policies
+- **Task 5:** Test vector search using a Flask web application
 
-This exercise takes approximately **30** minutes to complete.
-
-## Before you start
-
-To complete the exercise, you need:
-
-- An Azure subscription with the permissions to deploy the necessary Azure services. If you don't already have one, you can [sign up for one](https://azure.microsoft.com/).
-- [Visual Studio Code](https://code.visualstudio.com/) on one of the [supported platforms](https://code.visualstudio.com/docs/supporting/requirements#_platforms).
-- The latest version of the [Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli).
-- [Python 3.12](https://www.python.org/downloads/) or greater.
 
 ## Download project starter files and deploy Azure services
 
@@ -474,3 +468,10 @@ If you encounter issues during this exercise, try these steps:
 - On Linux/macOS, use: **source .venv/bin/activate**
 - On Windows PowerShell, use: **.\.venv\Scripts\Activate.ps1**
 - If **activate** script is missing, reinstall **python3-venv** package and recreate the venv
+
+
+### Summary
+
+
+
+## You have successfully completed the Hands-on Lab!

@@ -1,25 +1,18 @@
-# Publish and subscribe to events in Azure Managed Redis
+# Lab 16: Publish and subscribe to events in Azure Managed Redis
+
+### Estimated Duration : 30 Minutes
+
+## Overview 
 
 In this exercise, you create an Azure Managed Redis resource and complete the code for a console-based publisher and a subscriber app. The publisher app sends event messages to Redis channels, while the subscriber app listens for those messages using a graphical interface built with **tkinter**. You implement core pub/sub patterns including direct channel subscriptions, wildcard pattern matching, message formatting, and background message listening.
 
-Tasks performed in this exercise:
+## Lab Overview
 
-- Download the project starter files
-- Create an Azure Managed Redis resource
-- Add code to complete both the publisher and subscriber apps
-- Run the publisher and subscriber apps to send and receive messages
+- **Task 1:** Download the project starter files
+- **Task 2:** Create an Azure Managed Redis resource
+- **Task 3:** Add code to complete both the publisher and subscriber apps
+- **Task 4:** Run the publisher and subscriber apps to send and receive messages
 
-This exercise takes approximately **30** minutes to complete.
-
-## Before you start
-
-To complete the exercise, you need:
-
-- An Azure subscription. If you don't already have one, you can [sign up for one](https://azure.microsoft.com/).
-- [Visual Studio Code](https://code.visualstudio.com/) on one of the [supported platforms](https://code.visualstudio.com/docs/supporting/requirements#_platforms).
-- [Python 3.12](https://www.python.org/downloads/) or greater.
-- The latest version of the [Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli).
-- The Azure CLI **redisenterprise** extension. You can install it by running the **az extension add --name redisenterprise** command.
 
 ## Download project starter files and deploy Azure Managed Redis
 
@@ -515,3 +508,8 @@ If you encounter issues while completing this exercise, try the following troubl
 - Confirm the virtual environment is activated before running the app.
 - Verify that all packages from *requirements.txt* were installed successfully by running **pip list**.
 
+### Summary
+
+
+
+## You have successfully completed the Hands-on Lab!
