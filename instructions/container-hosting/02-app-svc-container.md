@@ -8,54 +8,96 @@ In this exercise, you deploy a Linux container image from Azure Container Regist
 
 ## Lab Overview
 
-- **Task 1:** Download the project starter files
-- **Task 2:** Deploy Azure Container Registry and build a container image using ACR Tasks
-- **Task 3:** Deploy an App Service plan for Linux containers
-- **Task 4:** Create and configure a Web App for Containers to pull from ACR using managed identity
-- **Task 5:** Configure runtime settings and enable container logging
-- **Task 6:** Verify the deployment and test the document processing endpoint
+- **Task 1:** Deploy Azure Container Registry and build a container image using ACR Tasks
+- **Task 2:** Deploy an App Service plan for Linux containers
+- **Task 3:** Create and configure a Web App for Containers to pull from ACR using managed identity
+- **Task 4:** Configure runtime settings and enable container logging
+- **Task 5:** Verify the deployment and test the document processing endpoint
+.
 
+## Task 1: Deploy Azure Container Registry and build a container image using ACR Tasks
 
->**Important:** Azure Container Registry task runs are temporarily paused from Azure free credits. This exercise requires a Pay-As-You-Go, or another paid plan.
+1. On VM select **Visual Studio Code** from the desktop.
 
+    ![](../Images/vsimage.png)
 
-## Download project starter files and deploy Azure services
+1. Select **File(1)**,then **Open Folder... (2)** in the menu, then choose the folder containing the project files.
 
-In this section you download the project starter files and use a script to deploy the necessary services to your Azure subscription. The Azure Container Registry and App Service plan deployment takes a few minutes to complete.
+    ![](../Images/folderimagea.png)
 
-1. Open a browser and enter the following URL to download the starter file. The file will be saved in your default download location.
+1. Navigate to **C:\Allfiles (1)**, click on  the **Select folder (2)**.    
 
-    ```
-    https://github.com/MicrosoftLearning/mslearn-azure-ai/raw/main/downloads/python/app-svc-container-python.zip
-    ```
+    ![](../Images/folderimage-b.png)
 
-1. Copy, or move, the file to a location in your system where you want to work on the project. Then unzip the file into a folder.
+1. Once the folder open in VS Code, select **file explorer (1)**, then **azdeploy.ps1 (2)**.
 
-1. Launch Visual Studio Code (VS Code) and select **File > Open Folder...** in the menu, then choose the folder containing the project files.
+    ![](../Images/powershellscript.png)
 
-1. The project contains deployment scripts for both Bash (*azdeploy.sh*) and PowerShell (*azdeploy.ps1*). Open the appropriate file for your environment and change the two values at the top of the script to meet your needs, then save your changes. **Note:** Do not change anything else in the script.
+1. Navigate to azure portal, and search for **Resource groups (1)** and select **Resource groups (2)**.
+
+    ![](../Images/resgrpimage.png)
+
+1. Note the name of the **Resource group**.
+
+    ![](../Images/grp-name-img.png)
+    
+1. The project contains deployment scripts for both Bash (*azdeploy.sh*) and PowerShell (*azdeploy.ps1*). Open the appropriate file for your environment and change the two values at the top of the script to meet your needs, then save your changes. 
+
+    - Resource Group name : AI-200-RG02-**<inject key="DeploymentID"></inject>**
+
+    - Region : **<inject key="Region"></inject>**
 
     ```
     "<your-resource-group-name>" # Resource Group name
     "<your-azure-region>" # Azure region for the resources
     ```
+    ![](../Images/powershellrgnaming.png)
+
+    > **Note:** Do not change anything else in the script.
+
+1. Do **Ctrl+S** to save the changes.    
 
 1. In the menu bar select **Terminal > New Terminal** to open a terminal window in VS Code.
 
-1. Run the following command to login to your Azure account. Answer the prompts to select your Azure account and subscription for the exercise.
+    ![](../Images/terminalimage.png)
+
+1. Run the following command.
+
+    ```
+    Set-ExecutionPolicy -ExecutionPolicy bypass -Force
+    ```
+    ![](../Images/runcmd.png)
+
+1. Run the following command to login to your Azure account. Answer the prompts to select your Azure account and subscription for the exercise. Minimize the window.
 
     ```
     az login
     ```
+    ![](../Images/azloginimage.png)
 
-1. Run the following commands to ensure your subscription has the necessary resource providers for Azure Container Registry (ACR) and Azure App Service.
+1. On the desktop a pop-up will appear, select the **Work and school account (1)**, the click on **Continue (2)**. 
 
-    ```
-    az provider register --namespace Microsoft.ContainerRegistry
-    az provider register --namespace Microsoft.Web
-    ```
+    ![](../Images/sign-in-1.png)
 
-### Create resources in Azure
+1. Choose you account **(1)**, click on **Next (2)**.
+
+    ![](../Images/sign-in-2.png)
+
+1. Enter the temporary acces pass, click on **Sign in**.
+
+    ![](../Images/tempass.png)
+
+1. On Sign in to all apps and websites on this device?, then select **No,this app only.**.
+
+    ![](../Images/sign-in-3.png)
+
+1. Navigate back to the terminal.
+
+1. Choose the Subscription, by enter **1**.
+
+    ![](../Images/sign-in-4.png)
+
+### Task 2: Create resources in Azure
 
 In this section you run the deployment script to deploy the necessary services to your Azure subscription.
 
@@ -70,14 +112,21 @@ In this section you run the deployment script to deploy the necessary services t
     ```powershell
     ./azdeploy.ps1
     ```
+    ![](../Images/Lab02-Task1-1.png)
 
 1. When the script is running, enter **1** to launch the **1. Create Azure Container Registry and build container image** option. This option creates the ACR service and uses ACR Tasks to build and push the image to the registry.
 
+    ![](../Images/Lab02-Task1-2.png)
+
 1. When the previous operation is finished, enter **2** to launch the **Create App Service Plan** options. This option creates the App Service plan needed for web app.
+
+    ![](../Images/Lab02-Task1-3.png)
 
     >**Note:** A file containing environment variables is created after the App Service plan is created. You use these variables throughout the exercise.
 
 1. When the previous operation is finished, enter **4** to exit the deployment script.
+
+    ![](../Images/Lab02-Task1-4.png)
 
 1. Run the appropriate command to load the environment variables into your terminal session from the file created in a previous step.
 
@@ -89,11 +138,13 @@ In this section you run the deployment script to deploy the necessary services t
     **PowerShell**
     ```powershell
     . .\.env.ps1
+
     ```
+    ![](../Images/Lab02-Task1-5.png)
 
     >**Note:** Keep the terminal open. If you close it and create a new terminal, you might need to run the command to create the environment variable again.
 
-## Create the web app
+## Task 3: Create the web app
 
 In this section you create the web app with CLI commands. You then configure the web app with a system-assigned managed identity to give the app access to the image in ACR.
 
