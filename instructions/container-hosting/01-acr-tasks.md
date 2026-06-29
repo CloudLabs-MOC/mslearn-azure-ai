@@ -35,10 +35,7 @@ In this section you download the project starter files and use a script to deplo
 
     ![](../Images/Lab01-Task1-4.png)
 
-1. The project contains deployment scripts for both Bash (*azdeploy.sh*) and PowerShell (*azdeploy.ps1*). Open the appropriate file for your environment and change the two values: **Resource group name** and **Azure Region** at the top of the script to meet your needs.
-
-     - Resource Group name: AI-200-RG02-**<inject key="DeploymentID"></inject>**
-    - Region: **<inject key="Region"></inject>**
+1. The project contains deployment scripts for both Bash (*azdeploy.sh*) and PowerShell (*azdeploy.ps1*). Open the appropriate file for your environment and change the two values: **Resource group name** and **Azure Region** at the top of the script to meet your needs. 
 
     > **Note:** Do not change anything else in the script.
 
