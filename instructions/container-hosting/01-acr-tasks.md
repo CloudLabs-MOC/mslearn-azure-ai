@@ -23,7 +23,7 @@ In this section you download the project starter files and use a script to deplo
 
     ![](../Images/Lab01-Task1-1.png)
 
-1. Select **File Explorer (1)** from left panel. Click **Open Folder...** in the menu.
+1. Select **File Explorer (1)** from left panel. Click **Open Folder** in the menu.
 
     ![](../Images/Lab01-Task1-2.png)
 
@@ -35,7 +35,10 @@ In this section you download the project starter files and use a script to deplo
 
     ![](../Images/Lab01-Task1-4.png)
 
-1. The project contains deployment scripts for both Bash (*azdeploy.sh*) and PowerShell (*azdeploy.ps1*). Open the appropriate file for your environment and change the two values: **Resource group name** and **Azure Region** at the top of the script to meet your needs. 
+1. The project contains deployment scripts for both Bash (*azdeploy.sh*) and PowerShell (*azdeploy.ps1*). Open the appropriate file for your environment and change the two values: **Resource group name** and **Azure Region** at the top of the script to meet your needs.
+
+     - Resource Group name: AI-200-RG02-**<inject key="DeploymentID"></inject>**
+    - Region: **<inject key="Region"></inject>**
 
     > **Note:** Do not change anything else in the script.
 
@@ -52,7 +55,7 @@ In this section you download the project starter files and use a script to deplo
 
     ![](../Images/Lab01-Task1-7.png)
 
-1. In the menu bar, select **three dots (1)** and click on **Terminal (2)**, then select **New Terminal (3)** to open a terminal window in VS Code.
+1. In the menu bar, select **ellipsis (...) (1)**, then **Terminal (2)**, and then **New Terminal (3)** to open a terminal window in VS Code.
 
     ![](../Images/Lab01-Task1-8.png)
 
@@ -80,7 +83,7 @@ In this section you download the project starter files and use a script to deplo
 
     ![](../Images/Lab01-Task1-11.png)
 
-1. In the login window, kindly sign in using the provided **Azure credentials (1)** and click **Continue (2)**.
+1. In the login window, kindly sign in using the provided **Azure credentials (1)** and click **Next (2)**.
 
     - **Email/Username:** <inject key="AzureAdUserEmail"></inject>
 
