@@ -284,11 +284,13 @@ To enable the web app to use that identity to pull images, you assign the built-
 
     **Bash**
     ```bash
-    az role assignment create \
-        --assignee $PRINCIPAL_ID \
-        --scope $ACR_ID \
+        MSYS_NO_PATHCONV=1 \
+        az role assignment create \
+        --assignee "$PRINCIPAL_ID" \
+        --scope "$ACR_ID" \
         --role AcrPull
     ```
+    ![](../Images/Lab02-Task2-49.png)
 
     **PowerShell**
     ```powershell
@@ -475,6 +477,7 @@ In this section, you send a request to the API to confirm that the app is workin
         -H "Content-Type: text/plain" \
         --data-binary @document.txt
     ```
+    ![](../Images/Lab02-Task2-50.png)
 
     **PowerShell**
     ```powershell
@@ -491,6 +494,7 @@ In this section, you send a request to the API to confirm that the app is workin
     ```bash
     curl https://$APP_URL/documents
     ```
+    ![](../Images/Lab02-Task2-51.png)
 
     **PowerShell**
     ```powershell
@@ -547,6 +551,8 @@ In this section, you open the SCM (Kudu) site to inspect configuration views and
     1. **Environment** to view environment variables and verify that your app settings are present.
     1. **Bash** to open a browser-based shell and file explorer.
     1. In the file explorer, navigate to **/home/LogFiles/** to view log files. Enter **ls** to list the files in the folder.
+
+        ![](../Images/Lab02-Task2-52.png)
 
     > **Tip:** You can also use **Log stream** in the top menu to view logs in the browser, or use the **SSH** option to connect to the app container.
 
