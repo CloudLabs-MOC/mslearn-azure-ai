@@ -45,10 +45,7 @@ In this lab, you will deploy a containerized application to Azure App Service by
 
     ![](../Images/grp-name-img.png)
 
-1. The project contains deployment scripts for both Bash (*azdeploy.sh*) and PowerShell (*azdeploy.ps1*). Open the appropriate file for your environment and change the two values: **Resource group name** and **Azure Region** at the top of the script to meet your needs. 
-
-    - Resource Group name: AI-200-RG02-**<inject key="DeploymentID"></inject>**
-    - Region: **<inject key="Region"></inject>**
+1. The project contains deployment scripts for both Bash (*azdeploy.sh*) and PowerShell (*azdeploy.ps1*). Open the appropriate file for your environment and change the two values: **Resource group name** as **<inject key="ResourceGroupName" enableCopy="false"/>** and **Azure Region** as **<inject key="Region" enableCopy="false"/>** at the top of the script to meet your needs.
 
     ```
     "<your-resource-group-name>" # Resource Group name
