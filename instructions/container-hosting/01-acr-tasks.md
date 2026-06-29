@@ -35,7 +35,7 @@ In this section you download the project starter files and use a script to deplo
 
     ![](../Images/Lab01-Task1-4.png)
 
-1. The project contains deployment scripts for both Bash (*azdeploy.sh*) and PowerShell (*azdeploy.ps1*). Open the appropriate file for your environment and change the two values: **Resource group name** and **Azure Region** at the top of the script to meet your needs. 
+1. The project contains deployment scripts for both Bash (*azdeploy.sh*) and PowerShell (*azdeploy.ps1*). Open the appropriate file for your environment and change the two values: **Resource group name** as **<inject key="rgName" enableCopy="false"/>** and **Azure Region** as **<inject key="Region" enableCopy="false"/>** at the top of the script to meet your needs.
 
     > **Note:** Do not change anything else in the script.
 
@@ -87,6 +87,8 @@ In this section you download the project starter files and use a script to deplo
     ![](../Images/Lab01-Task1-12.png)
 
 1. Next, enter the provided **Password (1)** and click **Sign in (2)**.
+
+    - **Password:** <inject key="AzureAdUserPassword"></inject>
 
     ![](../Images/Lab01-Task1-13.png)
 
@@ -289,6 +291,8 @@ In this section you use the **az acr run** command to execute a command inside y
     The output includes Docker pull progress as it downloads the image. A successful run ends with **Run ID: xxx was successful after n sec (2)**. This confirms the container runs correctly and the Flask application imports without errors.
 
     ![](../Images/Lab01-Task4-1.png)
+
+    > **NOTE:** If the command fails, re-run the same command after 2-3 minutes. It may take a few minutes for the image to be available in the registry after the build completes.
 
 ## Task 5: Build with a different tag
 
