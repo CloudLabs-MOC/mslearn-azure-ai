@@ -122,9 +122,13 @@ In this section you download the project starter files and use a script to deplo
 
     ![](../Images/Lab01-Task1-17.png)
 
-1. You should see one container registry created.
+1. You should see one container registry created. Click on the container registry created.
 
     ![](../Images/Lab01-Task1-18.png)
+
+1. In the container registry page, click on **Access keys (1)** under **Settings** in the left menu. Make sure **Admin user (2)** is set to **Enabled**.
+
+    ![](../Images/Lab01-Task1-18-1.png)
 
 1. Run the appropriate command to load the environment variables into your terminal session.
 
