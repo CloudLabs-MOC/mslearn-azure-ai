@@ -8,7 +8,7 @@ In this lab, you will deploy a containerized application to Azure App Service by
 
 ## Lab Overview
 
-- **Task 1:** Deploy Azure Container Registry
+- **Task 1:** Deploy Azure Container Registry and App Service Plan
 - **Task 2:** Create and configure a web app
 - **Task 3:** Assign the AcrPull role to the web app
 - **Task 4:** Configure runtime settings and enable container logging
@@ -19,7 +19,7 @@ In this lab, you will deploy a containerized application to Azure App Service by
 - **Task 9:** View application settings
 
 
-## Task 1: Deploy Azure Container Registry
+## Task 1: Deploy Azure Container Registry and App Service Plan
 
 1. Launch **Visual Studio Code** (VS Code) from desktop.
 
@@ -149,6 +149,14 @@ In this lab, you will deploy a containerized application to Azure App Service by
 
     > **Note:** A file containing environment variables is created after the App Service plan is created. You will use these variables throughout the exercise.
 
+1. To verify that the deployment was successful, navigate to the Azure portal. In the search bar, type **App Service plans (1)** and select **App Service plans (2)** from the search results.
+
+    ![](../Images/Lab02-Task2-53.png)
+
+1. You should see the **App Service plan** you created.
+
+    ![](../Images/Lab02-Task2-54.png)
+
 1. When the previous operation is complete, enter **4** to exit the deployment script.
 
     ![](../Images/Lab02-Task1-4.png)
@@ -169,6 +177,18 @@ In this lab, you will deploy a containerized application to Azure App Service by
     ![](../Images/Lab02-Task1-5.png)
 
     > **Note:** Keep the terminal open. If you close it and open a new terminal, you may need to run the command again to recreate the environment variables.
+
+1. In the search bar, type **Container registries (1)** and select **Container registries (2)** from the search results.
+
+    ![](../Images/Lab02-Task2-4.png)
+
+1. In the left-hand menu, under the **Settings (1)** section, select **Access keys (2)**.
+
+    ![](../Images/Lab02-Task2-55.png)
+
+1. Under the Admin user section, checkbox the **Enable** option.
+
+    ![](../Images/Lab02-Task2-56.png)
 
 ## Task 2: Create and configure a web app
 
