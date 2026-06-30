@@ -9,9 +9,8 @@ In this exercise, you deploy a containerized backend API to Azure Container Apps
 ## Lab Overview
 
 - **Task 1:** Download the project starter files and deploy Azure services
-- **Task 2:** Deploy the container app with managed identity authentication
-- **Task 3:** Configure secrets and reference them from environment variables
-- **Task 4:** Verify the deployment by calling API endpoints and reviewing logs
+- **Task 2:** Deploy the container app and configure secrets
+- **Task 3:** Verify the Deployment
 
 
 ## Download project starter files and deploy Azure services
@@ -176,7 +175,7 @@ In this exercise, you deploy a containerized backend API to Azure Container Apps
 
     >**Note:** Keep the terminal open. If you close it and create a new terminal, you might need to run the command to create the environment variable again.
 
-## Deploy the container app and configure secrets
+## Task 2: Deploy the container app and configure secrets
 
 In this section you deploy the API as a container app with external ingress. Because the image is in a private registry, you must configure registry authentication at create time so the first revision can pull the image. You then configure a secret and reference it from an environment variable. This pattern mirrors how AI apps store provider API keys
 
@@ -209,6 +208,7 @@ In this section you deploy the API as a container app with external ingress. Bec
         --registry-server "$env:ACR_SERVER" `
         --registry-identity system
     ```
+    ![](../Images/Lab03-Task1-9.png)
 
 1. Create a secret and reference it from an environment variable.
 
@@ -223,6 +223,7 @@ In this section you deploy the API as a container app with external ingress. Bec
     az containerapp secret set -n $env:CONTAINER_APP_NAME -g $env:RESOURCE_GROUP `
         --secrets embeddings-api-key=$env:EMBEDDINGS_API_KEY
     ```
+    ![](../Images/Lab03-Task1-10.png)
 
 1. Reference the secret from an environment variable. This command creates a new revision, which restarts the app so the secret change takes effect.
 
@@ -237,16 +238,25 @@ In this section you deploy the API as a container app with external ingress. Bec
     az containerapp update -n $env:CONTAINER_APP_NAME -g $env:RESOURCE_GROUP `
         --set-env-vars EMBEDDINGS_API_KEY=secretref:embeddings-api-key
     ```
+    ![](../Images/Lab03-Task1-12.png)
 
 1. Run the following command to list the revisions to confirm a new revision was created.
 
     ```azurecli
     az containerapp revision list -n $CONTAINER_APP_NAME -g $RESOURCE_GROUP -o table
     ```
+    **PowerShell**
+    ```powershell
+    az containerapp revision list `
+    --name $env:CONTAINER_APP_NAME `
+    --resource-group $env:RESOURCE_GROUP `
+    --output table
+    ```
+    ![](../Images/Lab03-Task1-13.png)
 
     The revision name ends with a suffix like `--0000002`, indicating this is the second revision. Container Apps creates a new revision whenever you change environment variables or secrets, which restarts the app with the updated configuration. Old inactive revisions may be pruned over time.
 
-## Verify the deployment
+## Task 3: Verify the deployment
 
 You should validate that the app starts and that ingress works. You also use logs to confirm the app is behaving as expected.
 
@@ -267,6 +277,7 @@ You should validate that the app starts and that ingress works. You also use log
 
     Write-Output $FQDN
     ```
+    ![](../Images/Lab03-Task1-14.png)
 
 1. Run the following command to call the health endpoint. The command should return **{"status": "healthy"}**.
 
@@ -279,6 +290,7 @@ You should validate that the app starts and that ingress works. You also use log
     ```powershell
     Invoke-RestMethod -Uri "https://$FQDN/health"
     ```
+    ![](../Images/Lab03-Task1-15.png)
 
 1. Run the following command to verify the secret is configured by calling the root endpoint. The endpoint returns JSON containing app information including the configured model name and whether the API key secret is configured.
 
@@ -291,6 +303,7 @@ You should validate that the app starts and that ingress works. You also use log
     ```powershell
     Invoke-RestMethod -Uri "https://$FQDN/"
     ```
+    ![](../Images/Lab03-Task3-1.png)
 
 1. Run the following command to test the document processing endpoint. The command sends the *document.txt* file to the endpoint. The operation returns JSON with mock data analysis information.
 
@@ -308,6 +321,7 @@ You should validate that the app starts and that ingress works. You also use log
         -ContentType "text/plain" `
         -Body (Get-Content -Raw document.txt)
     ```
+    ![](../Images/Lab03-Task3-2.png)
 
 1. Run the following command to review logs for startup and runtime signals. This command shows recent console output only. For historical logs and advanced troubleshooting, logs persist in the Log Analytics workspace associated with your Container Apps environment.
 
