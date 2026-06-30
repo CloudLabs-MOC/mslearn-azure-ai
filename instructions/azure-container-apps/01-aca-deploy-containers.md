@@ -13,54 +13,110 @@ In this exercise, you deploy a containerized backend API to Azure Container Apps
 - **Task 3:** Configure secrets and reference them from environment variables
 - **Task 4:** Verify the deployment by calling API endpoints and reviewing logs
 
->**Important:** Azure Container Registry task runs are temporarily paused from Azure free credits. This exercise requires a Pay-As-You-Go, or another paid plan.
-
 
 ## Download project starter files and deploy Azure services
 
-In this section you download the project starter files and use a script to deploy the necessary services to your Azure subscription. The Azure Container Registry and Container Apps environment deployment takes a few minutes to complete.
+1. Launch **Visual Studio Code** (VS Code) from desktop.
 
-1. Open a browser and enter the following URL to download the starter file. The file will be saved in your default download location.
+    ![](../Images/vsimage.png)
 
-    ```
-    https://github.com/MicrosoftLearning/mslearn-azure-ai/raw/main/downloads/python/aca-deploy-python.zip
-    ```
+1. Select **File Explorer (1)**, then **Open Folder (2)** from the menu.
 
-1. Copy, or move, the file to a location in your system where you want to work on the project. Then unzip the file into a folder.
+    ![](../Images/folderimagea.png)
 
-1. Launch Visual Studio Code (VS Code) and select **File > Open Folder...** in the menu, then choose the folder containing the project files.
+1. Navigate to **C:\Allfiles (1)** and click **Select Folder (2)**.
 
-1. The project contains deployment scripts for both Bash (*azdeploy.sh*) and PowerShell (*azdeploy.ps1*). Open the appropriate file for your environment and change the two values at the top of the script to meet your needs, then save your changes. **Note:** Do not change anything else in the script.
+    ![](../Images/folderimage-b.png)
+
+1. If you see the prompt, **Do you trust the authors of the files in this folder?**, click **Yes, I trust the authors**.
+
+    ![](../Images/vs-trusted.png)
+
+1. Once the folder opens in VS Code, select **Explorer (1)** and then **azdeploy.ps1 (2)**.
+
+    ![](../Images/powershellscript.png)
+
+1. Navigate to the Azure portal and search for **Resource groups (1)**. Then select **Resource groups (2)**.
+
+    ![](../Images/resgrpimage.png)
+
+1. Note the name of the **Resource group**.
+
+    ![](../Images/grp-name-img.png)
+
+1. The project contains deployment scripts for both Bash (*azdeploy.sh*) and PowerShell (*azdeploy.ps1*). Open the appropriate file for your environment and change the two values: **Resource group name** as **<inject key="ResourceGroupName" enableCopy="false"/>** and **Azure Region** as **<inject key="Region" enableCopy="false"/>** at the top of the script to meet your needs.
 
     ```
     "<your-resource-group-name>" # Resource Group name
     "<your-azure-region>" # Azure region for the resources
     ```
 
-1. In the menu bar select **Terminal > New Terminal** to open a terminal window in VS Code.
+    ![](../Images/powershellrgnaming.png)
 
-1. Run the following command to login to your Azure account. Answer the prompts to select your Azure account and subscription for the exercise.
+    ![](../Images/Lab02-Task2-48.png)
+
+    > **Note:** Do not change anything else in the script.
+
+1. Press **Ctrl+S** to save the changes.
+
+1. In the menu bar, select **ellipsis (...) (1)**, then **Terminal (2)**, and then **New Terminal (3)** to open a terminal window in VS Code.
+
+    ![](../Images/terminalimage.png)
+
+    > **Note:** If you are using Bash, after the terminal opens, expand the downward arrow icon **(1)** to open a new terminal and select **Git Bash (2)** from the drop-down list. If you are using PowerShell, skip this step.
+    >
+    > ![](../Images/Lab02-Task2-26.png)
+
+1. Run the following command in the terminal to allow PowerShell scripts to run. This step is required only if you are using PowerShell. If you are using Bash, skip this step.
+
+    ```
+    Set-ExecutionPolicy -ExecutionPolicy bypass -Force
+    ```
+
+    ![](../Images/runcmd.png)
+
+
+1. Run the command **az login (1)** to sign in to your Azure account. Then minimize the VS Code window **(2)** to view the login window that opens in the background.
 
     ```
     az login
     ```
+    ![](../Images/azloginimage.png)
+
+1. A pop-up window will appear on the desktop. Select **Work and school account (1)** and then click **Continue (2)**.
+
+    ![](../Images/sign-in-1.png)
+
+1. In the login window, sign in by using the provided **Azure credentials (1)** and then click **Next (2)**.
+
+    - **Email/Username:** <inject key="AzureAdUserEmail"></inject>
+
+    ![](../Images/sign-in-2.png)
+
+1. Enter the temporary access password and click **Sign in**.
+
+    - **Password:** <inject key="AzureAdUserPassword"></inject>
+
+    ![](../Images/tempass.png)
+
+1. When prompted with **Sign in to all apps and websites on this device?**, select **No, this app only**.
+
+    ![](../Images/sign-in-3.png)
+
+1. Return to the terminal.
+
+1. Choose the subscription by entering **1**.
+
+    ![](../Images/sign-in-4.png)
+
+     > **NOTE:** To confirm you're logged in to the correct Azure subscription, run **az account show**.    
 
 1. Run the following command to ensure you have the **containerapp** extension for Azure CLI.
 
     ```azurecli
     az extension add --name containerapp
     ```
-
-1. Run the following commands to ensure your subscription has the necessary resource providers for the exercise.
-
-    ```azurecli
-    az provider register --namespace Microsoft.App
-    az provider register --namespace Microsoft.OperationalInsights
-    ```
-
-### Create resources in Azure
-
-In this section you run the deployment script to deploy the necessary services to your Azure subscription.
+    ![](../Images/Lab03-Task1-1.png)
 
 1. Make sure you are in the root directory of the project and run the appropriate command in the terminal to launch the deployment script. The deployment script will deploy ACR and create a file with environment variables needed for exercise.
 
@@ -73,14 +129,37 @@ In this section you run the deployment script to deploy the necessary services t
     ```powershell
     ./azdeploy.ps1
     ```
+    ![](../Images/Lab02-Task1-1.png)
 
 1. When the script is running, enter **1** to launch the **Create Azure Container Registry and build container image** option. This option creates the ACR service and uses ACR Tasks to build and push the image to the registry.
 
+    ![](../Images/Lab03-Task1-2.png)
+
+1. To verify that the deployment was successful, navigate to the Azure portal. In the search bar, type **Container registries (1)** and select **Container registries (2)** from the search results.
+
+    ![](../Images/Lab02-Task2-4.png)
+
+1. You should see one container registry created.
+
+    ![](../Images/Lab03-Task1-6.png)        
+
 1. When the previous operation is finished, enter **2** to launch the **Create Container Apps environment** options. Creating the environment is necessary before deploying the container.
+
+    ![](../Images/Lab03-Task1-3.png)
 
     >**Note:** A file containing environment variables is created after the Container Apps environment is created. You use these variables throughout the exercise.
 
+1. To verify that the deployment was successful, navigate to the Azure portal. In the search bar, type **Container Apps Environments (1)** and select **Container Apps Environments (2)** from the search results.
+
+    ![](../Images/Lab03-Task1-7.png)
+
+1. You should see the **Container App Environment** you created.
+
+    ![](../Images/Lab03-Task1-8.png)
+
 1. When the previous operation is finished, enter **4** to exit the deployment script.
+
+    ![](../Images/Lab03-Task1-4.png)
 
 1. Run the appropriate command to load the environment variables into your terminal session from the file created in a previous step.
 
@@ -93,6 +172,7 @@ In this section you run the deployment script to deploy the necessary services t
     ```powershell
     . .\.env.ps1
     ```
+    ![](../Images/Lab03-Task1-5.png)
 
     >**Note:** Keep the terminal open. If you close it and create a new terminal, you might need to run the command to create the environment variable again.
 
@@ -236,18 +316,6 @@ You should validate that the app starts and that ingress works. You also use log
     ```
 
     Look for **gunicorn** startup messages showing workers spawned and listening on port 8000. You should also see HTTP request logs from your curl commands (GET /health, POST /process, etc.).
-
-## Clean up resources
-
-Now that you finished the exercise, you should delete the cloud resources you created to avoid unnecessary resource usage.
-
-1. Run the following command in the VS Code terminal to delete the resource group, and all resources in the group. Replace **\<rg-name>** with the name you choose earlier in the exercise. The command will launch a background task in Azure to delete the resource group.
-
-    ```
-    az group delete --name <rg-name> --no-wait --yes
-    ```
-
-> **CAUTION:** Deleting a resource group deletes all resources contained within it. If you chose an existing resource group for this exercise, any existing resources outside the scope of this exercise will also be deleted.
 
 ## Troubleshooting
 
