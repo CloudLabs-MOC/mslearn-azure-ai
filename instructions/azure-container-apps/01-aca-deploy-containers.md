@@ -215,6 +215,14 @@ In this task, you will deploy the container API as a container app with external
     ```
     ![](../Images/Lab03-Task1-9.png)
 
+1. To verify that the deployment was successful, navigate to the Azure portal. In the search bar, type **Container Apps (1)** and select **Container Apps (2)** from the search results.
+
+    ![](../Images/Lab03-Task2-15.png)
+
+1. You should see the **Container App** is deployed.
+
+    ![](../Images/Lab03-Task2-16.png)
+
 1. Create a secret and reference it from an environment variable.
 
     **Bash**
