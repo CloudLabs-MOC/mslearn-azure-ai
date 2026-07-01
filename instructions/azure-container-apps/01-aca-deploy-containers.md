@@ -4,16 +4,18 @@
 
 ## Overview 
 
-In this exercise, you deploy a containerized backend API to Azure Container Apps. You use a managed identity to securely pull images from Azure Container Registry and configure secrets as environment variables.
+In this lab, you will deploy a containerized backend API to Azure Container Apps using secure identity-based authentication. You will create a system-assigned managed identity to securely pull images from a private Azure Container Registry, configure secrets for sensitive API keys as environment variables, and verify the deployment by testing the API endpoints and reviewing application logs. 
 
 ## Lab Overview
 
-- **Task 1:** Download the project starter files and deploy Azure services
+- **Task 1:** Deploy Azure Container Registry and Container App Environment
 - **Task 2:** Deploy the container app and configure secrets
 - **Task 3:** Verify the Deployment
 
 
-## Download project starter files and deploy Azure services
+## Task 1: Deploy Azure Container Registry and Container App Environment
+
+In this task, you will run the deployment script to create an Azure Container Registry (ACR) and a Container Apps environment, which are the foundational services required for deploying your containerized API.
 
 1. Launch **Visual Studio Code** (VS Code) from desktop.
 
@@ -75,7 +77,7 @@ In this exercise, you deploy a containerized backend API to Azure Container Apps
     ![](../Images/runcmd.png)
 
 
-1. Run the command **az login (1)** to sign in to your Azure account. Then minimize the VS Code window **(2)** to view the login window that opens in the background.
+1. Run the command **az login (1)** to sign in to your Azure account. Then **minimize the VS Code window (2)** to view the login window that opens in the background.
 
     ```
     az login
@@ -117,12 +119,13 @@ In this exercise, you deploy a containerized backend API to Azure Container Apps
     ```
     ![](../Images/Lab03-Task1-1.png)
 
-1. Make sure you are in the root directory of the project and run the appropriate command in the terminal to launch the deployment script. The deployment script will deploy ACR and create a file with environment variables needed for exercise.
+1. Make sure you are in the root directory of the project and run the appropriate command in the terminal to launch the deployment script. The deployment script will deploy ACR and create a file with environment variables needed.
 
     **Bash**
     ```bash
     bash azdeploy.sh
     ```
+    ![](../Images/Lab03-Task2-1-bash.png)
 
     **PowerShell**
     ```powershell
@@ -166,6 +169,7 @@ In this exercise, you deploy a containerized backend API to Azure Container Apps
     ```bash
     source .env
     ```
+    ![](../Images/Lab03-Task2-3-bash.png)
 
     **PowerShell**
     ```powershell
@@ -177,7 +181,7 @@ In this exercise, you deploy a containerized backend API to Azure Container Apps
 
 ## Task 2: Deploy the container app and configure secrets
 
-In this section you deploy the API as a container app with external ingress. Because the image is in a private registry, you must configure registry authentication at create time so the first revision can pull the image. You then configure a secret and reference it from an environment variable. This pattern mirrors how AI apps store provider API keys
+In this task, you will deploy the container API as a container app with external ingress enabled. You will configure a system-assigned managed identity for secure registry authentication and create secrets to store sensitive API keys as environment variables.
 
 1. Create the container app with a system-assigned managed identity and configure registry authentication at create time. The **--registry-identity** flag tells Container Apps to use the app's managed identity to pull images from the specified registry. The CLI automatically assigns the **AcrPull** role when you use this flag with an Azure Container Registry.
 
@@ -194,6 +198,7 @@ In this section you deploy the API as a container app with external ingress. Bec
         --registry-server "$ACR_SERVER" \
         --registry-identity system
     ```
+    ![](../Images/Lab03-Task2-4-bash.png)
 
     **PowerShell**
     ```powershell
@@ -217,6 +222,7 @@ In this section you deploy the API as a container app with external ingress. Bec
     az containerapp secret set -n $CONTAINER_APP_NAME -g $RESOURCE_GROUP \
         --secrets embeddings-api-key=$EMBEDDINGS_API_KEY
     ```
+    ![](../Images/Lab03-Task2-5-bash.png)
 
     **PowerShell**
     ```powershell
@@ -232,6 +238,7 @@ In this section you deploy the API as a container app with external ingress. Bec
     az containerapp update -n $CONTAINER_APP_NAME -g $RESOURCE_GROUP \
         --set-env-vars EMBEDDINGS_API_KEY=secretref:embeddings-api-key
     ```
+    ![](../Images/Lab03-Task2-6-bash.png)
 
     **PowerShell**
     ```powershell
@@ -245,6 +252,8 @@ In this section you deploy the API as a container app with external ingress. Bec
     ```azurecli
     az containerapp revision list -n $CONTAINER_APP_NAME -g $RESOURCE_GROUP -o table
     ```
+    ![](../Images/Lab03-Task2-7-bash.png)
+
     **PowerShell**
     ```powershell
     az containerapp revision list `
@@ -254,11 +263,11 @@ In this section you deploy the API as a container app with external ingress. Bec
     ```
     ![](../Images/Lab03-Task1-13.png)
 
-    The revision name ends with a suffix like `--0000002`, indicating this is the second revision. Container Apps creates a new revision whenever you change environment variables or secrets, which restarts the app with the updated configuration. Old inactive revisions may be pruned over time.
+    > **Note:** The revision name ends with a suffix like `--0000002`, indicating this is the second revision. Container Apps creates a new revision whenever you change environment variables or secrets, which restarts the app with the updated configuration. Old inactive revisions may be pruned over time.
 
 ## Task 3: Verify the deployment
 
-You should validate that the app starts and that ingress works. You also use logs to confirm the app is behaving as expected.
+In this task, you will verify that the container app has started correctly and is responding to requests. You will retrieve the app's fully qualified domain name (FQDN), test the API endpoints including health, root, and document processing endpoints, and review the application logs to confirm everything is working as expected.
 
 1. Run the following command to retrieve the app FQDN and store the result to a variable.
 
@@ -269,6 +278,7 @@ You should validate that the app starts and that ingress works. You also use log
 
     echo "$FQDN"
     ```
+    ![](../Images/Lab03-Task2-8-bash.png)
 
     **PowerShell**
     ```powershell
@@ -285,6 +295,7 @@ You should validate that the app starts and that ingress works. You also use log
     ```bash
     curl -s "https://$FQDN/health"
     ```
+    ![](../Images/Lab03-Task2-9-bash.png)
 
     **PowerShell**
     ```powershell
@@ -298,6 +309,7 @@ You should validate that the app starts and that ingress works. You also use log
     ```bash
     curl -s "https://$FQDN/"
     ```
+    ![](../Images/Lab03-Task2-10-bash.png)
 
     **PowerShell**
     ```powershell
@@ -313,6 +325,7 @@ You should validate that the app starts and that ingress works. You also use log
         -H "Content-Type: text/plain" \
         -d @document.txt
     ```
+    ![](../Images/Lab03-Task2-11-bash.png)
 
     **PowerShell**
     ```powershell
@@ -328,66 +341,19 @@ You should validate that the app starts and that ingress works. You also use log
     ```azurecli
     az containerapp logs show -n $CONTAINER_APP_NAME -g $RESOURCE_GROUP
     ```
+    ![](../Images/Lab03-Task2-12-bash.png)
 
     Look for **gunicorn** startup messages showing workers spawned and listening on port 8000. You should also see HTTP request logs from your curl commands (GET /health, POST /process, etc.).
 
-## Troubleshooting
-
-If you encounter issues while completing this exercise, try the following troubleshooting steps:
-
-**Check deployment status with the script**
-
-- Run the deployment script and select option **3** to check the status of your ACR and Container Apps environment. This verifies the base infrastructure is deployed and the container image exists.
-
-**Verify Azure authentication and environment variables**
-
-- Run **az account show** to confirm you're logged in to the correct Azure subscription.
-- Verify your environment variables are set by running **echo $ACR_NAME** (Bash) or **$env:ACR_NAME** (PowerShell).
-- If variables are empty, re-run **source .env** (Bash) or **. .\.env.ps1** (PowerShell).
-
-**Verify ACR deployment**
-
-- Navigate to the [Azure portal](https://portal.azure.com) and locate your resource group.
-- Confirm that the Azure Container Registry exists and shows a **Provisioning State** of **Succeeded**.
-- Run **az acr list --output table** to verify your registry is accessible.
-
-**Troubleshoot build failures**
-
-- The deployment script suppresses verbose **az acr build** output. To troubleshoot failures, check the status and logs of the most recent ACR Task run.
-- Verify you're running the deployment script from the project root directory (where the *api* folder is located).
-- List recent ACR Task runs:
-    - **Bash:** **az acr task list-runs --registry $ACR_NAME --output table**
-    - **PowerShell:** **az acr task list-runs --registry $env:ACR_NAME --output table**
-- View logs for a specific run (replace **\<run-id>** with a value from the previous command):
-    - **Bash:** **az acr task logs --registry $ACR_NAME --run-id \<run-id>**
-    - **PowerShell:** **az acr task logs --registry $env:ACR_NAME --run-id \<run-id>**
-
-**Troubleshoot container pull failures (ImagePullBackOff / unauthorized / 403)**
-
-- Confirm the container app has a system-assigned managed identity enabled:
-    - **Bash:** **az containerapp identity show -n $CONTAINER_APP_NAME -g $RESOURCE_GROUP**
-    - **PowerShell:** **az containerapp identity show -n $env:CONTAINER_APP_NAME -g $env:RESOURCE_GROUP**
-- Confirm the container app has the **AcrPull** role assignment scoped to the registry. Role assignments can take a minute or two to propagate after creation.
-
-**Troubleshoot container startup and application errors**
-
-- Stream container logs to diagnose startup issues:
-    - **Bash:** **az containerapp logs show -n $CONTAINER_APP_NAME -g $RESOURCE_GROUP --follow**
-    - **PowerShell:** **az containerapp logs show -n $env:CONTAINER_APP_NAME -g $env:RESOURCE_GROUP --follow**
-- If the app returns a 502/503 shortly after deployment, wait a minute and try again. The first start can take longer while Container Apps pulls and starts the container.
-- Check revision status for provisioning errors:
-    - **Bash:** **az containerapp revision list -n $CONTAINER_APP_NAME -g $RESOURCE_GROUP -o table**
-    - **PowerShell:** **az containerapp revision list -n $env:CONTAINER_APP_NAME -g $env:RESOURCE_GROUP -o table**
-
-**Troubleshoot secret configuration**
-
-- Verify the secret was created:
-    - **Bash:** **az containerapp secret list -n $CONTAINER_APP_NAME -g $RESOURCE_GROUP -o table**
-    - **PowerShell:** **az containerapp secret list -n $env:CONTAINER_APP_NAME -g $env:RESOURCE_GROUP -o table**
-- Confirm the environment variable references the secret correctly by calling the root endpoint (**/**), which shows whether the API key is configured.
-
 ### Summary
 
+In this lab, you successfully deployed a containerized backend API to Azure Container Apps by completing the following tasks:
+
+- Deployed Azure infrastructure including an Azure Container Registry and Container Apps environment.
+- Created a system-assigned managed identity and configured registry authentication so the container app can securely pull images from the private ACR without storing credentials.
+- Configured secrets to store sensitive API keys and referenced them as environment variables in the container app.
+- Verified the deployment by testing the API health endpoint, root endpoint, and document processing endpoint.
+- Reviewed container logs to confirm the application started successfully and is processing requests correctly.
 
 
 ## You have successfully completed the Hands-on Lab!
