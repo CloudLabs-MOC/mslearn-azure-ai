@@ -1,12 +1,14 @@
 # Lab 06: Deploy an AI inference API to Azure Kubernetes Service
 
-### Estimated Duration : 30 Minutes
+### Estimated Duration : 45 Minutes
 
-## Overview
+## Lab overview
 
 In this exercise, you deploy Azure resources including a Microsoft Foundry AI model, Azure Container Registry (ACR), and Azure Kubernetes Service (AKS) cluster. You then complete Kubernetes manifest files to define container specifications, health probes, resource limits, and load balancing. After deploying the containerized API to AKS, you use a Python client application to test the deployed API endpoints including health checks, readiness validation, and AI model inference requests.
 
-## Lab Overview
+## Lab objectives
+
+In this lab, you'll perform the following tasks:
 
 - **Task 1:** Prepare the environment
 - **Task 2:** Deploy resources to Azure
@@ -81,12 +83,12 @@ In this task, you'll prepare the deployment environment, configure the deploymen
 1. In the login window, kindly sign in using the provided **Azure credentials (1)** and click **Next (2)**.
    - **Email/Username:** <inject key="AzureAdUserEmail"></inject>
 
-   ![](../Images/Lab01-Task1-12.png)
+     ![](../Images/Lab01-Task1-12.png)
 
 1. Next, enter the provided **Password (1)** and click **Sign in (2)**.
    - **Password:** <inject key="AzureAdUserPassword"></inject>
 
-   ![](../Images/Lab01-Task1-13.png)
+     ![](../Images/Lab01-Task1-13.png)
 
 1. Next, select **No, this app only** and navigate back to VS Code to continue.
 
@@ -256,7 +258,7 @@ In this task, you'll complete the Kubernetes deployment and service manifests, d
 
 In this section you use the deployment script to apply the manifests to AKS.
 
-1. Install kubectl by executing the following commands:
+1. Install kubectl and add it to your current terminal session by running the following commands. Execute both commands in sequence.
 
    **Bash**
 
@@ -311,7 +313,7 @@ In this task, you'll configure the Python environment, run the client applicatio
 
 In this section, you create the Python environment and install the dependencies.
 
-1. Ensure you are in the **client** folder of the project in the terminal.
+1. In the terminal, navigate to the project's `client` folder by running the following command:
 
    ```bash
    cd client
