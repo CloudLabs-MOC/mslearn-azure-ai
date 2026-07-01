@@ -338,12 +338,19 @@ In this task, you will verify that the container app has started correctly and i
 
 1. Run the following command to review logs for startup and runtime signals. This command shows recent console output only. For historical logs and advanced troubleshooting, logs persist in the Log Analytics workspace associated with your Container Apps environment.
 
+    **Bash**
     ```azurecli
     az containerapp logs show -n $CONTAINER_APP_NAME -g $RESOURCE_GROUP
     ```
     ![](../Images/Lab03-Task2-12-bash.png)
 
-    Look for **gunicorn** startup messages showing workers spawned and listening on port 8000. You should also see HTTP request logs from your curl commands (GET /health, POST /process, etc.).
+    **PowerShell**
+    ```azurecli
+    az containerapp logs show `
+    --name $env:CONTAINER_APP_NAME `
+    --resource-group $env:RESOURCE_GROUP
+    ```
+    ![](../Images/Lab03-Task3-3.png)
 
 ### Summary
 
