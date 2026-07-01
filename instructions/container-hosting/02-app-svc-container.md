@@ -190,6 +190,14 @@ In this lab, you will deploy a containerized application to Azure App Service by
 
     ![](../Images/Lab02-Task2-56.png)
 
+> **Congratulations** on completing the task! Now, it's time to validate it. Here are the steps:
+> - If you receive a success message, you can proceed to the next task.
+> - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
+> - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help you out.
+ 
+<validation step="386be4bc-a8c0-4e24-b566-929b5988c51e" />
+
+
 ## Task 2: Create and configure a web app
 
 In this section, you create the web app by using CLI commands. You then configure the web app with a system-assigned managed identity so that the app can access the image in the ACR.
@@ -246,6 +254,13 @@ In this section, you create the web app by using CLI commands. You then configur
 
     ![](../Images/Lab02-Task2-9.png)
 
+> **Congratulations** on completing the task! Now, it's time to validate it. Here are the steps:
+> - If you receive a success message, you can proceed to the next task.
+> - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
+> - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help you out.
+ 
+<validation step="64635f2b-82f0-4c6d-b062-72bf60bbb7a1" />
+ 
 ## Task 3: Assign the AcrPull role to the web app
 
 In this section, you grant the web app permission to pull images from your private registry. Managed identities are Microsoft Entra-backed identities that Azure creates and manages for you. When you enable a system-assigned identity on the web app, App Service can request tokens as that identity.
