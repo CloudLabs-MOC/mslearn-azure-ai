@@ -158,6 +158,14 @@ In this task, you'll use the deployment script to provision the Microsoft Foundr
 
 Next, you complete the YAML files necessary to deploy the API to AKS.
 
+> **Congratulations** on completing the task! Now, it's time to validate it. Here are the steps:
+>
+> - If you receive a success message, you can proceed to the next task.
+> - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
+> - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help you out.
+
+<validation step="863f232b-c9d4-43e5-9cd0-34977f36a254" />
+
 ## Task 3: Complete the YAML deployment files and deploy to AKS
 
 In this task, you'll complete the Kubernetes deployment and service manifests, deploy the containerized AI inference API to Azure Kubernetes Service (AKS), and verify that the application is running successfully.

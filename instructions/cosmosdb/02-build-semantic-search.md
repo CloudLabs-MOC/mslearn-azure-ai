@@ -111,7 +111,7 @@ In this task, you'll deploy an Azure Cosmos DB for NoSQL account with vector sea
    **Bash**
 
    ```bash
-   bash azdeploy.sh
+   MSYS_NO_PATHCONV=1 bash azdeploy.sh
    ```
 
    **PowerShell**

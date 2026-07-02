@@ -159,6 +159,14 @@ In this task, you'll use the deployment script to provision Azure Container Regi
 
    > **Note:** Leave the terminal open, all of the steps in the exercise are performed in the terminal.
 
+> **Congratulations** on completing the task! Now, it's time to validate it. Here are the steps:
+>
+> - If you receive a success message, you can proceed to the next task.
+> - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
+> - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help you out.
+
+<validation step="00871f8a-8db0-4167-8c66-522f72256d94" />
+
 ## Task 3: Troubleshoot the deployment
 
 In this task, you'll use Kubernetes troubleshooting commands to diagnose and resolve common deployment issues, including Service selector mismatches, `CrashLoopBackOff` errors, and readiness probe failures, and verify that the application is functioning correctly.

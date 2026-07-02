@@ -161,6 +161,14 @@ In this task, you'll use the deployment script to provision Azure Container Regi
 
 Next, you complete the YAML files necessary to deploy the API to AKS.
 
+> **Congratulations** on completing the task! Now, it's time to validate it. Here are the steps:
+>
+> - If you receive a success message, you can proceed to the next task.
+> - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
+> - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help you out.
+
+<validation step="09b2eabe-f01e-4341-853b-6d1250298d03" />
+
 ## Task 3: Complete the YAML deployment files and deploy to AKS
 
 In this task, you'll configure Kubernetes resources by creating a ConfigMap, Secret, and PersistentVolumeClaim (PVC), and update the deployment manifest to use your Azure Container Registry (ACR) image.
