@@ -1,0 +1,42 @@
+{
+  "Name": "cosmosdb-semantic-search-Candidate",
+  "Description": "Custom RBAC role for the Microsoft-provided Azure Cosmos DB for NoSQL semantic search lab candidate sandbox",
+  "IsCustom": true,
+  "Actions": [
+    "Microsoft.Resources/subscriptions/resourceGroups/read",
+    "Microsoft.Resources/subscriptions/resourceGroups/resources/read",
+    "Microsoft.Network/virtualNetworks/*",
+    "Microsoft.Network/networkInterfaces/*",
+    "Microsoft.Network/networkSecurityGroups/*",
+    "Microsoft.Network/publicIPAddresses/*",
+    "Microsoft.Network/virtualNetworks/subnets/*",
+    "Microsoft.Compute/virtualMachines/*",
+    "Microsoft.Compute/disks/*",
+    "Microsoft.Compute/sshPublicKeys/*",
+    "Microsoft.Storage/storageAccounts/read",
+    "Microsoft.Storage/storageAccounts/listKeys/action",
+    "Microsoft.DocumentDB/databaseAccounts/read",
+    "Microsoft.DocumentDB/databaseAccounts/write",
+    "Microsoft.DocumentDB/databaseAccounts/delete",
+    "Microsoft.DocumentDB/databaseAccounts/listKeys/action",
+    "Microsoft.DocumentDB/databaseAccounts/regenerateKey/action",
+    "Microsoft.DocumentDB/databaseAccounts/listConnectionStrings/action",
+    "Microsoft.DocumentDB/databaseAccounts/readonlykeys/action",
+    "Microsoft.DocumentDB/databaseAccounts/sqlDatabases/*",
+    "Microsoft.DocumentDB/databaseAccounts/sqlRoleDefinitions/read",
+    "Microsoft.DocumentDB/databaseAccounts/sqlRoleDefinitions/write",
+    "Microsoft.DocumentDB/databaseAccounts/sqlRoleDefinitions/delete",
+    "Microsoft.DocumentDB/databaseAccounts/sqlRoleAssignments/read",
+    "Microsoft.DocumentDB/databaseAccounts/sqlRoleAssignments/write",
+    "Microsoft.DocumentDB/databaseAccounts/sqlRoleAssignments/delete",
+    "Microsoft.DocumentDB/databaseAccounts/failoverPriorityChange/action",
+    "Microsoft.DocumentDB/databaseAccounts/forceUpdate/action"
+  ],
+  "NotActions": [
+    "Microsoft.Authorization/*/Write",
+    "Microsoft.Authorization/*/Delete"
+  ],
+  "AssignableScopes": [
+    "/subscriptions/{SUBSCRIPTION_ID}/resourceGroups/rg-candidate-{DEPLOYMENT_ID}"
+  ]
+}
