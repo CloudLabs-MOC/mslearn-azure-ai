@@ -1,0 +1,12 @@
+{
+  "name": "Cosmos DB Semantic Search",
+  "cloud": "azure",
+  "level": "Intermediate",
+  "deploymentDurationMinutes": 75,
+  "enableLabValidation": true,
+  "hasInlineQuestions": false,
+  "customPolicy": true,
+  "customRbacRole": true,
+  "cloudScope": null,
+  "policyPack": null
+}

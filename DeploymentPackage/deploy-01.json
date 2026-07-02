@@ -1,0 +1,202 @@
+{
+  "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "azureUserName": {
+      "type": "string"
+    },
+    "azurePassword": {
+      "type": "securestring"
+    },
+    "ODLID": {
+      "type": "string"
+    },
+    "DeploymentID": {
+      "type": "string"
+    },
+    "adminUsername": {
+      "type": "string"
+    },
+    "adminPassword": {
+      "type": "securestring"
+    },
+    "trainerUserName": {
+      "type": "string"
+    },
+    "trainerUserPassword": {
+      "type": "string"
+    }
+  },
+  "variables": {
+    "scripturl": "https://experienceazure.blob.core.windows.net/lab-templates/0350adb8-678f-4d42-9d28-b671b66d44b0/DeploymentPackage/psscript-01.ps1",
+    "location": "[resourceGroup().location]",
+    "LabVMName": "[concat('labvm-', parameters('DeploymentID'))]",
+    "vnetName": "[concat('vnet-', parameters('DeploymentID'))]",
+    "subnetName": "default",
+    "nsgName": "[concat('nsg-', parameters('DeploymentID'))]",
+    "pipName": "[concat('pip-', parameters('DeploymentID'))]",
+    "nicName": "[concat('nic-', parameters('DeploymentID'))]",
+    "dnsLabelPrefix": "[toLower(concat('cl', uniqueString(resourceGroup().id, parameters('DeploymentID'))))]",
+    "userdata": "[concat('powershell.exe -ExecutionPolicy Bypass -File ', variables('scripturl'), ' -AzureUserName ''', parameters('azureUserName'), ''' -AzurePassword ''', parameters('azurePassword'), ''' -AzureTenantID ''', subscription().tenantId, ''' -AzureSubscriptionID ''', subscription().subscriptionId, ''' -DeploymentID ''', parameters('DeploymentID'), ''' -vmAdminUsername ''', parameters('adminUsername'), ''' -vmAdminPassword ''', parameters('adminPassword'), ''' -trainerUserName ''', parameters('trainerUserName'), ''' -trainerUserPassword ''', parameters('trainerUserPassword'), '''')]"
+  },
+  "resources": [
+    {
+      "type": "Microsoft.Network/publicIPAddresses",
+      "apiVersion": "2024-05-01",
+      "name": "[variables('pipName')]",
+      "location": "[variables('location')]",
+      "sku": {
+        "name": "Standard",
+        "tier": "Regional"
+      },
+      "properties": {
+        "publicIPAllocationMethod": "Static",
+        "publicIPAddressVersion": "IPv4",
+        "dnsSettings": {
+          "domainNameLabel": "[variables('dnsLabelPrefix')]"
+        }
+      }
+    },
+    {
+      "type": "Microsoft.Network/networkSecurityGroups",
+      "apiVersion": "2024-05-01",
+      "name": "[variables('nsgName')]",
+      "location": "[variables('location')]",
+      "properties": {
+        "securityRules": [
+          {
+            "name": "Allow-RDP",
+            "properties": {
+              "priority": 1000,
+              "protocol": "Tcp",
+              "access": "Allow",
+              "direction": "Inbound",
+              "sourcePortRange": "*",
+              "destinationPortRange": "3389",
+              "sourceAddressPrefix": "*",
+              "destinationAddressPrefix": "*"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "Microsoft.Network/virtualNetworks",
+      "apiVersion": "2024-05-01",
+      "name": "[variables('vnetName')]",
+      "location": "[variables('location')]",
+      "properties": {
+        "addressSpace": {
+          "addressPrefixes": [
+            "10.0.0.0/16"
+          ]
+        },
+        "subnets": [
+          {
+            "name": "[variables('subnetName')]",
+            "properties": {
+              "addressPrefix": "10.0.0.0/24",
+              "networkSecurityGroup": {
+                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('nsgName'))]"
+              }
+            }
+          }
+        ]
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/networkSecurityGroups', variables('nsgName'))]"
+      ]
+    },
+    {
+      "type": "Microsoft.Network/networkInterfaces",
+      "apiVersion": "2024-05-01",
+      "name": "[variables('nicName')]",
+      "location": "[variables('location')]",
+      "properties": {
+        "ipConfigurations": [
+          {
+            "name": "ipconfig1",
+            "properties": {
+              "privateIPAllocationMethod": "Dynamic",
+              "publicIPAddress": {
+                "id": "[resourceId('Microsoft.Network/publicIPAddresses', variables('pipName'))]"
+              },
+              "subnet": {
+                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('vnetName'), variables('subnetName'))]"
+              }
+            }
+          }
+        ]
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/publicIPAddresses', variables('pipName'))]",
+        "[resourceId('Microsoft.Network/virtualNetworks', variables('vnetName'))]"
+      ]
+    },
+    {
+      "type": "Microsoft.Compute/virtualMachines",
+      "apiVersion": "2024-07-01",
+      "name": "[variables('LabVMName')]",
+      "location": "[variables('location')]",
+      "plan": {
+        "name": "win2019",
+        "publisher": "spektra",
+        "product": "cloudlabs-windows-jumpvm"
+      },
+      "properties": {
+        "hardwareProfile": {
+          "vmSize": "Standard_B2s"
+        },
+        "osProfile": {
+          "computerName": "[variables('LabVMName')]",
+          "adminUsername": "[parameters('adminUsername')]",
+          "adminPassword": "[parameters('adminPassword')]"
+        },
+        "storageProfile": {
+          "imageReference": {
+            "publisher": "Spektra",
+            "offer": "cloudlabs-windows-jumpvm",
+            "sku": "win2019",
+            "version": "latest"
+          },
+          "osDisk": {
+            "createOption": "FromImage",
+            "managedDisk": {
+              "storageAccountType": "StandardSSD_LRS"
+            }
+          }
+        },
+        "networkProfile": {
+          "networkInterfaces": [
+            {
+              "id": "[resourceId('Microsoft.Network/networkInterfaces', variables('nicName'))]"
+            }
+          ]
+        },
+        "diagnosticsProfile": {
+          "bootDiagnostics": {
+            "enabled": true
+          }
+        },
+        "userData": "[base64(variables('userdata'))]"
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/networkInterfaces', variables('nicName'))]"
+      ]
+    }
+  ],
+  "outputs": {
+    "vmServerDnsName": {
+      "type": "string",
+      "value": "[reference(resourceId('Microsoft.Network/publicIPAddresses', variables('pipName')), '2024-05-01').dnsSettings.fqdn]"
+    },
+    "vmServerUsername": {
+      "type": "string",
+      "value": "[parameters('adminUsername')]"
+    },
+    "vmServerPassword": {
+      "type": "securestring",
+      "value": "[parameters('adminPassword')]"
+    }
+  }
+}
