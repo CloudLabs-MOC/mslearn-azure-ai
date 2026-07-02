@@ -2,7 +2,7 @@
 
 This course teaches developers how to create, monitor, and troubleshoot AI solutions on Microsoft Azure. Students will learn how to implement Azure compute and containerization patterns to host applications, build serverless APIs with Azure Functions, and integrate services using event‑driven and message‑based architectures such as Azure Service Bus and Event Grid. The course also covers working with Azure data services that support AI workloads, including designing and querying solutions with Cosmos DB for NoSQL, Azure Database for PostgreSQL with pgvector, and Azure Managed Redis for caching, streaming, and vector search. By the end of the course, developers will be able to connect services, orchestrate AI workflows, and build secure, scalable, and observable AI‑driven applications on Azure.
 
-## Lab 09: Build a RAG document store with Cosmos DB
+## Lab 09: Build a RAG document store on Azure Cosmos DB for NoSQL
 
 ### Overall Estimated Timing: 45 Minutes
 
@@ -110,6 +110,8 @@ To adjust the zoom level for the environment page, click the **A↕: 100%** icon
    ![](../Images/Sign-in-no.png)
 
 1. If a **Welcome to Microsoft Azure** pop-up window appears, simply click **Maybe later** to skip the tour.
+
+   ![](../Images/maybelater.png)
 
 ## Support Contact
 

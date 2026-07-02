@@ -2,7 +2,7 @@
 
 ### Estimated Duration : 45 Minutes
 
-## Overview
+## Lab overview
 
 In this exercise, you create an Azure Cosmos DB for NoSQL database that serves as a document store for retrieval-augmented generation (RAG) applications. The database stores chunked documents with metadata that an AI application can retrieve to provide context to language models. You design a schema optimized for document retrieval, build Python functions that store and query document chunks, and test the complete workflow using a Flask web application. This pattern provides a foundation for building AI applications that ground language model responses in your organization's documents.
 
@@ -103,22 +103,16 @@ In this task, you'll prepare the deployment environment, configure the deploymen
 
    > **NOTE:** To confirm you're logged in to the correct Azure subscription, run **az account show**.
 
-1. Run the following command to ensure your subscription has the necessary resource provider for the exercise.
-
-   ```azurecli
-   az provider register --namespace Microsoft.DocumentDB
-   ```
-
 ## Task 2: Create resources in Azure
 
-In this section you run the deployment script to deploy the Cosmos DB account.
+In this task, you'll deploy an Azure Cosmos DB for NoSQL account, database, and container using the deployment script to create the document store required for the RAG application.
 
 1. Make sure you are in the root directory of the project and run the appropriate command in the terminal to launch the deployment script.
 
    **Bash**
 
    ```bash
-   bash azdeploy.sh
+   MSYS_NO_PATHCONV=1 bash azdeploy.sh
    ```
 
    **PowerShell**
@@ -137,7 +131,7 @@ In this section you run the deployment script to deploy the Cosmos DB account.
 
 ## Task 3: Complete the RAG document functions
 
-In this section you complete the _rag_functions.py_ file by adding functions that an AI application can call to store and retrieve document chunks. These functions serve as the application's interface to the document store. The app you run later in this exercise imports these functions to demonstrate how an AI application would use them.
+In this task, you'll implement the Python functions that store, retrieve, and search document chunks in Azure Cosmos DB, enabling the core data operations required for retrieval-augmented generation (RAG).
 
 1. Open the **client/rag_functions.py** file in VS Code.
 
@@ -335,7 +329,7 @@ Next, you finalize the Azure resource deployment.
 
 ## Task 4: Complete the Azure resource deployment
 
-In this section you return to the deployment script to configure Entra ID access and retrieve the connection information for the Cosmos DB account.
+In this task, you'll finalize the Azure resource deployment by configuring Microsoft Entra ID access, verifying the deployment status, retrieving the Cosmos DB connection information, and loading the required environment variables.
 
 1. Go back to the terminal. When the **Create Cosmos DB account** operation has completed, enter **2** to launch the **Configure Entra ID access** option. This assigns your user account the necessary role to access the Cosmos DB data plane.
 
@@ -373,7 +367,7 @@ Next, you explore the document schema used for the RAG document store.
 
 ## Task 5: Understand the RAG document schema
 
-In this section you learn about the document schema designed for RAG applications. Unlike relational databases, Cosmos DB for NoSQL uses a flexible JSON document model. The container was created with **documentId** as the partition key, which groups all chunks from the same source document together for efficient retrieval.
+In this task, you'll explore the document schema used for the RAG document store and understand how document chunks, metadata, partitioning, and retrieval patterns are optimized for Azure Cosmos DB.
 
 The document schema for each chunk includes:
 
@@ -396,7 +390,7 @@ This schema supports common RAG patterns:
 
 ## Task 6: Test the RAG functions with the Flask app
 
-In this section you start the Flask web application and use its interface to test the RAG functions you created. The app provides a visual way to load data, run tests, query chunks, and execute custom SQL queries.
+In this task, you'll configure the Python environment, run the Flask application, and validate the RAG document functions by loading sample data, executing automated tests, retrieving document chunks, and searching documents using metadata filters.
 
 1. Run the following command to navigate to the **client** directory.
 
@@ -513,7 +507,7 @@ In this section you search for chunks across all documents using metadata filter
 
 ## Task 7: Query document context
 
-In this section you practice writing SQL queries against the Cosmos DB container using the Query Explorer. These queries demonstrate patterns that RAG applications commonly use to retrieve document context.
+In this task, you'll use the Cosmos DB SQL API to query the document store and retrieve relevant document context using common RAG query patterns, including document-based, metadata-based, and tag-based searches.
 
 1. In the **Query Explorer** section, enter the following query in the **SQL Query** field to find all chunks for a specific document. This query retrieves chunks ordered by their index for sequential reading.
 
