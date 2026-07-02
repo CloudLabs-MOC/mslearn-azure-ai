@@ -319,7 +319,7 @@ When a container fails to start, Kubernetes repeatedly restarts it, resulting in
    ports:
    ```
 
-   ![](../Images/lab08-t3p13.png)
+   ![](../Images/lab08-t4p13.png)
 
    Save the changes and close the editor.
 
