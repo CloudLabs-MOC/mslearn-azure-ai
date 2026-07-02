@@ -100,14 +100,6 @@ In this task, you'll prepare the deployment environment, configure the deploymen
 
    > **NOTE:** To confirm you're logged in to the correct Azure subscription, run **az account show**.
 
-1. Run the following commands to ensure your subscription has the necessary resource providers to install AKS, ACR, and the Foundry AI model.
-
-   ```
-   az provider register --namespace Microsoft.CognitiveServices
-   az provider register --namespace Microsoft.ContainerService
-   az provider register --namespace Microsoft.ContainerRegistry
-   ```
-
 1. Make sure you are in the root directory of the project and run the appropriate command in the terminal to launch the deployment script.
 
    **Bash**
