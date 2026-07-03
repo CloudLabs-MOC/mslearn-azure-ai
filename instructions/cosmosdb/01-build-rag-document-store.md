@@ -131,6 +131,14 @@ In this task, you'll deploy an Azure Cosmos DB for NoSQL account, database, and 
 
    > **Note:** Leave the terminal running the deployment open for the duration of the exercise. You can move on to the next section of the exercise while the deployment continues in the terminal.
 
+> **Congratulations** on completing the task! Now, it's time to validate it. Here are the steps:
+>
+> - If you receive a success message, you can proceed to the next task.
+> - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
+> - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help you out.
+
+<validation step="072be012-6093-4115-b0af-b798d2e1c77c" />
+
 ## Task 3: Complete the RAG document functions
 
 In this task, you'll implement the Python functions that store, retrieve, and search document chunks in Azure Cosmos DB, enabling the core data operations required for retrieval-augmented generation (RAG).

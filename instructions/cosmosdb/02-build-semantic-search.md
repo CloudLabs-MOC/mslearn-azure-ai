@@ -130,6 +130,14 @@ In this task, you'll deploy an Azure Cosmos DB for NoSQL account with vector sea
 
    > **IMPORTANT:** Leave the terminal running the deployment open for the duration of the exercise. You can move on to the next section of the exercise while the deployment continues in the terminal.
 
+> **Congratulations** on completing the task! Now, it's time to validate it. Here are the steps:
+>
+> - If you receive a success message, you can proceed to the next task.
+> - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
+> - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help you out.
+
+<validation step="e7a6cb5c-63c5-4d85-9f4e-022a5eabca81" />
+
 ## Task 3: Build Python functions for vector similarity search
 
 In this task, you'll implement Python functions that store vector embeddings, perform vector similarity searches, and execute filtered semantic searches. You'll also review the container configuration required to enable vector search in Azure Cosmos DB
