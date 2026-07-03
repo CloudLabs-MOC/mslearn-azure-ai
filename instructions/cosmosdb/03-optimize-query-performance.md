@@ -17,6 +17,8 @@ In this lab, you'll perform the following tasks:
 - **Task 5:** Set up the Python environment
 - **Task 6:** Test vector index performance with the Flask app
 
+> ### **Note:** This lab includes deployment scripts for both **PowerShell** and **Bash**. You may choose either scripting language based on your preference or environment. Once you make your choice, use the corresponding commands and script throughout the entire lab, as all subsequent steps provide instructions for both PowerShell and Bash.
+
 ## Task 1: Prepare the environment
 
 In this task, you'll prepare the deployment environment, configure the deployment script, authenticate to Azure, register the required resource providers, install kubectl, and launch the deployment script.
