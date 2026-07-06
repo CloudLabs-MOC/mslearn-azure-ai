@@ -4,7 +4,7 @@ This course teaches developers how to create, monitor, and troubleshoot AI solut
 
 ## Lab 16: Build a pub/sub solution with Azure Managed Redis
 
-### Overall Estimated Timing: 45 Minutes
+### Overall Estimated Timing: 60 Minutes
 
 ## Overview
 

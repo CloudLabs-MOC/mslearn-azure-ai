@@ -4,7 +4,7 @@ This course teaches developers how to create, monitor, and troubleshoot AI solut
 
 ## Lab 07: Configure containers in Azure Kubernetes Service
 
-### Overall Estimated Timing: 45 Minutes
+### Overall Estimated Timing: 60 Minutes
 
 ## Overview
 

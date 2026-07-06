@@ -1,6 +1,6 @@
 # Lab 09: Build a RAG document store on Azure Cosmos DB for NoSQL
 
-### Estimated Duration : 45 Minutes
+### Estimated Duration : 60 Minutes
 
 ## Lab overview
 

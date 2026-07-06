@@ -1,10 +1,10 @@
 # Lab 18: Process messages with Azure Service Bus
 
-### Estimated Duration : 45 Minutes
+### Estimated Duration : 60 Minutes
 
 ## Lab overview
 
-In this lab, you deploy Azure Service Bus and complete the messaging logic for a Python application. The application demonstrates core messaging patterns by sending and processing queue messages, handling invalid messages with a dead-letter queue, and publishing messages to topics with filtered subscriptions. You implement Azure Service Bus operations using the Azure SDK for Python and Microsoft Entra authentication, then verify queue processing, dead-letter handling, and topic-based message routing through a web application.
+In this exercise, you deploy Azure Service Bus and complete the messaging logic for a Python application. The application demonstrates core messaging patterns by sending and processing queue messages, handling invalid messages with a dead-letter queue, and publishing messages to topics with filtered subscriptions. You implement Azure Service Bus operations using the Azure SDK for Python and Microsoft Entra authentication, then verify queue processing, dead-letter handling, and topic-based message routing through a web application.
 
 ## Lab objectives
 
@@ -107,7 +107,7 @@ In this task, you'll prepare the development environment, configure the deployme
    **Bash**
 
    ```bash
-   bash azdeploy.sh
+   MSYS_NO_PATHCONV=1 bash azdeploy.sh
    ```
 
    **PowerShell**

@@ -1,6 +1,6 @@
 # Lab 07: Configure apps on Azure Kubernetes Service
 
-### Estimated Duration : 45 Minutes
+### Estimated Duration : 60 Minutes
 
 ## Lab overview
 

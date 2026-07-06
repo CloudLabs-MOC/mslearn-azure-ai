@@ -1,6 +1,6 @@
 # Lab 06: Deploy an AI inference API to Azure Kubernetes Service
 
-### Estimated Duration : 45 Minutes
+### Estimated Duration : 60 Minutes
 
 ## Lab overview
 
