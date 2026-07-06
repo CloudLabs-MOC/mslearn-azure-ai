@@ -17,6 +17,8 @@ In this lab, you'll perform the following tasks:
 - **Task 5:** Set up the Python environment
 - **Task 6:** Test vector index performance with the Flask app
 
+> ### **Note:** This lab includes deployment scripts for both **PowerShell** and **Bash**. You may choose either scripting language based on your preference or environment. Once you make your choice, use the corresponding commands and script throughout the entire lab, as all subsequent steps provide instructions for both PowerShell and Bash.
+
 ## Task 1: Prepare the environment
 
 In this task, you'll prepare the deployment environment, configure the deployment script, authenticate to Azure, register the required resource providers, install kubectl, and launch the deployment script.
@@ -127,6 +129,14 @@ In this task, you'll deploy an Azure Cosmos DB for NoSQL account with vector sea
    > **Note:** Deployment can take 5-10 minutes to complete.
 
    > **IMPORTANT:** Leave the terminal running the deployment open for the duration of the exercise. You can move on to the next section of the exercise while the deployment continues in the terminal.
+
+> **Congratulations** on completing the task! Now, it's time to validate it. Here are the steps:
+>
+> - If you receive a success message, you can proceed to the next task.
+> - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
+> - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help you out.
+
+<validation step="14919b2f-fe43-4b72-ba48-e60817141a33" />
 
 ## Task 3: Complete the index comparison functions
 

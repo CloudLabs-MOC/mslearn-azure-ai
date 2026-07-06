@@ -12,6 +12,8 @@ In this lab, you will deploy a containerized backend API to Azure Container Apps
 - **Task 2:** Deploy the container app and configure secrets
 - **Task 3:** Verify the Deployment
 
+> **Note:** This lab includes deployment scripts for both **PowerShell** and **Bash**. You may choose either scripting language based on your preference or environment. Once you make your choice, use the corresponding commands and script throughout the entire lab, as all subsequent steps provide instructions for both PowerShell and Bash.
+
 ## Task 1: Deploy Azure Container Registry and Container App Environment
 
 In this task, you will run the deployment script to create an Azure Container Registry (ACR) and a Container Apps environment, which are the foundational services required for deploying your containerized API.
