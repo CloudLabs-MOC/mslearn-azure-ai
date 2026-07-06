@@ -4,99 +4,193 @@
 
 ## Overview 
 
-In this exercise, you troubleshoot a failing container app and apply targeted fixes. You use revision status, logs, and the Azure CLI to isolate deployment issues. This workflow is common in AI solutions because startup behavior changes frequently when you update models and dependencies.
+In this lab, you will diagnose and fix a failing container app deployment in Azure Container Apps. You will investigate deployment issues by reviewing revision status, checking application logs, and using the Azure CLI to isolate problems such as missing environment variables and ingress configuration errors. By the end of the lab, you will have practiced the troubleshooting workflow used to keep containerized AI applications healthy and running correctly.
 
 ## Lab Overview
 
-- **Task 1:** Deploy a mock AI document processing API as a container app
-- **Task 2:** Introduce and diagnose a missing environment variable error
-- **Task 3:** Introduce and diagnose an ingress configuration issue
+- **Task 1:** Deploy Azure Container Registry and Container App Environment
+- **Task 2:** Diagnose a missing environment variable error
+- **Task 3:** Diagnose an ingress configuration issue
 - **Task 4:** Query Log Analytics for historical troubleshooting data
 
+> **Note:** This lab includes deployment scripts for both **PowerShell** and **Bash**. You may choose either scripting language based on your preference or environment. Once you make your choice, use the corresponding commands and script throughout the entire lab, as all subsequent steps provide instructions for both PowerShell and Bash.
 
->**Important:** Azure Container Registry task runs are temporarily paused from Azure free credits. This exercise requires a Pay-As-You-Go, or another paid plan.
+## Task 1: Deploy Azure Container Registry and Container App Environment
 
-## Download project starter files and deploy Azure services
+In this task, you will download the project starter files and use the deployment script to create the Azure services required for the lab. You will deploy an Azure Container Registry and a Container Apps environment, which provide the foundation for hosting and troubleshooting the container app.
 
-In this section you download the project starter files and use a script to deploy the necessary services to your Azure subscription. The Azure Container Registry and Container Apps environment deployment takes a few minutes to complete.
+1. Launch **Visual Studio Code** (VS Code) from desktop.
 
-1. Open a browser and enter the following URL to download the starter file. The file will be saved in your default download location.
+   ![](../Images/vsimage.png)
 
-    ```
-    https://github.com/MicrosoftLearning/mslearn-azure-ai/raw/main/downloads/python/aca-manage-python.zip
-    ```
+1. Select **File Explorer (1)**, then **Open Folder (2)** from the menu.
 
-1. Copy, or move, the file to a location in your system where you want to work on the project. Then unzip the file into a folder.
+   ![](../Images/folderimagea.png)
 
-1. Launch Visual Studio Code (VS Code) and select **File > Open Folder...** in the menu, then choose the folder containing the project files.
+1. Navigate to **C:\Allfiles (1)** and click **Select Folder (2)**.
 
-1. The project contains deployment scripts for both Bash (*azdeploy.sh*) and PowerShell (*azdeploy.ps1*). Open the appropriate file for your environment and change the two values at the top of the script to meet your needs, then save your changes. **Note:** Do not change anything else in the script.
+   ![](../Images/folderimage-b.png)
 
-    ```
-    "<your-resource-group-name>" # Resource Group name
-    "<your-azure-region>" # Azure region for the resources
-    ```
+1. If you see the prompt, **Do you trust the authors of the files in this folder?**, click **Yes, I trust the authors**.
 
-1. In the menu bar select **Terminal > New Terminal** to open a terminal window in VS Code.
+   ![](../Images/vs-trusted.png)
 
-1. Run the following command to login to your Azure account. Answer the prompts to select your Azure account and subscription for the exercise.
+1. Once the folder opens in VS Code, select **Explorer (1)** and then **azdeploy.ps1 (2)**.
 
-    ```
-    az login
-    ```
+   ![](../Images/powershellscript.png)
+
+1. Navigate to the Azure portal and search for **Resource groups (1)**. Then select **Resource groups (2)**.
+
+   ![](../Images/resgrpimage.png)
+
+1. Note the name of the **Resource group**.
+
+   ![](../Images/Lab04-Task1-4.png)
+
+1. The project contains deployment scripts for both Bash (_azdeploy.sh_) and PowerShell (_azdeploy.ps1_). Open the appropriate file for your environment and change the two values: **Resource group name** as **<inject key="ResourceGroupName" enableCopy="false"/>** and **Azure Region** as **<inject key="Region" enableCopy="false"/>** at the top of the script to meet your needs.
+
+   ```
+   "<your-resource-group-name>" # Resource Group name
+   "<your-azure-region>" # Azure region for the resources
+   ```
+
+   ![](../Images/powershellrgnaming.png)
+
+   ![](../Images/Lab02-Task2-48.png)
+
+   > **Note:** Do not change anything else in the script.
+
+1. Press **Ctrl+S** to save the changes.
+
+1. In the menu bar, select **ellipsis (...) (1)**, then **Terminal (2)**, and then **New Terminal (3)** to open a terminal window in VS Code.
+
+   ![](../Images/terminalimage.png)
+
+   > **Note:** If you are using Bash, after the terminal opens, expand the downward arrow icon **(1)** to open a new terminal and select **Git Bash (2)** from the drop-down list. If you are using PowerShell, skip this step.
+   >
+   > ![](../Images/Lab02-Task2-26.png)
+
+1. Run the following command in the terminal to allow PowerShell scripts to run. This step is required only if you are using PowerShell. If you are using Bash, skip this step.
+
+   ```
+   Set-ExecutionPolicy -ExecutionPolicy bypass -Force
+   ```
+
+   ![](../Images/runcmd.png)
+
+1. Run the command **az login (1)** to sign in to your Azure account. Then **minimize the VS Code window (2)** to view the login window that opens in the background.
+
+   ```
+   az login
+   ```
+
+   ![](../Images/azloginimage.png)
+
+1. A pop-up window will appear on the desktop. Select **Work and school account (1)** and then click **Continue (2)**.
+
+   ![](../Images/sign-in-1.png)
+
+1. In the login window, sign in by using the provided **Azure credentials (1)** and then click **Next (2)**.
+   - **Email/Username:** <inject key="AzureAdUserEmail"></inject>
+
+     ![](../Images/sign-in-2.png)
+
+1. Enter the temporary access password and click **Sign in**.
+   - **Password:** <inject key="AzureAdUserPassword"></inject>
+
+     ![](../Images/tempass.png)
+
+1. When prompted with **Sign in to all apps and websites on this device?**, select **No, this app only**.
+
+   ![](../Images/sign-in-3.png)
+
+1. Return to the terminal.
+
+1. Choose the subscription by entering **1**.
+
+   ![](../Images/sign-in-4.png)
+
+   > **NOTE:** To confirm you're logged in to the correct Azure subscription, run **az account show**.
 
 1. Run the following command to ensure you have the **containerapp** extension for Azure CLI.
 
-    ```azurecli
-    az extension add --name containerapp
-    ```
+   ```azurecli
+   az extension add --name containerapp
+   ```
 
-1. Run the following commands to ensure your subscription has the necessary resource providers for the exercise.
+   ![](../Images/Lab03-Task1-1.png)
 
-    ```azurecli
-    az provider register --namespace Microsoft.App
-    az provider register --namespace Microsoft.OperationalInsights
-    ```
+1. Make sure you are in the root directory of the project and run the appropriate command in the terminal to launch the deployment script. The deployment script will deploy ACR and create a file with environment variables needed.
 
-### Create resources in Azure
+   **Bash**
 
-In this section you run the deployment script to deploy the necessary services to your Azure subscription.
+   ```bash
+   bash azdeploy.sh
+   ```
 
-1. Make sure you are in the root directory of the project and run the appropriate command in the terminal to launch the deployment script. The deployment script will deploy ACR and create a file with environment variables needed for exercise.
+   ![](../Images/Lab03-Task2-1-bash.png)
 
-    **Bash**
-    ```bash
-    bash azdeploy.sh
-    ```
+   **PowerShell**
 
-    **PowerShell**
-    ```powershell
-    ./azdeploy.ps1
-    ```
+   ```powershell
+   ./azdeploy.ps1
+   ```
+
+   ![](../Images/Lab02-Task1-1.png)
 
 1. When the script is running, enter **1** to launch the **Create Azure Container Registry and build container image** option. This option creates the ACR service and uses ACR Tasks to build and push the image to the registry.
 
+   ![](../Images/Lab04-Task1-1.png)
+
+1. To verify that the deployment was successful, navigate to the Azure portal. In the search bar, type **Container registries (1)** and select **Container registries (2)** from the search results.
+
+   ![](../Images/Lab02-Task2-4.png)
+
+1. You should see one container registry created.
+
+   ![](../Images/Lab03-Task1-6.png)
+
 1. When the previous operation is finished, enter **2** to launch the **Create Container Apps environment** options. Creating the environment is necessary before deploying the container.
 
+    ![](../Images/Lab04-Task1-6.png)
+
+1. To verify that the deployment was successful, navigate to the Azure portal. In the search bar, type **Container Apps Environments (1)** and select **Container Apps Environments (2)** from the search results.
+
+   ![](../Images/Lab03-Task1-7.png)
+
+1. You should see the **Container App Environment** you created.
+
+   ![](../Images/Lab03-Task1-8.png)
+
 1. When the previous operation is finished, enter **3** to launch the **Deploy the container app and configure secrets** option.
+
+    ![](../Images/Lab04-Task1-2.png)
 
     >**Note:** A file containing environment variables is created after the container app is created. You use these variables throughout the exercise.
 
 1. When the previous operation is finished, enter **5** to exit the deployment script.
 
+   ![](../Images/Lab04-Task1-3.png)
+
 1. Run the appropriate command to load the environment variables into your terminal session from the file created in a previous step.
 
-    **Bash**
-    ```bash
-    source .env
-    ```
+   **Bash**
 
-    **PowerShell**
-    ```powershell
-    . .\.env.ps1
-    ```
+   ```bash
+   source .env
+   ```
 
-    >**Note:** Keep the terminal open. If you close it and create a new terminal, you might need to run the command to create the environment variable again.
+   ![](../Images/Lab03-Task2-3-bash.png)
+
+   **PowerShell**
+
+   ```powershell
+   . .\.env.ps1
+   ```
+
+   ![](../Images/Lab03-Task1-5.png)
+
+   > **Note:** Keep the terminal open. If you close it and create a new terminal, you might need to run the command to create the environment variable again.
 
 1. Run the following command to retrieve the app FQDN and store the result to a variable.
 
@@ -115,6 +209,7 @@ In this section you run the deployment script to deploy the necessary services t
 
     Write-Output $FQDN
     ```
+    ![](../Images/Lab04-Task1-7.png)
 
 1. Run the following command to call the default endpoint to verify the app is running. The command should return some JSON. Look for the **model.name** field, it should be set to **gpt-4o-mini**.
 
@@ -128,9 +223,17 @@ In this section you run the deployment script to deploy the necessary services t
     Invoke-RestMethod -Uri "https://$FQDN/"
     ```
 
-## Diagnose a missing environment variable
+> **Congratulations** on completing the task! Now, it's time to validate it. Here are the steps:
+>
+> - If you receive a success message, you can proceed to the next task.
+> - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
+> - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help you out.
 
-When a container app depends on an environment variable that isn't set, the app may fail to start or behave unexpectedly. In this section, you remove a required environment variable and observe the symptoms.
+<validation step="" />
+
+## Task 2: Diagnose a missing environment variable error
+
+In this task, you will introduce a configuration problem by removing a required environment variable and observing how it affects the container app. You will then diagnose the issue and restore the variable to confirm the fix.
 
 1. Run the following command to update the container app to remove the `MODEL_NAME` environment variable.
 
@@ -145,6 +248,7 @@ When a container app depends on an environment variable that isn't set, the app 
     az containerapp update -n $env:CONTAINER_APP_NAME -g $env:RESOURCE_GROUP `
         --remove-env-vars MODEL_NAME
     ```
+    ![](../Images/Lab04-Task1-8.png)
 
 1. Run the following command to list revisions to confirm a new revision was created. Look for a new revision with a higher suffix number (for example, **ai-api--0000002**) and **TrafficWeight** of **100**, indicating it's now receiving all traffic.
 
@@ -157,6 +261,7 @@ When a container app depends on an environment variable that isn't set, the app 
     ```powershell
     az containerapp revision list -n $env:CONTAINER_APP_NAME -g $env:RESOURCE_GROUP -o table
     ```
+    ![](../Images/Lab04-Task2-1.png)
 
 1. Run the following command to check the root endpoint to observe the symptom from the API consumer's perspective. The **model.name** field now shows the default value of **not-configured** instead of the configured value.
 
@@ -168,6 +273,7 @@ When a container app depends on an environment variable that isn't set, the app 
     **PowerShell**
     ```powershell
     (Invoke-RestMethod -Uri "https://$FQDN/").model
+    ```
 
 1. Run the following command to diagnose the root cause by viewing the container app's configuration. Run the following command to confirm the **MODEL_NAME** environment variable is missing.
 
@@ -182,6 +288,7 @@ When a container app depends on an environment variable that isn't set, the app 
     az containerapp show -n $env:CONTAINER_APP_NAME -g $env:RESOURCE_GROUP `
         --query "properties.template.containers[0].env" -o table
     ```
+    ![](../Images/Lab04-Task2-.png)
 
 1. Run the following command to fix the issue by adding the `MODEL_NAME` environment variable back.
 
@@ -211,9 +318,9 @@ When a container app depends on an environment variable that isn't set, the app 
 
 You diagnosed and fixed a missing environment variable. Next, you diagnose a secret an ingress issue.
 
-## Diagnose an ingress configuration issue
+## Task 3: Diagnose an ingress configuration issue
 
-Container Apps uses the **target-port** setting to route traffic to your container. If the port doesn't match what your application listens on, requests fail. In this section, you introduce a port mismatch.
+In this task, you will introduce an ingress-related problem by changing the target port to a value that does not match the application. You will then diagnose the resulting connectivity issue and restore the correct configuration.
 
 1. Run the following command to update the container app to use the wrong target port.
 
@@ -297,9 +404,9 @@ Container Apps uses the **target-port** setting to route traffic to your contain
 
 You diagnosed and fixed an ingress configuration issue. Next, you learn how to query historical logs.
 
-## Query Log Analytics for historical troubleshooting
+## Task 4: Query Log Analytics for historical troubleshooting
 
-Console logs shown by **az containerapp logs show** are recent only. For historical troubleshooting, logs persist in the Log Analytics workspace associated with your Container Apps environment.
+In this task, you will use Log Analytics to review historical container logs and investigate issues that may no longer appear in the recent console output. This helps you troubleshoot problems that occurred earlier or after a revision change.
 
 1. Run the following command to get the Log Analytics workspace ID from the Container Apps environment.
 
@@ -356,13 +463,6 @@ Console logs shown by **az containerapp logs show** are recent only. For histori
 
 These queries help you investigate issues that occurred in the past, even after container restarts or revision changes.
 
-## Clean up resources
-
-Cleaning up avoids ongoing cost. Delete the resource group, which deletes the Container Apps environment, container app, and registry.
-
-```bash
-az group delete --name $RESOURCE_GROUP --no-wait --yes
-```
 
 ## Troubleshooting
 
@@ -382,6 +482,6 @@ If you encounter issues during this exercise, try these steps:
 
 ### Summary
 
-
+In this lab, you diagnosed and resolved common deployment issues in Azure Container Apps by reviewing revision state, inspecting logs, and using the Azure CLI to identify and fix problems. You learned how missing environment variables and incorrect ingress settings can affect application behavior, and how to validate your fixes by testing the app and reviewing troubleshooting data.
 
 ## You have successfully completed the Hands-on Lab!
