@@ -148,14 +148,6 @@ In this task, you'll prepare the development environment, configure the deployme
 
    ![](../Images/lab15-t1p9.png)
 
-> **Congratulations** on completing the task! Now, it's time to validate it. Here are the steps:
->
-> - If you receive a success message, you can proceed to the next task.
-> - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
-> - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help you out.
-
-<validation step="051811e8-cf51-44fa-bb48-7c40f022ac16" />
-
 ## Task 2: Configure the Python environment
 
 In this task, you'll create and activate a Python virtual environment, and install the required dependencies for the publisher and subscriber applications.
@@ -466,11 +458,13 @@ In this section, you add code to handle channel and pattern subscriptions. The *
 
 1. Take a few minutes to review all of the code in the application.
 
+   > **Note:** Verify that the code indentation is preserved exactly as shown. Improper indentation can lead to syntax or execution errors and prevent the code from running successfully.
+
 ## Task 5: Verify resource deployment
 
 In this task, you'll verify that the Azure Managed Redis deployment has completed successfully, retrieve the Redis endpoint and access key, and generate the environment configuration required by the applications.
 
-1. Run the appropriate command in the terminal to start the deployment script. If you closed the previous terminal, use **Ctrl + `** to open a new one.
+1. Run the appropriate command in the terminal to start the deployment script. If you closed the previous terminal, use **Ctrl + ` (backtick)** to open a new one.
 
    **Bash**
 
@@ -617,6 +611,14 @@ Take some time to experiment subscribing and publishing messages to different ch
 | Unsubscribe from Channel  | Unsubscribe from a single channel. Note: you can't unsubscribe using a pattern using this option.                              |
 | Unsubscribe All           | Unsubscribe from all channels, including pattern subscriptions.                                                                |
 | View Active Subscriptions | Lists all of the subscribed channels, including pattern subscriptions.                                                         |
+
+> **Congratulations** on completing the task! Now, it's time to validate it. Here are the steps:
+>
+> - If you receive a success message, you can proceed to the next task.
+> - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
+> - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help you out.
+
+<validation step="051811e8-cf51-44fa-bb48-7c40f022ac16" />
 
 ## Summary
 

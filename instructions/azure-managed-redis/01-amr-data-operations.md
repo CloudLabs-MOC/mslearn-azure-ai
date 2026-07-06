@@ -147,14 +147,6 @@ In this task, you'll prepare the development environment, configure the deployme
 
    ![](../Images/lab15-t1p9.png)
 
-> **Congratulations** on completing the task! Now, it's time to validate it. Here are the steps:
->
-> - If you receive a success message, you can proceed to the next task.
-> - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
-> - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help you out.
-
-<validation step="ebfa3f28-b6b8-4061-9f75-0b0507be8e9e" />
-
 ## Task 2: Configure the Python environment
 
 In this task, you'll create a Python virtual environment, activate it, and install the required dependencies for the Redis console application.
@@ -322,6 +314,8 @@ In this section, you add code to remove keys from Redis using the **delete** com
 
 1. Save your changes to the **main.py** file using **Ctrl + S**.
 
+   > **Note:** Verify that the code indentation is preserved exactly as shown. Improper indentation can lead to syntax or execution errors and prevent the code from running successfully.
+
 ## Task 4: Verify the Azure Managed Redis deployment
 
 In this task, you'll verify that the Azure Managed Redis deployment has completed successfully, retrieve the Redis endpoint and access key, and generate the environment configuration required by the application.
@@ -388,6 +382,14 @@ In this task, you'll run the completed console application to validate the Redis
    > **Note:** You can run the options in any order you choose. For example, after storing the hash data you can retrieve the expiration information to learn there is no expiration set on the key.
 
 The mock hash data used in the app is defined in the beginning of the **main()** function. You can update the code to use a different key, or add more values to the hash data.
+
+> **Congratulations** on completing the task! Now, it's time to validate it. Here are the steps:
+>
+> - If you receive a success message, you can proceed to the next task.
+> - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
+> - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help you out.
+
+<validation step="ebfa3f28-b6b8-4061-9f75-0b0507be8e9e" />
 
 ## Summary
 
