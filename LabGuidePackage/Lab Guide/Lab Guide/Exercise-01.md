@@ -20,7 +20,7 @@ This exercise is a wrapper for the first two tasks in the Microsoft lab. CloudLa
 In this task, you will sign in to Azure from the LabVM, open the Microsoft semantic search lab instructions, and complete Task 1 from the Microsoft markdown without changing the provided procedure.
 
 1. On the LabVM, open a browser and sign in to the Azure portal at <https://portal.azure.com> using the following credentials:
-   - Username: `<inject key="AzureAdUserEmail"></inject>`
+   - Username: <inject key="AzureAdUserEmail"></inject>
    - Password: `<inject key="AzureAdUserPassword"></inject>`
 2. Confirm that you are working in subscription `<inject key="SubscriptionID"></inject>` and tenant `<inject key="TenantID"></inject>`.
 3. Record the CloudLabs deployment identifier for this lab session: **Deployment ID: `<inject key="DeploymentID" enableCopy="false"></inject>`**.
