@@ -205,6 +205,21 @@ In this section you complete the *app.py* file by adding route handlers that int
                     if not row:
                         flash("Product not found", "error")
                         return redirect(url_for("index"))
+                    cur.execute("""
+                        SELECT id, name, category, description, price
+                        FROM products
+                        WHERE id = %s
+                    """, (product_id,))
+
+                    p = cur.fetchone()
+
+                    searched_product = {
+                        "id": p[0],
+                        "name": p[1],
+                        "category": p[2],
+                        "description": p[3],
+                        "price": p[4]
+                    }
 
                     # Find similar products using cosine distance
                     # The <=> operator is pgvector's cosine distance operator
@@ -224,14 +239,14 @@ In this section you complete the *app.py* file by adding route handlers that int
 
             products = get_products()
             new_products = get_new_products()
-            return render_template("index.html", products=products, new_products=new_products, results=results)
+            return render_template("index.html", products=products, new_products=new_products, results=results, searched_product=searched_product)
 
         except Exception as e:
             flash(f"Error searching: {str(e)}", "error")
             return redirect(url_for("index"))
     ```
 
-    ![](../Images/ai200-l13-11.png)
+    ![](../Images/ai200-l13-28.png)
 
 1. Search for the **BEGIN ADD PRODUCT SECTION** comment and add the following code directly after the comment. This route adds a product from the *new_products.json* file to the database.
 
