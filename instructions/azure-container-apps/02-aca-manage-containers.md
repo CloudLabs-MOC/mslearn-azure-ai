@@ -509,7 +509,6 @@ In this task, you will use Log Analytics to review historical container logs and
         --analytics-query "ContainerAppConsoleLogs_CL | where ContainerAppName_s == '$env:CONTAINER_APP_NAME' and Log_s contains 'error' | order by TimeGenerated desc | take 20" `
         -o table
     ```
-
     ![](../Images/Lab04-Task4-3.png)
 
 These queries help you investigate issues that occurred in the past, even after container restarts or revision changes.
