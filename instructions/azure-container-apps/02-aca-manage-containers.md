@@ -17,7 +17,7 @@ In this lab, you will diagnose and fix a failing container app deployment in Azu
 
 ## Task 1: Deploy Azure Container Registry and Container App Environment
 
-In this task, you will download the project starter files and use the deployment script to create the Azure services required for the lab. You will deploy an Azure Container Registry and a Container Apps environment, which provide the foundation for hosting and troubleshooting the container app.
+In this task, you will deploy an Azure Container Registry and a Container Apps environment, which provide the foundation for hosting and troubleshooting the container app.
 
 1. Launch **Visual Studio Code** (VS Code) from desktop.
 
@@ -60,7 +60,7 @@ In this task, you will download the project starter files and use the deployment
 
    > **Note:** Do not change anything else in the script.
 
-1. Press **Ctrl+S** to save the changes.
+1. Press **Ctrl+S** to save the changes in both the scripts.
 
 1. In the menu bar, select **ellipsis (...) (1)**, then **Terminal (2)**, and then **New Terminal (3)** to open a terminal window in VS Code.
 
@@ -91,12 +91,12 @@ In this task, you will download the project starter files and use the deployment
    ![](../Images/sign-in-1.png)
 
 1. In the login window, sign in by using the provided **Azure credentials (1)** and then click **Next (2)**.
-   - **Email/Username:** <inject key="AzureAdUserEmail"></inject>
+   - **Email/Username:** <inject key="AzureAdUserEmail" enableCopy="false"></inject>
 
      ![](../Images/sign-in-2.png)
 
 1. Enter the temporary access password and click **Sign in**.
-   - **Password:** <inject key="AzureAdUserPassword"></inject>
+   - **Password:** <inject key="AzureAdUserPassword" enableCopy="false"></inject>
 
      ![](../Images/tempass.png)
 
@@ -146,7 +146,7 @@ In this task, you will download the project starter files and use the deployment
 
    ![](../Images/Lab02-Task2-4.png)
 
-1. You should see one container registry created.
+1. You should see one **Container registry** created.
 
    ![](../Images/Lab03-Task1-6.png)
 
@@ -201,6 +201,7 @@ In this task, you will download the project starter files and use the deployment
 
     echo "$FQDN"
     ```
+     ![](../Images/Lab04-Task1-10b.png)
 
     **PowerShell**
     ```powershell
@@ -217,11 +218,13 @@ In this task, you will download the project starter files and use the deployment
     ```bash
     curl -s "https://$FQDN/"
     ```
+    ![](../Images/Lab04-Task1-11b.png)
 
     **PowerShell**
     ```powershell
     Invoke-RestMethod -Uri "https://$FQDN/"
     ```
+    ![](../Images/Lab04-Task1-9.png)
 
 > **Congratulations** on completing the task! Now, it's time to validate it. Here are the steps:
 >
@@ -243,6 +246,8 @@ In this task, you will introduce a configuration problem by removing a required 
         --remove-env-vars MODEL_NAME
     ```
 
+    ![](../Images/Lab04-Task2-12b.png)
+
     **PowerShell**
     ```powershell
     az containerapp update -n $env:CONTAINER_APP_NAME -g $env:RESOURCE_GROUP `
@@ -257,6 +262,8 @@ In this task, you will introduce a configuration problem by removing a required 
     az containerapp revision list -n $CONTAINER_APP_NAME -g $RESOURCE_GROUP -o table
     ```
 
+    ![](../Images/Lab04-Task2-13b.png)
+
     **PowerShell**
     ```powershell
     az containerapp revision list -n $env:CONTAINER_APP_NAME -g $env:RESOURCE_GROUP -o table
@@ -270,10 +277,14 @@ In this task, you will introduce a configuration problem by removing a required 
     curl -s "https://$FQDN/" | jq .model
     ```
 
+    ![](../Images/Lab04-Task2-14b.png)
+
     **PowerShell**
     ```powershell
     (Invoke-RestMethod -Uri "https://$FQDN/").model
     ```
+
+    ![](../Images/Lab04-Task2-4.png)
 
 1. Run the following command to diagnose the root cause by viewing the container app's configuration. Run the following command to confirm the **MODEL_NAME** environment variable is missing.
 
@@ -283,12 +294,15 @@ In this task, you will introduce a configuration problem by removing a required 
         --query "properties.template.containers[0].env" -o table
     ```
 
+    ![](../Images/Lab04-Task2-15b.png)
+
     **PowerShell**
     ```powershell
     az containerapp show -n $env:CONTAINER_APP_NAME -g $env:RESOURCE_GROUP `
         --query "properties.template.containers[0].env" -o table
     ```
-    ![](../Images/Lab04-Task2-.png)
+
+    ![](../Images/Lab04-Task2-5.png)
 
 1. Run the following command to fix the issue by adding the `MODEL_NAME` environment variable back.
 
@@ -297,12 +311,14 @@ In this task, you will introduce a configuration problem by removing a required 
     az containerapp update -n $CONTAINER_APP_NAME -g $RESOURCE_GROUP \
         --set-env-vars MODEL_NAME=$MODEL_NAME
     ```
+    ![](../Images/Lab04-Task2-16b.png)
 
     **PowerShell**
     ```powershell
     az containerapp update -n $env:CONTAINER_APP_NAME -g $env:RESOURCE_GROUP `
         --set-env-vars MODEL_NAME=$env:MODEL_NAME
     ```
+    ![](../Images/Lab04-Task2-6.png)
 
 1. Run the following command to verify the fix by checking the root endpoint again. This confirms the application now behaves correctly from an API consumer's perspective. The response should now show the configured model name.
 
@@ -310,11 +326,13 @@ In this task, you will introduce a configuration problem by removing a required 
     ```bash
     curl -s "https://$FQDN/" | jq .model
     ```
+    ![](../Images/Lab04-Task2-17b.png)
 
     **PowerShell**
     ```powershell
     (Invoke-RestMethod -Uri "https://$FQDN/").model
     ```
+    ![](../Images/Lab04-Task2-7.png)
 
 You diagnosed and fixed a missing environment variable. Next, you diagnose a secret an ingress issue.
 
@@ -330,11 +348,14 @@ In this task, you will introduce an ingress-related problem by changing the targ
         --target-port 3000
     ```
 
+    ![](../Images/Lab04-Task3-18b.png)
+
     **PowerShell**
     ```powershell
     az containerapp ingress update -n $env:CONTAINER_APP_NAME -g $env:RESOURCE_GROUP `
         --target-port 3000
     ```
+    ![](../Images/Lab04-Task3-1.png)
 
 1. Run the following command to try to access the health endpoint to observe the symptom from an API consumer's perspective.
 
@@ -343,12 +364,17 @@ In this task, you will introduce an ingress-related problem by changing the targ
     curl -s "https://$FQDN/health"
     ```
 
+    ![](../Images/Lab04-Task3-19b.png)
+
     **PowerShell**
     ```powershell
     Invoke-RestMethod -Uri "https://$FQDN/health"
     ```
+    ![](../Images/Lab04-Task3-2.png)
 
-    The request fails or times out because Container Apps is routing traffic to port 3000, but the application listens on port 8000.
+    > **Note:** The request fails or times out because Container Apps is routing traffic to port 3000, but the application listens on port 8000.
+
+    > **Note:** Log Analytics data may take **2-5 minutes** to appear.
 
 1. Run the following command to diagnose the root cause by checking the current ingress configuration. Notice the **targetPort** is set to 3000.
 
@@ -358,11 +384,15 @@ In this task, you will introduce an ingress-related problem by changing the targ
         --query "properties.configuration.ingress" -o yaml
     ```
 
+    ![](../Images/Lab04-Task3-20b.png)
+
     **PowerShell**
     ```powershell
     az containerapp show -n $env:CONTAINER_APP_NAME -g $env:RESOURCE_GROUP `
         --query "properties.configuration.ingress" -o yaml
     ```
+
+    ![](../Images/Lab04-Task3-3.png)
 
 1. Run the following command to check the container logs to see if the application is running. You should see gunicorn startup messages indicating the app is listening on port 8000, confirming the mismatch.
 
@@ -370,11 +400,14 @@ In this task, you will introduce an ingress-related problem by changing the targ
     ```bash
     az containerapp logs show -n $CONTAINER_APP_NAME -g $RESOURCE_GROUP
     ```
+    ![](../Images/Lab04-Task3-21b.png)
 
     **PowerShell**
     ```powershell
     az containerapp logs show -n $env:CONTAINER_APP_NAME -g $env:RESOURCE_GROUP
     ```
+
+    ![](../Images/Lab04-Task3-4.png)
 
 1. Run the following command to fix the ingress configuration by setting the correct target port.
 
@@ -384,11 +417,15 @@ In this task, you will introduce an ingress-related problem by changing the targ
         --target-port 8000
     ```
 
+    ![](../Images/Lab04-Task3-22b.png)
+
     **PowerShell**
     ```powershell
     az containerapp ingress update -n $env:CONTAINER_APP_NAME -g $env:RESOURCE_GROUP `
         --target-port 8000
     ```
+
+    ![](../Images/Lab04-Task3-5.png)
 
 1. Run the following command to verify the fix by calling the health endpoint. This confirms the application is accessible from an API consumer's perspective. You should see **{"status":"healthy"}**.
 
@@ -397,10 +434,14 @@ In this task, you will introduce an ingress-related problem by changing the targ
     curl -s "https://$FQDN/health"
     ```
 
+    ![](../Images/Lab04-Task3-23b.png)
+
     **PowerShell**
     ```powershell
     Invoke-RestMethod -Uri "https://$FQDN/health"
     ```
+
+    ![](../Images/Lab04-Task3-6.png)
 
 You diagnosed and fixed an ingress configuration issue. Next, you learn how to query historical logs.
 
@@ -418,6 +459,8 @@ In this task, you will use Log Analytics to review historical container logs and
     echo "Workspace ID: $WORKSPACE_ID"
     ```
 
+    ![](../Images/Lab04-Task4-24b.png)
+
     **PowerShell**
     ```powershell
     $WORKSPACE_ID = az containerapp env show -n $env:ACA_ENVIRONMENT -g $env:RESOURCE_GROUP `
@@ -425,8 +468,9 @@ In this task, you will use Log Analytics to review historical container logs and
 
     Write-Output "Workspace ID: $WORKSPACE_ID"
     ```
+    ![](../Images/Lab04-Task4-1.png)
 
-1. Run the following command to query the console logs for your container app. This returns the last 20 log entries showing timestamp and message.
+1. Run the following command to query the console logs for your container app. Press **Y** for installing log-analytics extension. This returns the last 20 log entries showing timestamp and message.
 
     **Bash**
     ```bash
@@ -435,6 +479,8 @@ In this task, you will use Log Analytics to review historical container logs and
         -o table
     ```
 
+    ![](../Images/Lab04-Task4-25b.png)
+
     **PowerShell**
     ```powershell
     az monitor log-analytics query -w $WORKSPACE_ID `
@@ -442,8 +488,9 @@ In this task, you will use Log Analytics to review historical container logs and
         -o table
     ```
 
-    > [!NOTE]
-    > Log Analytics data may take a few minutes to appear after events occur. If you don't see recent logs, wait a few minutes and try again.
+    ![](../Images/Lab04-Task4-2.png)
+    
+    > **NOTE:** Log Analytics data may take a few minutes to appear after events occur. If you don't see recent logs, wait a few minutes and try again.
 
 1. Run the following command to query for error-level logs specifically.
 
@@ -453,6 +500,8 @@ In this task, you will use Log Analytics to review historical container logs and
         --analytics-query "ContainerAppConsoleLogs_CL | where ContainerAppName_s == '$CONTAINER_APP_NAME' and Log_s contains 'error' | order by TimeGenerated desc | take 20" \
         -o table
     ```
+    ![](../Images/Lab04-Task4-26b.png)
+
 
     **PowerShell**
     ```powershell
@@ -461,24 +510,9 @@ In this task, you will use Log Analytics to review historical container logs and
         -o table
     ```
 
+    ![](../Images/Lab04-Task4-3.png)
+
 These queries help you investigate issues that occurred in the past, even after container restarts or revision changes.
-
-
-## Troubleshooting
-
-If you encounter issues during this exercise, try these steps:
-
-**Container app not responding**
-- Check if the revision is active using **az containerapp revision list**
-- Verify ingress is configured using **az containerapp show**
-
-**Cannot see logs**
-- Console logs are recent only. Use Log Analytics for historical data.
-- Log Analytics data may take 2-5 minutes to appear.
-
-**Environment variables not taking effect**
-- Container Apps creates a new revision when you change environment variables. Verify the new revision is active.
-- Use **--replace-env-vars** carefully—it replaces all environment variables, not just the ones you specify.
 
 ### Summary
 
