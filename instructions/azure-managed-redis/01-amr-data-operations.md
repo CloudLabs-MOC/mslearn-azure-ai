@@ -1,6 +1,6 @@
 # Lab 15: Perform data operations in Azure Managed Redis
 
-### Estimated Duration : 45 Minutes
+### Estimated Duration : 60 Minutes
 
 ## Lab overview
 

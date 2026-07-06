@@ -1,10 +1,10 @@
 # Lab 16: Publish and subscribe to events in Azure Managed Redis
 
-### Estimated Duration : 45 Minutes
+### Estimated Duration : 60 Minutes
 
 ## Lab overview
 
-In this lab, you create an Azure Managed Redis resource and complete the code for a console-based publisher and a subscriber app. The publisher app sends event messages to Redis channels, while the subscriber app listens for those messages using a graphical interface built with **tkinter**. You implement core pub/sub patterns including direct channel subscriptions, wildcard pattern matching, message formatting, and background message listening.
+In this exercise, you create an Azure Managed Redis resource and complete the code for a console-based publisher and a subscriber app. The publisher app sends event messages to Redis channels, while the subscriber app listens for those messages using a graphical interface built with **tkinter**. You implement core pub/sub patterns including direct channel subscriptions, wildcard pattern matching, message formatting, and background message listening.
 
 ## Lab objectives
 

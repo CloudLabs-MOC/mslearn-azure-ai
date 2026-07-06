@@ -4,7 +4,7 @@ This course teaches developers how to create, monitor, and troubleshoot AI solut
 
 ## Lab 10: Build a semantic search application with Azure Cosmos DB for NoSQL
 
-### Overall Estimated Timing: 45 Minutes
+### Overall Estimated Timing: 60 Minutes
 
 ## Overview
 
