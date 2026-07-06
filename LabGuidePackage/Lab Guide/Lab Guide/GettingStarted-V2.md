@@ -23,7 +23,7 @@ You will connect to the LabVM, sign in to Azure, verify the developer tools requ
 Before you begin, make sure you have access to the CloudLabs environment and your lab deployment details:
 
 - Azure portal: <https://portal.azure.com>
-- Username: `<inject key="AzureAdUserEmail"></inject>`
+- Username: <inject key="AzureAdUserEmail"></inject>
 - Password: `<inject key="AzureAdUserPassword"></inject>`
 - Subscription: `<inject key="SubscriptionID"></inject>`
 - Tenant: `<inject key="TenantID"></inject>`
