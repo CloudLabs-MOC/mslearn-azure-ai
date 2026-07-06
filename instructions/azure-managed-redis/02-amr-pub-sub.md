@@ -148,6 +148,14 @@ In this task, you'll prepare the development environment, configure the deployme
 
    ![](../Images/lab15-t1p9.png)
 
+> **Congratulations** on completing the task! Now, it's time to validate it. Here are the steps:
+>
+> - If you receive a success message, you can proceed to the next task.
+> - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
+> - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help you out.
+
+<validation step="051811e8-cf51-44fa-bb48-7c40f022ac16" />
+
 ## Task 2: Configure the Python environment
 
 In this task, you'll create and activate a Python virtual environment, and install the required dependencies for the publisher and subscriber applications.
