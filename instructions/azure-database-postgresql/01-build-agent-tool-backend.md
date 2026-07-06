@@ -1,81 +1,146 @@
 # Lab 12: Build an agent tool backend on Azure Database for PostgreSQL
 
-
-### Estimated Duration : 30 Minutes
+### Estimated Duration : 45 Minutes
 
 ## Overview 
 
 In this exercise, you create an Azure Database for PostgreSQL instance that serves as a tool backend for an AI agent. The database stores conversation context and task state that an agent can read and write during operation. You design a schema for agent memory, build Python functions that serve as agent tools, and test the complete workflow. This pattern provides a foundation for building AI agents that maintain persistent memory across sessions and can resume interrupted tasks.
 
+## Lab Objective
 
-- **Task 1:** Download project starter files and configure the deployment script
-- **Task 2:** Deploy an Azure Database for PostgreSQL Flexible Server with Microsoft Entra authentication
-- **Task 3:** Build Python tool functions for conversation and task state management
-- **Task 4:** Create a database schema for agent memory with tables for conversations, messages, and task checkpoints
-- **Task 5:** Test the agent memory workflow using a provided test script
-- **Task 6:** Query conversation context using SQL
+- **Task 1:** Prepare the environment
 
+- **Task 2:** Create resources in Azure
 
-## Download project starter files and deploy Azure services
+- **Task 3:** Complete the tool function app
+
+- **Task 4:** Complete the Azure resource deployment
+
+- **Task 5:** Create the agent memory schema with psql
+
+- **Task 6:** Test the agent memory workflow
+
+- **Task 7:** Query conversation context
+
+> ### **Note:** This lab includes deployment scripts for both **PowerShell** and **Bash**. You may choose either scripting language based on your preference or environment. Once you make your choice, use the corresponding commands and script throughout the entire lab, as all subsequent steps provide instructions for both PowerShell and Bash.
+
+## Task 1: Prepare the environment
 
 In this section you download the project starter files and use a script to deploy the necessary services to your Azure subscription. The PostgreSQL server deployment takes a few minutes to complete.
 
-1. Open a browser and enter the following URL to download the starter file. The file will be saved in your default download location.
+1. Launch **Visual Studio Code** (VS Code) from desktop.
 
-    ```
-    https://github.com/MicrosoftLearning/mslearn-azure-ai/raw/main/downloads/python/postgresql-build-agent-python.zip
-    ```
+   ![](../Images/vsimage.png)
 
-1. Copy, or move, the file to a location in your system where you want to work on the project. Then unzip the file into a folder.
+1. Select **File Explorer (1)**, then **Open Folder (2)** from the menu.
 
-1. Launch Visual Studio Code (VS Code) and select **File > Open Folder...** in the menu, then choose the folder containing the project files.
+   ![](../Images/folderimagea.png)
 
-1. The project contains deployment scripts for both Bash (*azdeploy.sh*) and PowerShell (*azdeploy.ps1*). Open the appropriate file for your environment and change the two values at the top of the script to meet your needs, then save your changes. **Note:** Do not change anything else in the script.
+1. Navigate to **C:\AllFiles (1)** and click **Select Folder (2)**.
 
-    ```
-    "<your-resource-group-name>" # Resource Group name
-    "<your-azure-region>" # Azure region for the resources
-    ```
+   ![](../Images/ai200-l12-4.png)
 
-1. In the menu bar select **Terminal > New Terminal** to open a terminal window in VS Code.
+1. If you see the prompt, **Do you trust the authors of the files in this folder?**, click **Yes, I trust the authors**.
 
-1. Run the following command to login to your Azure account. Answer the prompts to select your Azure account and subscription for the exercise.
+   ![](../Images/Lab01-Task1-4.png)
 
-    ```
-    az login
-    ```
+1. Once the folder opens in VS Code, select **Explorer (1)** and then **azdeploy.ps1 (2)**.
 
-1. Run the following command to ensure your subscription has the necessary resource provider for the exercise.
+    ![](../Images/ai200-l12-3.png)
 
-    ```azurecli
-    az provider register --namespace Microsoft.DBforPostgreSQL
-    ```
+1. The project contains deployment scripts for both Bash (_azdeploy.sh_) and PowerShell (_azdeploy.ps1_). Open the appropriate file for your environment and change the two values: **Resource group name** as **<inject key="ResourceGroupName" enableCopy="false"/>** and **Azure Region** as **<inject key="Region" enableCopy="false"/>** at the top of the script to meet your needs.
 
-### Create resources in Azure
+   ```
+   "<your-resource-group-name>" # Resource Group name
+   "<your-azure-region>" # Azure region for the resources
+   ```
 
-In this section you run the deployment script to deploy the PostgreSQL.
+   ![](../Images/ai200-l12-5.png)
+
+   ![](../Images/ai200-l12-6.png)
+
+1. In the menu bar, select **File (1)** and select **Save All (2)** from drop-down.
+
+   ![](../Images/Lab01-Task1-7.png)
+
+1. In the menu bar, select **ellipsis (...) (1)**, then **Terminal (2)**, and then **New Terminal (3)** to open a terminal window in VS Code.
+
+   ![](../Images/ai200-l12-7.png)
+
+   > **NOTE:** If you are using Bash, after the terminal opens, click on the **+ (1)** icon to open a new terminal and select **Git Bash (2)** from the drop-down. If you are using PowerShell, skip this step.
+   
+   ![](../Images/lab06-t1p5.png)
+
+1. Run the following command in the terminal to allow PowerShell scripts to run. This command is only required if you are using PowerShell. If you are using Bash, skip this step.
+
+   ```
+   Set-ExecutionPolicy -ExecutionPolicy bypass -Force
+   ```
+
+   ![](../Images/Lab01-Task1-9.png)
+
+1. Run the **following command (1)** to login to your Azure account. Next, **minimize the VS Code window (2)** to view the login window opened in background.
+
+   ```
+   az login
+   ```
+
+   ![](../Images/lab06-t1p6.png)
+
+1. In the login window, select **Work or school account (1)** and click **Continue (2)**.
+
+   ![](../Images/Lab01-Task1-11.png)
+
+1. In the login window, kindly sign in using the provided **Azure credentials (1)** and click **Next (2)**.
+   - **Email/Username:** <inject key="AzureAdUserEmail"></inject>
+
+     ![](../Images/Lab01-Task1-12.png)
+
+1. Next, enter the provided **Password (1)** and click **Sign in (2)**.
+   - **Password:** <inject key="AzureAdUserPassword"></inject>
+
+     ![](../Images/Lab01-Task1-13.png)
+
+1. Next, select **No, this app only** and navigate back to VS Code to continue.
+
+   ![](../Images/Lab01-Task1-14.png)
+1. Answer the prompts to select your Azure account and subscription for the exercise.
+
+   ![](../Images/Lab01-Task1-15.png)
+
+   > **NOTE:** To confirm you're logged in to the correct Azure subscription, run **az account show**.
+
+## Task 2: Create resources in Azure
 
 1. Make sure you are in the root directory of the project and run the appropriate command in the terminal to launch the deployment script.
 
-    **Bash**
-    ```bash
-    bash azdeploy.sh
-    ```
+   **Bash**
 
-    **PowerShell**
-    ```powershell
-    ./azdeploy.ps1
-    ```
+   ```bash
+   MSYS_NO_PATHCONV=1 bash azdeploy.sh
+   ```
+
+   **PowerShell**
+
+   ```powershell
+   ./azdeploy.ps1
+   ```
+
+   ![](../Images/ai200-l12-8.png)
 
 1. When the script menu appears, enter **1** to launch the **Create PostgreSQL server with Entra authentication** option. This creates the server with Entra-only authentication enabled. **Note:** Deployment can take 5-10 minutes to complete.
 
+    ![](../Images/ai200-l12-9.png)
+
     >**IMPORTANT:** Leave the terminal running the deployment open for the duration of the exercise. You can move on to the next section of the exercise while the deployment continues in the terminal.
 
-## Complete the tool function app
+## Task 3: Complete the tool function app
 
 In this section you complete the *agent_tools.py* file by adding functions that an AI agent can call to persist and retrieve state. These functions serve as the agent's interface to the database. The *test_workflow.py* script, which you run later in this exercise, imports these functions to demonstrate how an agent would use them.
 
-1. Open the *agent-backend/agent_tools.py* file in VS Code.
+1. Open the **agent-backend/agent_tools.py** file in VS Code.
+
+    ![](../Images/ai200-l12-10.png)
 
 1. Search for the **BEGIN CREATE CONVERSATION FUNCTION** comment and add the following code directly after the comment. This function creates a new conversation record with a unique session ID and stores optional metadata as JSONB.
 
@@ -101,6 +166,8 @@ In this section you complete the *agent_tools.py* file by adding functions that 
                     "started_at": row[2].isoformat()
                 }
     ```
+
+     ![](../Images/ai200-l12-11.png)
 
 1. Search for the **BEGIN RETRIEVE CONVERSATION HISTORY FUNCTION** comment and add the following code directly after the comment. This function retrieves messages from a conversation, ordered chronologically.
 
@@ -132,6 +199,8 @@ In this section you complete the *agent_tools.py* file by adding functions that 
                 ]
     ```
 
+    ![](../Images/ai200-l12-12.png)
+
 1. Search for the **BEGIN TASK CHECKPOINT FUNCTIONS** comment and add the following code directly after the comment. This function uses an upsert pattern to save or update task state, allowing the agent to resume interrupted tasks.
 
     ```python
@@ -160,21 +229,31 @@ In this section you complete the *agent_tools.py* file by adding functions that 
                 }
     ```
 
-1. Save your changes to the *agent_tools.py* file.
+    ![](../Images/ai200-l12-13.png)
+
+1. Save your changes to the **agent_tools.py** file by using **Ctrl + S**.
 
 1. Take a few minutes to review all of the code in the app.
 
 Next, you finalize the Azure resource deployment.
 
-## Complete the Azure resource deployment
+## Task 4: Complete the Azure resource deployment
 
 In this section you return to the deployment script to configure the Microsoft Entra administrator and retrieve the connection information for the PostgreSQL server.
 
-1. When the **Create PostgreSQL server with Entra authentication** operation has completed, enter **2** to launch the **Configure Microsoft Entra administrator** option. This sets your Azure account as the database administrator.
+1. Go back to the terminal. When the **Create PostgreSQL server with Entra authentication** operation has completed, enter **2** to launch the **Configure Microsoft Entra administrator** option. This sets your Azure account as the database administrator.
+
+    ![](../Images/ai200-l12-14.png)
 
 1. When the previous operation completes, enter **3** to launch the **Check deployment status** option. This verifies the server is ready.
 
+    ![](../Images/ai200-l12-15.png)
+
 1. Enter **4** to launch the **Retrieve connection info and access token** option. This creates a file with the necessary environment variables.
+
+    ![](../Images/ai200-l12-16.png)
+    
+    ![](../Images/ai200-l12-17.png)
 
 1. Enter **5** to exit the deployment script.
 
@@ -196,7 +275,7 @@ In this section you return to the deployment script to configure the Microsoft E
 
 Next, you create the schema to support the agent.
 
-## Create the agent memory schema with **psql**
+## Task 5: Create the agent memory schema with **psql**
 
 In this section you connect to the PostgreSQL server using the **psql** command-line tool and create the database schema for agent memory. The schema includes three tables: one for conversations (agent sessions), one for messages within those conversations, and one for task checkpoints that enable the agent to resume interrupted work.
 
@@ -212,17 +291,24 @@ In this section you connect to the PostgreSQL server using the **psql** command-
     psql "host=$env:DB_HOST port=5432 dbname=$env:DB_NAME user=$env:DB_USER sslmode=require"
     ```
 
+    ![](../Images/ai200-l12-18.png)
+
 1. Run the following command to verify the connection by checking the PostgreSQL version.
 
     ```sql
     SELECT version();
     ```
+
+    ![](../Images/ai200-l12-19.png)
+
 1. Run the following command to create a database for the agent backend. The **\c** command connects to the new database.
 
     ```sql
     CREATE DATABASE agent_memory;
     \c agent_memory
     ```
+
+    ![](../Images/ai200-l12-20.png)
 
 1. Run the following command to create a table for conversations (agent sessions). This table stores session metadata and links messages to a specific conversation.
 
@@ -281,17 +367,17 @@ In this section you connect to the PostgreSQL server using the **psql** command-
     UNIQUE (conversation_id, task_name);
     ```
 
-1. Run the following command to verify the schema was created correctly.
+1. Run the following command to verify the schema was created correctly. You should see the three tables listed.
 
     ```sql
     \dt
     ```
 
-    You should see the three tables listed.
+    ![](../Images/ai200-l12-21.png)
 
 1. Enter `exit` to close the **psql** session and return to the terminal.
 
-## Test the agent memory workflow
+## Task 6: Test the agent memory workflow
 
 In this section you run a test script to verify the tool functions work correctly. The *test_workflow.py* script is included in the project files and demonstrates creating conversations, storing messages, and managing task checkpoints.
 
@@ -311,13 +397,15 @@ In this section you run a test script to verify the tool functions work correctl
 
     **Bash**
     ```bash
-    source .venv/bin/activate
+    source .venv/Scripts/activate
     ```
 
     **PowerShell**
     ```powershell
     .\.venv\Scripts\Activate.ps1
     ```
+
+    ![](../Images/ai200-l12-22.png)
 
 1. Run the following command to install the Python dependencies for the app. This installs the **psycopg** library for PostgreSQL connectivity and **azure-identity** for Microsoft Entra authentication.
 
@@ -333,9 +421,11 @@ In this section you run a test script to verify the tool functions work correctl
 
 1. You should see output showing each step completing successfully, demonstrating that the agent can create conversations, store messages, save task state, and retrieve history.
 
-1. Optional: Open the *test_workflow.py* file and review the code.
+    ![](../Images/ai200-l12-23.png)
 
-## Query conversation context
+1. Optional: Open the **test_workflow.py** file and review the code.
+
+## Task 7: Query conversation context
 
 In this section you practice querying the data an agent would use to make decisions.
 
@@ -361,6 +451,8 @@ In this section you practice querying the data an agent would use to make decisi
     WHERE user_id = 'user_123'
     ORDER BY started_at DESC;
     ```
+
+    ![](../Images/ai200-l12-24.png)
 
 1. Run the following query to get recent messages across all conversations. This returns the messages stored by the test script.
 
@@ -404,52 +496,3 @@ In this section you practice querying the data an agent would use to make decisi
 ## Summary
 
 In this exercise, you built a PostgreSQL-based tool backend for AI agents. You deployed an Azure Database for PostgreSQL Flexible Server with Microsoft Entra authentication, created Python functions that agents can call to manage conversations and task state, and designed a database schema with tables for conversations, messages, and task checkpoints. You tested the workflow by running a script that simulated agent operations, then queried the stored data using SQL. This pattern enables AI agents to maintain persistent memory across sessions and resume interrupted tasks.
-
-# Clean up resources
-
-Now that you finished the exercise, you should delete the cloud resources you created to avoid unnecessary resource usage.
-
-1. Run the following command in the VS Code terminal to delete the resource group, and all resources in the group. Replace **\<rg-name>** with the name you choose earlier in the exercise. The command will launch a background task in Azure to delete the resource group.
-
-    ```
-    az group delete --name <rg-name> --no-wait --yes
-    ```
-
-> **CAUTION:** Deleting a resource group deletes all resources contained within it. If you chose an existing resource group for this exercise, any existing resources outside the scope of this exercise will also be deleted.
-
-## Troubleshooting
-
-If you encounter issues during this exercise, try these steps:
-
-**psql connection fails**
-- Ensure the *.env* file was created by running the deployment script option **4**
-- Ensure you ran **source .env** (Bash) or **. .\.env.ps1** (PowerShell) to load environment variables
-- The access token expires after approximately one hour; run the deployment script option **4** again to generate a new token
-- Verify the server is ready by running the deployment script option **3**
-
-**Access denied or authentication errors**
-- Ensure the Microsoft Entra administrator was configured by running the deployment script option **2**
-- Verify **PGPASSWORD** is set correctly in your terminal session
-- Ensure you're using the correct **DB_USER** value (your Azure account email)
-
-**Python test script fails**
-- Ensure Python virtual environment is activated (you should see **(.venv)** in your terminal prompt)
-- Ensure dependencies are installed: **pip install -r requirements.txt**
-- Ensure you created the **agent_memory** database and all tables in **psql**
-- Ensure you added the unique constraint on **task_checkpoints** table
-
-**Database or table not found errors**
-- Ensure you connected to the **agent_memory** database using **\c agent_memory** in **psql**
-- Verify tables exist by running **\dt** in **psql**
-- Re-run the CREATE TABLE statements if tables are missing
-
-**Python venv activation issues**
-- On Linux/macOS, use: **source .venv/bin/activate**
-- On Windows PowerShell, use: **.\.venv\Scripts\Activate.ps1**
-- If **activate** script is missing, reinstall **python3-venv** package and recreate the venv
-
-### Summary
-
-
-
-## You have successfully completed the Hands-on Lab!
