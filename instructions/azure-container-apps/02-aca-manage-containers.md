@@ -502,7 +502,6 @@ In this task, you will use Log Analytics to review historical container logs and
     ```
     ![](../Images/Lab04-Task4-26b.png)
 
-
     **PowerShell**
     ```powershell
     az monitor log-analytics query -w $WORKSPACE_ID `
