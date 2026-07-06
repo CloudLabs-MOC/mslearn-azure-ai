@@ -87,6 +87,29 @@ In this section you download the project starter files and use a script to deplo
 
    ![](../Images/lab06-t1p6.png)
 
+1. In the login window, select **Work or school account (1)** and click **Continue (2)**.
+
+   ![](../Images/Lab01-Task1-11.png)
+
+1. In the login window, kindly sign in using the provided **Azure credentials (1)** and click **Next (2)**.
+   - **Email/Username:** <inject key="AzureAdUserEmail"></inject>
+
+     ![](../Images/Lab01-Task1-12.png)
+
+1. Next, enter the provided **Password (1)** and click **Sign in (2)**.
+   - **Password:** <inject key="AzureAdUserPassword"></inject>
+
+     ![](../Images/Lab01-Task1-13.png)
+
+1. Next, select **No, this app only** and navigate back to VS Code to continue.
+
+   ![](../Images/Lab01-Task1-14.png)
+1. Answer the prompts to select your Azure account and subscription for the exercise.
+
+   ![](../Images/Lab01-Task1-15.png)
+
+   > **NOTE:** To confirm you're logged in to the correct Azure subscription, run **az account show**.
+
 ## Task 2: Create resources in Azure
 
 1. Make sure you are in the root directory of the project and run the appropriate command in the terminal to launch the deployment script.
@@ -374,7 +397,7 @@ In this section you run a test script to verify the tool functions work correctl
 
     **Bash**
     ```bash
-    source .venv/bin/activate
+    source .venv/Scripts/activate
     ```
 
     **PowerShell**
@@ -400,7 +423,7 @@ In this section you run a test script to verify the tool functions work correctl
 
     ![](../Images/ai200-l12-23.png)
 
-1. Optional: Open the *test_workflow.py* file and review the code.
+1. Optional: Open the **test_workflow.py** file and review the code.
 
 ## Task 7: Query conversation context
 
