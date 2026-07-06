@@ -54,7 +54,7 @@ The lab architecture demonstrates ... :
  
 Once you're ready to dive in, your virtual machine and **Guide** will be right at your fingertips within your web browser.
  
-![Access Your VM and Lab Guide; pending](../Images/lab4-vm.png)
+![](../Images/Lab4-guidedtab.png)
 
 ## Virtual Machine & Lab Guide
  
@@ -64,7 +64,7 @@ Your virtual machine is your workhorse throughout the workshop. The lab guide is
  
 To get a better understanding of your lab resources and credentials, navigate to the **Environment** tab.
  
-![Explore Lab Resources; pending](../Images/envtab.png)
+![](../Images/Lab4-guidedtab2.png)
 
 ## Managing Your Virtual Machine
  
@@ -82,13 +82,13 @@ You can use the **Progress** tab to track your progress while working on the lab
  
 For convenience, you can open the lab guide in a separate window by selecting the **Split Window** button from the top right corner.
  
-![Use the Split Window Feature;pending](../Images/splitwindow.png)
+![Use the Split Window Feature;pending](../Images/lab07-splittab.png)
 
 ## Lab Guide Zoom In/Zoom Out
  
 To adjust the zoom level for the environment page, click the **A↕: 100%** icon located next to the timer in the lab environment.
 
-![pending](../Images/lab4-z.png)
+![pending](../Images/lab07-zoomtab.png)
 
 ## Let's Get Started with Azure Portal
  
