@@ -24,7 +24,7 @@ Before you begin, make sure you have access to the CloudLabs environment and you
 
 - Azure portal: <https://portal.azure.com>
 - Username: <inject key="AzureAdUserEmail"></inject>
-- Password: `<inject key="AzureAdUserPassword"></inject>`
+- Password: <inject key="AzureAdUserPassword"></inject>
 - Subscription: `<inject key="SubscriptionID"></inject>`
 - Tenant: `<inject key="TenantID"></inject>`
 - Deployment ID: **<inject key="DeploymentID" enableCopy="false"/>**
