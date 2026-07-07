@@ -133,6 +133,14 @@ In this section you run the deployment script to deploy the PostgreSQL server an
 
     >**IMPORTANT:** Leave the terminal running the deployment open for the duration of the exercise. You can move on to the next section of the exercise while the deployment continues in the terminal.
 
+> **Congratulations** on completing the task! Now, it's time to validate it. Here are the steps:
+>
+> - If you receive a success message, you can proceed to the next task.
+> - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
+> - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help you out.
+
+<validation step="3f94629b-44f2-409c-9abb-ed1a77303eda" />
+
 ## Task 3: Complete the client application
 
 In this section you complete the *app.py* file by adding route handlers that interact with the PostgreSQL database. These routes handle loading sample products, performing similarity searches, and adding new products. The Flask application provides a web interface for testing vector similarity search.
