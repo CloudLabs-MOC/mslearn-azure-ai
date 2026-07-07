@@ -1,6 +1,6 @@
 # Lab 21: Manage secrets with Azure Key Vault
 
-### Estimated Duration : 20 Minutes
+### Estimated Duration : 45 Minutes
 
 ## Overview
 
@@ -10,51 +10,102 @@ In this exercise, you deploy an Azure Key Vault pre-loaded with sample secrets a
 
 ## Lab Objectives
 
-- **Task 1:** Download the project starter files
-- **Task 2:** Create an Azure Key Vault and store sample secrets
-- **Task 3:** Add code to the starter files to complete the app
-- **Task 4:** Run the app to perform secret operations
+- **Task 1:** Prepare the environment
 
-## Download project starter files and deploy Azure Key Vault
+- **Task 2:** Complete the app
 
-In this section you download the starter files for the app and use a script to deploy an Azure Key Vault with sample secrets to your subscription.
+- **Task 3:** Configure the Python environment
 
-1. Open a browser and enter the following URL to download the starter file. The file will be saved in your default download location.
+- **Task 4:** Run the app
 
-    ```
-    https://github.com/MicrosoftLearning/mslearn-azure-ai/raw/main/downloads/python/key-vault-python.zip
-    ```
+## Task 1: Prepare the environment
 
-1. Copy, or move, the file to a location in your system where you want to work on the project. Then unzip the file into a folder.
+In this section you download the project starter files and use a script to deploy the necessary services to your Azure subscription. The PostgreSQL server deployment takes a few minutes to complete.
 
-1. Launch Visual Studio Code (VS Code) and select **File > Open Folder...** in the menu, then choose the folder containing the project files.
+1. Launch **Visual Studio Code** (VS Code) from desktop.
 
-1. The project contains deployment scripts for both Bash (*azdeploy.sh*) and PowerShell (*azdeploy.ps1*). Open the appropriate file for your environment and change the two values at the top of the script to meet your needs, then save your changes. **Note:** Do not change anything else in the script.
+   ![](../Images/vsimage.png)
 
-    ```
-    "<your-resource-group-name>" # Resource Group name
-    "<your-azure-region>" # Azure region for the resources
-    ```
+1. Select **File Explorer (1)**, then **Open Folder (2)** from the menu.
 
-1. In the menu bar select **Terminal > New Terminal** to open a terminal window in VS Code.
+   ![](../Images/folderimagea.png)
 
-1. Run the following command to login to your Azure account. Answer the prompts to select your Azure account and subscription for the exercise.
+1. Navigate to **C:\AllFiles (1)** and click **Select Folder (2)**.
 
-    ```
-    az login
-    ```
+   ![](../Images/ai200-l21-1.png)
 
-1. Run the following command to ensure your subscription has the necessary resource provider for the exercise.
+1. If you see the prompt, **Do you trust the authors of the files in this folder?**, click **Yes, I trust the authors**.
 
-    ```
-    az provider register --namespace Microsoft.KeyVault
-    ```
+   ![](../Images/Lab01-Task1-4.png)
+
+1. The project contains deployment scripts for both Bash (_azdeploy.sh_) and PowerShell (_azdeploy.ps1_). Open the appropriate file for your environment and change the two values: **Resource group name** as **<inject key="ResourceGroupName" enableCopy="false"/>** and **Azure Region** as **<inject key="Region" enableCopy="false"/>** at the top of the script to meet your needs.
+
+   ```
+   "<your-resource-group-name>" # Resource Group name
+   "<your-azure-region>" # Azure region for the resources
+   ```
+
+   ![](../Images/ai200-l21-2.png)
+
+   ![](../Images/ai200-l21-3.png)
+
+1. In the menu bar, select **File (1)** and select **Save All (2)** from drop-down.
+
+   ![](../Images/Lab01-Task1-7.png)
+
+1. In the menu bar, select **ellipsis (...) (1)**, then **Terminal (2)**, and then **New Terminal (3)** to open a terminal window in VS Code.
+
+   ![](../Images/ai200-l12-7.png)
+
+   > **NOTE:** If you are using Bash, after the terminal opens, click on the **+ (1)** icon to open a new terminal and select **Git Bash (2)** from the drop-down. If you are using PowerShell, skip this step.
+   
+   ![](../Images/lab06-t1p5.png)
+
+1. Run the following command in the terminal to allow PowerShell scripts to run. This command is only required if you are using PowerShell. If you are using Bash, skip this step.
+
+   ```
+   Set-ExecutionPolicy -ExecutionPolicy bypass -Force
+   ```
+
+   ![](../Images/Lab01-Task1-9.png)
+
+1. Run the **following command (1)** to login to your Azure account. Next, **minimize the VS Code window (2)** to view the login window opened in background.
+
+   ```
+   az login
+   ```
+
+   ![](../Images/lab06-t1p6.png)
+
+1. In the login window, select **Work or school account (1)** and click **Continue (2)**.
+
+   ![](../Images/Lab01-Task1-11.png)
+
+1. In the login window, kindly sign in using the provided **Azure credentials (1)** and click **Next (2)**.
+   - **Email/Username:** <inject key="AzureAdUserEmail"></inject>
+
+     ![](../Images/Lab01-Task1-12.png)
+
+1. Next, enter the provided **Password (1)** and click **Sign in (2)**.
+   - **Password:** <inject key="AzureAdUserPassword"></inject>
+
+     ![](../Images/Lab01-Task1-13.png)
+
+1. Next, select **No, this app only** and navigate back to VS Code to continue.
+
+   ![](../Images/Lab01-Task1-14.png)
+
+1. Answer the prompts to select your Azure account and subscription for the exercise.
+
+   ![](../Images/Lab01-Task1-15.png)
+
+   > **NOTE:** To confirm you're logged in to the correct Azure subscription, run **az account show**.
 
 1. Run the appropriate command in the terminal to launch the script.
 
     **Bash**
     ```bash
-    bash azdeploy.sh
+    MSYS_NO_PATHCONV=1 bash azdeploy.sh
     ```
 
     **PowerShell**
@@ -62,17 +113,29 @@ In this section you download the starter files for the app and use a script to d
     ./azdeploy.ps1
     ```
 
+    ![](../Images/ai200-l21-4.png)
+
 1. When the script is running, enter **1** to launch the **1. Create Key Vault** option.
+
+    ![](../Images/ai200-l21-5.png)
 
     This option creates the resource group if it doesn't already exist, and deploys an Azure Key Vault with RBAC authorization enabled. RBAC authorization is the recommended model for controlling access to vault secrets instead of legacy access policies.
 
 1. Enter **2** to run the **2. Assign role** option. This assigns the Key Vault Secrets Officer role to your account so you can read, create, update, and delete secrets using Microsoft Entra authentication.
 
+    ![](../Images/ai200-l21-6.png)
+
 1. Enter **3** to run the **3. Store secrets** option. This stores two sample secrets in the vault: an API key for a model endpoint (**openai-api-key**) and a database connection string (**cosmosdb-connection-string**). Both are tagged with metadata for environment and service identification.
+
+    ![](../Images/ai200-l21-7.png)
 
 1. Enter **4** to run the **4. Check deployment status** option. Verify the vault status shows **Succeeded**, the role is assigned, and the secrets are stored before continuing. If the vault is still provisioning, wait a moment and try again.
 
+    ![](../Images/ai200-l21-8.png)
+
 1. Enter **5** to run the **5. Retrieve connection info** option. This creates the environment variable file with the Key Vault URL needed by the app.
+
+    ![](../Images/ai200-l21-9.png)
 
 1. Enter **6** to exit the deployment script.
 
@@ -90,15 +153,17 @@ In this section you download the starter files for the app and use a script to d
 
     >**Note:** Keep the terminal open. If you close it and create a new terminal, you need to run this command again to reload the environment variables.
 
-## Complete the app
+## Task 2: Complete the app
 
 In this section you add code to the *keyvault_functions.py* file to complete the Key Vault secret management functions. The Flask app in *app.py* calls these functions and displays the results in the browser. You run the app later in the exercise.
 
 1. Open the *client/keyvault_functions.py* file to begin adding code.
 
+    ![](../Images/ai200-l21-10.png)
+
 >**Note:** The code blocks you add to the application should align with the comment for that section of the code.
 
-### Add code to retrieve secrets
+### Task 2.1: Add code to retrieve secrets
 
 In this section, you add code to retrieve two secrets from the vault and return their metadata. The function demonstrates how to access secret values, version identifiers, content types, creation dates, and custom tags.
 
@@ -152,9 +217,11 @@ The function calls **get_secret()** for each secret name, which returns both the
         return results
     ```
 
+    ![](../Images/ai200-l21-11.png)
+
 1. Take a few minutes to review the code.
 
-### Add code to list secret properties
+### Task 2.2: Add code to list secret properties
 
 In this section, you add code to list the properties of all secrets in the vault without retrieving their values. This follows the principle of least privilege by exposing only metadata such as name, enabled status, content type, and timestamps.
 
@@ -183,9 +250,11 @@ The function calls **list_properties_of_secrets()**, which returns an iterable o
         return results
     ```
 
+    ![](../Images/ai200-l21-12.png)
+
 1. Save your changes and take a few minutes to review the code.
 
-### Add code to create a new secret version
+### Task 2.3: Add code to create a new secret version
 
 In this section, you add code to create a new version of a secret, simulating a credential rotation. The function retrieves the current version, writes a new value with **set_secret()**, and then confirms the update by retrieving the secret again.
 
@@ -231,9 +300,11 @@ The function uses **set_secret()** to write a new value for an existing secret n
         }
     ```
 
+    ![](../Images/ai200-l21-13.png)
+
 1. Save your changes and take a few minutes to review the code.
 
-### Add code for cached secret retrieval
+### Task 2.4: Add code for cached secret retrieval
 
 In this section, you add code that implements a time-based cache to reduce the number of Key Vault API calls when secrets are accessed frequently. The cache stores secret values in memory with a configurable time-to-live (TTL) and tracks cache hits and misses.
 
@@ -290,9 +361,11 @@ The function creates a dictionary-based cache with a 30-second TTL using **time.
         }
     ```
 
+    ![](../Images/ai200-l21-14.png)
+
 1. Save your changes and take a few minutes to review the code.
 
-## Configure the Python environment
+## Task 3: Configure the Python environment
 
 In this section, you navigate to the client app directory, create the Python environment, and install the dependencies.
 
@@ -312,7 +385,7 @@ In this section, you navigate to the client app directory, create the Python env
 
     **Bash**
     ```bash
-    source .venv/bin/activate
+    source .venv/Scripts/activate
     ```
 
     **PowerShell**
@@ -320,13 +393,15 @@ In this section, you navigate to the client app directory, create the Python env
     .\.venv\Scripts\Activate.ps1
     ```
 
+    ![](../Images/ai200-l21-15.png)
+
 1. Run the following command in the VS Code terminal to install the dependencies.
 
     ```
     pip install -r requirements.txt
     ```
 
-## Run the app
+## task 4: Run the app
 
 In this section, you run the completed Flask application to perform various Key Vault secret management operations. The app provides a web interface that lets you retrieve secrets, list their properties, create new versions, and test cached retrieval.
 
@@ -336,64 +411,31 @@ In this section, you run the completed Flask application to perform various Key 
     python app.py
     ```
 
+    ![](../Images/ai200-l21-16.png)
+
 1. Open a browser and navigate to `http://localhost:5000` to access the app.
 
-1. Select **Retrieve Secrets** in the left panel. This retrieves the two secrets stored in the vault and displays their metadata in the right panel, including the secret name, a truncated value, version identifier, content type, creation date, and any custom tags. Both secrets should show a status of **retrieved**.
+    ![](../Images/ai200-l21-17.png)
+
+1. Select **Retrieve Secrets (1)** in the left panel. This retrieves the two secrets stored in the vault and displays their metadata in the right panel, including the secret name, a truncated value, version identifier, content type, creation date, and any custom tags. Both secrets should show a status of **retrieved (2)**.
+
+     ![](../Images/ai200-l21-18.png)
 
 1. Select **List Secret Properties**. This lists the properties of all secrets in the vault without exposing their values. The results show each secret's name, enabled status, content type, creation date, and last updated date. This operation is useful for inventory and audit scenarios.
 
+    ![](../Images/ai200-l21-19.png)
+
 1. Select **Create New Version**. This creates a new version of the **openai-api-key** secret with a randomly generated value, simulating a credential rotation. The results show the previous version and value alongside the new version and value, confirming that **set_secret()** creates a new version while preserving the old one.
+
+    ![](../Images/ai200-l21-20.png)
 
 1. Select **Retrieve Secrets** in the left panel to verify the secret was updated.
 
+    ![](../Images/ai200-l21-21.png)
+
 1. Select **Run Cached Retrieval**. This simulates five rounds of accessing both secrets with a 30-second TTL cache. The first round shows two cache misses (one per secret) as the values are fetched from Key Vault. The remaining rounds show cache hits because the TTL has not expired. The summary confirms that only 2 Key Vault API calls were made for 10 total accesses.
 
-## Clean up resources
-
-Now that you finished the exercise, you should delete the cloud resources you created to avoid unnecessary resource usage.
-
-1. Run the following command in the VS Code terminal to delete the resource group, and all resources in the group. Replace **\<rg-name>** with the name you choose earlier in the exercise. The command will launch a background task in Azure to delete the resource group.
-
-    ```
-    az group delete --name <rg-name> --no-wait --yes
-    ```
-
-> **CAUTION:** Deleting a resource group deletes all resources contained within it. If you chose an existing resource group for this exercise, any existing resources outside the scope of this exercise will also be deleted.
-
-## Troubleshooting
-
-If you encounter issues while completing this exercise, try the following troubleshooting steps:
-
-**Verify Azure Key Vault deployment**
-- Navigate to the [Azure portal](https://portal.azure.com) and locate your resource group.
-- Confirm that the Key Vault shows a **Provisioning State** of **Succeeded**.
-- Verify the vault has RBAC authorization enabled (not access policy mode).
-
-**Check secrets**
-- Run the deployment script's **Check deployment status** option to verify the secrets were stored successfully.
-- If secrets are missing, run the **Store secrets** option again.
-
-**Check code completeness and indentation**
-- Ensure all code blocks were added to the correct sections in *keyvault_functions.py* between the appropriate BEGIN/END comment markers.
-- Verify that Python indentation is consistent (use spaces, not tabs) and that all code aligns properly within functions.
-- Confirm that no code was accidentally removed or modified outside the designated sections.
-
-**Verify environment variables**
-- Check that the *.env* file exists in the project root and contains the **KEY_VAULT_URL** value.
-- Ensure you ran **source .env** (Bash) or **. .\.env.ps1** (PowerShell) to load environment variables into your terminal session.
-- If variables are empty, re-run **source .env** (Bash) or **. .\.env.ps1** (PowerShell).
-
-**Check authentication**
-- Confirm you are logged in to Azure CLI by running **az account show**.
-- Verify the Key Vault Secrets Officer role is assigned to your account by checking the role assignments in the Azure portal or running the deployment script's option to assign the role again.
-
-**Check Python environment and dependencies**
-- Confirm the virtual environment is activated before running the app.
-- Verify that all packages from *requirements.txt* were installed successfully by running **pip list**.
-
-
 ### Summary
-
 
 
 ## You have successfully completed the Hands-on Lab!
