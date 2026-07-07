@@ -296,7 +296,7 @@ In this section you complete the *app.py* file by adding route handlers that int
 
     ![](../Images/ai200-l13-12.png)
 
-1. Save your changes to the *app.py* file.
+1. Save your changes to the *app.py* file by using **Ctrl + S**.
 
 1. Take a few minutes to review all of the code in the app. Notice how each route uses the **get_connection()** function to connect to PostgreSQL with Microsoft Entra authentication, and how the **\<=>** operator performs cosine distance calculations for similarity search.
 
