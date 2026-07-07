@@ -1,6 +1,6 @@
 # Getting Started with your AI-200: Develop AI cloud solutions on Azure
 
-This course teaches developers how to create, monitor, and troubleshoot AI solutions on Microsoft Azure. Students will learn how to implement Azure compute and containerization patterns to host applications, build serverless APIs with Azure Functions, and integrate services using event‑driven and message‑based architectures such as Azure Service Bus and Event Grid. The course also covers working with Azure data services that support AI workloads, including designing and querying solutions with Cosmos DB for NoSQL, Azure Database for PostgreSQL with pgvector, and Azure Managed Redis for caching, streaming, and vector search. By the end of the course, developers will be able to connect services, orchestrate AI workflows, and build secure, scalable, and observable AI‑driven applications on Azure.
+Welcome to your AI-200: Develop AI cloud solutions on Azure workshop! In this lab, you will build a semantic search application with Azure Cosmos DB for NoSQL and use vector search to retrieve related support cases based on meaning.
 
 ## Lab 10: Build a semantic search application with Azure Cosmos DB for NoSQL
 
@@ -8,33 +8,36 @@ This course teaches developers how to create, monitor, and troubleshoot AI solut
 
 ## Overview
 
-In this hands-on lab,
+In this hands-on lab, you will deploy Azure Cosmos DB for NoSQL with vector search capability, create vector-enabled container indexing and embedding policies, and implement Python functions for semantic search. You will validate the solution using a Flask app that stores vector documents, performs similarity searches, and applies metadata filters.
 
 ## Objectives
 
 By the end of this lab, you will be able to:
 
-1.
+1. **Deploy Cosmos DB with vector search:** Provision a Cosmos DB for NoSQL account with the EnableNoSQLVectorSearch capability and create a vector-enabled container.
 
-2.
+2. **Implement semantic search functions:** Build Python functions that store document embeddings, execute vector similarity searches, and combine vector search with metadata filters.
 
-3.
+3. **Validate the semantic search app:** Use a Flask application and Cosmos DB queries to confirm that semantic search returns relevant results based on vector similarity.
 
 ## Pre-requisites
 
--
--
--
+- Basic understanding of Azure Cosmos DB, vector search, and document databases.
+- Experience using Python, Flask, and Azure CLI in PowerShell or Bash.
+- Access to an Azure subscription and the provided lab credentials.
+- Familiarity with Visual Studio Code and editing Python files.
 
 ## Architecture
 
-The lab architecture demonstrates ... :
+The lab architecture shows a semantic search application built on Azure Cosmos DB for NoSQL with vector search enabled. The solution stores support tickets as vector-embedded documents and uses Cosmos DB’s VectorDistance function to retrieve semantically similar documents.
 
-1.
+1. **Azure Cosmos DB for NoSQL:** Hosts the vector-enabled container for semantic document search.
 
-2.
+2. **Vector-enabled container:** Stores support tickets with embeddings and metadata for vector search.
 
-3.
+3. **Python semantic search functions:** Implement storage, similarity search, and filtered vector search operations.
+
+4. **Flask app:** Provides a UI to load sample data, execute semantic searches, and display results.
 
 ## Architecture Diagram
 
@@ -42,13 +45,13 @@ The lab architecture demonstrates ... :
 
 ## Explanation of Components
 
-1.
+1. **Azure Cosmos DB for NoSQL:** Provides a scalable low-latency store for vector and metadata documents.
 
-2.
+2. **Vector-enabled container:** Uses a vector embedding policy and diskANN index to support semantic search.
 
-3.
+3. **VectorDistance queries:** Compare query embeddings with stored document embeddings to rank results by similarity.
 
-4.
+4. **Flask application:** Loads sample data, triggers semantic searches, and displays related documents in the browser.
 
 ## Accessing Your Lab Environment
 

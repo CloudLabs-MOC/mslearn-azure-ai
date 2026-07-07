@@ -1,40 +1,40 @@
 # Getting Started with your AI-200: Develop AI cloud solutions on Azure
 
-This course teaches developers how to create, monitor, and troubleshoot AI solutions on Microsoft Azure. Students will learn how to implement Azure compute and containerization patterns to host applications, build serverless APIs with Azure Functions, and integrate services using event‑driven and message‑based architectures such as Azure Service Bus and Event Grid. The course also covers working with Azure data services that support AI workloads, including designing and querying solutions with Cosmos DB for NoSQL, Azure Database for PostgreSQL with pgvector, and Azure Managed Redis for caching, streaming, and vector search. By the end of the course, developers will be able to connect services, orchestrate AI workflows, and build secure, scalable, and observable AI‑driven applications on Azure.
+Welcome to your AI-200: Develop AI cloud solutions on Azure workshop! In this lab, you will identify and repair common Kubernetes deployment problems in Azure Kubernetes Service by using kubectl and live manifest edits.
 
-## Lab 08: Troubleshoot containers in Azure Kubernetes Service
+## Lab 08: Troubleshoot apps on Azure Kubernetes Service
 
 ### Overall Estimated Timing: 60 Minutes
 
 ## Overview
 
-In this hands-on lab,
+In this hands-on lab, you will deploy a containerized API to AKS, verify the running application, and troubleshoot issues such as service selector mismatches, CrashLoopBackOff restarts, and readiness probe failures. You will use kubectl to inspect pods, services, events, and logs, then edit live resources to restore application availability.
 
 ## Objectives
 
-By the end of this lab, you will be able to:
+1. **Deploy AKS infrastructure and application resources:** Provision Azure Container Registry and AKS resources, then deploy the containerized API using the provided scripts and manifests.
 
-1.
+2. **Inspect Kubernetes runtime behavior:** Use kubectl to examine pod status, service endpoints, events, and container logs in the target namespace.
 
-2.
-
-3.
+3. **Diagnose and resolve common issues:** Identify and fix configuration problems including Service selector mismatches, CrashLoopBackOff failures, and readiness probe misconfigurations.
 
 ## Pre-requisites
 
--
--
--
+- Basic familiarity with Kubernetes concepts such as pods, services, deployments, and namespaces.
+- Experience using Azure CLI, kubectl, and Visual Studio Code in PowerShell or Bash.
+- Access to an Azure subscription and the provided lab credentials.
 
 ## Architecture
 
-The lab architecture demonstrates ... :
+The lab architecture shows a containerized API deployed to Azure Kubernetes Service with resources organized in a dedicated troubleshooting namespace. The exercise demonstrates how AKS, ACR, Services, and Deployments work together, and how to diagnose issues using Kubernetes tools.
 
-1.
+1. **Azure Container Registry:** Stores the container image used by the AKS deployment.
 
-2.
+2. **Azure Kubernetes Service:** Hosts the application pods, manages networking, and runs the troubleshooting scenarios.
 
-3.
+3. **Kubernetes Service and Deployment:** Exposes the API and keeps pods running while the cluster is diagnosed.
+
+4. **Troubleshooting manifests:** Introduce misconfigurations that require kubectl inspection and live edits.
 
 ## Architecture Diagram
 
@@ -42,13 +42,13 @@ The lab architecture demonstrates ... :
 
 ## Explanation of Components
 
-1.
+1. **Azure Container Registry:** Holds the API image and makes it available for the AKS deployment.
 
-2.
+2. **Azure Kubernetes Service:** Runs the containerized API pods and manages cluster resources.
 
-3.
+3. **Kubernetes Service and Deployment:** Exposes the API to internal or external traffic and manages pod rollout and updates.
 
-4.
+4. **Troubleshooting manifests:** Provide sample errors and misconfigurations so you can practice debugging and fixing live Kubernetes resources.
 
 ## Accessing Your Lab Environment
 

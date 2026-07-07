@@ -1,54 +1,60 @@
 # Getting Started with your AI-200: Develop AI cloud solutions on Azure
  
-This course teaches developers how to create, monitor, and troubleshoot AI solutions on Microsoft Azure. Students will learn how to implement Azure compute and containerization patterns to host applications, build serverless APIs with Azure Functions, and integrate services using event‑driven and message‑based architectures such as Azure Service Bus and Event Grid. The course also covers working with Azure data services that support AI workloads, including designing and querying solutions with Cosmos DB for NoSQL, Azure Database for PostgreSQL with pgvector, and Azure Managed Redis for caching, streaming, and vector search. By the end of the course, developers will be able to connect services, orchestrate AI workflows, and build secure, scalable, and observable AI‑driven applications on Azure.
+Welcome to your AI-200: Develop AI cloud solutions on Azure workshop! In this lab, you will build a product similarity search application using Azure Database for PostgreSQL and the pgvector extension. You will deploy the database, create a vector-enabled schema, complete a Flask client app, and run similarity searches against product embeddings.
 
 ## Lab 13: Implement vector search with Azure Database for PostgreSQL
 
-### Overall Estimated Timing: 30 Minutes
+### Overall Estimated Timing: 60 Minutes
 
 ## Overview
 
-In this hands-on lab, 
+In this hands-on lab, you will provision Azure Database for PostgreSQL, enable the pgvector extension, create a products table with a vector embedding column, and implement a Flask web application that loads sample product data, performs similarity searches, and adds new products. You will validate the solution by querying the database and examining the similarity search results in the web app.
 
 ## Objectives
 
 By the end of this lab, you will be able to:
 
-1. 
+1. **Deploy PostgreSQL and enable pgvector:** Create an Azure Database for PostgreSQL server and configure the pgvector extension for vector storage.
 
-2. 
+2. **Create a vector-enabled schema:** Build a products table with a vector column and HNSW index to support efficient similarity queries.
 
-3. 
+3. **Implement a Flask client app:** Add routes that load sample data, perform vector similarity searches, and insert new products.
+
+4. **Validate semantic search results:** Run the Flask application and use the web interface to find similar products based on embeddings.
 
 ## Pre-requisites
 
--
--
--
-
-## Architecture
-
-The lab architecture demonstrates ... :
-
-1. 
-
-2. 
-
-3. 
+- Basic familiarity with relational databases and PostgreSQL.
+- Experience using Python, Flask, and Azure CLI.
+- Access to an Azure subscription and the provided lab credentials.
+- Familiarity with running terminal commands in PowerShell or Bash.
 
 ## Architecture Diagram
 
 ![pending](../Images/lab13-arch.png)
 
+## Architecture
+
+The lab architecture shows a vector search application built on Azure Database for PostgreSQL with pgvector. The backend stores product embeddings and performs similarity searches, while a Flask web app serves as the client interface.
+
+1. **Azure Database for PostgreSQL:** Hosts the managed PostgreSQL instance for storing products and embeddings.
+
+2. **pgvector extension:** Enables vector data types and similarity operators in PostgreSQL.
+
+3. **Products schema:** Uses a vector column to store embeddings and an HNSW index for fast similarity queries.
+
+4. **Flask application:** Provides a web interface to load products, find similar items, and add new products.
+
 ## Explanation of Components
 
-1. 
+1. **Azure Database for PostgreSQL:** Provides a secure, managed relational database with support for Entra authentication and vector extensions.
 
-2. 
+2. **pgvector extension:** Adds support for vector columns and similarity operators like cosine distance, enabling semantic search.
 
-3. 
+3. **Products table:** Stores product details and 384-dimensional embeddings used to compute similarity.
 
-4. 
+4. **Flask client app:** Connects to PostgreSQL, loads sample data, executes vector search queries, and displays results in the browser.
+
 
 ## Accessing Your Lab Environment
  
@@ -64,7 +70,7 @@ Your virtual machine is your workhorse throughout the workshop. The lab guide is
  
 To get a better understanding of your lab resources and credentials, navigate to the **Environment** tab.
  
-![Explore Lab Resources; pending](../Images/envtab.png)
+![Explore Lab Resources; pending](../Images/lab07-envtab.png)
 
 ## Managing Your Virtual Machine
  
@@ -82,13 +88,13 @@ You can use the **Progress** tab to track your progress while working on the lab
  
 For convenience, you can open the lab guide in a separate window by selecting the **Split Window** button from the top right corner.
  
-![Use the Split Window Feature;pending](../Images/splitwindow.png)
+![Use the Split Window Feature;pending](../Images/lab07-splittab.png)
 
 ## Lab Guide Zoom In/Zoom Out
  
 To adjust the zoom level for the environment page, click the **A↕: 100%** icon located next to the timer in the lab environment.
 
-![pending](../Images/lab13-z.png)
+![pending](../Images/lab07-zoomtab.png)
 
 ## Let's Get Started with Azure Portal
  
@@ -112,7 +118,7 @@ To adjust the zoom level for the environment page, click the **A↕: 100%** icon
 
 1. If a **Welcome to Microsoft Azure** pop-up window appears, simply click **Maybe later** to skip the tour.
 
-    ![](../Images/lab13-w.png)
+    ![](../Images/maybelater.png)
 
 
 ## Support Contact

@@ -1,40 +1,46 @@
 # Getting Started with your AI-200: Develop AI cloud solutions on Azure
 
-This course teaches developers how to create, monitor, and troubleshoot AI solutions on Microsoft Azure. Students will learn how to implement Azure compute and containerization patterns to host applications, build serverless APIs with Azure Functions, and integrate services using event‑driven and message‑based architectures such as Azure Service Bus and Event Grid. The course also covers working with Azure data services that support AI workloads, including designing and querying solutions with Cosmos DB for NoSQL, Azure Database for PostgreSQL with pgvector, and Azure Managed Redis for caching, streaming, and vector search. By the end of the course, developers will be able to connect services, orchestrate AI workflows, and build secure, scalable, and observable AI‑driven applications on Azure.
+Welcome to your AI-200: Develop AI cloud solutions on Azure workshop! We’re excited to guide you through hands-on learning with Azure cloud infrastructure using Azure Container Registry, Azure App Service, managed identity, and diagnostic logging. In this lab, you will build, deploy, and validate a secure containerized application that demonstrates how Azure services work together to host and run modern cloud-native apps.
 
-## Lab 02: Build and manage a container image with App Service
+## Lab 02: Deploy a container to Azure App Service
 
 ### Overall Estimated Timing: 60 Minutes
 
 ## Overview
 
-In this hands-on lab,
+In this lab, you will deploy a containerized application to Azure App Service by using a private Azure Container Registry (ACR). You will create an ACR, build and store a container image, and deploy it to a Linux Web App. You will also configure a system-assigned managed identity with the **AcrPull** role to securely access the private registry. Finally, you will configure the application, enable logging, and verify the deployment by testing the application and reviewing its logs.
 
 ## Objectives
 
-By the end of this lab, you will be able to:
+1. **Deploy Azure Container Registry and App Service infrastructure:** Create and configure an ACR instance and an App Service plan for Linux container hosting.
 
-1.
+2. **Configure a secure container deployment:** Create a Web App for Containers, enable a system-assigned managed identity, and assign the **AcrPull** role for secure registry access.
 
-2.
+3. **Enable runtime settings and logging:** Configure container app settings, enable container logging, and validate the deployed application using browser and API tests.
 
-3.
+4. **Verify deployment and troubleshoot:** Stream container logs, inspect the diagnostic console, and review application settings to confirm the app is running correctly.
 
 ## Pre-requisites
 
--
--
--
+- Basic knowledge of Azure services, App Service, and containerization concepts.
+
+- Familiarity with Azure CLI and terminal commands (PowerShell or Bash).
+
+- Access to an Azure subscription and the provided lab credentials.
+
+- Experience using Visual Studio Code and navigating Azure portal resources.
 
 ## Architecture
 
-The lab architecture demonstrates ... :
+This lab architecture demonstrates a secure container deployment workflow that uses Azure Container Registry, App Service, managed identity, and App Service logging to run a containerized app in Azure.
 
-1.
+1. **Azure Container Registry:** Stores the container image that the web app deploys from a private registry.
 
-2.
+2. **Azure App Service Plan:** Provides the Linux compute environment for running the web app container.
 
-3.
+3. **Web App for Containers:** Hosts the containerized application and pulls the image from the private registry.
+
+4. **Managed Identity + AcrPull:** Enables secure registry authentication without storing credentials in app settings.
 
 ## Architecture Diagram
 
@@ -42,13 +48,13 @@ The lab architecture demonstrates ... :
 
 ## Explanation of Components
 
-1.
+1. **Azure Container Registry:** Holds the built application image and serves it securely to Azure App Service.
 
-2.
+2. **App Service Plan:** Supplies the compute resources and scaling tier for the Linux web app.
 
-3.
+3. **Web App for Containers:** Runs the container image, exposes the app endpoint, and supports container settings.
 
-4.
+4. **Managed Identity with AcrPull:** Grants the web app least-privilege access to pull images from the private ACR.
 
 ## Accessing Your Lab Environment
 
@@ -64,7 +70,7 @@ Your virtual machine is your workhorse throughout the workshop. The lab guide is
 
 To get a better understanding of your lab resources and credentials, navigate to the **Environment** tab.
 
-![Explore Lab Resources; pending](../Images/envtab.png)
+![Explore Lab Resources; pending](../Images/lab07-envtab.png)
 
 ## Managing Your Virtual Machine
 
@@ -82,13 +88,13 @@ You can use the **Progress** tab to track your progress while working on the lab
 
 For convenience, you can open the lab guide in a separate window by selecting the **Split Window** button from the top right corner.
 
-![Use the Split Window Feature;pending](../Images/splitwindow.png)
+![Use the Split Window Feature;pending](../Images/lab07-splittab.png)
 
 ## Lab Guide Zoom In/Zoom Out
 
 To adjust the zoom level for the environment page, click the **A↕: 100%** icon located next to the timer in the lab environment.
 
-![pending](../Images/lab2-z.png)
+![pending](../Images/lab07-zoomtab.png)
 
 ## Let's Get Started with Azure Portal
 

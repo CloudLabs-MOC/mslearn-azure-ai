@@ -1,40 +1,46 @@
 # Getting Started with your AI-200: Develop AI cloud solutions on Azure
 
-This course teaches developers how to create, monitor, and troubleshoot AI solutions on Microsoft Azure. Students will learn how to implement Azure compute and containerization patterns to host applications, build serverless APIs with Azure Functions, and integrate services using event‑driven and message‑based architectures such as Azure Service Bus and Event Grid. The course also covers working with Azure data services that support AI workloads, including designing and querying solutions with Cosmos DB for NoSQL, Azure Database for PostgreSQL with pgvector, and Azure Managed Redis for caching, streaming, and vector search. By the end of the course, developers will be able to connect services, orchestrate AI workflows, and build secure, scalable, and observable AI‑driven applications on Azure.
+Welcome to your AI-200: Develop AI cloud solutions on Azure workshop! In this lab, you will deploy an AI inference API to Azure Kubernetes Service (AKS) using Azure Container Registry, Microsoft Foundry, and Kubernetes manifest configuration.
 
-## Lab 06: Deploy containers to Azure Kubernetes Service
+## Lab 06: Deploy an AI inference API to Azure Kubernetes Service
 
 ### Overall Estimated Timing: 60 Minutes
 
 ## Overview
 
-In this hands-on lab,
+In this hands-on lab, you will provision Microsoft Foundry model resources, Azure Container Registry, and an AKS cluster. You will complete Kubernetes deployment and service manifests with container specifications, health probes, resource limits, and load balancing. Finally, you will deploy the API to AKS and validate it using a Python client application that exercises health, readiness, and inference endpoints.
 
 ## Objectives
 
-By the end of this lab, you will be able to:
+1. **Deploy Azure resources for AI inference:** Provision a Microsoft Foundry model, Azure Container Registry, and Azure Kubernetes Service cluster.
 
-1.
+2. **Configure AKS deployment manifests:** Complete and apply Kubernetes deployment and service YAML files that define containers, probes, resources, and load balancing.
 
-2.
+3. **Validate containerized AI inference:** Use a Python client app to test health checks, readiness, and AI inference requests against the deployed AKS service.
 
-3.
+4. **Use Azure CLI for deployment tasks:** Run the deployment script and CLI commands to build images, configure AKS access, and verify resource deployment.
 
 ## Pre-requisites
 
--
--
--
+- Basic knowledge of Azure Kubernetes Service (AKS), container images, and Kubernetes manifests.
+
+- Familiarity with Azure CLI commands and terminal usage in PowerShell or Bash.
+
+- Access to an Azure subscription and the provided lab credentials.
+
+- Experience with Visual Studio Code and editing YAML configuration files.
 
 ## Architecture
 
-The lab architecture demonstrates ... :
+The lab architecture shows a containerized AI inference API deployed to AKS. The application uses Azure Container Registry to store the image, Microsoft Foundry for AI model inference, and Kubernetes resources to expose the API with health and readiness checks.
 
-1.
+1. **Microsoft Foundry model:** Provides the AI inference model used by the deployed API.
 
-2.
+2. **Azure Container Registry:** Stores the container image built for the API.
 
-3.
+3. **Azure Kubernetes Service:** Hosts the containerized API using Kubernetes deployment and service resources.
+
+4. **Kubernetes manifests:** Define container ports, probes, resource limits, and load balancer configuration for the AKS service.
 
 ## Architecture Diagram
 
@@ -42,13 +48,13 @@ The lab architecture demonstrates ... :
 
 ## Explanation of Components
 
-1.
+1. **Microsoft Foundry model:** Hosts the AI model endpoint used by the API to perform inference.
 
-2.
+2. **Azure Container Registry:** Stores and serves the Docker image for the AKS deployment.
 
-3.
+3. **AKS Deployment:** Runs the container replicas and defines the runtime environment for the API.
 
-4.
+4. **AKS Service:** Exposes the application externally and provides load balancing to route traffic to healthy pods.
 
 ## Accessing Your Lab Environment
 

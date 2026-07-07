@@ -28,7 +28,7 @@ In this task, you'll prepare the deployment environment, configure the deploymen
 
    ![](../Images/Lab01-Task1-1.png)
 
-1. Select **File Explorer (1)** from left panel. Click **Open Folder** in the menu.
+1. Select **File Explorer (1)** from left panel. Click **Open Folder (2)** in the menu.
 
    ![](../Images/Lab01-Task1-2.png)
 

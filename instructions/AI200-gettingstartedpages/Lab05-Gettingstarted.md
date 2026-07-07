@@ -1,40 +1,48 @@
 # Getting Started with your AI-200: Develop AI cloud solutions on Azure
  
-This course teaches developers how to create, monitor, and troubleshoot AI solutions on Microsoft Azure. Students will learn how to implement Azure compute and containerization patterns to host applications, build serverless APIs with Azure Functions, and integrate services using event‑driven and message‑based architectures such as Azure Service Bus and Event Grid. The course also covers working with Azure data services that support AI workloads, including designing and querying solutions with Cosmos DB for NoSQL, Azure Database for PostgreSQL with pgvector, and Azure Managed Redis for caching, streaming, and vector search. By the end of the course, developers will be able to connect services, orchestrate AI workflows, and build secure, scalable, and observable AI‑driven applications on Azure.
+Welcome to your AI-200: Develop AI cloud solutions on Azure workshop! In this lab, you will learn how to configure autoscaling for a containerized application in Azure Container Apps using KEDA HTTP concurrency triggers, resource scaling rules, and YAML-based configuration management.
 
-## Lab 05: Scale containers in Azure Container Apps
+## Lab 05: Configure autoscaling using KEDA triggers
 
-### Overall Estimated Timing: 30 Minutes
+### Overall Estimated Timing: 60 Minutes
 
 ## Overview
 
-In this hands-on lab, 
+In this hands-on lab, you will create Azure Container Apps infrastructure, deploy a mock backend API, and configure autoscaling rules that allow the app to scale out when demand increases and scale in when traffic decreases. You will also generate load to observe scaling behavior in real time and update the scaling configuration using YAML for more repeatable management.
 
 ## Objectives
 
 By the end of this lab, you will be able to:
 
-1. 
+1. **Deploy Azure Container Apps resources:** Create an Azure Container Registry and Container Apps environment to host the containerized API.
 
-2. 
+2. **Configure KEDA-based autoscaling:** Apply HTTP concurrency scale rules so the app automatically scales based on incoming request load.
 
-3. 
+3. **Validate scaling behavior:** Generate traffic to observe replica changes and verify that the app scales correctly.
+
+4. **Use YAML to manage scale configuration:** Export and update the Container App configuration in YAML, then apply the updated policy.
 
 ## Pre-requisites
 
--
--
--
+- Basic understanding of Azure Container Apps, scaling concepts, and container deployment.
+
+- Familiarity with Azure CLI commands and terminal usage in PowerShell or Bash.
+
+- Access to an Azure subscription and the provided lab credentials.
+
+- Experience with Visual Studio Code and editing configuration files.
 
 ## Architecture
 
-The lab architecture demonstrates ... :
+The lab architecture shows a containerized backend API deployed to Azure Container Apps with KEDA-based autoscaling rules and a private Azure Container Registry. The app uses HTTP concurrency rules to scale replicas up and down based on real-time request traffic.
 
-1. 
+1. **Azure Container Registry:** Stores the container image used by the Container App.
 
-2. 
+2. **Container Apps environment:** Hosts the Container App and provides networking, ingress, and scaling support.
 
-3. 
+3. **Container App:** Runs the backend API and is configured with HTTP concurrency-based scale rules.
+
+4. **KEDA scale rules:** Automatically adjust replica count based on app request concurrency and load.
 
 ## Architecture Diagram
 
@@ -42,13 +50,13 @@ The lab architecture demonstrates ... :
 
 ## Explanation of Components
 
-1. 
+1. **Azure Container Registry:** Holds the application image and provides secure storage for deployment.
 
-2. 
+2. **Container Apps environment:** Provides the runtime boundary, ingress, and logging for the containerized app.
 
-3. 
+3. **Container App:** Runs the backend API container and exposes it through external ingress.
 
-4. 
+4. **KEDA scale rules:** Monitor HTTP concurrency and scale the app replicas to match traffic demand.
 
 ## Accessing Your Lab Environment
  

@@ -1,40 +1,50 @@
 # Getting Started with your AI-200: Develop AI cloud solutions on Azure
 
-This course teaches developers how to create, monitor, and troubleshoot AI solutions on Microsoft Azure. Students will learn how to implement Azure compute and containerization patterns to host applications, build serverless APIs with Azure Functions, and integrate services using event‑driven and message‑based architectures such as Azure Service Bus and Event Grid. The course also covers working with Azure data services that support AI workloads, including designing and querying solutions with Cosmos DB for NoSQL, Azure Database for PostgreSQL with pgvector, and Azure Managed Redis for caching, streaming, and vector search. By the end of the course, developers will be able to connect services, orchestrate AI workflows, and build secure, scalable, and observable AI‑driven applications on Azure.
+Welcome to your AI-200: Develop AI cloud solutions on Azure workshop! In this lab, you will troubleshoot a failing Azure Container Apps deployment and restore a containerized backend API using Azure CLI diagnostics, application logs, and revision inspection.
 
-## Lab 04: Manage containers in Azure Container Apps
+## Lab 04: Diagnose and fix a failing deployment
 
 ### Overall Estimated Timing: 60 Minutes
 
 ## Overview
 
-In this hands-on lab,
+In this hands-on lab, you will investigate a failing Azure Container Apps deployment by reviewing revision status, checking container logs, and validating application configuration. You will diagnose issues caused by missing environment variables and incorrect ingress settings, apply configuration fixes, and verify that the backend API is healthy and responding correctly.
 
 ## Objectives
 
 By the end of this lab, you will be able to:
 
-1.
+1. **Deploy supporting container infrastructure:** Create an Azure Container Registry and Container Apps environment to host the workload.
 
-2.
+2. **Diagnose configuration failures:** Identify missing environment variables and ingress mismatch issues using Azure CLI and API endpoint checks.
 
-3.
+3. **Use container logs for root cause analysis:** Review Container Apps logs and revision information to isolate and troubleshoot app failures.
+
+4. **Restore application health:** Apply fixes to the deployment configuration and confirm the app is accessible and working as expected.
+
+5. **Inspect historical troubleshooting data:** Query Log Analytics to investigate past errors and understand issues that occurred before the current app revision.
 
 ## Pre-requisites
 
--
--
--
+- Basic knowledge of Azure Container Apps, Azure Container Registry, and container-based application deployment.
+
+- Familiarity with Azure CLI and terminal commands in PowerShell or Bash.
+
+- Access to an Azure subscription and the provided lab credentials.
+
+- Experience using Visual Studio Code and understanding of environment variables and app configuration.
 
 ## Architecture
 
-The lab architecture demonstrates ... :
+This lab architecture illustrates a containerized backend API deployed to Azure Container Apps with a private Azure Container Registry and diagnostic logging. The app uses environment variables and ingress configuration to control runtime behavior, while Log Analytics stores historical logs for troubleshooting.
 
-1.
+1. **Azure Container Registry:** Stores the container image for the backend application in a private registry.
 
-2.
+2. **Container Apps environment:** Hosts the Container App and provides the runtime boundary for the deployment.
 
-3.
+3. **Container App:** Runs the backend API container, exposes external ingress, and consumes environment variables to configure app behavior.
+
+4. **Log Analytics:** Captures container logs and diagnostic data to help troubleshoot deployment and runtime issues.
 
 ## Architecture Diagram
 
@@ -42,13 +52,13 @@ The lab architecture demonstrates ... :
 
 ## Explanation of Components
 
-1.
+1. **Azure Container Registry:** Holds the built application image and serves it securely to Azure Container Apps.
 
-2.
+2. **Container Apps environment:** Provides the hosting environment and networking boundary for the container app.
 
-3.
+3. **Container App:** Runs the backend API, exposes the app endpoint, and applies environment variable configuration.
 
-4.
+4. **Log Analytics workspace:** Stores logs and telemetry from the container app for historical troubleshooting and diagnostics.
 
 ## Accessing Your Lab Environment
 

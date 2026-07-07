@@ -232,7 +232,7 @@ In this task, you will deploy an Azure Container Registry and a Container Apps e
 > - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
 > - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help you out.
 
-<validation step="" />
+<validation step="ab6a4d60-579f-407a-b953-1312c561f236" />
 
 ## Task 2: Diagnose a missing environment variable error
 

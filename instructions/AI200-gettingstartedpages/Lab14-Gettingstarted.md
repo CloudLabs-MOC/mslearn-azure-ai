@@ -1,40 +1,45 @@
 # Getting Started with your AI-200: Develop AI cloud solutions on Azure
  
-This course teaches developers how to create, monitor, and troubleshoot AI solutions on Microsoft Azure. Students will learn how to implement Azure compute and containerization patterns to host applications, build serverless APIs with Azure Functions, and integrate services using event‑driven and message‑based architectures such as Azure Service Bus and Event Grid. The course also covers working with Azure data services that support AI workloads, including designing and querying solutions with Cosmos DB for NoSQL, Azure Database for PostgreSQL with pgvector, and Azure Managed Redis for caching, streaming, and vector search. By the end of the course, developers will be able to connect services, orchestrate AI workflows, and build secure, scalable, and observable AI‑driven applications on Azure.
+Welcome to your AI-200: Develop AI cloud solutions on Azure workshop! In this lab, you will optimize vector search performance in Azure Database for PostgreSQL by building large-scale vector datasets, testing baseline query performance, and comparing IVFFlat and HNSW index strategies.
 
 ## Lab 14: Optimize vector search with Azure Database for PostgreSQL
 
-### Overall Estimated Timing: 30 Minutes
+### Overall Estimated Timing: 60 Minutes
 
 ## Overview
 
-In this hands-on lab, 
+In this hands-on lab, you will deploy an Azure Database for PostgreSQL instance, create vector-enabled tables for test data, and measure similarity search performance. You will test baseline queries without indexes, then create and compare IVFFlat and HNSW indexes, and tune search parameters to find the best balance of speed and accuracy.
 
 ## Objectives
 
 By the end of this lab, you will be able to:
 
-1. 
+1. **Deploy PostgreSQL for vector search:** Provision Azure Database for PostgreSQL and configure Microsoft Entra authentication.
 
-2. 
+2. **Create vector search schema and test data:** Build tables with vector embeddings and generate a large dataset for performance testing.
 
-3. 
+3. **Compare vector index strategies:** Create IVFFlat and HNSW indexes, measure query performance, and tune index parameters.
+
+4. **Optimize filtered similarity queries:** Add metadata indexes and evaluate combined vector plus filter queries for production scenarios.
 
 ## Pre-requisites
 
--
--
--
+- Basic familiarity with PostgreSQL and relational database concepts.
+- Experience using Python, Azure CLI, and Visual Studio Code.
+- Access to an Azure subscription and the provided lab credentials.
+- Familiarity with running commands in PowerShell or Bash.
 
 ## Architecture
 
-The lab architecture demonstrates ... :
+The lab architecture shows a vector search workload running on Azure Database for PostgreSQL with pgvector. The backend stores high-dimensional embeddings and uses specialized indexes to optimize semantic search over large datasets.
 
-1. 
+1. **Azure Database for PostgreSQL:** Hosts the managed relational database and vector extension.
 
-2. 
+2. **pgvector-enabled tables:** Store product or test embeddings in a vector column for similarity search.
 
-3. 
+3. **IVFFlat and HNSW indexes:** Provide alternate vector indexing strategies with different performance and recall trade-offs.
+
+4. **Performance testing queries:** Compare baseline scans with indexed searches and tune parameters for production workloads.
 
 ## Architecture Diagram
 
@@ -42,13 +47,13 @@ The lab architecture demonstrates ... :
 
 ## Explanation of Components
 
-1. 
+1. **Azure Database for PostgreSQL:** Provides a managed relational database platform for storing high-dimensional vector embeddings and running similarity search queries.
 
-2. 
+2. **pgvector extension:** Adds native vector data types and similarity operators to PostgreSQL, enabling semantic search over embedding data.
 
-3. 
+3. **IVFFlat and HNSW indexes:** Offer alternative index strategies for vector search, allowing you to compare trade-offs between build time, query latency, and recall.
 
-4. 
+4. **Performance testing queries:** Measure baseline search performance, compare index results, and tune parameters such as probes and ef_search for real-world workloads.
 
 ## Accessing Your Lab Environment
  
@@ -64,7 +69,7 @@ Your virtual machine is your workhorse throughout the workshop. The lab guide is
  
 To get a better understanding of your lab resources and credentials, navigate to the **Environment** tab.
  
-![Explore Lab Resources; pending](../Images/envtab.png)
+![Explore Lab Resources; pending](../Images/lab07-envtab.png)
 
 ## Managing Your Virtual Machine
  
@@ -82,13 +87,13 @@ You can use the **Progress** tab to track your progress while working on the lab
  
 For convenience, you can open the lab guide in a separate window by selecting the **Split Window** button from the top right corner.
  
-![Use the Split Window Feature;pending](../Images/splitwindow.png)
+![Use the Split Window Feature;pending](../Images/lab07-splittab.png)
 
 ## Lab Guide Zoom In/Zoom Out
  
 To adjust the zoom level for the environment page, click the **A↕: 100%** icon located next to the timer in the lab environment.
 
-![pending](../Images/lab14-z.png)
+![pending](../Images/lab07-zoomtab.png)
 
 ## Let's Get Started with Azure Portal
  
@@ -112,7 +117,7 @@ To adjust the zoom level for the environment page, click the **A↕: 100%** icon
 
 1. If a **Welcome to Microsoft Azure** pop-up window appears, simply click **Maybe later** to skip the tour.
 
-    ![](../Images/lab14-w.png)
+    ![](../Images/maybelater.png)
 
 
 ## Support Contact

@@ -1,6 +1,6 @@
 # Getting Started with your AI-200: Develop AI cloud solutions on Azure
 
-This course teaches developers how to create, monitor, and troubleshoot AI solutions on Microsoft Azure. Students will learn how to implement Azure compute and containerization patterns to host applications, build serverless APIs with Azure Functions, and integrate services using event‑driven and message‑based architectures such as Azure Service Bus and Event Grid. The course also covers working with Azure data services that support AI workloads, including designing and querying solutions with Cosmos DB for NoSQL, Azure Database for PostgreSQL with pgvector, and Azure Managed Redis for caching, streaming, and vector search. By the end of the course, developers will be able to connect services, orchestrate AI workflows, and build secure, scalable, and observable AI‑driven applications on Azure.
+Welcome to your AI-200: Develop AI cloud solutions on Azure workshop! In this lab, you will compare vector indexing strategies to optimize semantic search performance in Azure Cosmos DB for NoSQL.
 
 ## Lab 11: Optimize query performance with vector indexes on Azure Cosmos DB for NoSQL
 
@@ -8,33 +8,36 @@ This course teaches developers how to create, monitor, and troubleshoot AI solut
 
 ## Overview
 
-In this hands-on lab,
+In this hands-on lab, you will deploy a vector-enabled Cosmos DB container, create and compare containers with flat, quantizedFlat, and diskANN indexes, and run semantic search queries to measure Request Unit (RU) consumption and execution latency. This exercise helps you understand the trade-offs between exact and approximate vector indexing strategies.
 
 ## Objectives
 
 By the end of this lab, you will be able to:
 
-1.
+1. **Deploy Cosmos DB vector containers:** Provision an Azure Cosmos DB for NoSQL account with the EnableNoSQLVectorSearch capability and create containers with different vector index types.
 
-2.
+2. **Implement comparative search functions:** Build Python functions that execute the same vector query against flat, quantizedFlat, and diskANN containers while tracking RU usage and execution time.
 
-3.
+3. **Analyze index performance:** Compare search results, RU charges, and query latency to choose the right index strategy for semantic search scenarios.
 
 ## Pre-requisites
 
--
--
--
+- Basic understanding of Azure Cosmos DB, vector search, and index configuration.
+- Experience using Python, Flask, and Azure CLI in PowerShell or Bash.
+- Access to an Azure subscription and the provided lab credentials.
+- Familiarity with Visual Studio Code and editing Python files.
 
 ## Architecture
 
-The lab architecture demonstrates ... :
+The lab architecture shows a semantic search solution using Azure Cosmos DB for NoSQL with three vector-enabled containers. Each container uses a different index type to store the same set of vector embeddings, allowing you to compare how index strategy affects search performance and cost.
 
-1.
+1. **Azure Cosmos DB for NoSQL:** Hosts the vector-enabled containers and executes semantic search queries.
 
-2.
+2. **Vector-enabled containers:** Store identical document embeddings using different index types for performance comparison.
 
-3.
+3. **Vector index policies:** Control whether the container uses flat, quantizedFlat, or diskANN indexing for vector search.
+
+4. **Flask application:** Loads sample data, executes comparative searches, and displays RU and timing results.
 
 ## Architecture Diagram
 
@@ -42,13 +45,13 @@ The lab architecture demonstrates ... :
 
 ## Explanation of Components
 
-1.
+1. **Azure Cosmos DB for NoSQL:** Provides the backend document database and vector search capability for semantic queries.
 
-2.
+2. **Vector-enabled containers:** Store support ticket documents with embedding vectors and metadata, using different index types for comparison.
 
-3.
+3. **Index type comparison:** Flat delivers exact search results, quantizedFlat optimizes memory and cost, and diskANN provides approximate search with the best RU efficiency.
 
-4.
+4. **Performance comparison app:** The Flask app loads data, runs the same query on each container, and shows RU consumption and query execution time.
 
 ## Accessing Your Lab Environment
 

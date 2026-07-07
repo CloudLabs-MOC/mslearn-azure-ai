@@ -1,40 +1,43 @@
 # Getting Started with your AI-200: Develop AI cloud solutions on Azure
  
-This course teaches developers how to create, monitor, and troubleshoot AI solutions on Microsoft Azure. Students will learn how to implement Azure compute and containerization patterns to host applications, build serverless APIs with Azure Functions, and integrate services using event‑driven and message‑based architectures such as Azure Service Bus and Event Grid. The course also covers working with Azure data services that support AI workloads, including designing and querying solutions with Cosmos DB for NoSQL, Azure Database for PostgreSQL with pgvector, and Azure Managed Redis for caching, streaming, and vector search. By the end of the course, developers will be able to connect services, orchestrate AI workflows, and build secure, scalable, and observable AI‑driven applications on Azure.
+Welcome to your AI-200: Develop AI cloud solutions on Azure workshop! In this lab, you will provision Azure Database for PostgreSQL with Microsoft Entra authentication, design a relational schema for agent memory and task checkpoints, and implement Python tool functions that let an AI agent store conversation history and resume interrupted workflows.
 
-## Lab 12: Build an agent tool backend with Azure Database for PostgreSQL
+## Lab 12: Build an agent tool backend on Azure Database for PostgreSQL
 
 ### Overall Estimated Timing: 30 Minutes
 
 ## Overview
 
-In this hands-on lab, 
+In this hands-on lab, you will provision Azure Database for PostgreSQL, create a database schema for agent memory and task checkpoints, and implement Python functions that allow an AI agent to save conversation history and resume work. You will validate the workflow by running a test script and querying the persisted agent data.
 
 ## Objectives
 
 By the end of this lab, you will be able to:
 
-1. 
+1. **Deploy PostgreSQL backend services:** Provision Azure Database for PostgreSQL with Microsoft Entra authentication and configure access for your lab environment.
 
-2. 
+2. **Design agent memory schema:** Create tables for conversations, messages, and task checkpoints to persist agent state and context.
 
-3. 
+3. **Build agent tool functions:** Implement Python functions that create conversations, store messages, save task checkpoints, and retrieve conversation history.
 
 ## Pre-requisites
 
--
--
--
+- Basic knowledge of relational databases and PostgreSQL.
+- Experience using Python, Azure CLI, and Visual Studio Code.
+- Access to an Azure subscription and the provided lab credentials.
+- Familiarity with running scripts in PowerShell or Bash.
 
 ## Architecture
 
-The lab architecture demonstrates ... :
+The lab architecture demonstrates an AI agent tool backend built on Azure Database for PostgreSQL. The backend stores conversation sessions, message history, and task checkpoint state so the agent can maintain memory and resume interrupted workflows.
 
-1. 
+1. **Azure Database for PostgreSQL:** Hosts the relational database for agent memory storage.
 
-2. 
+2. **Agent memory schema:** Uses tables for conversations, messages, and task checkpoints.
 
-3. 
+3. **Python tool functions:** Provide the agent interface for creating sessions, storing messages, and saving task status.
+
+4. **Test workflow script:** Verifies that the agent backend works end-to-end by creating conversations, storing messages, and querying stored data.
 
 ## Architecture Diagram
 
@@ -42,13 +45,13 @@ The lab architecture demonstrates ... :
 
 ## Explanation of Components
 
-1. 
+1. **Azure Database for PostgreSQL:** Provides a managed relational database for agent session state and conversation context.
 
-2. 
+2. **Conversations table:** Stores agent session metadata and links related messages.
 
-3. 
+3. **Messages table:** Records user, system, assistant, and tool messages in chronological order.
 
-4. 
+4. **Task checkpoints:** Persist task state so an agent can resume interrupted tasks and track progress.
 
 ## Accessing Your Lab Environment
  
@@ -64,7 +67,7 @@ Your virtual machine is your workhorse throughout the workshop. The lab guide is
  
 To get a better understanding of your lab resources and credentials, navigate to the **Environment** tab.
  
-![Explore Lab Resources; pending](../Images/envtab.png)
+![Explore Lab Resources; pending](../Images/lab07-envtab.png)
 
 ## Managing Your Virtual Machine
  
@@ -82,13 +85,13 @@ You can use the **Progress** tab to track your progress while working on the lab
  
 For convenience, you can open the lab guide in a separate window by selecting the **Split Window** button from the top right corner.
  
-![Use the Split Window Feature;pending](../Images/splitwindow.png)
+![Use the Split Window Feature;pending](../Images/lab07-splittab.png)
 
 ## Lab Guide Zoom In/Zoom Out
  
 To adjust the zoom level for the environment page, click the **A↕: 100%** icon located next to the timer in the lab environment.
 
-![pending](../Images/lab12-z.png)
+![pending](../Images/lab07-zoomtab.png)
 
 ## Let's Get Started with Azure Portal
  
@@ -112,7 +115,7 @@ To adjust the zoom level for the environment page, click the **A↕: 100%** icon
 
 1. If a **Welcome to Microsoft Azure** pop-up window appears, simply click **Maybe later** to skip the tour.
 
-    ![](../Images/lab12-w.png)
+    ![](../Images/maybelater.png)
 
 
 ## Support Contact

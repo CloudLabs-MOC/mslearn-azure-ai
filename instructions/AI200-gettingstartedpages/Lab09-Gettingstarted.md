@@ -1,40 +1,41 @@
 # Getting Started with your AI-200: Develop AI cloud solutions on Azure
 
-This course teaches developers how to create, monitor, and troubleshoot AI solutions on Microsoft Azure. Students will learn how to implement Azure compute and containerization patterns to host applications, build serverless APIs with Azure Functions, and integrate services using event‑driven and message‑based architectures such as Azure Service Bus and Event Grid. The course also covers working with Azure data services that support AI workloads, including designing and querying solutions with Cosmos DB for NoSQL, Azure Database for PostgreSQL with pgvector, and Azure Managed Redis for caching, streaming, and vector search. By the end of the course, developers will be able to connect services, orchestrate AI workflows, and build secure, scalable, and observable AI‑driven applications on Azure.
+Welcome to your AI-200: Develop AI cloud solutions on Azure workshop! In this lab, you will build a RAG document store on Azure Cosmos DB for NoSQL and implement Python functions to store, retrieve, and search chunked document content.
 
-## Lab 09: Build a RAG document store on Azure Cosmos DB for NoSQL
+## Lab 09: Build a RAG document store on Azure Cosmos DB for NoSQL 
 
 ### Overall Estimated Timing: 60 Minutes
 
 ## Overview
 
-In this hands-on lab,
+In this hands-on lab, you will deploy Azure Cosmos DB for NoSQL, build a document store optimized for RAG scenarios, and implement Python functions to store document chunks, query documents by ID, and search by metadata. You will validate your work using a Flask application and Cosmos DB SQL queries.
 
 ## Objectives
 
-By the end of this lab, you will be able to:
+1. **Deploy Cosmos DB resources:** Provision Azure Cosmos DB for NoSQL with a database and container designed for chunked document storage.
 
-1.
+2. **Implement RAG document functions:** Build Python functions that store document chunks, retrieve chunks, search by metadata, and perform efficient point reads.
 
-2.
-
-3.
+3. **Validate the document store:** Use a Flask app and Cosmos DB queries to confirm document ingestion, retrieval, and metadata searches.
 
 ## Pre-requisites
 
--
--
--
+- Basic understanding of Azure Cosmos DB, NoSQL data modeling, and document storage concepts.
+- Experience using Python, Flask, and Azure CLI in PowerShell or Bash.
+- Access to an Azure subscription and provided lab credentials.
+- Familiarity with Visual Studio Code and editing Python files.
 
 ## Architecture
 
-The lab architecture demonstrates ... :
+The lab architecture shows a RAG document store built on Azure Cosmos DB for NoSQL. Documents are split into chunks and stored with metadata, embeddings placeholders, and chunk indices. The Flask app exercises storage, retrieval, and metadata search operations against Cosmos DB.
 
-1.
+1. **Azure Cosmos DB for NoSQL:** Hosts the database and container for chunked document storage.
 
-2.
+2. **Document schema:** Stores chunk content, metadata, embeddings placeholder, chunk index, and partition keys for efficient retrieval.
 
-3.
+3. **Python functions:** Handle storing, querying, and searching chunked documents in Cosmos DB.
+
+4. **Flask app:** Provides a user interface to load sample data, run RAG workflow tests, and execute document queries.
 
 ## Architecture Diagram
 
@@ -42,13 +43,13 @@ The lab architecture demonstrates ... :
 
 ## Explanation of Components
 
-1.
+1. **Azure Cosmos DB for NoSQL:** Provides a globally distributed, low-latency document database for RAG storage.
 
-2.
+2. **Database and container:** Organize chunked documents using documentId as the partition key for efficient retrieval.
 
-3.
+3. **Python RAG functions:** Implement operations for storing chunks, retrieving chunks, searching metadata, and point reads.
 
-4.
+4. **Flask app:** Validates the workflow by loading sample data, executing tests, and displaying query results.
 
 ## Accessing Your Lab Environment
 

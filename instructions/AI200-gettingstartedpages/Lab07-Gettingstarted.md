@@ -1,40 +1,46 @@
 # Getting Started with your AI-200: Develop AI cloud solutions on Azure
 
-This course teaches developers how to create, monitor, and troubleshoot AI solutions on Microsoft Azure. Students will learn how to implement Azure compute and containerization patterns to host applications, build serverless APIs with Azure Functions, and integrate services using event‑driven and message‑based architectures such as Azure Service Bus and Event Grid. The course also covers working with Azure data services that support AI workloads, including designing and querying solutions with Cosmos DB for NoSQL, Azure Database for PostgreSQL with pgvector, and Azure Managed Redis for caching, streaming, and vector search. By the end of the course, developers will be able to connect services, orchestrate AI workflows, and build secure, scalable, and observable AI‑driven applications on Azure.
+Welcome to your AI-200: Develop AI cloud solutions on Azure workshop! In this lab, you will learn how to configure AKS applications with Kubernetes configuration resources such as ConfigMaps, Secrets, and persistent storage, then validate the deployment using a Python client app.
 
-## Lab 07: Configure containers in Azure Kubernetes Service
+## Lab 07: Configure apps on Azure Kubernetes Service
 
 ### Overall Estimated Timing: 60 Minutes
 
 ## Overview
 
-In this hands-on lab,
+In this hands-on lab, you will provision Azure Container Registry and Azure Kubernetes Service resources, build and deploy a containerized API, then configure Kubernetes ConfigMaps, Secrets, and PersistentVolumeClaims. You will validate the deployed application by applying manifests, exposing the service, and using a Python client app to test health, readiness, secret access, and log retrieval.
 
 ## Objectives
 
-By the end of this lab, you will be able to:
+1. **Deploy AKS infrastructure:** Provision Azure Container Registry and AKS resources needed to host the containerized API.
 
-1.
+2. **Configure Kubernetes resources:** Create ConfigMaps, Secrets, and PersistentVolumeClaims to manage application settings, credentials, and storage.
 
-2.
+3. **Update and deploy Kubernetes manifests:** Configure the deployment YAML to use your ACR image and apply the full set of Kubernetes manifests to AKS.
 
-3.
+4. **Validate the application with a client app:** Use a Python client application to confirm API health, readiness, secret access, and log retrieval from persistent storage.
 
 ## Pre-requisites
 
--
--
--
+- Basic understanding of Azure Kubernetes Service, container images, and Kubernetes manifests.
+
+- Familiarity with Azure CLI commands and terminal usage in PowerShell or Bash.
+
+- Access to an Azure subscription and the provided lab credentials.
+
+- Experience with Visual Studio Code and editing YAML configuration files.
 
 ## Architecture
 
-The lab architecture demonstrates ... :
+The lab architecture shows a containerized API deployed to AKS using ConfigMaps for non-sensitive settings, Secrets for sensitive data, and PersistentVolumeClaims for durable log storage. The AKS service exposes the API through a LoadBalancer so the client app can interact with it.
 
-1.
+1. **Azure Container Registry:** Stores the Docker image used by the AKS deployment.
 
-2.
+2. **Azure Kubernetes Service:** Runs the API pods and manages the Kubernetes resources.
 
-3.
+3. **ConfigMap and Secret:** Provide configuration data and sensitive credentials to the application.
+
+4. **PersistentVolumeClaim:** Provides durable storage for application logs across pod restarts.
 
 ## Architecture Diagram
 
@@ -42,13 +48,13 @@ The lab architecture demonstrates ... :
 
 ## Explanation of Components
 
-1.
+1. **Azure Container Registry:** Holds the container image that AKS pulls for the deployment.
 
-2.
+2. **Azure Kubernetes Service:** Hosts the containerized API and manages pod lifecycle, networking, and scaling.
 
-3.
+3. **ConfigMap:** Stores non-sensitive configuration values such as application settings and metadata.
 
-4.
+4. **Secret:** Stores sensitive information securely so the application can access credentials without hardcoding them.
 
 ## Accessing Your Lab Environment
 
