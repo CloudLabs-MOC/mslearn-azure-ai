@@ -1,58 +1,115 @@
 # Lab 13: Implement vector search on Azure Database for PostgreSQL
 
-### Estimated Duration : 30 Minutes
+### Estimated Duration : 60 Minutes
 
 ## Overview 
-
 
 In this exercise, you build a product similarity search application using Azure Database for PostgreSQL and the pgvector extension. You enable vector storage capabilities, create a database schema for products with embeddings, load sample data through a Flask web application, and perform similarity searches to find related products. This pattern provides a foundation for building recommendation systems, semantic search features, and other AI-powered applications.
 
 ## Lab Overview
 
-- **Task 1:** Download project starter files and configure the deployment script
-- **Task 2:**  Deploy an Azure Database for PostgreSQL Flexible Server with Microsoft Entra authentication
-- **Task 3:** Complete the Flask application code while the server deploys
-- **Task 4:** Enable the pgvector extension and create the products table schema
-- **Task 5:** Run the Flask application to load products and perform similarity searches
-- **Task 6:** Add new products and observe how similarity results change
+- **Task 1:** Prepare the environment
+
+- **Task 2:** Create resources in Azure
+
+- **Task 3:** Complete the client application
+
+- **Task 4:** Complete the Azure resource deployment and create the schema
+
+- **Task 5:** Set up and run the Flask application
+
+- **Task 6:** Load products and perform similarity searches
+
+- **Task 7:** Add new products and observe changes
 
 
-## Download project starter files and deploy Azure services
+## Task 1: Prepare the environment
 
 In this section you download the project starter files and use a script to deploy the necessary services to your Azure subscription. The PostgreSQL server deployment takes a few minutes to complete.
 
-1. Open a browser and enter the following URL to download the starter file. The file will be saved in your default download location.
+1. Launch **Visual Studio Code** (VS Code) from desktop.
 
-    ```
-    https://github.com/MicrosoftLearning/mslearn-azure-ai/raw/main/downloads/python/postgresql-vector-search-python.zip
-    ```
+   ![](../Images/vsimage.png)
 
-1. Copy, or move, the file to a location in your system where you want to work on the project. Then unzip the file into a folder.
+1. Select **File Explorer (1)**, then **Open Folder (2)** from the menu.
 
-1. Launch Visual Studio Code (VS Code) and select **File > Open Folder...** in the menu, then choose the folder containing the project files.
+   ![](../Images/folderimagea.png)
 
-1. The project contains deployment scripts for both Bash (*azdeploy.sh*) and PowerShell (*azdeploy.ps1*). Open the appropriate file for your environment and change the two values at the top of the script to meet your needs, then save your changes. **Note:** Do not change anything else in the script.
+1. Navigate to **C:\AllFiles (1)** and click **Select Folder (2)**.
 
-    ```
-    "<your-resource-group-name>" # Resource Group name
-    "<your-azure-region>" # Azure region for the resources
-    ```
+   ![](../Images/ai200-l13-2.png)
 
-1. In the menu bar select **Terminal > New Terminal** to open a terminal window in VS Code.
+1. If you see the prompt, **Do you trust the authors of the files in this folder?**, click **Yes, I trust the authors**.
 
-1. Run the following command to login to your Azure account. Answer the prompts to select your Azure account and subscription for the exercise.
+   ![](../Images/Lab01-Task1-4.png)
 
-    ```
-    az login
-    ```
+1. Once the folder opens in VS Code, select **Explorer (1)** and then **azdeploy.ps1 (2)**.
 
-1. Run the following command to ensure your subscription has the necessary resource provider for the exercise.
+    ![](../Images/ai200-l13-4.png)
 
-    ```azurecli
-    az provider register --namespace Microsoft.DBforPostgreSQL
-    ```
+1. The project contains deployment scripts for both Bash (_azdeploy.sh_) and PowerShell (_azdeploy.ps1_). Open the appropriate file for your environment and change the two values: **Resource group name** as **<inject key="ResourceGroupName" enableCopy="false"/>** and **Azure Region** as **<inject key="Region" enableCopy="false"/>** at the top of the script to meet your needs.
 
-### Create resources in Azure
+   ```
+   "<your-resource-group-name>" # Resource Group name
+   "<your-azure-region>" # Azure region for the resources
+   ```
+
+   ![](../Images/ai200-l13-3.png)
+
+   ![](../Images/ai200-l13-5.png)
+
+1. In the menu bar, select **File (1)** and select **Save All (2)** from drop-down.
+
+   ![](../Images/Lab01-Task1-7.png)
+
+1. In the menu bar, select **ellipsis (...) (1)**, then **Terminal (2)**, and then **New Terminal (3)** to open a terminal window in VS Code.
+
+   ![](../Images/ai200-l13-6.png)
+
+   > **NOTE:** If you are using Bash, after the terminal opens, click on the **+ (1)** icon to open a new terminal and select **Git Bash (2)** from the drop-down. If you are using PowerShell, skip this step.
+   
+   ![](../Images/lab06-t1p5.png)
+
+1. Run the following command in the terminal to allow PowerShell scripts to run. This command is only required if you are using PowerShell. If you are using Bash, skip this step.
+
+   ```
+   Set-ExecutionPolicy -ExecutionPolicy bypass -Force
+   ```
+
+   ![](../Images/Lab01-Task1-9.png)
+
+1. Run the **following command (1)** to login to your Azure account. Next, **minimize the VS Code window (2)** to view the login window opened in background.
+
+   ```
+   az login
+   ```
+
+   ![](../Images/lab06-t1p6.png)
+
+1. In the login window, select **Work or school account (1)** and click **Continue (2)**.
+
+   ![](../Images/Lab01-Task1-11.png)
+
+1. In the login window, kindly sign in using the provided **Azure credentials (1)** and click **Next (2)**.
+   - **Email/Username:** <inject key="AzureAdUserEmail"></inject>
+
+     ![](../Images/Lab01-Task1-12.png)
+
+1. Next, enter the provided **Password (1)** and click **Sign in (2)**.
+   - **Password:** <inject key="AzureAdUserPassword"></inject>
+
+     ![](../Images/Lab01-Task1-13.png)
+
+1. Next, select **No, this app only** and navigate back to VS Code to continue.
+
+   ![](../Images/Lab01-Task1-14.png)
+1. Answer the prompts to select your Azure account and subscription for the exercise.
+
+   ![](../Images/Lab01-Task1-15.png)
+
+   > **NOTE:** To confirm you're logged in to the correct Azure subscription, run **az account show**.
+
+## Task 2: Create resources in Azure
 
 In this section you run the deployment script to deploy the PostgreSQL server and configure authentication.
 
@@ -60,7 +117,7 @@ In this section you run the deployment script to deploy the PostgreSQL server an
 
     **Bash**
     ```bash
-    bash azdeploy.sh
+    MSYS_NO_PATHCONV=1 bash azdeploy.sh
     ```
 
     **PowerShell**
@@ -68,15 +125,29 @@ In this section you run the deployment script to deploy the PostgreSQL server an
     ./azdeploy.ps1
     ```
 
+    ![](../Images/ai200-l13-7.png)
+
 1. When the script menu appears, enter **1** to launch the **Create PostgreSQL server with Entra authentication** option. This creates the server with Entra-only authentication enabled. **Note:** Deployment can take 5-10 minutes to complete.
+
+    ![](../Images/ai200-l13-8.png)
 
     >**IMPORTANT:** Leave the terminal running the deployment open for the duration of the exercise. You can move on to the next section of the exercise while the deployment continues in the terminal.
 
-## Complete the client application
+> **Congratulations** on completing the task! Now, it's time to validate it. Here are the steps:
+>
+> - If you receive a success message, you can proceed to the next task.
+> - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
+> - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help you out.
+
+<validation step="3f94629b-44f2-409c-9abb-ed1a77303eda" />
+
+## Task 3: Complete the client application
 
 In this section you complete the *app.py* file by adding route handlers that interact with the PostgreSQL database. These routes handle loading sample products, performing similarity searches, and adding new products. The Flask application provides a web interface for testing vector similarity search.
 
 1. Open the *client/app.py* file in VS Code.
+
+    ![](../Images/ai200-l13-9.png)
 
 1. Search for the **BEGIN LOAD DATA SECTION** comment and add the following code directly after the comment. This route loads products from a JSON file and inserts them into the database with their embeddings.
 
@@ -118,6 +189,8 @@ In this section you complete the *app.py* file by adding route handlers that int
         return redirect(url_for("index"))
     ```
 
+    ![](../Images/ai200-l13-10.png)
+
 1. Search for the **BEGIN SEARCH SECTION** comment and add the following code directly after the comment. This route retrieves the embedding for a selected product and finds similar products using cosine distance.
 
     ```python
@@ -140,6 +213,21 @@ In this section you complete the *app.py* file by adding route handlers that int
                     if not row:
                         flash("Product not found", "error")
                         return redirect(url_for("index"))
+                    cur.execute("""
+                        SELECT id, name, category, description, price
+                        FROM products
+                        WHERE id = %s
+                    """, (product_id,))
+
+                    p = cur.fetchone()
+
+                    searched_product = {
+                        "id": p[0],
+                        "name": p[1],
+                        "category": p[2],
+                        "description": p[3],
+                        "price": p[4]
+                    }
 
                     # Find similar products using cosine distance
                     # The <=> operator is pgvector's cosine distance operator
@@ -159,12 +247,14 @@ In this section you complete the *app.py* file by adding route handlers that int
 
             products = get_products()
             new_products = get_new_products()
-            return render_template("index.html", products=products, new_products=new_products, results=results)
+            return render_template("index.html", products=products, new_products=new_products, results=results, searched_product=searched_product)
 
         except Exception as e:
             flash(f"Error searching: {str(e)}", "error")
             return redirect(url_for("index"))
     ```
+
+    ![](../Images/ai200-l13-28.png)
 
 1. Search for the **BEGIN ADD PRODUCT SECTION** comment and add the following code directly after the comment. This route adds a product from the *new_products.json* file to the database.
 
@@ -212,11 +302,13 @@ In this section you complete the *app.py* file by adding route handlers that int
         return redirect(url_for("index"))
     ```
 
-1. Save your changes to the *app.py* file.
+    ![](../Images/ai200-l13-12.png)
+
+1. Save your changes to the *app.py* file by using **Ctrl + S**.
 
 1. Take a few minutes to review all of the code in the app. Notice how each route uses the **get_connection()** function to connect to PostgreSQL with Microsoft Entra authentication, and how the **\<=>** operator performs cosine distance calculations for similarity search.
 
-## Complete the Azure resource deployment and create the schema
+## task 4: Complete the Azure resource deployment and create the schema
 
 In this section you enable the pgvector extension and create the products table with a vector column for storing embeddings. The schema includes columns for product details and a 384-dimensional embedding vector used for similarity searches.
 
@@ -224,9 +316,17 @@ In this section you enable the pgvector extension and create the products table 
 
 1. In the deployment script menu, enter **2** to configure Microsoft Entra authentication. This sets your Azure account as the database administrator.
 
+    ![](../Images/ai200-l13-13.png)
+
 1. When the previous operation completes, enter **3** to launch the **Check deployment status** option. This verifies the server is ready.
 
+    ![](../Images/ai200-l13-14.png)
+
 1. Enter **4** to launch the **Retrieve connection info and access token** option. This creates a file with the necessary environment variables.
+
+     ![](../Images/ai200-l13-15.png)
+
+     ![](../Images/ai200-l13-16.png)
 
 1. Enter **5** to exit the deployment script.
 
@@ -253,6 +353,8 @@ In this section you enable the pgvector extension and create the products table 
     ```powershell
     psql "host=$env:DB_HOST port=5432 dbname=$env:DB_NAME user=$env:DB_USER sslmode=require"
     ```
+
+    ![](../Images/ai200-l12-18.png)
 
 1. Enable the pgvector extension. This extension must be enabled before you can use vector data types.
 
@@ -289,10 +391,12 @@ In this section you enable the pgvector extension and create the products table 
 
     You should see the table structure with columns for id, name, category, description, price, and embedding, plus the HNSW index.
 
+    ![](../Images/ai200-l13-17.png)
+
 1. Enter **quit** to exit the session.
 
 
-## Set up and run the Flask application
+## Task 5: Set up and run the Flask application
 
 In this section you install the Python dependencies and run the Flask web application. The application provides a browser interface for loading products, searching for similar items, and adding new products to the database.
 
@@ -312,13 +416,15 @@ In this section you install the Python dependencies and run the Flask web applic
 
     **Bash**
     ```bash
-    source .venv/bin/activate
+    source .venv/Scripts/activate
     ```
 
     **PowerShell**
     ```powershell
     .\.venv\Scripts\Activate.ps1
     ```
+
+    ![](../Images/ai200-l13-18.png)
 
 1. Run the following command to install the required Python packages. The *requirements.txt* file includes **flask** for the web framework, **psycopg** for PostgreSQL connectivity, and **azure-identity** for authentication.
 
@@ -332,6 +438,8 @@ In this section you install the Python dependencies and run the Flask web applic
     python app.py
     ```
 
+    ![](../Images/ai200-l13-19.png)
+
     You should see output indicating the Flask server is running:
     ```
     * Running on all addresses (0.0.0.0)
@@ -340,31 +448,47 @@ In this section you install the Python dependencies and run the Flask web applic
 
 1. Open a web browser and navigate to `http://127.0.0.1:5000`. You should see the Vector Search Demo page with an empty product list.
 
-## Load products and perform similarity searches
+    ![](../Images/ai200-l13-20.png)
+
+## Task 6: Load products and perform similarity searches
 
 In this section you use the web application to load sample products into the database and perform similarity searches. The products include pre-computed embeddings that represent each product's semantic meaning, enabling the application to find similar items based on their descriptions.
 
 1. On the web page, select **Load Sample Products**. This inserts 10 products with their embeddings into the database.
 
-    You should see a success message and the product list now displays items like "Wireless Bluetooth Headphones", "Gaming Laptop", and "Running Shoes".
+    ![](../Images/ai200-l13-21.png)
 
-1. In the **Find Similar Products** section, select **Wireless Bluetooth Headphones** from the dropdown and select **Find Similar**.
+1. You should see a success message and the product list now displays items like "Wireless Bluetooth Headphones", "Gaming Laptop", and "Running Shoes".
 
-    The application queries the database using vector similarity and returns products ordered by their semantic closeness to the selected item. You should see "Noise Cancelling Earbuds" near the top of the results since it's semantically similar (both are audio devices).
+    ![](../Images/ai200-l13-22.png)
+
+1. In the **Find Similar Products** section, select **Wireless Bluetooth Headphones (1)** from the dropdown and select **Find Similar (2)**.
+
+    ![](../Images/ai200-l13-23.png)
+
+1. The application queries the database using vector similarity and returns products ordered by their semantic closeness to the selected item. You should see "Noise Cancelling Earbuds" near the top of the results since it's semantically similar (both are audio devices).
+
+    ![](../Images/ai200-l13-24.png)
 
 1. Try selecting different products and observe how the similar products change based on the selected item's category and description.
 
-## Add new products and observe changes
+## Task 7: Add new products and observe changes
 
 In this section you add new products to the database and observe how they appear in similarity search results. This demonstrates how the vector search adapts as your data changes.
 
 1. Return to the web browser with the Flask application.
 
-1. In the **Add New Product** section, select **Espresso Machine** from the dropdown and select **Add Product**.
+1. In the **Add New Product** section, select **Espresso Machine (1)** from the dropdown and select **Add Product (2)**.
 
-1. Now search for products similar to **Coffee Maker** by selecting it in the **Find Similar Products** dropdown and selecting **Find Similar**.
+     ![](../Images/ai200-l13-25.png)
 
-    Notice that "Espresso Machine" now appears in the results with a low distance score, since both products are semantically related (home coffee appliances).
+1. Now search for products similar to **Coffee Maker** by selecting it in the **Find Similar Products (1)** dropdown and selecting **Find Similar (2)**.
+
+     ![](../Images/ai200-l13-26.png)
+
+1. Notice that "Espresso Machine" now appears in the results with a low distance score, since both products are semantically related (home coffee appliances).
+
+     ![](../Images/ai200-l13-27.png)
 
 1. Add the remaining products from the dropdown (**Wireless Gaming Mouse** and **Fitness Tracker Band**) and observe how they appear in similarity searches for related products.
 
@@ -372,55 +496,3 @@ In this section you add new products to the database and observe how they appear
 
 In this exercise, you built a product similarity search application using Azure Database for PostgreSQL and the pgvector extension. You deployed a PostgreSQL Flexible Server with Microsoft Entra authentication, enabled the pgvector extension, and created a products table with a 384-dimensional vector column for storing embeddings. You added an HNSW index to optimize similarity queries, then used a Flask web application to load sample products and perform vector similarity searches using the cosine distance operator (**\<=>**). This pattern demonstrates how to build recommendation systems and semantic search features that find related items based on their semantic meaning rather than exact keyword matches.
 
-## Clean up resources
-
-Now that you finished the exercise, you should delete the cloud resources you created to avoid unnecessary resource usage.
-
-1. Run the following command in the VS Code terminal to delete the resource group, and all resources in the group. Replace **\<rg-name>** with the name you choose earlier in the exercise. The command will launch a background task in Azure to delete the resource group.
-
-    ```
-    az group delete --name <rg-name> --no-wait --yes
-    ```
-
-> **CAUTION:** Deleting a resource group deletes all resources contained within it. If you chose an existing resource group for this exercise, any existing resources outside the scope of this exercise will also be deleted.
-
-## Troubleshooting
-
-If you encounter issues during this exercise, try these steps:
-
-**psql connection fails**
-- Ensure the *.env* file was created by running the deployment script option **4**
-- Ensure you ran **source .env** (Bash) or **. .\.env.ps1** (PowerShell) to load environment variables
-- The access token expires after approximately one hour; run the deployment script option **4** again to generate a new token
-- Verify the server is ready by running the deployment script option **3**
-
-**Access denied or authentication errors**
-- Ensure the Microsoft Entra administrator was configured by running the deployment script option **2**
-- Verify **PGPASSWORD** is set correctly in your terminal session
-- Ensure you're using the correct **DB_USER** value (your Azure account email)
-
-**Flask application fails to start**
-- Ensure Python virtual environment is activated (you should see **(.venv)** in your terminal prompt)
-- Ensure dependencies are installed: **pip install -r requirements.txt**
-- Verify all three route functions were added to *app.py* correctly
-
-**Database connection errors in Flask**
-- Ensure environment variables are loaded in the terminal running Flask
-- Verify the products table exists by connecting with **psql** and running **\d products**
-- Ensure the pgvector extension is enabled: **CREATE EXTENSION IF NOT EXISTS vector;**
-
-**No products appear after loading**
-- Check the Flask terminal for error messages
-- Verify the *sample_products.json* file exists in the *client* folder
-- Ensure the products table was created with the correct schema
-
-**Python venv activation issues**
-- On Linux/macOS, use: **source .venv/bin/activate**
-- On Windows PowerShell, use: **.\.venv\Scripts\Activate.ps1**
-- If using Git Bash on Windows, use: **source .venv/Scripts/activate**
-
-### Summary
-
-
-
-## You have successfully completed the Hands-on Lab!

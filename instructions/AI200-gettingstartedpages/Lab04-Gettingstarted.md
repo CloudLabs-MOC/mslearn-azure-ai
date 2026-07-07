@@ -54,7 +54,7 @@ The lab architecture demonstrates ... :
 
 Once you're ready to dive in, your virtual machine and **Guide** will be right at your fingertips within your web browser.
 
-![](../Images/Lab4-guidedtab.png)
+![](../Images/Lab4-guidedtab2.png)
 
 ## Virtual Machine & Lab Guide
 
@@ -64,7 +64,7 @@ Your virtual machine is your workhorse throughout the workshop. The lab guide is
 
 To get a better understanding of your lab resources and credentials, navigate to the **Environment** tab.
 
-![](../Images/Lab4-guidedtab2.png)
+![Explore Lab Resources; pending](../Images/lab07-envtab.png)
 
 ## Managing Your Virtual Machine
 

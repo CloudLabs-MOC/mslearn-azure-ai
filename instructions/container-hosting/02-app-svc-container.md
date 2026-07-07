@@ -1,6 +1,6 @@
 # Lab 02: Deploy a container to Azure App Service
 
-### Estimated Duration: 30 Minutes
+### Estimated Duration: 60 Minutes
 
 ## Overview
 

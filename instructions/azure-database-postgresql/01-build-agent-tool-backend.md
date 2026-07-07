@@ -1,6 +1,6 @@
 # Lab 12: Build an agent tool backend on Azure Database for PostgreSQL
 
-### Estimated Duration : 45 Minutes
+### Estimated Duration : 60 Minutes
 
 ## Overview 
 
@@ -133,6 +133,14 @@ In this section you download the project starter files and use a script to deplo
     ![](../Images/ai200-l12-9.png)
 
     >**IMPORTANT:** Leave the terminal running the deployment open for the duration of the exercise. You can move on to the next section of the exercise while the deployment continues in the terminal.
+
+> **Congratulations** on completing the task! Now, it's time to validate it. Here are the steps:
+>
+> - If you receive a success message, you can proceed to the next task.
+> - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
+> - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help you out.
+
+<validation step="951f3b8f-12bc-4447-b7b3-f6e9a2194652" />
 
 ## Task 3: Complete the tool function app
 

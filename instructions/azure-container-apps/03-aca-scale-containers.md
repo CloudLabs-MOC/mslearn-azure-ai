@@ -1,103 +1,196 @@
 # Lab 05: Configure autoscaling using KEDA triggers
 
-### Estimated Duration : 30 Minutes
+### Estimated Duration : 60 Minutes
 
 ## Overview 
 
-AI applications often experience unpredictable workloads—a surge in inference requests, batch jobs, or sudden spikes from an agent-based workflow. KEDA-based autoscaling in Azure Container Apps allows your workloads to scale to zero when idle (saving costs) and rapidly scale out when demand increases.
+In this lab, you will configure autoscaling for a containerized application in Azure Container Apps using KEDA-based HTTP concurrency rules. You will deploy a mock agent API, create the required Azure Container Registry and Container Apps resources, and apply scaling policies that allow the app to scale out during periods of high demand and scale down when traffic decreases. You will also generate concurrent requests to observe replica changes in real time and update scaling behavior using YAML so the configuration is easier to manage and repeat.
 
-In this exercise, you deploy a simple mock agent API and configure autoscaling based on **HTTP concurrent requests**. You then generate concurrent load and observe how the app scales out and creates new revisions when configuration changes are applied.
-
-Tasks performed in this exercise:
+## Lab Overview
 
 - **Task 1:** Create Azure Container Registry and Container Apps resources
-- **Task 2:** Deploy a mock agent API container app
-- **Task 3:** Configure an HTTP concurrency scale rule using KEDA
-- **Task 4:** Generate concurrent requests to trigger scale-out and monitor replica count changes in real-time
-- **Task 5:** Configure scale rules using YAML
+- **Task 2:** Configure an HTTP concurrency scale rule
+- **Task 3:**  Generate load and observe scaling
+- **Task 4:** Configure scale rules using YAML
 
+> **Note:** This lab includes deployment scripts for both **PowerShell** and **Bash**. You may choose either scripting language based on your preference or environment. Once you make your choice, use the corresponding commands and script throughout the entire lab, as all subsequent steps provide instructions for both PowerShell and Bash.
 
->**Important:** Azure Container Registry task runs are temporarily paused from Azure free credits. This exercise requires a Pay-As-You-Go, or another paid plan.
+## Task 1: Create Azure Container Registry and Container Apps resources
 
-## Download project starter files and deploy Azure services
+In this task, you will create the Azure resources required for the lab by running the deployment script. You will provision an Azure Container Registry and a Container Apps environment, which provide the foundation for deploying and scaling the container app.
 
-In this section you download the project starter files and use a script to deploy the necessary services to your Azure subscription. The Azure Container Registry and Container Apps environment deployment takes a few minutes to complete.
+1. Launch **Visual Studio Code** (VS Code) from desktop.
 
-1. Open a browser and enter the following URL to download the starter file. The file will be saved in your default download location.
+   ![](../Images/vsimage.png)
 
-    ```
-    https://github.com/MicrosoftLearning/mslearn-azure-ai/raw/main/downloads/python/aca-scale-python.zip
-    ```
+1. Select **File Explorer (1)**, then **Open Folder (2)** from the menu.
 
-1. Copy, or move, the file to a location in your system where you want to work on the project. Then unzip the file into a folder.
+   ![](../Images/folderimagea.png)
 
-1. Launch Visual Studio Code (VS Code) and select **File > Open Folder...** in the menu, then choose the folder containing the project files.
+1. Navigate to **C:\Allfiles (1)** and click **Select Folder (2)**.
 
-1. The project contains deployment scripts for both Bash (*azdeploy.sh*) and PowerShell (*azdeploy.ps1*). Open the appropriate file for your environment and change the two values at the top of the script to meet your needs, then save your changes. **Note:** Do not change anything else in the script.
+   ![](../Images/folderimage-b.png)
 
-    ```
-    "<your-resource-group-name>" # Resource Group name
-    "<your-azure-region>" # Azure region for the resources
-    ```
+1. If you see the prompt, **Do you trust the authors of the files in this folder?**, click **Yes, I trust the authors**.
 
-1. In the menu bar select **Terminal > New Terminal** to open a terminal window in VS Code.
+   ![](../Images/vs-trusted.png)
 
-1. Run the following command to login to your Azure account. Answer the prompts to select your Azure account and subscription for the exercise.
+1. Once the folder opens in VS Code, select **Explorer (1)** and then **azdeploy.ps1 (2)**.
 
-    ```
-    az login
-    ```
+   ![](../Images/powershellscript.png)
+
+1. Navigate to the Azure portal and search for **Resource groups (1)**. Then select **Resource groups (2)**.
+
+   ![](../Images/resgrpimage.png)
+
+1. Note the name of the **Resource group**.
+
+   ![](../Images/Lab04-Task1-4.png)
+
+1. The project contains deployment scripts for both Bash (_azdeploy.sh_) and PowerShell (_azdeploy.ps1_). Open the appropriate file for your environment and change the two values: **Resource group name** as **<inject key="ResourceGroupName" enableCopy="false"/>** and **Azure Region** as **<inject key="Region" enableCopy="false"/>** at the top of the script to meet your needs.
+
+   ```
+   "<your-resource-group-name>" # Resource Group name
+   "<your-azure-region>" # Azure region for the resources
+   ```
+
+   ![](../Images/powershellrgnaming.png)
+
+   ![](../Images/Lab02-Task2-48.png)
+
+   > **Note:** Do not change anything else in the script.
+
+1. Press **Ctrl+S** to save the changes in both the scripts.
+
+1. In the menu bar, select **ellipsis (...) (1)**, then **Terminal (2)**, and then **New Terminal (3)** to open a terminal window in VS Code.
+
+   ![](../Images/terminalimage.png)
+
+   > **Note:** If you are using Bash, after the terminal opens, expand the downward arrow icon **(1)** to open a new terminal and select **Git Bash (2)** from the drop-down list. If you are using PowerShell, skip this step.
+   >
+   > ![](../Images/Lab02-Task2-26.png)
+
+1. Run the following command in the terminal to allow PowerShell scripts to run. This step is required only if you are using PowerShell. If you are using Bash, skip this step.
+
+   ```
+   Set-ExecutionPolicy -ExecutionPolicy bypass -Force
+   ```
+
+   ![](../Images/runcmd.png)
+
+1. Run the command **az login (1)** to sign in to your Azure account. Then **minimize the VS Code window (2)** to view the login window that opens in the background.
+
+   ```
+   az login
+   ```
+
+   ![](../Images/azloginimage.png)
+
+1. A pop-up window will appear on the desktop. Select **Work and school account (1)** and then click **Continue (2)**.
+
+   ![](../Images/sign-in-1.png)
+
+1. In the login window, sign in by using the provided **Azure credentials (1)** and then click **Next (2)**.
+   - **Email/Username:** <inject key="AzureAdUserEmail"></inject>
+
+     ![](../Images/sign-in-2.png)
+
+1. Enter the temporary access password and click **Sign in**.
+   - **Password:** <inject key="AzureAdUserPassword"></inject>
+
+     ![](../Images/tempass.png)
+
+1. When prompted with **Sign in to all apps and websites on this device?**, select **No, this app only**.
+
+   ![](../Images/sign-in-3.png)
+
+1. Return to the terminal.
+
+1. Choose the subscription by entering **1**.
+
+   ![](../Images/sign-in-4.png)
+
+   > **NOTE:** To confirm you're logged in to the correct Azure subscription, run **az account show**.
 
 1. Run the following command to ensure you have the **containerapp** extension for Azure CLI.
 
-    ```azurecli
-    az extension add --name containerapp
-    ```
+   ```azurecli
+   az extension add --name containerapp
+   ```
 
-1. Run the following commands to ensure your subscription has the necessary resource providers for the exercise.
+   ![](../Images/Lab03-Task1-1.png)
 
-    ```azurecli
-    az provider register --namespace Microsoft.App
-    az provider register --namespace Microsoft.OperationalInsights
-    ```
+1. Make sure you are in the root directory of the project and run the appropriate command in the terminal to launch the deployment script. The deployment script will deploy ACR and create a file with environment variables needed.
 
-### Create resources in Azure
+   **Bash**
 
-In this section you run the deployment script to deploy the necessary services to your Azure subscription.
+   ```bash
+   bash azdeploy.sh
+   ```
 
-1. Make sure you are in the root directory of the project and run the appropriate command in the terminal to launch the deployment script. The script deploys ACR, a Container Apps environment, and a Container App with ingress enabled. It also creates a file with environment variables you use throughout the exercise.
+   ![](../Images/Lab03-Task2-1-bash.png)
 
-    **Bash**
-    ```bash
-    bash azdeploy.sh
-    ```
+   **PowerShell**
 
-    **PowerShell**
-    ```powershell
-    ./azdeploy.ps1
-    ```
+   ```powershell
+   ./azdeploy.ps1
+   ```
+
+   ![](../Images/Lab02-Task1-1.png)
 
 1. When the script is running, enter **1** to launch **Create Azure Container Registry and build container image**.
 
-1. When the previous operation is finished, enter **2** to launch **Create Container Apps environment**.
+   ![](../Images/Lab05-Task1-1.png)
+
+1. To verify that the deployment was successful, navigate to the Azure portal. In the search bar, type **Container registries (1)** and select **Container registries (2)** from the search results.
+
+   ![](../Images/Lab02-Task2-4.png)
+
+1. You should see one **Container registry** created.
+
+   ![](../Images/Lab03-Task1-6.png)
+
+1.  When the previous operation is finished, enter **2** to launch **Create Container Apps environment**.
+
+    ![](../Images/Lab05-Task1-2.png)
+
+1. To verify that the deployment was successful, navigate to the Azure portal. In the search bar, type **Container Apps Environments (1)** and select **Container Apps Environments (2)** from the search results.
+
+   ![](../Images/Lab03-Task1-7.png)
+
+1. You should see the **Container App Environment** you created.
+
+   ![](../Images/Lab03-Task1-8.png)
 
 1. When the previous operation is finished, enter **3** to launch **Create Container App**.
 
+    ![](../Images/Lab05-Task1-3.png)
+
     >**Note:** A file containing environment variables is created after the container app is created. You use these variables throughout the exercise.
 
-1. When the deployment completes, enter **5** to exit the deployment script.
+1. When the previous operation is finished, enter **5** to exit the deployment script.
+
+   ![](../Images/Lab04-Task1-3.png)
 
 1. Run the appropriate command to load the environment variables into your terminal session from the file created in a previous step.
 
-    **Bash**
-    ```bash
-    source .env
-    ```
+   **Bash**
 
-    **PowerShell**
-    ```powershell
-    . .\.env.ps1
-    ```
+   ```bash
+   source .env
+   ```
+
+   ![](../Images/Lab03-Task2-3-bash.png)
+
+   **PowerShell**
+
+   ```powershell
+   . .\.env.ps1
+   ```
+
+   ![](../Images/Lab03-Task1-5.png)
+
+   > **Note:** Keep the terminal open. If you close it and create a new terminal, you might need to run the command to create the environment variable again.
 
 1. Verify the app endpoint is available.
 
@@ -105,17 +198,27 @@ In this section you run the deployment script to deploy the necessary services t
     ```bash
     curl -sS "$CONTAINER_APP_URL/" | head
     ```
+    ![](../Images/Lab05-Task1-1b.png)
 
     **PowerShell**
     ```powershell
     Invoke-RestMethod "$env:CONTAINER_APP_URL/"
     ```
+    ![](../Images/Lab05-Task1-4.png)
 
-    >**Note:** Keep the terminal open. If you close it and create a new terminal, you might need to run the command to create the environment variable again.
+    > **Note:** Keep the terminal open. If you close it and create a new terminal, you might need to run the command to create the environment variable again.
 
-## Configure autoscaling
+> **Congratulations** on completing the task! Now, it's time to validate it. Here are the steps:
+>
+> - If you receive a success message, you can proceed to the next task.
+> - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
+> - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help you out.
 
-In this section you configure an HTTP scale rule that triggers scaling based on **concurrent requests**. This is a useful proxy for "agent requests in progress" without adding any other Azure services.
+<validation step="" />
+
+## Task 2: Configure an HTTP concurrency scale rule 
+
+In this task, you will configure an HTTP scale rule that triggers autoscaling based on concurrent requests. This allows the container app to scale out when demand increases and scale in when the workload decreases.
 
 >**Note:** Applying configuration updates (including scaling changes) creates a **new revision**.
 
@@ -132,6 +235,7 @@ In this section you configure an HTTP scale rule that triggers scaling based on 
         --scale-rule-type http \
         --scale-rule-http-concurrency 10
     ```
+    ![](../Images/Lab05-Task2-2b.png)
 
     **PowerShell**
     ```powershell
@@ -145,6 +249,8 @@ In this section you configure an HTTP scale rule that triggers scaling based on 
         --scale-rule-http-concurrency 10
     ```
 
+    ![](../Images/Lab05-Task1-5.png)
+
 1. Run the following command to verify the scale rule is configured. Look for the **http-scaling** rule in the output with **minReplicas** set to **0** and **maxReplicas** set to **10**.
 
     **Bash**
@@ -154,6 +260,7 @@ In this section you configure an HTTP scale rule that triggers scaling based on 
         --resource-group $RESOURCE_GROUP \
         --query "properties.template.scale"
     ```
+    ![](../Images/Lab05-Task2-3b.png)
 
     **PowerShell**
     ```powershell
@@ -163,9 +270,11 @@ In this section you configure an HTTP scale rule that triggers scaling based on 
         --query "properties.template.scale"
     ```
 
-## Generate load and observe scaling
+    ![](../Images/Lab05-Task1-6.png)
 
-In this section you run a local Flask dashboard that can both generate concurrent requests and show Container App revisions/replicas.
+## Task 3: Generate load and observe scaling
+
+In this task, you will run a local dashboard that generates concurrent requests and displays the container app's revisions and replica count. This lets you observe how the autoscaling rules respond to real traffic.
 
 1. Run the following command to navigate to the *client* directory.
 
@@ -173,51 +282,70 @@ In this section you run a local Flask dashboard that can both generate concurren
     cd client
     ```
 
+    ![](../Images/Lab05-Task1-7.png)
+
 1. Run the following command to create a virtual environment for the client app. Depending on your environment the command might be **python** or **python3**.
 
     ```python
     python -m venv .venv
     ```
 
-1. Run the following command to activate the Python environment. **Note:** On Linux/macOS, use the Bash command. On Windows, use the PowerShell command. If using Git Bash on Windows, use **source .venv/Scripts/activate**.
+    ![](../Images/Lab05-Task1-8.png)
+
+1. Run the following command to activate the Python environment. 
 
     **Bash**
     ```bash
-    source .venv/bin/activate
+    source .venv/Scripts/activate
     ```
+    ![](../Images/Lab05-Task3-5b.png)
+
+    > **Note:** On Linux/macOS, use the Bash command **source .venv/bin/activate**.
 
     **PowerShell**
     ```powershell
     .\.venv\Scripts\Activate.ps1
     ```
 
+    ![](../Images/Lab05-Task1-9.png)
+
 1. Run the following command to install the dependencies for the client app.
 
     ```bash
     pip install -r requirements.txt
     ```
-
+    ![](../Images/Lab05-Task1-10.png)
+    
 1. Run the following command to start the dashboard.
 
     ```
     python app.py
     ```
+    ![](../Images/Lab05-Task3-2.png)
 
 1. Open a browser and navigate to the following URL: `http://127.0.0.1:5000`.
 
+    ![](../Images/Lab05-Task3-3.png)
+
 1. In the left pane of the app select **Refresh Revisions & Replicas**. In the top right of the app you should see **1**, or **0** replicas running.
 
-    When you deployed the app it defaulted to **1** running replica. You applied KEDA scale rule in a previous step and scaling down to zero may take an additional **~5 minutes** after the workload becomes idle because of the default **300-second (5-minute)** cool-down period.
+     ![](../Images/Lab05-Task3-4.png)
+
+    >**Note:** When you deployed the app it defaulted to **1** running replica. You applied KEDA scale rule in a previous step and scaling down to zero may take an additional **~5 minutes** after the workload becomes idle because of the default **300-second (5-minute)** cool-down period.
 
 1. In the **Load Generator** section, select **Start** to being sending data to the container app.
 
+    ![](../Images/Lab05-Task3-5.png)
+
 1. Select **Refresh Revisions & Replicas** every 5-10 seconds and you should see the number of replicas increase. You can run the **Load Generator** again after it stops to increase the traffic and increase replica count.
 
-When you're finished close the browser window and enter **Ctrl+c** in the terminal to end the client app.
+    ![](../Images/Lab05-Task3-6.png)
 
-## Configure scale rules using YAML
+1. When you're finished close the browser window and enter **Ctrl+c** in the terminal to end the client app.
 
-In this section you configure autoscaling by editing the Container App YAML. This is a repeatable way to manage scale rules, and it becomes essential when you have multiple rules.
+## Task 4: Configure scale rules using YAML
+
+In this task, you will update the container app scaling configuration by editing the YAML definition. This provides a repeatable way to manage autoscaling settings and adjust them for different workloads.
 
 1. Run the following command to export the app configuration to a YAML file.
 
@@ -228,6 +356,7 @@ In this section you configure autoscaling by editing the Container App YAML. Thi
         --resource-group $RESOURCE_GROUP \
         --output yaml > app-config.yaml
     ```
+    ![](../Images/Lab05-Task4-6b.png)
 
     **PowerShell**
     ```powershell
@@ -236,8 +365,16 @@ In this section you configure autoscaling by editing the Container App YAML. Thi
         --resource-group $env:RESOURCE_GROUP `
         --output yaml > app-config.yaml
     ```
+    ![](../Images/Lab05-Task4-1.png)
 
-1. Open the *app-config.yaml* file in VS Code. Find the **scale** section under **properties > template**. Modify the scaling configuration to reduce the **cooldownPeriod** to **200** seconds (faster scale-down), set **maxReplicas** to **5**, and set **minReplicas** to **1** so the app always has at least one replica running. The **scale** section should look similar to the following example.
+1. Navigate to **Explorer**, select the **app-config.yaml (1)**, then open the **app-config.yaml (2)** file in VS Code. 
+
+    ![](../Images/Lab05-Task4-2.png)
+
+    > **Note:** While performing this lab with the Bash command that generates the **app-config.yaml** file, navigate to **Explorer** and, under the **client (1)** folder, select the **app-config.yaml (2)** file.
+    ![](../Images/Lab05-Task4-7b.png)
+
+1. Find the **scale** section under **properties > template**. Modify the scaling configuration to reduce the **cooldownPeriod** to **200** seconds (faster scale-down), set **maxReplicas** to **5**, and set **minReplicas** to **1** so the app always has at least one replica running. The **scale** section should look similar to the following example.
 
     ```yaml
     scale:
@@ -246,8 +383,11 @@ In this section you configure autoscaling by editing the Container App YAML. Thi
       minReplicas: 1
       pollingInterval: 30
     ```
+    ![](../Images/Lab05-Task4-3.png)
 
-1. Save the file and run the following command to apply the updated configuration.
+1. Press **Ctrl+S** to save the changes in the **app-config.yaml**.
+
+1. Run the following command to apply the updated configuration.
 
     **Bash**
     ```bash
@@ -256,6 +396,7 @@ In this section you configure autoscaling by editing the Container App YAML. Thi
         --resource-group $RESOURCE_GROUP \
         --yaml app-config.yaml
     ```
+    ![](../Images/Lab05-Task4-8b.png)
 
     **PowerShell**
     ```powershell
@@ -264,6 +405,7 @@ In this section you configure autoscaling by editing the Container App YAML. Thi
         --resource-group $env:RESOURCE_GROUP `
         --yaml app-config.yaml
     ```
+    ![](../Images/Lab05-Task4-4.png)
 
 1. Run the following command to verify the changes you just implemented.
 
@@ -274,6 +416,7 @@ In this section you configure autoscaling by editing the Container App YAML. Thi
         --resource-group $RESOURCE_GROUP \
         --query "properties.template.scale"
     ```
+    ![](../Images/Lab05-Task4-9b.png)
 
     **PowerShell**
     ```powershell
@@ -282,48 +425,10 @@ In this section you configure autoscaling by editing the Container App YAML. Thi
         --resource-group $env:RESOURCE_GROUP `
         --query "properties.template.scale"
     ```
+    ![](../Images/Lab05-Task4-5.png)
 
-# Clean up resources
+## Summary
 
-Now that you finished the exercise, you should delete the cloud resources you created to avoid unnecessary resource usage.
-
-1. Run the following command in the VS Code terminal to delete the resource group, and all resources in the group. Replace **\<rg-name>** with the name you choose earlier in the exercise. The command will launch a background task in Azure to delete the resource group.
-
-    ```
-    az group delete --name <rg-name> --no-wait --yes
-    ```
-
-> **CAUTION:** Deleting a resource group deletes all resources contained within it. If you chose an existing resource group for this exercise, any existing resources outside the scope of this exercise will also be deleted.
-
-## Troubleshooting
-
-If you encounter issues during this exercise, try these steps:
-
-**App not scaling out under load**
-- Verify the HTTP scale rule is configured: **az containerapp show --query "properties.template.scale"**
-- Ensure you're generating concurrent requests (use the dashboard with delayMs > 0)
-- Increase **delayMs** (500-1500ms) so requests overlap and concurrency accumulates
-- Check system logs for scaling events: **az containerapp logs show --type system --tail 50**
-
-**Dashboard won't start or can't list revisions/replicas**
-- Ensure Python virtual environment is activated (you should see **(.venv)** in your terminal prompt)
-- Ensure dependencies are installed: **pip install -r client/requirements.txt**
-- Ensure Azure CLI is installed and you ran **az login**
-- Ensure the **containerapp** extension is installed: **az extension add --name containerapp**
-- Ensure **.env** is loaded and contains **RESOURCE_GROUP** and **CONTAINER_APP_NAME**
-
-**Python venv activation issues**
-- On Linux/macOS, use: **source client/.venv/bin/activate**
-- On Windows PowerShell, use: **.\client\.venv\Scripts\Activate.ps1**
-- If **activate** script is missing, reinstall **python3-venv** package and recreate the venv
-
-**YAML update fails**
-- Ensure the YAML file syntax is valid (check indentation)
-- Some read-only properties like **id**, **systemData**, and **type** may cause errors; remove them if needed
-- Verify the scale section follows the correct structure under **properties > template > scale**
-
-### Summary
-
-
+In this lab, you configured autoscaling for a containerized application in **Azure Container Apps** to help it respond efficiently to changing workloads. You started by creating the required Azure resources, deployed a mock agent API, and applied **KEDA**-based HTTP concurrency rules so the app could automatically scale out when traffic increased and scale in when demand decreased. You also generated concurrent requests to observe replica changes in real time and updated the scaling configuration using **YAML**, giving you a more reusable and maintainable way to manage autoscaling behavior.
 
 ## You have successfully completed the Hands-on Lab!

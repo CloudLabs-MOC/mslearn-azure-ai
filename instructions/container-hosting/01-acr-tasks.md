@@ -1,6 +1,6 @@
 # Lab 01: Build and run a container image with ACR Tasks
 
-### Estimated Duration : 30 Minutes
+### Estimated Duration : 60 Minutes
 
 ## Overview
 
