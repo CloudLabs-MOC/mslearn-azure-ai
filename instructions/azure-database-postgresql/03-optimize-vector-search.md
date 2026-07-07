@@ -139,7 +139,7 @@ In this section you run the deployment script to deploy the PostgreSQL server an
 
 In this section you review the key concepts for vector indexing that you apply later in the exercise. Understanding these trade-offs helps you make informed decisions when optimizing vector search.
 
-### IVFFlat indexes
+### 1. IVFFlat indexes
 
 IVFFlat (Inverted File with Flat compression) divides vectors into clusters called **lists**. When searching, it only scans vectors in nearby clusters rather than the entire dataset.
 
@@ -148,7 +148,7 @@ Key parameters:
 - **lists**: Number of clusters to create. A good starting point is `rows / 1000` for up to 1 million rows. More lists means faster searches but slower index builds.
 - **probes**: Number of clusters to search at query time. Higher values improve recall (finding the true nearest neighbors) but increase latency.
 
-### HNSW indexes
+### 2. HNSW indexes
 
 HNSW (Hierarchical Navigable Small World) builds a multi-layer graph structure. Upper layers contain fewer nodes for fast navigation; lower layers contain more nodes for precise searching.
 
@@ -462,6 +462,8 @@ In this section you test queries that combine vector similarity with metadata fi
     ORDER BY embedding <=> (SELECT embedding FROM query_vectors)
     LIMIT 10;
     ```
+
+    ![](../Images/ai200-l14-17.png)
 
 ## Summary
 
