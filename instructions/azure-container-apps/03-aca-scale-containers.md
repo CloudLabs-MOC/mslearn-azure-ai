@@ -92,12 +92,12 @@ In this task, you will create the Azure resources required for the lab by runnin
    ![](../Images/sign-in-1.png)
 
 1. In the login window, sign in by using the provided **Azure credentials (1)** and then click **Next (2)**.
-   - **Email/Username:** <inject key="AzureAdUserEmail" enableCopy="false"></inject>
+   - **Email/Username:** <inject key="AzureAdUserEmail"></inject>
 
      ![](../Images/sign-in-2.png)
 
 1. Enter the temporary access password and click **Sign in**.
-   - **Password:** <inject key="AzureAdUserPassword" enableCopy="false"></inject>
+   - **Password:** <inject key="AzureAdUserPassword"></inject>
 
      ![](../Images/tempass.png)
 
@@ -138,7 +138,6 @@ In this task, you will create the Azure resources required for the lab by runnin
    ```
 
    ![](../Images/Lab02-Task1-1.png)
-
 
 1. When the script is running, enter **1** to launch **Create Azure Container Registry and build container image**.
 
@@ -194,13 +193,13 @@ In this task, you will create the Azure resources required for the lab by runnin
 
    > **Note:** Keep the terminal open. If you close it and create a new terminal, you might need to run the command to create the environment variable again.
 
-
 1. Verify the app endpoint is available.
 
    **Bash**
     ```bash
     curl -sS "$CONTAINER_APP_URL/" | head
     ```
+    ![](../Images/Lab05-Task1-1b.png)
 
     **PowerShell**
     ```powershell
@@ -208,8 +207,7 @@ In this task, you will create the Azure resources required for the lab by runnin
     ```
     ![](../Images/Lab05-Task1-4.png)
 
-
-    >**Note:** Keep the terminal open. If you close it and create a new terminal, you might need to run the command to create the environment variable again.
+    > **Note:** Keep the terminal open. If you close it and create a new terminal, you might need to run the command to create the environment variable again.
 
 
 > **Congratulations** on completing the task! Now, it's time to validate it. Here are the steps:
@@ -242,6 +240,7 @@ In this task, you will configure an HTTP scale rule that triggers autoscaling ba
         --scale-rule-type http \
         --scale-rule-http-concurrency 10
     ```
+    ![](../Images/Lab05-Task2-2b.png)
 
     **PowerShell**
     ```powershell
@@ -266,6 +265,7 @@ In this task, you will configure an HTTP scale rule that triggers autoscaling ba
         --resource-group $RESOURCE_GROUP \
         --query "properties.template.scale"
     ```
+    ![](../Images/Lab05-Task2-3b.png)
 
     **PowerShell**
     ```powershell
@@ -297,12 +297,15 @@ In this task, you will run a local dashboard that generates concurrent requests 
 
     ![](../Images/Lab05-Task1-8.png)
 
-1. Run the following command to activate the Python environment. **Note:** On Linux/macOS, use the Bash command. On Windows, use the PowerShell command. If using Git Bash on Windows, use **source .venv/Scripts/activate**.
+1. Run the following command to activate the Python environment. 
 
     **Bash**
     ```bash
-    source .venv/bin/activate
+    source .venv/Scripts/activate
     ```
+   > **Note:** On Linux/macOS, use the Bash command **source .venv/bin/activate**.
+
+    ![](../Images/Lab05-Task3-5b.png)
 
     **PowerShell**
     ```powershell
@@ -323,18 +326,29 @@ In this task, you will run a local dashboard that generates concurrent requests 
     ```
     python app.py
     ```
+    ![](../Images/Lab05-Task3-2.png)
 
 1. Open a browser and navigate to the following URL: `http://127.0.0.1:5000`.
 
+    ![](../Images/Lab05-Task3-3.png)
+
 1. In the left pane of the app select **Refresh Revisions & Replicas**. In the top right of the app you should see **1**, or **0** replicas running.
 
-    When you deployed the app it defaulted to **1** running replica. You applied KEDA scale rule in a previous step and scaling down to zero may take an additional **~5 minutes** after the workload becomes idle because of the default **300-second (5-minute)** cool-down period.
+     ![](../Images/Lab05-Task3-4.png)
+
+
+    > **Note:** When you deployed the app it defaulted to **1** running replica. You applied KEDA scale rule in a previous step and scaling down to zero may take an additional **~5 minutes** after the workload becomes idle because of the default **300-second (5-minute)** cool-down period.
 
 1. In the **Load Generator** section, select **Start** to being sending data to the container app.
 
+    ![](../Images/Lab05-Task3-5.png)
+
+
 1. Select **Refresh Revisions & Replicas** every 5-10 seconds and you should see the number of replicas increase. You can run the **Load Generator** again after it stops to increase the traffic and increase replica count.
 
-When you're finished close the browser window and enter **Ctrl+c** in the terminal to end the client app.
+    ![](../Images/Lab05-Task3-6.png)
+
+1. When you're finished close the browser window and enter **Ctrl+c** in the terminal to end the client app.
 
 ## Task 4: Configure scale rules using YAML
 
@@ -349,6 +363,7 @@ In this task, you will update the container app scaling configuration by editing
         --resource-group $RESOURCE_GROUP \
         --output yaml > app-config.yaml
     ```
+    ![](../Images/Lab05-Task4-6b.png)
 
     **PowerShell**
     ```powershell
@@ -357,8 +372,17 @@ In this task, you will update the container app scaling configuration by editing
         --resource-group $env:RESOURCE_GROUP `
         --output yaml > app-config.yaml
     ```
+    ![](../Images/Lab05-Task4-1.png)
 
-1. Open the *app-config.yaml* file in VS Code. Find the **scale** section under **properties > template**. Modify the scaling configuration to reduce the **cooldownPeriod** to **200** seconds (faster scale-down), set **maxReplicas** to **5**, and set **minReplicas** to **1** so the app always has at least one replica running. The **scale** section should look similar to the following example.
+1. Navigate to **Explorer**, select the **app-config.yaml (1)**, then open the **app-config.yaml (2)** file in VS Code. 
+
+    ![](../Images/Lab05-Task4-2.png)
+
+    > **Note:** While performing this lab with the Bash command that generates the **app-config.yaml** file, navigate to **Explorer** and, under the **client (1)** folder, select the **app-config.yaml (2)** file.
+    ![](../Images/Lab05-Task4-7b.png)
+
+
+1. Find the **scale** section under **properties > template**. Modify the scaling configuration to reduce the **cooldownPeriod** to **200** seconds (faster scale-down), set **maxReplicas** to **5**, and set **minReplicas** to **1** so the app always has at least one replica running. The **scale** section should look similar to the following example.
 
     ```yaml
     scale:
@@ -367,8 +391,11 @@ In this task, you will update the container app scaling configuration by editing
       minReplicas: 1
       pollingInterval: 30
     ```
+    ![](../Images/Lab05-Task4-3.png)
 
-1. Save the file and run the following command to apply the updated configuration.
+1. Press **Ctrl+S** to save the changes in the **app-config.yaml**.
+
+1. Run the following command to apply the updated configuration.
 
     **Bash**
     ```bash
@@ -377,6 +404,7 @@ In this task, you will update the container app scaling configuration by editing
         --resource-group $RESOURCE_GROUP \
         --yaml app-config.yaml
     ```
+    ![](../Images/Lab05-Task4-8b.png)
 
     **PowerShell**
     ```powershell
@@ -385,6 +413,7 @@ In this task, you will update the container app scaling configuration by editing
         --resource-group $env:RESOURCE_GROUP `
         --yaml app-config.yaml
     ```
+    ![](../Images/Lab05-Task4-4.png)
 
 1. Run the following command to verify the changes you just implemented.
 
@@ -395,6 +424,7 @@ In this task, you will update the container app scaling configuration by editing
         --resource-group $RESOURCE_GROUP \
         --query "properties.template.scale"
     ```
+    ![](../Images/Lab05-Task4-9b.png)
 
     **PowerShell**
     ```powershell
@@ -403,36 +433,10 @@ In this task, you will update the container app scaling configuration by editing
         --resource-group $env:RESOURCE_GROUP `
         --query "properties.template.scale"
     ```
+    ![](../Images/Lab05-Task4-5.png)
 
-## Troubleshooting
+## Summary
 
-If you encounter issues during this exercise, try these steps:
-
-**App not scaling out under load**
-- Verify the HTTP scale rule is configured: **az containerapp show --query "properties.template.scale"**
-- Ensure you're generating concurrent requests (use the dashboard with delayMs > 0)
-- Increase **delayMs** (500-1500ms) so requests overlap and concurrency accumulates
-- Check system logs for scaling events: **az containerapp logs show --type system --tail 50**
-
-**Dashboard won't start or can't list revisions/replicas**
-- Ensure Python virtual environment is activated (you should see **(.venv)** in your terminal prompt)
-- Ensure dependencies are installed: **pip install -r client/requirements.txt**
-- Ensure Azure CLI is installed and you ran **az login**
-- Ensure the **containerapp** extension is installed: **az extension add --name containerapp**
-- Ensure **.env** is loaded and contains **RESOURCE_GROUP** and **CONTAINER_APP_NAME**
-
-**Python venv activation issues**
-- On Linux/macOS, use: **source client/.venv/bin/activate**
-- On Windows PowerShell, use: **.\client\.venv\Scripts\Activate.ps1**
-- If **activate** script is missing, reinstall **python3-venv** package and recreate the venv
-
-**YAML update fails**
-- Ensure the YAML file syntax is valid (check indentation)
-- Some read-only properties like **id**, **systemData**, and **type** may cause errors; remove them if needed
-- Verify the scale section follows the correct structure under **properties > template > scale**
-
-### Summary
-
-In this lab, you configured autoscaling for a containerized application in Azure Container Apps to help it respond efficiently to changing workloads. You started by creating the required Azure resources, deployed a mock agent API, and applied KEDA-based HTTP concurrency rules so the app could automatically scale out when traffic increased and scale in when demand decreased. You also generated concurrent requests to observe replica changes in real time and updated the scaling configuration using YAML, giving you a more reusable and maintainable way to manage autoscaling behavior.
+In this lab, you configured autoscaling for a containerized application in **Azure Container Apps** to help it respond efficiently to changing workloads. You started by creating the required Azure resources, deployed a mock agent API, and applied **KEDA**-based HTTP concurrency rules so the app could automatically scale out when traffic increased and scale in when demand decreased. You also generated concurrent requests to observe replica changes in real time and updated the scaling configuration using **YAML**, giving you a more reusable and maintainable way to manage autoscaling behavior.
 
 ## You have successfully completed the Hands-on Lab!
