@@ -9,10 +9,9 @@ In this lab, you will configure autoscaling for a containerized application in A
 ## Lab Overview
 
 - **Task 1:** Create Azure Container Registry and Container Apps resources
-- **Task 2:** Deploy a mock agent API container app
-- **Task 3:** Configure an HTTP concurrency scale rule using KEDA
-- **Task 4:** Generate concurrent requests to trigger scale-out and monitor replica count changes in real-time
-- **Task 5:** Configure scale rules using YAML
+- **Task 2:** Configure an HTTP concurrency scale rule
+- **Task 3:**  Generate load and observe scaling
+- **Task 4:** Configure scale rules using YAML
 
 > **Note:** This lab includes deployment scripts for both **PowerShell** and **Bash**. You may choose either scripting language based on your preference or environment. Once you make your choice, use the corresponding commands and script throughout the entire lab, as all subsequent steps provide instructions for both PowerShell and Bash.
 
@@ -209,7 +208,6 @@ In this task, you will create the Azure resources required for the lab by runnin
 
     > **Note:** Keep the terminal open. If you close it and create a new terminal, you might need to run the command to create the environment variable again.
 
-
 > **Congratulations** on completing the task! Now, it's time to validate it. Here are the steps:
 >
 > - If you receive a success message, you can proceed to the next task.
@@ -218,10 +216,7 @@ In this task, you will create the Azure resources required for the lab by runnin
 
 <validation step="" />
 
-
-
-
-## Task 2: Configure autoscaling
+## Task 2: Configure an HTTP concurrency scale rule 
 
 In this task, you will configure an HTTP scale rule that triggers autoscaling based on concurrent requests. This allows the container app to scale out when demand increases and scale in when the workload decreases.
 
@@ -303,9 +298,9 @@ In this task, you will run a local dashboard that generates concurrent requests 
     ```bash
     source .venv/Scripts/activate
     ```
-   > **Note:** On Linux/macOS, use the Bash command **source .venv/bin/activate**.
-
     ![](../Images/Lab05-Task3-5b.png)
+
+    > **Note:** On Linux/macOS, use the Bash command **source .venv/bin/activate**.
 
     **PowerShell**
     ```powershell
@@ -336,13 +331,11 @@ In this task, you will run a local dashboard that generates concurrent requests 
 
      ![](../Images/Lab05-Task3-4.png)
 
-
-    > **Note:** When you deployed the app it defaulted to **1** running replica. You applied KEDA scale rule in a previous step and scaling down to zero may take an additional **~5 minutes** after the workload becomes idle because of the default **300-second (5-minute)** cool-down period.
+    >**Note:** When you deployed the app it defaulted to **1** running replica. You applied KEDA scale rule in a previous step and scaling down to zero may take an additional **~5 minutes** after the workload becomes idle because of the default **300-second (5-minute)** cool-down period.
 
 1. In the **Load Generator** section, select **Start** to being sending data to the container app.
 
     ![](../Images/Lab05-Task3-5.png)
-
 
 1. Select **Refresh Revisions & Replicas** every 5-10 seconds and you should see the number of replicas increase. You can run the **Load Generator** again after it stops to increase the traffic and increase replica count.
 
@@ -380,7 +373,6 @@ In this task, you will update the container app scaling configuration by editing
 
     > **Note:** While performing this lab with the Bash command that generates the **app-config.yaml** file, navigate to **Explorer** and, under the **client (1)** folder, select the **app-config.yaml (2)** file.
     ![](../Images/Lab05-Task4-7b.png)
-
 
 1. Find the **scale** section under **properties > template**. Modify the scaling configuration to reduce the **cooldownPeriod** to **200** seconds (faster scale-down), set **maxReplicas** to **5**, and set **minReplicas** to **1** so the app always has at least one replica running. The **scale** section should look similar to the following example.
 
