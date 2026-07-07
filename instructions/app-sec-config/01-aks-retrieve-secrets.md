@@ -1,6 +1,6 @@
 # Lab 21: Manage secrets with Azure Key Vault
 
-### Estimated Duration : 45 Minutes
+### Estimated Duration : 60 Minutes
 
 ## Overview
 
@@ -157,7 +157,7 @@ In this section you download the project starter files and use a script to deplo
 
 In this section you add code to the *keyvault_functions.py* file to complete the Key Vault secret management functions. The Flask app in *app.py* calls these functions and displays the results in the browser. You run the app later in the exercise.
 
-1. Open the *client/keyvault_functions.py* file to begin adding code.
+1. Open the **client/keyvault_functions.py** file to begin adding code.
 
     ![](../Images/ai200-l21-10.png)
 
@@ -381,7 +381,7 @@ In this section, you navigate to the client app directory, create the Python env
     python -m venv .venv
     ```
 
-1. Run the following command to activate the Python environment. **Note:** On Linux/macOS, use the Bash command. On Windows, use the PowerShell command. If using Git Bash on Windows, use **source .venv/Scripts/activate**.
+1. Run the following command to activate the Python environment.
 
     **Bash**
     ```bash
@@ -395,13 +395,15 @@ In this section, you navigate to the client app directory, create the Python env
 
     ![](../Images/ai200-l21-15.png)
 
+    > **Note:** On Linux/macOS, use the Bash command, use **source .venv/bin/activate**.
+
 1. Run the following command in the VS Code terminal to install the dependencies.
 
     ```
     pip install -r requirements.txt
     ```
 
-## task 4: Run the app
+## Task 4: Run the app
 
 In this section, you run the completed Flask application to perform various Key Vault secret management operations. The app provides a web interface that lets you retrieve secrets, list their properties, create new versions, and test cached retrieval.
 
@@ -421,19 +423,21 @@ In this section, you run the completed Flask application to perform various Key 
 
      ![](../Images/ai200-l21-18.png)
 
-1. Select **List Secret Properties**. This lists the properties of all secrets in the vault without exposing their values. The results show each secret's name, enabled status, content type, creation date, and last updated date. This operation is useful for inventory and audit scenarios.
-
-    ![](../Images/ai200-l21-19.png)
-
-1. Select **Create New Version**. This creates a new version of the **openai-api-key** secret with a randomly generated value, simulating a credential rotation. The results show the previous version and value alongside the new version and value, confirming that **set_secret()** creates a new version while preserving the old one.
+1. Select **List Secret Properties (1)**. This lists the properties of all secrets in the vault without exposing their values. The results show each secret's name, enabled status, content type, creation date, and last updated date **(2)**. This operation is useful for inventory and audit scenarios.
 
     ![](../Images/ai200-l21-20.png)
+
+1. Select **Create New Version (1)**. This creates a new version of the **openai-api-key** secret with a randomly generated value, simulating a credential rotation. The results show the previous version and value alongside the new version and value, confirming that **set_secret()** creates a new version while preserving the old one **(2)**.
+
+    ![](../Images/ai200-l21-19.png)
 
 1. Select **Retrieve Secrets** in the left panel to verify the secret was updated.
 
     ![](../Images/ai200-l21-21.png)
 
 1. Select **Run Cached Retrieval**. This simulates five rounds of accessing both secrets with a 30-second TTL cache. The first round shows two cache misses (one per secret) as the values are fetched from Key Vault. The remaining rounds show cache hits because the TTL has not expired. The summary confirms that only 2 Key Vault API calls were made for 10 total accesses.
+
+    ![](../Images/ai200-l21-22.png)
 
 ### Summary
 
