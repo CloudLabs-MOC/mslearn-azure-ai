@@ -1,6 +1,6 @@
 # Lab 14: Optimize vector search performance in Azure Database for PostgreSQL
 
-### Estimated Duration : 30 Minutes
+### Estimated Duration : 60 Minutes
 
 ## Overview
 
@@ -8,52 +8,110 @@ In this exercise, you deploy an Azure Database for PostgreSQL instance and optim
 
 ## Lab Objectives
 
-- **Task 1:** Download project starter files and configure the deployment script
-- **Task 2:** Deploy an Azure Database for PostgreSQL Flexible Server with Microsoft Entra authentication
-- **Task 3:** Create a test dataset with vector embeddings
-- **Task 4:** Analyze baseline vector search performance without indexes
-- **Task 5:** Create and compare IVFFlat and HNSW vector indexes
-- **Task 6:** Tune index parameters to balance speed and recall
+- **Task 1:** Prepare the environment
 
+- **Task 2:** Create resources in Azure
 
-## Download project starter files and deploy Azure services
+- **Task 3:** Review vector index concepts
+
+- **Task 4:** Complete the Azure resource deployment
+
+- **Task 5:** Create the database schema and test data
+
+- **Task 6:** Analyze baseline performance
+
+- **Task 7:** Create and compare IVFFlat and HNSW indexes
+
+- **Task 8:** Implement metadata filtering with indexes
+
+## Task 1: Prepare the environment
 
 In this section you download the project starter files and use a script to deploy the necessary services to your Azure subscription. The PostgreSQL server deployment takes a few minutes to complete.
 
-1. Open a browser and enter the following URL to download the starter file. The file will be saved in your default download location.
+1. Launch **Visual Studio Code** (VS Code) from desktop.
 
-    ```
-    https://github.com/MicrosoftLearning/mslearn-azure-ai/raw/main/downloads/python/postgresql-optimize-vector-search-python.zip
-    ```
+   ![](../Images/vsimage.png)
 
-1. Copy, or move, the file to a location in your system where you want to work on the project. Then unzip the file into a folder.
+1. Select **File Explorer (1)**, then **Open Folder (2)** from the menu.
 
-1. Launch Visual Studio Code (VS Code) and select **File > Open Folder...** in the menu, then choose the folder containing the project files.
+   ![](../Images/folderimagea.png)
 
-1. The project contains deployment scripts for both Bash (*azdeploy.sh*) and PowerShell (*azdeploy.ps1*). Open the appropriate file for your environment and change the two values at the top of the script to meet your needs, then save your changes. **Note:** Do not change anything else in the script.
+1. Navigate to **C:\AllFiles (1)** and click **Select Folder (2)**.
 
-    ```
-    "<your-resource-group-name>" # Resource Group name
-    "<your-azure-region>" # Azure region for the resources
-    ```
+   ![](../Images/ai200-l14-1.png)
 
-1. In the menu bar select **Terminal > New Terminal** to open a terminal window in VS Code.
+1. If you see the prompt, **Do you trust the authors of the files in this folder?**, click **Yes, I trust the authors**.
 
-    >**Tip:** This entire exercise is performed in the terminal. Maximize the panel size to make it easier to view the results of the commands.
+   ![](../Images/Lab01-Task1-4.png)
 
-1. Run the following command to log in to your Azure account. Answer the prompts to select your Azure account and subscription for the exercise.
+1. Once the folder opens in VS Code, select **Explorer (1)** and then **azdeploy.ps1 (2)**.
 
-    ```
-    az login
-    ```
+    ![](../Images/ai200-l14-2.png)
 
-1. Run the following command to ensure your subscription has the necessary resource provider for the exercise.
+1. The project contains deployment scripts for both Bash (_azdeploy.sh_) and PowerShell (_azdeploy.ps1_). Open the appropriate file for your environment and change the two values: **Resource group name** as **<inject key="ResourceGroupName" enableCopy="false"/>** and **Azure Region** as **<inject key="Region" enableCopy="false"/>** at the top of the script to meet your needs.
 
-    ```azurecli
-    az provider register --namespace Microsoft.DBforPostgreSQL
-    ```
+   ```
+   "<your-resource-group-name>" # Resource Group name
+   "<your-azure-region>" # Azure region for the resources
+   ```
 
-### Create resources in Azure
+   ![](../Images/ai200-l14-3.png)
+
+   ![](../Images/ai200-l14-4.png)
+
+1. In the menu bar, select **File (1)** and select **Save All (2)** from drop-down.
+
+   ![](../Images/Lab01-Task1-7.png)
+
+1. In the menu bar, select **ellipsis (...) (1)**, then **Terminal (2)**, and then **New Terminal (3)** to open a terminal window in VS Code.
+
+   ![](../Images/ai200-l13-6.png)
+
+   > **NOTE:** If you are using Bash, after the terminal opens, click on the **+ (1)** icon to open a new terminal and select **Git Bash (2)** from the drop-down. If you are using PowerShell, skip this step.
+   
+   ![](../Images/lab06-t1p5.png)
+
+1. Run the following command in the terminal to allow PowerShell scripts to run. This command is only required if you are using PowerShell. If you are using Bash, skip this step.
+
+   ```
+   Set-ExecutionPolicy -ExecutionPolicy bypass -Force
+   ```
+
+   ![](../Images/Lab01-Task1-9.png)
+
+1. Run the **following command (1)** to login to your Azure account. Next, **minimize the VS Code window (2)** to view the login window opened in background.
+
+   ```
+   az login
+   ```
+
+   ![](../Images/lab06-t1p6.png)
+
+1. In the login window, select **Work or school account (1)** and click **Continue (2)**.
+
+   ![](../Images/Lab01-Task1-11.png)
+
+1. In the login window, kindly sign in using the provided **Azure credentials (1)** and click **Next (2)**.
+   - **Email/Username:** <inject key="AzureAdUserEmail"></inject>
+
+     ![](../Images/Lab01-Task1-12.png)
+
+1. Next, enter the provided **Password (1)** and click **Sign in (2)**.
+   - **Password:** <inject key="AzureAdUserPassword"></inject>
+
+     ![](../Images/Lab01-Task1-13.png)
+
+1. Next, select **No, this app only** and navigate back to VS Code to continue.
+
+   ![](../Images/Lab01-Task1-14.png)
+
+1. Answer the prompts to select your Azure account and subscription for the exercise.
+
+   ![](../Images/Lab01-Task1-15.png)
+
+   > **NOTE:** To confirm you're logged in to the correct Azure subscription, run **az account show**.
+
+## Task 2: Create resources in Azure
 
 In this section you run the deployment script to deploy the PostgreSQL server and configure authentication.
 
@@ -61,7 +119,7 @@ In this section you run the deployment script to deploy the PostgreSQL server an
 
     **Bash**
     ```bash
-    bash azdeploy.sh
+    MSYS_NO_PATHCONV=1 bash azdeploy.sh
     ```
 
     **PowerShell**
@@ -69,11 +127,15 @@ In this section you run the deployment script to deploy the PostgreSQL server an
     ./azdeploy.ps1
     ```
 
+    ![](../Images/ai200-l14-5.png)
+
 1. When the script menu appears, enter **1** to launch the **Create PostgreSQL server with Entra authentication** option. This creates the server with Entra-only authentication enabled. **Note:** Deployment can take 5-10 minutes to complete.
+
+    ![](../Images/ai200-l14-6.png)
 
     >**IMPORTANT:** Leave the terminal running the deployment open for the duration of the exercise. You can move on to the next section of the exercise while the deployment continues in the terminal.
 
-## Review vector index concepts
+## Task 3: Review vector index concepts
 
 In this section you review the key concepts for vector indexing that you apply later in the exercise. Understanding these trade-offs helps you make informed decisions when optimizing vector search.
 
@@ -108,15 +170,23 @@ Key parameters:
 
 For this exercise, you test both index types and measure the trade-offs firsthand.
 
-## Complete the Azure resource deployment
+## Task 4: Complete the Azure resource deployment
 
 In this section you return to the deployment script to configure the Microsoft Entra administrator and retrieve the connection information for the PostgreSQL server.
 
 1. When the **Create PostgreSQL server with Entra authentication** operation has completed, enter **2** to launch the **Configure Microsoft Entra administrator** option. This sets your Azure account as the database administrator.
 
+    ![](../Images/ai200-l14-7.png)
+
 1. When the previous operation completes, enter **3** to launch the **Check deployment status** option. This verifies the server is ready.
 
+    ![](../Images/ai200-l14-8.png)
+
 1. Enter **4** to launch the **Retrieve connection info and access token** option. This creates a file with the necessary environment variables.
+
+    ![](../Images/ai200-l14-9.png)
+
+    ![](../Images/ai200-l14-10.png)
 
 1. Enter **5** to exit the deployment script.
 
@@ -136,7 +206,7 @@ In this section you return to the deployment script to configure the Microsoft E
 
     >**Note:** The access token expires after approximately one hour. If you need to reconnect later, run the script again and select option **4** to generate a new token, then export the variables again.
 
-## Create the database schema and test data
+## Task 5: Create the database schema and test data
 
 In this section you connect to the PostgreSQL server and create a table with product data and vector embeddings for testing.
 
@@ -159,6 +229,8 @@ In this section you connect to the PostgreSQL server and create a table with pro
     ```sql
     CREATE EXTENSION IF NOT EXISTS vector;
     ```
+
+    ![](../Images/ai200-l14-11.png)
 
 1. Run the following command to create the products table with a vector column. The **vector(384)** data type stores 384-dimensional embeddings, a common size for sentence embedding models.
 
@@ -195,6 +267,8 @@ In this section you connect to the PostgreSQL server and create a table with pro
     SELECT COUNT(*) FROM products;
     ```
 
+    ![](../Images/ai200-l14-12.png)
+
 1. Run the following command to create a query vector for consistent testing. This temporary table stores a random embedding you use throughout the exercise.
 
     ```sql
@@ -205,7 +279,7 @@ In this section you connect to the PostgreSQL server and create a table with pro
     ), ',') || ']')::vector AS embedding;
     ```
 
-## Analyze baseline performance
+## Task 6: Analyze baseline performance
 
 In this section you measure vector search performance without any indexes to establish a baseline.
 
@@ -221,13 +295,15 @@ In this section you measure vector search performance without any indexes to est
 
 1. Examine the output. You should see a **Seq Scan** in the plan, indicating PostgreSQL is scanning all 100,000 rows. Note the **Execution Time** value at the bottom.
 
+    ![](../Images/ai200-l14-13.png)
+
 1. Run the query two more times to get consistent measurements. The first run might be slower due to cold caches. Record the last execution time as your baseline.
 
-## Create and compare IVFFlat and HNSW indexes
+## Task 7: Create and compare IVFFlat and HNSW indexes
 
 In this section you create both index types and compare their performance.
 
-### Create an IVFFlat index
+### Task 7.1: Create an IVFFlat index
 
 1. Run the following command to create an IVFFlat index. For 100,000 rows, 100 lists is a reasonable starting point (using the `rows / 1000` guideline). Note the time taken to build the index.
 
@@ -269,7 +345,7 @@ In this section you create both index types and compare their performance.
     LIMIT 10;
     ```
 
-### Create an HNSW index
+### Task 7.2: Create an HNSW index
 
 1. Run the following command to drop the IVFFlat index so you can test HNSW independently.
 
@@ -282,6 +358,8 @@ In this section you create both index types and compare their performance.
     ```sql
     SET maintenance_work_mem = '256MB';
     ```
+
+    ![](../Images/ai200-l14-14.png)
 
 1. Run the following command to create an HNSW index. Note the build time, which is typically longer than IVFFlat.
 
@@ -323,6 +401,8 @@ In this section you create both index types and compare their performance.
     LIMIT 10;
     ```
 
+    ![](../Images/ai200-l14-15.png)
+
 ### Compare your results
 
 Compare your execution times across the different configurations. You should observe:
@@ -332,7 +412,7 @@ Compare your execution times across the different configurations. You should obs
 - **HNSW** generally provides faster queries than IVFFlat at similar recall levels
 - Increasing **probes** (IVFFlat) or **ef_search** (HNSW) improves accuracy but increases latency
 
-## Implement metadata filtering with indexes
+## Task 8: Implement metadata filtering with indexes
 
 In this section you test queries that combine vector similarity with metadata filters. In production applications, pure vector search is rare - you typically filter by category, date range, price, or other attributes before finding similar items. Optimizing these combined queries requires understanding how PostgreSQL uses multiple index types together.
 
@@ -364,6 +444,8 @@ In this section you test queries that combine vector similarity with metadata fi
     LIMIT 10;
     ```
 
+    ![](../Images/ai200-l14-16.png)
+
 1. Run the following command to create a composite index for the filter combination.
 
     ```sql
@@ -393,41 +475,3 @@ In this exercise, you:
 - Implemented metadata filtering with B-tree indexes
 
 These techniques enable you to optimize Azure Database for PostgreSQL for production vector search workloads.
-
-# Clean up resources
-
-Now that you finished the exercise, you should delete the cloud resources you created to avoid unnecessary resource usage.
-
-1. Run the following command in the VS Code terminal to delete the resource group, and all resources in the group. Replace **\<rg-name>** with the name you choose earlier in the exercise. The command will launch a background task in Azure to delete the resource group.
-
-    ```
-    az group delete --name <rg-name> --no-wait --yes
-    ```
-
-> **CAUTION:** Deleting a resource group deletes all resources contained within it. If you chose an existing resource group for this exercise, any existing resources outside the scope of this exercise will also be deleted.
-
-## Troubleshooting
-
-If you encounter issues during this exercise, try these steps:
-
-**psql connection fails**
-- Ensure the *.env* file was created by running the deployment script option **4**
-- Ensure you ran **source .env** (Bash) or **. .\.env.ps1** (PowerShell) to load environment variables
-- The access token expires after approximately one hour; run the deployment script option **4** again to generate a new token
-- Verify the server is ready by running the deployment script option **3**
-
-**Access denied or authentication errors**
-- Ensure the Microsoft Entra administrator was configured by running the deployment script option **2**
-- Verify **PGPASSWORD** is set correctly in your terminal session
-- Ensure you're using the correct **DB_USER** value (your Azure account email)
-
-**Index build takes too long or fails**
-- HNSW indexes take longer to build than IVFFlat; allow 1-2 minutes for 100,000 vectors
-- If the build times out, check CPU and memory metrics in Azure Monitor
-- Consider reducing the dataset size for testing
-
-### Summary
-
-
-
-## You have successfully completed the Hands-on Lab!
