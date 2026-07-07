@@ -473,7 +473,7 @@ In this section, you practice loading sample vector data into Redis and then per
 > - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
 > - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help you out.
 
-<validation step="09b2eabe-f01e-4341-853b-6d1250298d03" />
+<validation step="50fc6a7a-a0e0-4aa0-823e-ee07ab17e5cc" />
 
 ## Summary
 

@@ -164,7 +164,7 @@ In this task, you'll prepare the development environment, configure the deployme
 > - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
 > - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help you out.
 
-<validation step="ebfa3f28-b6b8-4061-9f75-0b0507be8e9e" />
+<validation step="9273bd12-ef48-4c0c-b041-44e48485088a" />
 
 ## Task 2: Complete the app
 
