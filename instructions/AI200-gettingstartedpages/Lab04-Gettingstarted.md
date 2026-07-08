@@ -48,7 +48,7 @@ This lab architecture illustrates a containerized backend API deployed to Azure 
 
 ## Architecture Diagram
 
-![pending](../Images/lab4-arch.png)
+![pending](../Images/lab4-archdiagram.png)
 
 ## Explanation of Components
 

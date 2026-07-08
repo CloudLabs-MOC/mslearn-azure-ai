@@ -41,7 +41,7 @@ The lab architecture shows a semantic search application built on Azure Cosmos D
 
 ## Architecture Diagram
 
-![pending](../Images/lab10-arch.png)
+![pending](../Images/lab10-archdiagram.png)
 
 ## Explanation of Components
 

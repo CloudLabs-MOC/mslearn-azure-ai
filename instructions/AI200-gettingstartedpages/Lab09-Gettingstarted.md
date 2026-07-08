@@ -39,7 +39,7 @@ The lab architecture shows a RAG document store built on Azure Cosmos DB for NoS
 
 ## Architecture Diagram
 
-![pending](../Images/lab9-arch.png)
+![pending](../Images/lab9-archdiagram.png)
 
 ## Explanation of Components
 

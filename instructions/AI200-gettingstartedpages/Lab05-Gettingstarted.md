@@ -46,7 +46,7 @@ The lab architecture shows a containerized backend API deployed to Azure Contain
 
 ## Architecture Diagram
 
-![pending](../Images/lab5-arch.png)
+![pending](../Images/lab5-archdiagram.png)
 
 ## Explanation of Components
 

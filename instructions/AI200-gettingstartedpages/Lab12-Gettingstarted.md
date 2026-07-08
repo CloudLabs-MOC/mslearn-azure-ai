@@ -41,7 +41,7 @@ The lab architecture demonstrates an AI agent tool backend built on Azure Databa
 
 ## Architecture Diagram
 
-![pending](../Images/lab12-arch.png)
+![pending](../Images/lab12-archdiagram.png)
 
 ## Explanation of Components
 

@@ -6,7 +6,7 @@
 
 In this hands-on lab, you deploy Azure Service Bus and complete the messaging logic for a Python application. The application demonstrates core messaging patterns by sending and processing queue messages, handling invalid messages with a dead-letter queue, and publishing messages to topics with filtered subscriptions. You implement Azure Service Bus operations using the Azure SDK for Python and Microsoft Entra authentication, then verify queue processing, dead-letter handling, and topic-based message routing through a web application.
 
-## Lab objectives
+## Lab Objective
 
 In this lab, you'll perform the following tasks:
 

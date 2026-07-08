@@ -38,7 +38,7 @@ The lab architecture shows a containerized API deployed to Azure Kubernetes Serv
 
 ## Architecture Diagram
 
-![pending](../Images/lab8-arch.png)
+![pending](../Images/lab8-archdiagram.png)
 
 ## Explanation of Components
 

@@ -6,7 +6,7 @@
 
 In this hands-on lab, you will diagnose and fix a failing container app deployment in Azure Container Apps. You will investigate deployment issues by reviewing revision status, checking application logs, and using the Azure CLI to isolate problems such as missing environment variables and ingress configuration errors. By the end of the lab, you will have practiced the troubleshooting workflow used to keep containerized AI applications healthy and running correctly.
 
-## Lab Overview
+## Lab Objective
 
 - **Task 1:** Deploy Azure Container Registry and Container App Environment
 - **Task 2:** Diagnose a missing environment variable error
@@ -512,7 +512,7 @@ In this task, you will use Log Analytics to review historical container logs and
 
 These queries help you investigate issues that occurred in the past, even after container restarts or revision changes.
 
-### Summary
+## Summary
 
 In this lab, you diagnosed and resolved common deployment issues in Azure Container Apps by reviewing revision state, inspecting logs, and using the Azure CLI to identify and fix problems. You learned how missing environment variables and incorrect ingress settings can affect application behavior, and how to validate your fixes by testing the app and reviewing troubleshooting data.
 

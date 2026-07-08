@@ -48,7 +48,7 @@ The lab architecture shows how Azure Container Apps, Azure Container Registry, a
 
 ## Architecture Diagram
 
-![pending](../Images/lab3-arch.png)
+![pending](../Images/lab3-archdiagram.png)
 
 ## Explanation of Components
 

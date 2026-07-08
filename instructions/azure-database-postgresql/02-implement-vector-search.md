@@ -496,3 +496,4 @@ In this section you add new products to the database and observe how they appear
 
 In this exercise, you built a product similarity search application using Azure Database for PostgreSQL and the pgvector extension. You deployed a PostgreSQL Flexible Server with Microsoft Entra authentication, enabled the pgvector extension, and created a products table with a 384-dimensional vector column for storing embeddings. You added an HNSW index to optimize similarity queries, then used a Flask web application to load sample products and perform vector similarity searches using the cosine distance operator (**\<=>**). This pattern demonstrates how to build recommendation systems and semantic search features that find related items based on their semantic meaning rather than exact keyword matches.
 
+## You have successfully completed the Hands-on Lab!

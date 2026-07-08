@@ -2,11 +2,13 @@
 
 ### Estimated Duration: 60 Minutes
 
-## Overview
+## Lab Overview
 
 In this hands-on lab, you will deploy a containerized application to Azure App Service by using a private Azure Container Registry (ACR). You will create an ACR, build and store a container image, and deploy it to a Linux Web App. You will also configure a system-assigned managed identity with the **AcrPull** role to securely access the private registry. Finally, you will configure the application, enable logging, and verify the deployment by testing the application and reviewing its logs.
 
 ## Lab Overview
+
+In this lab, you'll perform the following tasks:
 
 - **Task 1:** Deploy Azure Container Registry and App Service Plan
 - **Task 2:** Create and configure a web app
@@ -200,7 +202,7 @@ In this hands-on lab, you will deploy a containerized application to Azure App S
 
 ## Task 2: Create and configure a web app
 
-In this section, you create the web app by using CLI commands. You then configure the web app with a system-assigned managed identity so that the app can access the image in the ACR.
+In this task, you create the web app by using CLI commands. You then configure the web app with a system-assigned managed identity so that the app can access the image in the ACR.
 
 1. Run the following command to create a Web App for Containers that is configured to pull from your container registry.
 
@@ -263,7 +265,7 @@ In this section, you create the web app by using CLI commands. You then configur
  
 ## Task 3: Assign the AcrPull role to the web app
 
-In this section, you grant the web app permission to pull images from your private registry. Managed identities are Microsoft Entra-backed identities that Azure creates and manages for you. When you enable a system-assigned identity on the web app, App Service can request tokens as that identity.
+In this task, you grant the web app permission to pull images from your private registry. Managed identities are Microsoft Entra-backed identities that Azure creates and manages for you. When you enable a system-assigned identity on the web app, App Service can request tokens as that identity.
 
 To enable the web app to use that identity to pull images, you assign the built-in **AcrPull** role scoped to your registry. This follows the principle of least privilege: the web app can download images, but it cannot push or administer the registry.
 
@@ -384,7 +386,7 @@ To enable the web app to use that identity to pull images, you assign the built-
 
 ## Task 4: Configure runtime settings and enable container logging
 
-In this section, you configure runtime settings and enable logging to help the container run more reliably and to make troubleshooting easier.
+In this task, you configure runtime settings and enable logging to help the container run more reliably and to make troubleshooting easier.
 
 1. Run the following command to configure the container port. The sample image listens on port 80 by default, so this step demonstrates the setting without changing the behavior.
 
@@ -468,7 +470,7 @@ In this section, you configure runtime settings and enable logging to help the c
 
 ## Task 5: Verify the deployment and test the document processing endpoint
 
-In this section, you verify that the web app is running and responding.
+In this task, you verify that the web app is running and responding.
 
 1. Run the following command to retrieve the web app host name.
 
@@ -502,7 +504,7 @@ In this section, you verify that the web app is running and responding.
 
 ## Task 6: Test document processing
 
-In this section, you send a request to the API to confirm that the app is working and that results are being written to persistent storage.
+In this task, you send a request to the API to confirm that the app is working and that results are being written to persistent storage.
 
 1. Run the following command to submit the *document.txt* file included in the project to the processing endpoint.
 
@@ -541,7 +543,7 @@ In this section, you send a request to the API to confirm that the app is workin
 
 ## Task 7: Stream container logs
 
-In this section, you stream container logs to help troubleshoot startup and request processing issues.
+In this task, you stream container logs to help troubleshoot startup and request processing issues.
 
 1. Run the following command to view real-time logs from the container.
 
@@ -565,7 +567,7 @@ In this section, you stream container logs to help troubleshoot startup and requ
 
 ## Task 8: Inspect the diagnostic console
 
-In this section, you open the SCM (Kudu) site to inspect configuration views and common log locations.
+In this task, you open the SCM (Kudu) site to inspect configuration views and common log locations.
 
 1. Run the following command to print the SCM (Kudu) URL.
 
@@ -595,7 +597,7 @@ In this section, you open the SCM (Kudu) site to inspect configuration views and
 
 ## Task 9: View application settings
 
-In this section, you confirm that the app settings you configured are present.
+In this task, you confirm that the app settings you configured are present.
 
 1. Run the following command to list the application settings.
 

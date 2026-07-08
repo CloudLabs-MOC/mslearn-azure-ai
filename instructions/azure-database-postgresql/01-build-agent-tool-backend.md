@@ -26,7 +26,7 @@ In this hands-on lab, you create an Azure Database for PostgreSQL instance that 
 
 ## Task 1: Prepare the environment
 
-In this section you download the project starter files and use a script to deploy the necessary services to your Azure subscription. The PostgreSQL server deployment takes a few minutes to complete.
+In this task you download the project starter files and use a script to deploy the necessary services to your Azure subscription. The PostgreSQL server deployment takes a few minutes to complete.
 
 1. Launch **Visual Studio Code** (VS Code) from desktop.
 
@@ -144,7 +144,7 @@ In this section you download the project starter files and use a script to deplo
 
 ## Task 3: Complete the tool function app
 
-In this section you complete the *agent_tools.py* file by adding functions that an AI agent can call to persist and retrieve state. These functions serve as the agent's interface to the database. The *test_workflow.py* script, which you run later in this exercise, imports these functions to demonstrate how an agent would use them.
+In this task you complete the *agent_tools.py* file by adding functions that an AI agent can call to persist and retrieve state. These functions serve as the agent's interface to the database. The *test_workflow.py* script, which you run later in this exercise, imports these functions to demonstrate how an agent would use them.
 
 1. Open the **agent-backend/agent_tools.py** file in VS Code.
 
@@ -247,7 +247,7 @@ Next, you finalize the Azure resource deployment.
 
 ## Task 4: Complete the Azure resource deployment
 
-In this section you return to the deployment script to configure the Microsoft Entra administrator and retrieve the connection information for the PostgreSQL server.
+In this task you return to the deployment script to configure the Microsoft Entra administrator and retrieve the connection information for the PostgreSQL server.
 
 1. Go back to the terminal. When the **Create PostgreSQL server with Entra authentication** operation has completed, enter **2** to launch the **Configure Microsoft Entra administrator** option. This sets your Azure account as the database administrator.
 
@@ -285,7 +285,7 @@ Next, you create the schema to support the agent.
 
 ## Task 5: Create the agent memory schema with **psql**
 
-In this section you connect to the PostgreSQL server using the **psql** command-line tool and create the database schema for agent memory. The schema includes three tables: one for conversations (agent sessions), one for messages within those conversations, and one for task checkpoints that enable the agent to resume interrupted work.
+In this task you connect to the PostgreSQL server using the **psql** command-line tool and create the database schema for agent memory. The schema includes three tables: one for conversations (agent sessions), one for messages within those conversations, and one for task checkpoints that enable the agent to resume interrupted work.
 
 1. Run the following command to connect to the server using the environment variables. The **PGPASSWORD** environment variable is automatically used for authentication.
 
@@ -387,7 +387,7 @@ In this section you connect to the PostgreSQL server using the **psql** command-
 
 ## Task 6: Test the agent memory workflow
 
-In this section you run a test script to verify the tool functions work correctly. The *test_workflow.py* script is included in the project files and demonstrates creating conversations, storing messages, and managing task checkpoints.
+In this task you run a test script to verify the tool functions work correctly. The *test_workflow.py* script is included in the project files and demonstrates creating conversations, storing messages, and managing task checkpoints.
 
 1. Run the following command to navigate to the *agent-backend* directory.
 
@@ -435,7 +435,7 @@ In this section you run a test script to verify the tool functions work correctl
 
 ## Task 7: Query conversation context
 
-In this section you practice querying the data an agent would use to make decisions.
+In this task you practice querying the data an agent would use to make decisions.
 
 1. Run the following command to connect to the **agent_memory** database using the environment variables.
 
@@ -503,4 +503,6 @@ In this section you practice querying the data an agent would use to make decisi
 
 ## Summary
 
-In this exercise, you built a PostgreSQL-based tool backend for AI agents. You deployed an Azure Database for PostgreSQL Flexible Server with Microsoft Entra authentication, created Python functions that agents can call to manage conversations and task state, and designed a database schema with tables for conversations, messages, and task checkpoints. You tested the workflow by running a script that simulated agent operations, then queried the stored data using SQL. This pattern enables AI agents to maintain persistent memory across sessions and resume interrupted tasks.
+In this lab, you built a PostgreSQL-based tool backend for AI agents. You deployed an Azure Database for PostgreSQL Flexible Server with Microsoft Entra authentication, created Python functions that agents can call to manage conversations and task state, and designed a database schema with tables for conversations, messages, and task checkpoints. You tested the workflow by running a script that simulated agent operations, then queried the stored data using SQL. This pattern enables AI agents to maintain persistent memory across sessions and resume interrupted tasks.
+
+## You have successfully completed the Hands-on Lab!

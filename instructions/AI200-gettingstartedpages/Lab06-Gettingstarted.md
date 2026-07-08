@@ -44,7 +44,7 @@ The lab architecture shows a containerized AI inference API deployed to AKS. The
 
 ## Architecture Diagram
 
-![pending](../Images/lab6-arch.png)
+![pending](../Images/lab6-archdiagram.png)
 
 ## Explanation of Components
 

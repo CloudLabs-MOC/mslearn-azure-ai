@@ -2,11 +2,13 @@
 
 ### Estimated Duration : 60 Minutes
 
-## Overview
+## Lab Overview
 
 In this hands-on lab, you use Azure Container Registry (ACR) Tasks to build and manage container images entirely in the cloud, without requiring a local Docker installation.
 
-## Lab Objectives
+## Lab Objective
+
+In this lab, you'll perform the following tasks
 
 - **Task 1:** Deploy Azure Container Registry
 - **Task 2:** Build the image with ACR Tasks
@@ -17,7 +19,7 @@ In this hands-on lab, you use Azure Container Registry (ACR) Tasks to build and 
 
 ## Task 1: Deploy Azure Container Registry
 
-In this section you download the project starter files and use a script to deploy the necessary services to your Azure subscription. The Azure Container Registry deployment takes a few minutes to complete.
+In this task, you use a script to deploy the necessary services to your Azure subscription. The Azure Container Registry deployment takes a few minutes to complete.
 
 1. Launch **Visual Studio Code** (VS Code) from desktop.
 

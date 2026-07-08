@@ -41,7 +41,7 @@ The lab architecture shows a semantic search solution using Azure Cosmos DB for 
 
 ## Architecture Diagram
 
-![pending](../Images/lab11-arch.png)
+![pending](../Images/lab11-archdiagram.png)
 
 ## Explanation of Components
 

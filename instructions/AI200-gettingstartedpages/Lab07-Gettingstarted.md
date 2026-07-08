@@ -44,7 +44,7 @@ The lab architecture shows a containerized API deployed to AKS using ConfigMaps 
 
 ## Architecture Diagram
 
-![pending](../Images/lab7-arch.png)
+![pending](../Images/lab7-archdiagram.png)
 
 ## Explanation of Components
 
