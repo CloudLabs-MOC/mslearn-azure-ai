@@ -260,7 +260,7 @@ The function opens a **ServiceBusClient** using **DefaultAzureCredential** and c
 
 ### Task 2.2: Add code to process messages with peek-lock
 
-In this section, you add code to receive messages from the queue using peek-lock mode. The processor validates the JSON payload, completes valid messages, and dead-letters messages with invalid JSON by providing a reason and error description.
+In this task, you add code to receive messages from the queue using peek-lock mode. The processor validates the JSON payload, completes valid messages, and dead-letters messages with invalid JSON by providing a reason and error description.
 
 The function creates a queue receiver with **get_queue_receiver()** using peek-lock mode (the default), which locks each message while it's being processed but keeps it in the queue until settlement. For each message, it attempts to parse the JSON body. Valid messages are removed from the queue with **complete_message()**. Invalid messages are moved to the dead-letter sub-queue with **dead_letter_message()**, which accepts a **reason** and **error_description** for diagnostics.
 
@@ -317,7 +317,7 @@ The function creates a queue receiver with **get_queue_receiver()** using peek-l
 
 ### Task 2.3: Add code to inspect the dead-letter queue
 
-In this section, you add code to read messages from the dead-letter queue and display diagnostic information. The dead-letter queue captures messages that couldn't be processed, along with the reason and error description for troubleshooting.
+In this task, you add code to read messages from the dead-letter queue and display diagnostic information. The dead-letter queue captures messages that couldn't be processed, along with the reason and error description for troubleshooting.
 
 The function creates a receiver that targets the dead-letter sub-queue by passing **sub_queue=ServiceBusSubQueue.DEAD_LETTER** to **get_queue_receiver()**. For each dead-lettered message, it reads the diagnostic properties: **dead_letter_reason**, **dead_letter_error_description**, and **delivery_count**. After reading, it calls **complete_message()** to remove the message from the dead-letter queue.
 
@@ -361,7 +361,7 @@ The function creates a receiver that targets the dead-letter sub-queue by passin
 
 ### Task 2.4: Add code for topic messaging with filtered subscriptions
 
-In this section, you add code to send messages to a topic with different priority levels, then receive from each subscription to verify that filtering works. The **notifications** subscription receives all messages, while the **high-priority** subscription receives only messages where the **priority** application property equals **high**.
+In this task, you add code to send messages to a topic with different priority levels, then receive from each subscription to verify that filtering works. The **notifications** subscription receives all messages, while the **high-priority** subscription receives only messages where the **priority** application property equals **high**.
 
 The function uses **get_topic_sender()** to open a sender bound to the topic, then sends five messages with varying **priority** values in their **application_properties**. It then opens two subscription receivers with **get_subscription_receiver()**. The **notifications** subscription has no filter and receives all five messages. The **high-priority** subscription only delivers messages that match its SQL filter. Note that application properties may arrive as bytes due to AMQP encoding, so the code handles both string and bytes keys.
 
@@ -524,6 +524,6 @@ In this task, you'll run the completed application to send and process queue mes
 
 ## Summary
 
-In this lab, you implemented messaging solutions using Azure Service Bus by deploying a Service Bus namespace, completing the application's messaging logic, and running a web application to validate message processing workflows. You learned how to send and receive queue messages using peek-lock delivery, process invalid messages with the dead-letter queue, publish messages to topics, and route messages to subscriptions using SQL filters. These capabilities demonstrate common messaging patterns used to build reliable, asynchronous, and event-driven applications with Azure Service Bus.
+In this lab, you implemented messaging solutions using **Azure Service Bus** by deploying a Service Bus namespace, completing the application's messaging logic, and running a web application to validate message processing workflows. You learned how to send and receive queue messages using peek-lock delivery, process invalid messages with the dead-letter queue, publish messages to topics, and route messages to subscriptions using SQL filters. These capabilities demonstrate common messaging patterns used to build reliable, asynchronous, and event-driven applications with Azure Service Bus.
 
 ## You have successfully completed the Hands-on Lab!

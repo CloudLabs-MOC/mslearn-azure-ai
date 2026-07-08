@@ -468,6 +468,6 @@ In this task, you'll run the completed application to publish CloudEvents, verif
 
 ## Summary
 
-In this lab, you implemented event-driven messaging using Azure Event Grid by deploying an Event Grid Namespace, completing the application's event publishing and consumption logic, and running a web application to validate event processing workflows. You learned how to publish CloudEvents to an Event Grid namespace topic, receive events through pull delivery, verify event routing using filtered subscriptions, acknowledge successfully processed events, and reject events that cannot be processed. These capabilities demonstrate how Azure Event Grid enables scalable, event-driven applications with flexible event routing and reliable event processing.
+In this lab, you implemented event-driven messaging using **Azure Event Grid** by deploying an Event Grid Namespace, completing the application's event publishing and consumption logic, and running a web application to validate event processing workflows. You learned how to publish **CloudEvents** to an Event Grid namespace topic, receive events through pull delivery, verify event routing using filtered subscriptions, acknowledge successfully processed events, and reject events that cannot be processed. These capabilities demonstrate how Azure Event Grid enables scalable, event-driven applications with flexible event routing and reliable event processing.
 
 ## You have successfully completed the Hands-on Lab!

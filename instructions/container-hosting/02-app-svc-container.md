@@ -623,7 +623,7 @@ In this task, you confirm that the app settings you configured are present.
     > **Note:** Confirm that your settings appear in the list along with the system-provided settings.
 
 
-### Summary
+## Summary
 
 In this lab, you deployed a containerized application to Azure App Service by completing the following tasks:
 

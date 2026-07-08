@@ -221,7 +221,7 @@ In this section, you add code to establish a connection to Azure Managed Redis u
 
 ### Task 3.2: Add code to store and retrieve data
 
-In this section, you add code to work with Redis hash data structures using the **hset** and **hgetall** commands. The **hset** method stores multiple field-value pairs under a single key, while **hgetall** retrieves all fields and values for a given key.
+In this task, you add code to work with Redis hash data structures using the **hset** and **hgetall** commands. The **hset** method stores multiple field-value pairs under a single key, while **hgetall** retrieves all fields and values for a given key.
 
 1. Locate the **# BEGIN STORE AND RETRIEVE CODE SECTION** comment and add the following code under the comment. Be sure to check for proper code alignment.
 
@@ -256,7 +256,7 @@ In this section, you add code to work with Redis hash data structures using the 
 
 ### Task 3.3: Add code to set and retrieve expiration
 
-In this section, you add code to manage key expiration using the **expire** and **ttl** commands. The **expire** method sets a Time-To-Live (TTL) on a key, causing it to automatically expire after the specified number of seconds, while **ttl** retrieves the remaining time before a key expires.
+In this task, you add code to manage key expiration using the **expire** and **ttl** commands. The **expire** method sets a Time-To-Live (TTL) on a key, causing it to automatically expire after the specified number of seconds, while **ttl** retrieves the remaining time before a key expires.
 
 1. Locate the **# BEGIN EXPIRATION CODE SECTION** comment and add the following code under the comment. Be sure to check for proper code alignment.
 
@@ -293,7 +293,7 @@ In this section, you add code to manage key expiration using the **expire** and 
 
 ### Task 3.4: Add code to delete data
 
-In this section, you add code to remove keys from Redis using the **delete** command. The **delete** method permanently removes a key and its associated value from the cache, freeing up memory and ensuring the data is no longer accessible.
+In this task, you add code to remove keys from Redis using the **delete** command. The **delete** method permanently removes a key and its associated value from the cache, freeing up memory and ensuring the data is no longer accessible.
 
 1. Locate the **# BEGIN DELETE CODE SECTION** comment and add the following code under the comment. Be sure to check for proper code alignment.
 
@@ -393,6 +393,6 @@ The mock hash data used in the app is defined in the beginning of the **main()**
 
 ## Summary
 
-In this exercise, you deployed an Azure Managed Redis resource and built a Python console application that performs common Redis data operations. You configured a secure connection to Azure Managed Redis using the redis-py library, implemented operations to store and retrieve hash data, managed key expiration using Time-To-Live (TTL), and deleted cached data. Finally, you verified the deployment, configured the application using environment variables, and validated the implementation by running the console application to perform Redis operations.
+In this exercise, you deployed an **Azure Managed Redis** resource and built a Python console application that performs common Redis data operations. You configured a secure connection to Azure Managed Redis using the redis-py library, implemented operations to store and retrieve hash data, managed key expiration using **Time-To-Live (TTL)**, and deleted cached data. Finally, you verified the deployment, configured the application using environment variables, and validated the implementation by running the console application to perform Redis operations.
 
 ## You have successfully completed the Hands-on Lab!

@@ -4,7 +4,7 @@
 
 ## Lab overview
 
-In this exercise, you create an Azure Functions project that exposes tools through the Model Context Protocol (MCP). You configure the Azure Functions MCP extension, define MCP tool trigger functions for document summarization and classification, verify the Python development environment, and test the MCP server locally by connecting to it from GitHub Copilot in Agent mode. This demonstrates how Azure Functions can be used to build MCP-compatible tool servers that AI agents can discover and invoke.
+In this hands-on lab, you create an Azure Functions project that exposes tools through the Model Context Protocol (MCP). You configure the Azure Functions MCP extension, define MCP tool trigger functions for document summarization and classification, verify the Python development environment, and test the MCP server locally by connecting to it from GitHub Copilot in Agent mode. This demonstrates how Azure Functions can be used to build MCP-compatible tool servers that AI agents can discover and invoke.
 
 ## Lab objectives
 
@@ -22,8 +22,6 @@ In this lab, you'll perform the following tasks:
 ## Task 1: Create a new Functions project with the MCP extension
 
 In this task, you'll create a new Azure Functions project using the Python programming model, configure the Azure Functions MCP extension, and register a local MCP server for development and testing.
-
-You can use the following instruction in your lab guide:
 
 1. In the Windows search box, type **File Explorer (1)**. From the search results, select **File Explorer (2)** to open it.
 
@@ -378,6 +376,6 @@ In a production scenario, you would deploy the function app to Azure using the F
 
 ## Summary
 
-In this lab, you created an Azure Functions project that acts as an MCP server by using the Azure Functions MCP extension. You configured the MCP server, implemented custom MCP tool trigger functions, verified the Python development environment, and tested the server locally through GitHub Copilot in Agent mode. By the end of the exercise, you successfully exposed Azure Functions as discoverable MCP tools and validated that AI clients could invoke them to perform document processing tasks.
+In this lab, you created an **Azure Functions** project that acts as an **MCP server** by using the Azure Functions MCP extension. You configured the MCP server, implemented custom MCP tool trigger functions, verified the **Python** development environment, and tested the server locally through **GitHub Copilot** in Agent mode. By the end of the exercise, you successfully exposed Azure Functions as discoverable MCP tools and validated that AI clients could invoke them to perform document processing tasks.
 
 ## You have successfully completed the Hands-on Lab!

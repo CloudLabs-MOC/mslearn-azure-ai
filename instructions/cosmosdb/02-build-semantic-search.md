@@ -144,7 +144,7 @@ In this task, you'll implement Python functions that store vector embeddings, pe
 
 ### Task 3.1: Complete the vector search functions
 
-In this section you complete the _vector_functions.py_ file by adding functions that perform vector similarity search. These functions use the **VectorDistance** function to calculate similarity between query vectors and ticket embeddings. A support application could use these functions to find similar tickets when a new issue is reported.
+In this task you complete the _vector_functions.py_ file by adding functions that perform vector similarity search. These functions use the **VectorDistance** function to calculate similarity between query vectors and ticket embeddings. A support application could use these functions to find similar tickets when a new issue is reported.
 
 1. Open the **client/vector_functions.py** file in VS Code.
 
@@ -317,7 +317,7 @@ In this section you complete the _vector_functions.py_ file by adding functions 
 
 ### Task 3.2: Review the setup container code
 
-In this section you review the _setup_container.py_ script used to create a Cosmos DB container with vector embedding and indexing policies. The deployment script already created the container with these policies, but reviewing the code helps you understand the configuration.
+In this task you review the _setup_container.py_ script used to create a Cosmos DB container with vector embedding and indexing policies. The deployment script already created the container with these policies, but reviewing the code helps you understand the configuration.
 
 1. Open the **client/setup_container.py** file in VS Code.
 
@@ -472,7 +472,7 @@ In this task, you'll run the Flask application to validate the vector search imp
 
 ### Task 6.1: Load sample data
 
-In this section you use the app to load sample support tickets with pre-computed embeddings into the Cosmos DB container. The sample data includes 12 support tickets across different categories (billing, technical, account, shipping), each with a 256-dimensional embedding vector. The app calls the **store_vector_document()** function you created in _vector_functions.py_.
+In this task, you use the app to load sample support tickets with pre-computed embeddings into the Cosmos DB container. The sample data includes 12 support tickets across different categories (billing, technical, account, shipping), each with a 256-dimensional embedding vector. The app calls the **store_vector_document()** function you created in _vector_functions.py_.
 
 1. In the **Load Sample Data** section, select **Load Vector Data**. This inserts tickets with their pre-computed embeddings from the _sample_vectors.json_ file.
 
@@ -484,7 +484,7 @@ In this section you use the app to load sample support tickets with pre-computed
 
 ### Task 6.2: Vector similarity search
 
-In this section you perform semantic searches using pre-computed query vectors. The app calls the **vector_similarity_search()** function you created in _vector_functions.py_.
+In this task, you perform semantic searches using pre-computed query vectors. The app calls the **vector_similarity_search()** function you created in _vector_functions.py_.
 
 1. In the **Vector Similarity Search** section, select **I can't login to my account (1)** from the **Select Query** dropdown.
 
@@ -500,7 +500,7 @@ In this section you perform semantic searches using pre-computed query vectors. 
 
 ### Task 6.3: Filtered vector search
 
-In this section you combine metadata filtering with vector similarity ranking. The app calls the **filtered_vector_search()** function you created in _vector_functions.py_. You observe how filtering narrows results to a specific category.
+In this task, you combine metadata filtering with vector similarity ranking. The app calls the **filtered_vector_search()** function you created in _vector_functions.py_. You observe how filtering narrows results to a specific category.
 
 1. In the **Filtered Vector Search** section, select **I can't login to my account (1)** from the **Select Query** dropdown.
 
@@ -522,6 +522,6 @@ In this section you combine metadata filtering with vector similarity ranking. T
 
 ## Summary
 
-In this lab, you implemented vector similarity search using Azure Cosmos DB for NoSQL. You deployed an Azure Cosmos DB account with the **EnableNoSQLVectorSearch** capability and configured Entra ID authentication. You created a container using the Python SDK with vector embedding and indexing policies that enable the **VectorDistance** function. You built Python functions that store support tickets with embeddings, perform vector similarity search, and combine vector search with metadata filters. You tested the workflow using a Flask web application. This pattern enables applications to perform semantic search over support data, finding similar tickets based on meaning rather than exact keyword matches.
+In this lab, you implemented vector similarity search using **Azure Cosmos DB** for NoSQL. You deployed an Azure Cosmos DB account with the **EnableNoSQLVectorSearch** capability and configured Entra ID authentication. You created a container using the Python SDK with vector embedding and indexing policies that enable the **VectorDistance** function. You built Python functions that store support tickets with embeddings, perform vector similarity search, and combine vector search with metadata filters. You tested the workflow using a Flask web application. This pattern enables applications to perform semantic search over support data, finding similar tickets based on meaning rather than exact keyword matches.
 
 ## You have successfully completed the Hands-on Lab!

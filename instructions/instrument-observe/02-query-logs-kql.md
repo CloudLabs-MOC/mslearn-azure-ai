@@ -25,7 +25,7 @@ In this task, you'll prepare the development environment, configure the deployme
 
    ![](../Images/Lab01-Task1-1.png)
 
-1. Select **File Explorer (1)** from left panel. Click **Open Folder** in the menu.
+1. Select **File Explorer (1)** from left panel. Click **Open Folder (2)** in the menu.
 
    ![](../Images/Lab01-Task1-2.png)
 
@@ -442,6 +442,6 @@ In this task, you'll use the Azure CLI to create an Azure Monitor action group a
 
 ## Summary
 
-In this lab, you deployed an Azure Application Insights resource and generated application telemetry using OpenTelemetry. You learned how to analyze requests, dependencies, and exceptions by writing Kusto Query Language (KQL) queries in the Azure portal to diagnose application health and performance. You also configured proactive monitoring by creating an Azure Monitor action group and a scheduled query alert rule using the Azure CLI. These capabilities demonstrate how Application Insights, KQL, and Azure Monitor work together to provide comprehensive observability, troubleshooting, and alerting for cloud applications.
+In this lab, you deployed an **Azure Application Insights** resource and generated application telemetry using **OpenTelemetry**. You learned how to analyze requests, dependencies, and exceptions by writing **Kusto Query Language (KQL)** queries in the Azure portal to diagnose application health and performance. You also configured proactive monitoring by creating an Azure Monitor action group and a scheduled query alert rule using the Azure CLI. These capabilities demonstrate how Application Insights, KQL, and **Azure Monitor** work together to provide comprehensive observability, troubleshooting, and alerting for cloud applications.
 
 ## You have successfully completed the Hands-on Lab!

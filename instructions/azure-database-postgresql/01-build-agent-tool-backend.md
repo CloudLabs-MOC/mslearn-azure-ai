@@ -114,11 +114,8 @@ In this task, you'll prepare the development environment, configure the deployme
 
 ## Task 2: Create resources in Azure
 
-<<<<<<< Updated upstream
 In this task, you'll deploy an Azure Database for PostgreSQL Flexible Server with Microsoft Entra authentication and validate the resource deployment.
-=======
-In this task you run the deployment script to create the PostgreSQL server and related Azure resources for the lab.
->>>>>>> Stashed changes
+
 
 1. Make sure you are in the root directory of the project and run the appropriate command in the terminal to launch the deployment script.
 

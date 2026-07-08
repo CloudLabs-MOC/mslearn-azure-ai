@@ -450,7 +450,7 @@ In this task, you'll configure the Python environment, run the Flask application
 
 ### Task 6.1: Load sample data
 
-In this section you use the app to load sample document chunks into the Cosmos DB container. The app calls the **store_document_chunk()** function you created in **rag_functions.py** to insert each chunk.
+In this task, you use the app to load sample document chunks into the Cosmos DB container. The app calls the **store_document_chunk()** function you created in **rag_functions.py** to insert each chunk.
 
 1. In the **Load Sample Data** section, select **Load Sample Chunks**. This inserts 12 sample chunks across four documents, representing content from fictional Azure documentation articles.
 
@@ -462,7 +462,7 @@ In this section you use the app to load sample document chunks into the Cosmos D
 
 ### Task 6.2: Run test workflow
 
-In this section you run automated tests that verify the RAG functions you created in **rag_functions.py** work correctly.
+In this task, you run automated tests that verify the RAG functions you created in **rag_functions.py** work correctly.
 
 1. In the **Run Test Workflow** section, select **Run Tests**. This executes five tests that exercise each function.
 
@@ -479,7 +479,7 @@ In this section you run automated tests that verify the RAG functions you create
 
 ### Task 6.3: Get chunks by document
 
-In this section you retrieve all chunks for a specific document. The app calls the **get_chunks_by_document()** function you created in **rag_functions.py**.
+In this task, you retrieve all chunks for a specific document. The app calls the **get_chunks_by_document()** function you created in **rag_functions.py**.
 
 1. In the **Get Chunks by Document** section, select a document from the dropdown (for example, **doc-azure-overview**).
 
@@ -495,7 +495,7 @@ In this section you retrieve all chunks for a specific document. The app calls t
 
 ### Task 6.4: Search by metadata
 
-In this section you search for chunks across all documents using metadata filters. The app calls the **search_chunks_by_metadata()** function you created in **rag_functions.py**. You observe how combining filters narrows the results.
+In this task, you search for chunks across all documents using metadata filters. The app calls the **search_chunks_by_metadata()** function you created in **rag_functions.py**. You observe how combining filters narrows the results.
 
 1. In the **Search by Metadata** section, select **ai-applications (1)** from the **Category** dropdown. Leave the **Tag** field empty.
 
@@ -575,6 +575,6 @@ In this task, you'll use the Cosmos DB SQL API to query the document store and r
 
 ## Summary
 
-In this exercise, you built a Cosmos DB-based document store for RAG applications. You deployed an Azure Cosmos DB for NoSQL account with a database and container optimized for document retrieval patterns. You created Python functions that store document chunks with metadata, retrieve chunks by document ID, search across documents using metadata filters, and perform efficient point reads. You tested the workflow using a Flask web application that exercised each function, then queried the stored data using the Cosmos DB SQL API. This pattern enables AI applications to store chunked documents and retrieve relevant context to ground language model responses.
+In this exercise, you built a **Cosmos DB-based** document store for **RAG** applications. You deployed an **Azure Cosmos DB** for NoSQL account with a database and container optimized for document retrieval patterns. You created Python functions that store document chunks with metadata, retrieve chunks by document ID, search across documents using metadata filters, and perform efficient point reads. You tested the workflow using a Flask web application that exercised each function, then queried the stored data using the **Cosmos DB SQL API**. This pattern enables AI applications to store chunked documents and retrieve relevant context to ground language model responses.
 
 ## You have successfully completed the Hands-on Lab!

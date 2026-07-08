@@ -163,11 +163,7 @@ In this task, you'll prepare the development environment, deploy an Azure Key Va
 
 ## Task 2: Complete the app
 
-<<<<<<< Updated upstream
-In this task, you'll implement the Python code to retrieve and manage Azure Key Vault secrets, create new secret versions, and add a caching mechanism to optimize secret retrieval.
-=======
 In this task you add code to the *keyvault_functions.py* file to complete the Key Vault secret management functions. The Flask app in *app.py* calls these functions and displays the results in the browser. You run the app later in the exercise.
->>>>>>> Stashed changes
 
 1. Open the **client/keyvault_functions.py** file to begin adding code.
 
@@ -177,11 +173,7 @@ In this task you add code to the *keyvault_functions.py* file to complete the Ke
 
 ### Task 2.1: Add code to retrieve secrets
 
-<<<<<<< Updated upstream
-In this task, you will add code to retrieve two secrets from the vault and return their metadata. The function demonstrates how to access secret values, version identifiers, content types, creation dates, and custom tags.
-=======
 In this task, you add code to retrieve two secrets from the vault and return their metadata. The function demonstrates how to access secret values, version identifiers, content types, creation dates, and custom tags.
->>>>>>> Stashed changes
 
 The function calls **get_secret()** for each secret name, which returns both the secret value and a properties object containing metadata. It handles **ResourceNotFoundError** for missing secrets and **HttpResponseError** for authorization or network issues. The truncated value prevents full credentials from appearing in the UI while still confirming the secret was retrieved.
 
@@ -239,11 +231,7 @@ The function calls **get_secret()** for each secret name, which returns both the
 
 ### Task 2.2: Add code to list secret properties
 
-<<<<<<< Updated upstream
-In this task, you will add code to list the properties of all secrets in the vault without retrieving their values. This follows the principle of least privilege by exposing only metadata such as name, enabled status, content type, and timestamps.
-=======
 In this task, you add code to list the properties of all secrets in the vault without retrieving their values. This follows the principle of least privilege by exposing only metadata such as name, enabled status, content type, and timestamps.
->>>>>>> Stashed changes
 
 The function calls **list_properties_of_secrets()**, which returns an iterable of secret property objects. Unlike **get_secret()**, this method does not return secret values, making it safe for inventory and audit operations where you need to know what secrets exist without accessing their contents.
 
@@ -276,11 +264,7 @@ The function calls **list_properties_of_secrets()**, which returns an iterable o
 
 ### Task 2.3: Add code to create a new secret version
 
-<<<<<<< Updated upstream
-In this task, you will add code to create a new version of a secret, simulating a credential rotation. The function retrieves the current version, writes a new value with **set_secret()**, and then confirms the update by retrieving the secret again.
-=======
 In this task, you add code to create a new version of a secret, simulating a credential rotation. The function retrieves the current version, writes a new value with **set_secret()**, and then confirms the update by retrieving the secret again.
->>>>>>> Stashed changes
 
 The function uses **set_secret()** to write a new value for an existing secret name, which automatically creates a new version while preserving the previous one. Previous versions remain accessible by their version ID, but **get_secret()** without a version parameter always returns the latest. The function also attaches updated tags to the new version for tracking rotation metadata.
 
@@ -330,11 +314,7 @@ The function uses **set_secret()** to write a new value for an existing secret n
 
 ### Task 2.4: Add code for cached secret retrieval
 
-<<<<<<< Updated upstream
-In this task, you will add code that implements a time-based cache to reduce the number of Key Vault API calls when secrets are accessed frequently. The cache stores secret values in memory with a configurable time-to-live (TTL) and tracks cache hits and misses.
-=======
 In this task, you add code that implements a time-based cache to reduce the number of Key Vault API calls when secrets are accessed frequently. The cache stores secret values in memory with a configurable time-to-live (TTL) and tracks cache hits and misses.
->>>>>>> Stashed changes
 
 The function creates a dictionary-based cache with a 30-second TTL using **time.monotonic()** for elapsed time tracking. It simulates five rounds of accessing two secrets. The first round produces cache misses because the cache starts empty and has no entries to return, so the code fetches each secret from Key Vault and stores it. Subsequent rounds within the TTL find the cached entries and return them without making API calls. The access log shows each hit or miss, and the summary reports total API calls versus total accesses to demonstrate the efficiency gain.
 
@@ -394,12 +374,7 @@ The function creates a dictionary-based cache with a 30-second TTL using **time.
 1. Save your changes and take a few minutes to review the code.
 
 ## Task 3: Configure the Python environment
-
-<<<<<<< Updated upstream
-In this task, you will navigate to the client app directory, create the Python environment, and install the dependencies.
-=======
 In this task, you navigate to the client app directory, create the Python environment, and install the dependencies.
->>>>>>> Stashed changes
 
 1. Run the following command in the VS Code terminal to navigate to the *client* directory.
 
@@ -436,12 +411,7 @@ In this task, you navigate to the client app directory, create the Python enviro
     ```
 
 ## Task 4: Run the app
-
-<<<<<<< Updated upstream
-In this task, you'll run the Flask application and verify secret retrieval, secret versioning, metadata listing, and cached access through the web interface.
-=======
 In this task, you run the completed Flask application to perform various Key Vault secret management operations. The app provides a web interface that lets you retrieve secrets, list their properties, create new versions, and test cached retrieval.
->>>>>>> Stashed changes
 
 1. Run the following command in the terminal to start the app. Refer to the commands from earlier in the exercise to activate the environment, if needed, before running the command. If you navigated away from the *client* directory, run **cd client** first.
 
@@ -477,10 +447,7 @@ In this task, you run the completed Flask application to perform various Key Vau
 
 ## Summary
 
-<<<<<<< Updated upstream
-In this lab, you deployed an Azure Key Vault and built a Python Flask application to demonstrate secure secret management using the Azure SDK. You implemented secret retrieval, metadata inspection, secret versioning, and time-based caching to optimize access. Finally, you configured the Python environment, ran the application, and validated each operation through the web interface.
-=======
-In this lab, you deployed an Azure Key Vault with RBAC authorization, stored sample secrets, and built a Python Flask application that manages secrets securely using the Azure SDK. You retrieved secret values and metadata, listed secret properties without exposing values, rotated a secret by creating a new version, and implemented a time-based cache to reduce repeated Key Vault API calls.
->>>>>>> Stashed changes
+In this lab, you deployed an Azure Key Vault and built a **Python Flask application** to demonstrate secure secret management using the **Azure SDK**. You implemented secret retrieval, metadata inspection, secret versioning, and time-based caching to optimize access. Finally, you configured the Python environment, ran the application, and validated each operation through the web interface.
+
 
 ## You have successfully completed the Hands-on Lab!

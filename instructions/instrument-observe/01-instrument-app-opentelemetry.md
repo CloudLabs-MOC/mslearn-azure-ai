@@ -25,7 +25,7 @@ In this task, you'll prepare the development environment, configure the deployme
 
    ![](../Images/Lab01-Task1-1.png)
 
-1. Select **File Explorer (1)** from left panel. Click **Open Folder** in the menu.
+1. Select **File Explorer (1)** from left panel. Click **Open Folder (2)** in the menu.
 
    ![](../Images/Lab01-Task1-2.png)
 
@@ -184,7 +184,7 @@ In this task, you'll complete the OpenTelemetry instrumentation for the Flask ap
 
 ### Task 2.1: Add code to configure telemetry
 
-In this section you add code to configure the Azure Monitor OpenTelemetry Distro so the application exports traces to Application Insights. The function reads the connection string from an environment variable, creates a **DefaultAzureCredential** for Microsoft Entra authentication, and configures the Azure Monitor exporter. The credential excludes the managed identity provider because the app runs locally — without this setting, the credential chain would attempt to reach the Azure Instance Metadata Service on every telemetry export, and those failed HTTP calls would appear as noise in the Application Map.
+In this task, you add code to configure the Azure Monitor OpenTelemetry Distro so the application exports traces to Application Insights. The function reads the connection string from an environment variable, creates a **DefaultAzureCredential** for Microsoft Entra authentication, and configures the Azure Monitor exporter. The credential excludes the managed identity provider because the app runs locally — without this setting, the credential chain would attempt to reach the Azure Instance Metadata Service on every telemetry export, and those failed HTTP calls would appear as noise in the Application Map.
 
 The function calls **configure_azure_monitor()** from the Azure Monitor OpenTelemetry Distro package. This single call configures the OpenTelemetry SDK with the Azure Monitor trace exporter and sets up automatic instrumentation for Flask requests. The **credential** parameter enables Entra-based authentication so the app publishes telemetry using the Monitoring Metrics Publisher role instead of the instrumentation key. The **OTEL_SERVICE_NAME** environment variable, set in the _.env_ file by the deployment script, controls the **cloud.role.name** that appears on the Application Map.
 
@@ -218,7 +218,7 @@ The function calls **configure_azure_monitor()** from the Azure Monitor OpenTele
 
 ### Task 2.2: Add code to process documents
 
-In this section you add code that creates a parent span for a batch document processing operation. The function loops through a configurable number of documents and calls three child span functions for each one: validate, enrich, and store.
+In this task, you add code that creates a parent span for a batch document processing operation. The function loops through a configurable number of documents and calls three child span functions for each one: validate, enrich, and store.
 
 The function uses **start_as_current_span()** to create a parent span named "process-documents" that wraps the entire batch. Each child function creates its own span that automatically becomes a child of the current span, building a hierarchical trace tree. The span attributes record the batch size and the number of successfully processed documents.
 
@@ -259,7 +259,7 @@ The function uses **start_as_current_span()** to create a parent span named "pro
 
 ### Task 2.3: Add code to trace pipeline stages
 
-In this section you add three functions that each create a child span for one stage of the document pipeline: validate, enrich, and store. All three follow the same pattern — call **start_as_current_span()** to create a span that automatically becomes a child of the active parent, then call **set_attribute()** to attach searchable metadata and **set_status()** to mark the result.
+In this task, you add three functions that each create a child span for one stage of the document pipeline: validate, enrich, and store. All three follow the same pattern — call **start_as_current_span()** to create a span that automatically becomes a child of the active parent, then call **set_attribute()** to attach searchable metadata and **set_status()** to mark the result.
 
 The **enrich_document** function also includes a deliberate latency issue. Documents **DOC-0003** and **DOC-0005** experience a delay of 1.5 to 3 seconds, simulating an external service bottleneck. The **enrichment.slow** attribute flags affected spans so you can filter for them in Application Insights. When you examine the end-to-end transaction view later, these spans will stand out as the source of pipeline latency.
 
@@ -471,6 +471,6 @@ In this task, you'll run the completed Flask application to generate telemetry a
 
 ## Summary
 
-In this lab, you instrumented a Python Flask application using the Azure Monitor OpenTelemetry Distro and published distributed tracing telemetry to Azure Application Insights. You learned how to configure OpenTelemetry, create parent and child spans, enrich traces with custom attributes, and visualize end-to-end transactions. You also used Transaction Search and Kusto Query Language (KQL) queries to analyze telemetry, identify slow operations, and diagnose application performance issues. These capabilities demonstrate how OpenTelemetry and Application Insights work together to provide comprehensive observability and performance diagnostics for modern cloud applications.
+In this lab, you instrumented a **Python Flask application** using the **Azure Monitor OpenTelemetry** Distro and published distributed tracing telemetry to **Azure Application Insights**. You learned how to configure OpenTelemetry, create parent and child spans, enrich traces with custom attributes, and visualize end-to-end transactions. You also used Transaction Search and **Kusto Query Language (KQL)** queries to analyze telemetry, identify slow operations, and diagnose application performance issues. These capabilities demonstrate how OpenTelemetry and Application Insights work together to provide comprehensive observability and performance diagnostics for modern cloud applications.
 
 ## You have successfully completed the Hands-on Lab!

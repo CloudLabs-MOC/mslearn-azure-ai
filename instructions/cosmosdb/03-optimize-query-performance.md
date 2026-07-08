@@ -144,7 +144,7 @@ In this task, you'll implement Python functions to perform vector similarity sea
 
 ### Task 3.1: Complete the vector similarity search script
 
-In this section you complete the _index_functions.py_ file by adding the function that performs vector similarity search with performance tracking. This function is called for each container to compare how different index types handle the same query.
+In this task, you complete the _index_functions.py_ file by adding the function that performs vector similarity search with performance tracking. This function is called for each container to compare how different index types handle the same query.
 
 1. Open the **client/index_functions.py** file in VS Code.
 
@@ -296,7 +296,7 @@ In this section you complete the _index_functions.py_ file by adding the functio
 
 ### Task 3.2: Review the container setup code
 
-In this section you review the _setup_containers.py_ script that creates containers with different vector indexing strategies. The vector embedding policy (path, dimensions, data type, and distance function) is set at container creation time and cannot be changed afterward. The vector index type, however, is part of the indexing policy and can be updated on an existing container. When you change the index type, Cosmos DB performs an index transformation in the background. Despite this flexibility, testing different index types upfront is still a best practice: a common approach is to create test containers with each index type, load representative sample data, and run benchmark queries to measure RU costs and latency before committing to a production configuration.
+In this task, you review the _setup_containers.py_ script that creates containers with different vector indexing strategies. The vector embedding policy (path, dimensions, data type, and distance function) is set at container creation time and cannot be changed afterward. The vector index type, however, is part of the indexing policy and can be updated on an existing container. When you change the index type, Cosmos DB performs an index transformation in the background. Despite this flexibility, testing different index types upfront is still a best practice: a common approach is to create test containers with each index type, load representative sample data, and run benchmark queries to measure RU costs and latency before committing to a production configuration.
 
 1. Open the **client/setup_containers.py** file in VS Code.
 
@@ -463,7 +463,7 @@ In this task, you'll run the Flask application to compare the performance of dif
 
 ### Task 6.1: Load sample data
 
-In this section you use the app to load sample support tickets with pre-computed embeddings into all three containers. Loading identical data enables fair comparison of index performance.
+In this task, you use the app to load sample support tickets with pre-computed embeddings into all three containers. Loading identical data enables fair comparison of index performance.
 
 1. Review the **Container Status** section at the top of the page. All three containers should show 0 documents initially.
 
@@ -479,7 +479,7 @@ In this section you use the app to load sample support tickets with pre-computed
 
 ### Task 6.2: Compare vector search performance
 
-In this section you perform vector similarity searches and compare how each index type handles the same query. The app displays RU costs and execution times side-by-side.
+In this task, you perform vector similarity searches and compare how each index type handles the same query. The app displays RU costs and execution times side-by-side.
 
 1. In the **Vector Search Comparison** section, select **I can't login to my account (1)** from the **Select Query** dropdown.
 
@@ -503,7 +503,7 @@ In this section you perform vector similarity searches and compare how each inde
 
 ### Task 6.3: Compare filtered search performance
 
-In this section you combine metadata filtering with vector similarity search. Filtering narrows the search space before applying vector ranking, which can affect performance differently for each index type.
+In this task, you combine metadata filtering with vector similarity search. Filtering narrows the search space before applying vector ranking, which can affect performance differently for each index type.
 
 1. In the **Filtered Vector Search Comparison** section, select **Protect my account from hackers (1)** from the **Select Query** dropdown.
 
@@ -536,6 +536,6 @@ Based on your testing, consider these guidelines for selecting an index type:
 
 ## Summary
 
-In this lab, you compared vector indexing strategies in Azure Cosmos DB for NoSQL. You deployed an Azure Cosmos DB account with the **EnableNoSQLVectorSearch** capability and configured Entra ID authentication. You created three containers using the Python SDK with different vector index types: flat for exact search, quantizedFlat for memory efficiency, and diskANN for production-scale approximate search. You built Python functions that perform vector similarity searches while tracking RU consumption and execution time. You used a Flask web application to run comparative searches and analyze performance differences. This pattern helps you select the optimal indexing strategy for your AI application based on dataset size, accuracy requirements, and cost constraints.
+In this lab, you compared vector indexing strategies in **Azure Cosmos DB for NoSQL**. You deployed an Azure Cosmos DB account with the **EnableNoSQLVectorSearch** capability and configured Entra ID authentication. You created three containers using the Python SDK with different vector index types: flat for exact search, quantizedFlat for memory efficiency, and diskANN for production-scale approximate search. You built Python functions that perform vector similarity searches while tracking RU consumption and execution time. You used a Flask web application to run comparative searches and analyze performance differences. This pattern helps you select the optimal indexing strategy for your AI application based on dataset size, accuracy requirements, and cost constraints.
 
 ## You have successfully completed the Hands-on Lab!

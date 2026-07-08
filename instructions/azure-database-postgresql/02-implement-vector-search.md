@@ -27,11 +27,7 @@ In this lab, you'll perform the following tasks:
 
 ## Task 1: Prepare the environment
 
-<<<<<<< Updated upstream
 In this task, you'll prepare the development environment, configure the deployment script, and authenticate to Azure to begin deploying the required resources.
-=======
-In this task you use a script to deploy the necessary services to your Azure subscription. The PostgreSQL server deployment takes a few minutes to complete.
->>>>>>> Stashed changes
 
 1. Launch **Visual Studio Code** (VS Code) from desktop.
 
@@ -117,11 +113,7 @@ In this task you use a script to deploy the necessary services to your Azure sub
 
 ## Task 2: Create resources in Azure
 
-<<<<<<< Updated upstream
 In this task, you'll deploy an Azure Database for PostgreSQL Flexible Server with Microsoft Entra authentication and validate the resource deployment.
-=======
-In this task you run the deployment script to deploy the PostgreSQL server and configure authentication.
->>>>>>> Stashed changes
 
 1. Make sure you are in the root directory of the project and run the appropriate command in the terminal to launch the deployment script.
 
@@ -153,11 +145,7 @@ In this task you run the deployment script to deploy the PostgreSQL server and c
 
 ## Task 3: Complete the client application
 
-<<<<<<< Updated upstream
 In this task, you'll implement the Flask application to load product data, perform vector similarity searches, and add new products to the PostgreSQL database.
-=======
-In this task you complete the *app.py* file by adding route handlers that interact with the PostgreSQL database. These routes handle loading sample products, performing similarity searches, and adding new products. The Flask application provides a web interface for testing vector similarity search.
->>>>>>> Stashed changes
 
 1. Open the *client/app.py* file in VS Code.
 
@@ -324,11 +312,7 @@ In this task you complete the *app.py* file by adding route handlers that intera
 
 ## Task 4: Complete the Azure resource deployment and create the schema
 
-<<<<<<< Updated upstream
 In this task you will enable the pgvector extension and create the products table with a vector column for storing embeddings. The schema includes columns for product details and a 384-dimensional embedding vector used for similarity searches.
-=======
-In this task you enable the pgvector extension and create the products table with a vector column for storing embeddings. The schema includes columns for product details and a 384-dimensional embedding vector used for similarity searches.
->>>>>>> Stashed changes
 
 1. Wait for the PostgreSQL server to display the deployment is complete in the terminal.
 
@@ -416,11 +400,8 @@ In this task you enable the pgvector extension and create the products table wit
 
 ## Task 5: Set up and run the Flask application
 
-<<<<<<< Updated upstream
+
 In this Task you will install the Python dependencies and run the Flask web application. The application provides a browser interface for loading products, searching for similar items, and adding new products to the database.
-=======
-In this task you install the Python dependencies and run the Flask web application. The application provides a browser interface for loading products, searching for similar items, and adding new products to the database.
->>>>>>> Stashed changes
 
 1. Run the following command to navigate to the *client* folder.
 
@@ -474,11 +455,7 @@ In this task you install the Python dependencies and run the Flask web applicati
 
 ## Task 6: Load products and perform similarity searches
 
-<<<<<<< Updated upstream
 In this task you will use the web application to load sample products into the database and perform similarity searches. The products include pre-computed embeddings that represent each product's semantic meaning, enabling the application to find similar items based on their descriptions.
-=======
-In this task you use the web application to load sample products into the database and perform similarity searches. The products include pre-computed embeddings that represent each product's semantic meaning, enabling the application to find similar items based on their descriptions.
->>>>>>> Stashed changes
 
 1. On the web page, select **Load Sample Products**. This inserts 10 products with their embeddings into the database.
 
@@ -500,11 +477,7 @@ In this task you use the web application to load sample products into the databa
 
 ## Task 7: Add new products and observe changes
 
-<<<<<<< Updated upstream
 In this task you will add new products to the database and observe how they appear in similarity search results. This demonstrates how the vector search adapts as your data changes.
-=======
-In this task you add new products to the database and observe how they appear in similarity search results. This demonstrates how the vector search adapts as your data changes.
->>>>>>> Stashed changes
 
 1. Return to the web browser with the Flask application.
 
@@ -524,10 +497,6 @@ In this task you add new products to the database and observe how they appear in
 
 ## Summary
 
-<<<<<<< Updated upstream
 In this lab, you built a product similarity search application using Azure Database for PostgreSQL and the pgvector extension. You deployed a PostgreSQL Flexible Server with Microsoft Entra authentication, enabled the pgvector extension, and created a products table with a 384-dimensional vector column for storing embeddings. You added an HNSW index to optimize similarity queries, then used a Flask web application to load sample products and perform vector similarity searches using the cosine distance operator (**\<=>**). This pattern demonstrates how to build recommendation systems and semantic search features that find related items based on their semantic meaning rather than exact keyword matches.
-=======
-In this lab, you built a product similarity search application using **Azure Database** for **PostgreSQL** and the pgvector extension. You deployed a PostgreSQL Flexible Server with Microsoft Entra authentication, enabled the pgvector extension, and created a products table with a 384-dimensional vector column for storing embeddings. You added an **HNSW** index to optimize similarity queries, then used a Flask web application to load sample products and perform vector similarity searches using the cosine distance operator (**\<=>**). This pattern demonstrates how to build recommendation systems and semantic search features that find related items based on their semantic meaning rather than exact keyword matches.
->>>>>>> Stashed changes
 
 ## You have successfully completed the Hands-on Lab!

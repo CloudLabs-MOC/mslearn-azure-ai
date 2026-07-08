@@ -64,7 +64,7 @@ This lab architecture illustrates a containerized backend API deployed to Azure 
 
 Once you're ready to dive in, your virtual machine and **Guide** will be right at your fingertips within your web browser.
 
-![](../Images/Lab4-guidedtab2.png)
+![](../Images/guidetabimage.png)
 
 ## Virtual Machine & Lab Guide
 

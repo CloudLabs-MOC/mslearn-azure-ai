@@ -25,7 +25,7 @@ In this task, you use a script to deploy the necessary services to your Azure su
 
     ![](../Images/Lab01-Task1-1.png)
 
-1. Select **File Explorer (1)** from left panel. Click **Open Folder** in the menu.
+1. Select **File Explorer (1)** from left panel. Click **Open Folder (2)** in the menu.
 
     ![](../Images/Lab01-Task1-2.png)
 
@@ -154,7 +154,7 @@ In this task, you use a script to deploy the necessary services to your Azure su
 
 ## Task 2: Build the image with ACR Tasks
 
-In this section you Use a quick task to build the image in Azure without requiring Docker on your local machine. The **az acr build** command uploads your source files, builds the image in the cloud, and pushes it to your registry.
+In this task, you Use a quick task to build the image in Azure without requiring Docker on your local machine. The **az acr build** command uploads your source files, builds the image in the cloud, and pushes it to your registry.
 
 1. Run the following command to build, and push it to your registry. The build completes entirely in Azure. No local Docker installation is required.
 
@@ -189,7 +189,7 @@ In this section you Use a quick task to build the image in Azure without requiri
 
 ## Task 3: Verify the image in the registry
 
-In this section you confirm the image exists in your registry by listing repositories and tags.
+In this task, you confirm the image exists in your registry by listing repositories and tags.
 
 1. Run the following command to list all repositories in the registry.
 
@@ -271,7 +271,7 @@ In this section you confirm the image exists in your registry by listing reposit
 
 ## Task 4: Run the image with ACR Tasks
 
-In this section you use the **az acr run** command to execute a command inside your built image and verify it works correctly.
+In this task, you use the **az acr run** command to execute a command inside your built image and verify it works correctly.
 
 1. Run the **following command (1)** to verify the Flask application loads correctly in the container.
 
@@ -302,7 +302,7 @@ In this section you use the **az acr run** command to execute a command inside y
 
 ## Task 5: Build with a different tag
 
-In this section you build a new version of the image with a different tag to see how the registry maintains multiple versions.
+In this task, you build a new version of the image with a different tag to see how the registry maintains multiple versions.
 
 1. Run the **following command (1)** to build the image again with a new version tag.
 
@@ -354,7 +354,7 @@ In this section you build a new version of the image with a different tag to see
 
 ## Task 6: View build history and lock a production image
 
-In this section you review the ACR task run history and lock an image to protect it from accidental changes.
+In this task you review the **ACR** task run history and lock an image to protect it from accidental changes.
 
 1. Run the following command to review the ACR task run history to see all builds you've performed.
 
@@ -422,8 +422,8 @@ In this section you review the ACR task run history and lock an image to protect
 
     ![](../Images/Lab01-Task6-3.png)
 
-### Summary
+## Summary
 
-
+In this lab, you deployed **Azure Container Registry**, built and pushed a container image using ACR Tasks, verified the repository and tag metadata, and ran the container image to confirm the application loaded correctly. You also created a second version of the image, reviewed build history, and locked the production image tag to protect it from accidental changes.
 
 ## You have successfully completed the Hands-on Lab!

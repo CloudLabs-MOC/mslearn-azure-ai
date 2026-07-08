@@ -46,7 +46,7 @@ The lab architecture demonstrates how Azure Application Insights collects teleme
 
 ## Architecture Diagram
 
-![pending](../Images/lab24-arch.png)
+![pending](../Images/lab24-archdiagram.png)
 
 ## Explanation of Components
 

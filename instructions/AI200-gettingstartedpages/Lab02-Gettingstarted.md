@@ -60,7 +60,7 @@ This lab architecture demonstrates a secure container deployment workflow that u
 
 Once you're ready to dive in, your virtual machine and **Guide** will be right at your fingertips within your web browser.
 
-    ![](../Images/lab2-vm.png)
+   ![](../Images/guidetabimage.png)
 
 ## Virtual Machine & Lab Guide
 

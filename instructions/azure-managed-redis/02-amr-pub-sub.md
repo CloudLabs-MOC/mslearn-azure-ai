@@ -192,7 +192,7 @@ In this task, you'll implement the publisher application by establishing a secur
 
 ### Task 3.1: Add the client connection
 
-In this section, you add code to establish a connection to Azure Managed Redis using the redis-py library. The code retrieves connection credentials from environment variables and creates a Redis client instance configured for secure SSL communication.
+In this task, you add code to establish a connection to Azure Managed Redis using the redis-py library. The code retrieves connection credentials from environment variables and creates a Redis client instance configured for secure SSL communication.
 
 1. Locate the **# BEGIN CONNECTION CODE SECTION** comment and add the following code under the comment. Be sure to check for proper code alignment.
 
@@ -277,7 +277,7 @@ In this section, you add code to publish event messages to specific Redis channe
 
 ### Task 3.3: Add the broadcast message code
 
-In this section, you add code to broadcast the same message to multiple channels simultaneously using a loop with **publish()**. Broadcasting is useful for system-wide announcements or events that need to reach subscribers across different channels. This demonstrates the one-to-many messaging capability of pub/sub, where a single message can efficiently reach all interested subscribers across multiple channels in real-time.
+In this task, you add code to broadcast the same message to multiple channels simultaneously using a loop with **publish()**. Broadcasting is useful for system-wide announcements or events that need to reach subscribers across different channels. This demonstrates the one-to-many messaging capability of pub/sub, where a single message can efficiently reach all interested subscribers across multiple channels in real-time.
 
 1. Locate the **# BEGIN BROADCAST CODE SECTION** comment and add the following code under the comment. Be sure to check for proper code alignment.
 
@@ -380,7 +380,7 @@ In this section, you add code to format incoming pub/sub messages for display in
 
 ### Task 4.2: Add the message listener code
 
-In this section, you add code for the background listener thread that continuously monitors subscribed channels for incoming messages. The **listen_messages()** method uses the blocking **pubsub.listen()** iterator to receive messages as they are published. This demonstrates how subscribers passively wait for messages and handle different message types (direct channel messages vs. pattern-matched messages). The listener runs in a background thread to avoid blocking the main application while still receiving real-time message updates.
+In this task, you add code for the background listener thread that continuously monitors subscribed channels for incoming messages. The **listen_messages()** method uses the blocking **pubsub.listen()** iterator to receive messages as they are published. This demonstrates how subscribers passively wait for messages and handle different message types (direct channel messages vs. pattern-matched messages). The listener runs in a background thread to avoid blocking the main application while still receiving real-time message updates.
 
 1. Locate the **# BEGIN MESSAGE LISTENER CODE SECTION** comment and add the following code under the comment. Be sure to check for proper code alignment.
 
@@ -428,7 +428,7 @@ In this section, you add code for the background listener thread that continuous
 
 ### Task 4.3: Add code to subscribe to channels
 
-In this section, you add code to handle channel and pattern subscriptions. The **subscribe_to_channel()** method registers interest in a specific channel using **pubsub.subscribe()**, while **subscribe_to_pattern()** uses **pubsub.psubscribe()** for wildcard pattern matching (e.g., "orders:\*"). These functions demonstrate the two main subscription strategies in Redis pub/sub: direct channel subscriptions for specific events and pattern-based subscriptions for flexibility. After subscribing, the listener is restarted to begin receiving messages on the new channels.
+In this task, you add code to handle channel and pattern subscriptions. The **subscribe_to_channel()** method registers interest in a specific channel using **pubsub.subscribe()**, while **subscribe_to_pattern()** uses **pubsub.psubscribe()** for wildcard pattern matching (e.g., "orders:\*"). These functions demonstrate the two main subscription strategies in Redis pub/sub: direct channel subscriptions for specific events and pattern-based subscriptions for flexibility. After subscribing, the listener is restarted to begin receiving messages on the new channels.
 
 1. Locate the **# BEGIN SUBSCRIBE CHANNEL/PATTERN CODE SECTION** comment and add the following code under the comment. Be sure to check for proper code alignment.
 
@@ -622,6 +622,6 @@ Take some time to experiment subscribing and publishing messages to different ch
 
 ## Summary
 
-In this exercise, you deployed an Azure Managed Redis resource and completed both a publisher and a subscriber application using the redis-py library. You implemented a secure connection to Azure Managed Redis, published JSON-formatted messages to Redis channels, broadcast messages across multiple channels, and built a subscriber application that listens for events using direct channel subscriptions and wildcard pattern matching. Finally, you verified the deployment, configured the application environment, and validated real-time message delivery by running both applications and observing Redis Pub/Sub communication.
+In this lab, you deployed an **Azure Managed Redis** resource and completed both a publisher and a subscriber application using the redis-py library. You implemented a secure connection to Azure Managed Redis, published JSON-formatted messages to Redis channels, broadcast messages across multiple channels, and built a subscriber application that listens for events using direct channel subscriptions and wildcard pattern matching. Finally, you verified the deployment, configured the application environment, and validated real-time message delivery by running both applications and observing **Redis Pub/Sub** communication.
 
 ## You have successfully completed the Hands-on Lab!

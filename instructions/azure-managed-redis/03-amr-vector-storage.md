@@ -477,6 +477,6 @@ In this section, you practice loading sample vector data into Redis and then per
 
 ## Summary
 
-In this lab, you implement semantic search using Azure Managed Redis by creating a vector-enabled Redis instance, completing the application's vector storage and search logic, and running a sample application. You learn how to store vector embeddings with metadata, configure a RediSearch HNSW vector index, perform semantic similarity searches using KNN queries, and validate how vector search can identify semantically related products based on embedding similarity.
+In this lab, you implement semantic search using **Azure Managed Redis** by creating a vector-enabled Redis instance, completing the application's vector storage and search logic, and running a sample application. You learn how to store vector embeddings with metadata, configure a **RediSearch HNSW** vector index, perform semantic similarity searches using **KNN** queries, and validate how vector search can identify semantically related products based on embedding similarity.
 
 ## You have successfully completed the Hands-on Lab!
