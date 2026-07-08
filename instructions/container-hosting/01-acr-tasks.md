@@ -17,6 +17,8 @@ In this lab, you'll perform the following tasks
 - **Task 5:** Build with a different tag
 - **Task 6:** View build history and lock a production image
 
+> **Note:** This lab includes deployment scripts for both **PowerShell** and **Bash**. You may choose either scripting language based on your preference or environment. Once you make your choice, use the corresponding commands and script throughout the entire lab, as all subsequent steps provide instructions for both PowerShell and Bash.
+
 ## Task 1: Deploy Azure Container Registry
 
 In this task, you use a script to deploy the necessary services to your Azure subscription. The Azure Container Registry deployment takes a few minutes to complete.
@@ -86,13 +88,13 @@ In this task, you use a script to deploy the necessary services to your Azure su
 
     - **Email/Username:** <inject key="AzureAdUserEmail"></inject>
 
-    ![](../Images/Lab01-Task1-12.png)
+        ![](../Images/Lab01-Task1-12.png)
 
 1. Next, enter the provided **Password (1)** and click **Sign in (2)**.
 
     - **Password:** <inject key="AzureAdUserPassword"></inject>
 
-    ![](../Images/Lab01-Task1-13.png)
+        ![](../Images/Lab01-Task1-13.png)
 
 1. Next, select **No, this app only** and navigate back to VS Code to continue.
 
