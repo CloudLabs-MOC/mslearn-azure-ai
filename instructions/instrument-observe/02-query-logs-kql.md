@@ -1,31 +1,25 @@
-# Query logs with KQL
+# Lab 24: Query logs with KQL
 
-Kusto Query Language (KQL) is the query language used to analyze log data in Application Insights. KQL queries let you filter, aggregate, and join telemetry tables such as requests, dependencies, and exceptions to diagnose application health and performance. The Logs blade in Application Insights provides an interactive query editor with autocomplete, visual results, and time range controls that make it the primary tool for investigating telemetry. Combined with scheduled query alert rules created through the Azure CLI, KQL enables proactive monitoring that notifies your team when failure rates or latency exceed acceptable thresholds.
+### Estimated Duration : 60 Minutes
 
-In this exercise, you deploy an Application Insights resource, run a Python script that generates sample request, dependency, and exception telemetry using OpenTelemetry, then write KQL queries in the Azure portal Logs blade to investigate application health. You query the requests table to identify failures, join exceptions with requests to correlate errors, analyze dependency latency with percentile calculations, and create an action group and log search alert rule using the Azure CLI.
+## Lab overview
 
-Tasks performed in this exercise:
+In this exercise, you deploy an Azure Application Insights resource and generate sample application telemetry using a Python application instrumented with OpenTelemetry. You then use the Logs experience in the Azure portal to analyze request, dependency, and exception telemetry by writing Kusto Query Language (KQL) queries. Finally, you configure proactive monitoring by creating an Azure Monitor Action Group and a scheduled query alert rule using the Azure CLI to detect application failures and notify administrators when predefined conditions are met.
 
-- Download the project starter files
-- Create an Application Insights resource
-- Run the telemetry generator to create sample data
-- Query telemetry with KQL in the Azure portal
-- Create an action group and alert rule with the Azure CLI
+## Lab objectives
 
-This exercise takes approximately **20** minutes to complete.
+In this lab, you'll perform the following tasks:
 
-## Before you start
+- **Task 1:** Prepare the environment and deploy Application Insights
+- **Task 2:** Generate telemetry data
+- **Task 3:** Query telemetry in the Azure portal
+- **Task 4:** Create an action group and alert rule
 
-To complete the exercise, you need:
+> ### **Note:** This lab includes deployment scripts for both **PowerShell** and **Bash**. You may choose either scripting language based on your preference or environment. Once you make your choice, use the corresponding commands and script throughout the entire lab, as all subsequent steps provide instructions for both PowerShell and Bash.
 
-- An Azure subscription. If you don't already have one, you can [sign up for one](https://azure.microsoft.com/).
-- [Visual Studio Code](https://code.visualstudio.com/) on one of the [supported platforms](https://code.visualstudio.com/docs/supporting/requirements#_platforms).
-- [Python 3.12](https://www.python.org/downloads/) or greater.
-- The latest version of the [Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli).
+## Task 1: Prepare the environment and deploy Azure Application Insights
 
-## Download project starter files and deploy Application Insights
-
-In this section you download the starter files for the app and use a script to deploy an Application Insights resource to your subscription.
+In this task, you'll prepare the development environment, configure the deployment script, authenticate to Azure, and deploy an Azure Application Insights resource. You'll also assign the required permissions and retrieve the connection information needed for the telemetry generator application.
 
 1. Launch **Visual Studio Code** (VS Code) from desktop.
 
@@ -172,7 +166,7 @@ In this section you download the starter files for the app and use a script to d
 
 ## Task 2: Generate telemetry data
 
-In this section you set up the Python environment, run the pre-written telemetry generator to create sample request, dependency, and exception data in Application Insights, then wait for the data to arrive before querying it. The generator script uses OpenTelemetry to create spans that map to the **requests**, **dependencies**, and **exceptions** tables in Application Insights.
+In this task, you'll configure a Python virtual environment, install the required dependencies, and run a pre-built telemetry generator that uses OpenTelemetry to publish request, dependency, and exception telemetry to Application Insights.
 
 1. Run the following command in the VS Code terminal to navigate to the **_client_** directory.
 
@@ -226,7 +220,7 @@ In this section you set up the Python environment, run the pre-written telemetry
 
 ## Task 3: Query telemetry in the Azure portal
 
-In this section you use the Logs blade in Application Insights to run KQL queries against the telemetry you generated. The Logs blade provides an interactive editor with autocomplete, tabular results, and chart rendering.
+In this task, you'll use the Application Insights Logs experience to write and execute Kusto Query Language (KQL) queries. You'll analyze failed requests, investigate request performance, correlate exceptions with requests, and evaluate dependency latency to understand application health and performance.
 
 1. Navigate to the [Azure portal](https://portal.azure.com) and search **Application Insights (1)** resource and select **Application Insights (2)** from the results.
 
@@ -320,9 +314,9 @@ In this section you use the Logs blade in Application Insights to run KQL querie
 
    ![](../Images/lab24-t3p6.png)
 
-## Task 5: Create an action group and alert rule
+## Task 4: Create an action group and alert rule
 
-In this section you use the Azure CLI to create an action group and a log search alert rule that detects when the failure rate exceeds a threshold.
+In this task, you'll use the Azure CLI to create an Azure Monitor action group and a scheduled query alert rule. You'll configure the alert to monitor failed requests in Application Insights and automatically notify administrators when the failure threshold is exceeded.
 
 1. Run the following command in the VS Code terminal to create an action group with an email notification. The **ALERT_EMAIL** variable was populated from your Azure account when you ran the **Retrieve connection info** option in the deployment script.
 
@@ -384,6 +378,8 @@ In this section you use the Azure CLI to create an action group and a log search
 
    The severity is set to one (Error) to indicate a significant but not outage-level problem. When the alert fires, it triggers the action group which sends an email.
 
+   > **Note:** If prompted to install the scheduled-query Azure CLI extension, enter `y` and press Enter to continue. Wait for the extension to be installed before proceeding with the command.
+
 1. Run the following command to verify the alert rule was created and is enabled.
 
    **Bash**
@@ -433,5 +429,7 @@ In this section you use the Azure CLI to create an action group and a log search
    ![](../Images/lab24-t4p3.png)
 
 ## Summary
+
+In this lab, you deployed an Azure Application Insights resource and generated application telemetry using OpenTelemetry. You learned how to analyze requests, dependencies, and exceptions by writing Kusto Query Language (KQL) queries in the Azure portal to diagnose application health and performance. You also configured proactive monitoring by creating an Azure Monitor action group and a scheduled query alert rule using the Azure CLI. These capabilities demonstrate how Application Insights, KQL, and Azure Monitor work together to provide comprehensive observability, troubleshooting, and alerting for cloud applications.
 
 ## You have successfully completed the Hands-on Lab!

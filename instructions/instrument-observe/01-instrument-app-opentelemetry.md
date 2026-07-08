@@ -1,28 +1,25 @@
-# Instrument an app with OpenTelemetry
+# Lab 23: Instrument an app with OpenTelemetry
 
-OpenTelemetry is an open-source observability framework that provides a standardized way to collect traces, metrics, and logs from applications. The Azure Monitor OpenTelemetry Distro packages the OpenTelemetry SDK with the Azure Monitor exporter so Python applications can send telemetry to Application Insights with minimal configuration. Custom spans let you trace application-specific operations and add attributes that enrich trace data with business context.
+### Estimated Duration : 60 Minutes
 
-In this exercise, you deploy an Application Insights resource and build a Python Flask web application that demonstrates OpenTelemetry instrumentation for a document processing pipeline. You configure the Azure Monitor OpenTelemetry Distro, create custom parent and child spans for each pipeline stage, add span attributes to capture document metadata, and use Transaction search and log queries in the Azure portal to verify your telemetry and diagnose a simulated latency bottleneck.
+## Lab overview
 
-Tasks performed in this exercise:
+In this exercise, you deploy an Azure Application Insights resource and complete the OpenTelemetry instrumentation for a Python Flask application. You configure the Azure Monitor OpenTelemetry Distro, instrument a document processing pipeline with custom parent and child spans, and enrich telemetry with custom span attributes that provide business context. You then run the application to generate telemetry, use Transaction Search to visualize end-to-end request traces, and execute Kusto Query Language (KQL) queries in the Azure portal to analyze trace data and diagnose a simulated performance bottleneck.
 
-- Download the project starter files
-- Create an Application Insights resource
-- Add code to the starter files to complete the app
-- Run the app and diagnose a performance issue in Application Insights
+## Lab objectives
 
-This exercise takes approximately **25** minutes to complete.
+In this lab, you'll perform the following tasks:
 
-## Before you start
+- **Task 1:** Prepare the environment and deploy Azure Application Insights
+- **Task 2:** Complete the app
+- **Task 3:** Configure the Python environment
+- **Task 4:** Run the app
 
-To complete the exercise, you need:
+> ### **Note:** This lab includes deployment scripts for both **PowerShell** and **Bash**. You may choose either scripting language based on your preference or environment. Once you make your choice, use the corresponding commands and script throughout the entire lab, as all subsequent steps provide instructions for both PowerShell and Bash.
 
-- An Azure subscription. If you don't already have one, you can [sign up for one](https://azure.microsoft.com/).
-- [Visual Studio Code](https://code.visualstudio.com/) on one of the [supported platforms](https://code.visualstudio.com/docs/supporting/requirements#_platforms).
-- [Python 3.12](https://www.python.org/downloads/) or greater.
-- The latest version of the [Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli).
+## Task 1: Prepare the environment and deploy Azure Application Insights
 
-## Download project starter files and deploy Application Insights
+In this task, you'll prepare the development environment, configure the deployment script, authenticate to Azure, and deploy an Azure Application Insights resource. You'll also assign the required permissions and retrieve the connection information required for the application to publish telemetry using Microsoft Entra authentication.
 
 1. Launch **Visual Studio Code** (VS Code) from desktop.
 
@@ -169,7 +166,7 @@ To complete the exercise, you need:
 
 ## Task 2: Complete the app
 
-In this section you add code to the _telemetry_functions.py_ file to complete the OpenTelemetry instrumentation functions. The Flask app in _app.py_ calls these functions and displays the results in the browser. You run the app later in the exercise.
+In this task, you'll complete the OpenTelemetry instrumentation for the Flask application by configuring the Azure Monitor OpenTelemetry Distro, implementing a traced document processing pipeline, and creating parent and child spans with custom attributes to capture document metadata and application performance information.
 
 1. Open the **client/telemetry_functions.py** file to begin adding code.
 
@@ -331,7 +328,7 @@ The **enrich_document** function also includes a deliberate latency issue. Docum
 
 ## Task 3: Configure the Python environment
 
-In this section you navigate to the client app directory, create the Python environment, and install the dependencies.
+In this task, you'll create a Python virtual environment, install the required dependencies, and prepare the application for execution.
 
 1. Run the following command in the VS Code terminal to navigate to the _client_ directory.
 
@@ -367,7 +364,7 @@ In this section you navigate to the client app directory, create the Python envi
 
 ## Task 4: Run the app
 
-In this section you run the completed Flask application to generate telemetry, then use Transaction search and log queries in the Azure portal to verify the spans and diagnose a simulated performance bottleneck.
+In this task, you'll run the completed Flask application to generate telemetry and verify the OpenTelemetry instrumentation. You'll use Application Insights Transaction Search to inspect end-to-end traces and execute Kusto Query Language (KQL) queries to analyze custom spans, identify slow operations, and diagnose a simulated performance bottleneck.
 
 1. Run the following command in the terminal to start the app. Refer to the commands from earlier in the exercise to activate the environment, if needed, before running the command. If you navigated away from the **client** directory, run **cd client** first.
 
@@ -467,5 +464,7 @@ In this section you run the completed Flask application to generate telemetry, t
    ![](../Images/lab23-t4p19.png)
 
 ## Summary
+
+In this lab, you instrumented a Python Flask application using the Azure Monitor OpenTelemetry Distro and published distributed tracing telemetry to Azure Application Insights. You learned how to configure OpenTelemetry, create parent and child spans, enrich traces with custom attributes, and visualize end-to-end transactions. You also used Transaction Search and Kusto Query Language (KQL) queries to analyze telemetry, identify slow operations, and diagnose application performance issues. These capabilities demonstrate how OpenTelemetry and Application Insights work together to provide comprehensive observability and performance diagnostics for modern cloud applications.
 
 ## You have successfully completed the Hands-on Lab!
