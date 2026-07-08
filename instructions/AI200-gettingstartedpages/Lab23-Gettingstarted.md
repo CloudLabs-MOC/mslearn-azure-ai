@@ -1,40 +1,50 @@
 # Getting Started with your AI-200: Develop AI cloud solutions on Azure
 
-This course teaches developers how to create, monitor, and troubleshoot AI solutions on Microsoft Azure. Students will learn how to implement Azure compute and containerization patterns to host applications, build serverless APIs with Azure Functions, and integrate services using event‑driven and message‑based architectures such as Azure Service Bus and Event Grid. The course also covers working with Azure data services that support AI workloads, including designing and querying solutions with Cosmos DB for NoSQL, Azure Database for PostgreSQL with pgvector, and Azure Managed Redis for caching, streaming, and vector search. By the end of the course, developers will be able to connect services, orchestrate AI workflows, and build secure, scalable, and observable AI‑driven applications on Azure.
+Welcome to your AI-200: Develop AI cloud solutions on Azure workshop! In this lab, you will instrument a Python Flask application with OpenTelemetry and publish telemetry to Azure Application Insights to visualize trace data and diagnose application performance.
 
-## Lab 23: Instrument an app with OpenTelemetry
+## Lab 23: Instrument an app with the OpenTelemetry SDK 
 
 ### Overall Estimated Timing: 60 Minutes
 
 ## Overview
 
-In this hands-on lab,
+In this hands-on lab, you will deploy an Azure Application Insights resource, configure the Azure Monitor OpenTelemetry Distro for a Python app, and instrument a document processing pipeline with parent and child spans. You will enrich traces with custom attributes, run the application to generate telemetry, and use the Azure portal to analyze requests and diagnose a simulated performance bottleneck.
 
 ## Objectives
 
 By the end of this lab, you will be able to:
 
-1.
+1. **Deploy Application Insights:** Create an Application Insights resource and assign the required Monitoring Metrics Publisher role for Entra-based telemetry export.
 
-2.
+2. **Configure OpenTelemetry tracing:** Use the Azure Monitor OpenTelemetry Distro to instrument a Python Flask app and export telemetry using Microsoft Entra authentication.
 
-3.
+3. **Create distributed traces:** Instrument a document processing pipeline with parent and child spans and add custom span attributes for business context.
+
+4. **Generate and inspect telemetry:** Run the application, view end-to-end request traces in Application Insights, and identify slow operations in the trace timeline.
+
+5. **Query telemetry with KQL:** Use Kusto Query Language to analyze trace data and compare performance metrics for different pipeline stages.
 
 ## Pre-requisites
 
--
--
--
+- Basic knowledge of Azure services and Azure resource management.
+
+- Familiarity with Python programming and creating Python virtual environments.
+
+- Experience using Visual Studio Code, Azure CLI, and terminal commands (PowerShell or Bash).
+
+- Basic understanding of application observability, distributed tracing, and telemetry analysis.
 
 ## Architecture
 
-The lab architecture demonstrates ... :
+The lab architecture demonstrates how Azure Application Insights and OpenTelemetry provide observability for a Python Flask application by collecting traces, exporting telemetry, and enabling performance analysis.
 
-1.
+1. **Azure Application Insights:** Receives telemetry from the instrumented app and stores request traces, spans, and custom attributes.
 
-2.
+2. **Azure Monitor OpenTelemetry Distro:** Configures the OpenTelemetry SDK and exporter so the app sends telemetry using Application Insights connection data and Entra authentication.
 
-3.
+3. **Python Flask application:** Generates telemetry for a document processing pipeline, including parent and child spans for validation, enrichment, and storage stages.
+
+4. **Telemetry analysis tools:** Application Insights Transaction Search and Logs provide end-to-end trace visualization and KQL query capabilities.
 
 ## Architecture Diagram
 
@@ -42,13 +52,13 @@ The lab architecture demonstrates ... :
 
 ## Explanation of Components
 
-1.
+1. **Azure Application Insights:** Provides a managed telemetry store and analytics platform for monitoring application performance and diagnosing issues.
 
-2.
+2. **OpenTelemetry instrumentation:** Captures distributed traces and span data from the Python app to show how requests flow through the pipeline.
 
-3.
+3. **Custom span attributes:** Adds business context and performance metadata to traces so you can filter and understand slow operations.
 
-4.
+4. **Python Flask application:** The instrumented web app that triggers telemetry for document processing and demonstrates real-world observability patterns.
 
 ## Accessing Your Lab Environment
 

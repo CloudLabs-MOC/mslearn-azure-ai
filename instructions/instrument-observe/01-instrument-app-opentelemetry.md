@@ -4,7 +4,7 @@
 
 ## Lab overview
 
-In this exercise, you deploy an Azure Application Insights resource and complete the OpenTelemetry instrumentation for a Python Flask application. You configure the Azure Monitor OpenTelemetry Distro, instrument a document processing pipeline with custom parent and child spans, and enrich telemetry with custom span attributes that provide business context. You then run the application to generate telemetry, use Transaction Search to visualize end-to-end request traces, and execute Kusto Query Language (KQL) queries in the Azure portal to analyze trace data and diagnose a simulated performance bottleneck.
+In this hands-on lab, you deploy an Azure Application Insights resource and complete the OpenTelemetry instrumentation for a Python Flask application. You configure the Azure Monitor OpenTelemetry Distro, instrument a document processing pipeline with custom parent and child spans, and enrich telemetry with custom span attributes that provide business context. You then run the application to generate telemetry, use Transaction Search to visualize end-to-end request traces, and execute Kusto Query Language (KQL) queries in the Azure portal to analyze trace data and diagnose a simulated performance bottleneck.
 
 ## Lab objectives
 

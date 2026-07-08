@@ -1,40 +1,52 @@
 # Getting Started with your AI-200: Develop AI cloud solutions on Azure
  
-This course teaches developers how to create, monitor, and troubleshoot AI solutions on Microsoft Azure. Students will learn how to implement Azure compute and containerization patterns to host applications, build serverless APIs with Azure Functions, and integrate services using event‑driven and message‑based architectures such as Azure Service Bus and Event Grid. The course also covers working with Azure data services that support AI workloads, including designing and querying solutions with Cosmos DB for NoSQL, Azure Database for PostgreSQL with pgvector, and Azure Managed Redis for caching, streaming, and vector search. By the end of the course, developers will be able to connect services, orchestrate AI workflows, and build secure, scalable, and observable AI‑driven applications on Azure.
+Welcome to your AI-200: Develop AI cloud solutions on Azure workshop! In this lab, you will manage secrets with Azure Key Vault and build a Python Flask web app that retrieves secrets, lists secret metadata, creates new secret versions, and demonstrates time-based caching.
 
-## Lab 21: Manage secrets with Azure Key Vault
+## Lab 21: Manage secrets with Azure Key Vault 
 
-### Overall Estimated Timing: 30 Minutes
+### Overall Estimated Timing: 60 Minutes
 
 ## Overview
 
-In this hands-on lab, 
+In this hands-on lab, you will deploy an Azure Key Vault with RBAC authorization, store sample secrets, and complete a Python application that securely retrieves secrets, lists secret properties, rotates secret versions, and reduces repeated Key Vault access by using a cache.
 
 ## Objectives
 
 By the end of this lab, you will be able to:
 
-1. 
+1. **Deploy Azure Key Vault with RBAC authorization:** Create a vault, assign the Key Vault Secrets Officer role, and store sample secrets for the application.
 
-2. 
+2. **Retrieve secrets securely using Microsoft Entra:** Access secret values and metadata from the Python app with DefaultAzureCredential.
 
-3. 
+3. **List secret properties without exposing values:** Query secret metadata for inventory and audit scenarios while keeping secret contents hidden.
+
+4. **Rotate secrets and manage versions:** Create a new secret version to simulate credential rotation and confirm the update.
+
+5. **Implement caching for secret access:** Use a time-based cache to reduce the number of Key Vault API calls and improve application performance.
 
 ## Pre-requisites
 
--
--
--
+- Basic knowledge of Azure services and Azure resource management.
+
+- Familiarity with Python programming and creating Python virtual environments.
+
+- Experience using Visual Studio Code, Azure CLI, and terminal commands (PowerShell or Bash).
+
+- Basic understanding of secret management and Microsoft Entra authentication.
+
+- Access to an Azure subscription and the provided lab credentials.
 
 ## Architecture
 
-The lab architecture demonstrates ... :
+The lab architecture demonstrates how Azure Key Vault provides secure secret storage, RBAC-based access control, and a Python app that retrieves secrets, inspects metadata, rotates versions, and caches values to reduce repeated Key Vault calls.
 
-1. 
+1. **Azure Key Vault:** Stores secrets securely and manages secret versions over time.
 
-2. 
+2. **RBAC role assignment:** Grants the application permission to read and manage secrets using Microsoft Entra credentials.
 
-3. 
+3. **Python Flask application:** Retrieves secrets, lists secret properties, creates new secret versions, and demonstrates cache behavior.
+
+4. **Secret caching layer:** Reduces repeated Key Vault API calls by temporarily storing secret values in memory.
 
 ## Architecture Diagram
 
@@ -42,13 +54,13 @@ The lab architecture demonstrates ... :
 
 ## Explanation of Components
 
-1. 
+1. **Azure Key Vault:** A secure service for storing application secrets, connection strings, and other sensitive configuration values.
 
-2. 
+2. **Key Vault RBAC:** Microsoft Entra-based permissions that allow the app to access secrets without using static keys or connection strings.
 
-3. 
+3. **Python Flask application:** The web app that interacts with Key Vault to retrieve secrets, list metadata, rotate secret versions, and show cached retrieval behavior.
 
-4. 
+4. **Secret cache:** An in-memory cache that helps the app reduce repeated Key Vault calls by reusing recently accessed secret values for a short period.
 
 ## Accessing Your Lab Environment
  
@@ -64,7 +76,7 @@ Your virtual machine is your workhorse throughout the workshop. The lab guide is
  
 To get a better understanding of your lab resources and credentials, navigate to the **Environment** tab.
  
-![Explore Lab Resources; pending](../Images/envtab.png)
+![Explore Lab Resources; pending](../Images/lab07-envtab.png)
 
 ## Managing Your Virtual Machine
  
@@ -82,13 +94,13 @@ You can use the **Progress** tab to track your progress while working on the lab
  
 For convenience, you can open the lab guide in a separate window by selecting the **Split Window** button from the top right corner.
  
-![Use the Split Window Feature;pending](../Images/splitwindow.png)
+![Use the Split Window Feature;pending](../Images/lab07-splittab.png)
 
 ## Lab Guide Zoom In/Zoom Out
  
 To adjust the zoom level for the environment page, click the **A↕: 100%** icon located next to the timer in the lab environment.
 
-![pending](../Images/lab21-z.png)
+![pending](../Images/lab07-zoomtab.png)
 
 ## Let's Get Started with Azure Portal
  
@@ -112,7 +124,7 @@ To adjust the zoom level for the environment page, click the **A↕: 100%** icon
 
 1. If a **Welcome to Microsoft Azure** pop-up window appears, simply click **Maybe later** to skip the tour.
 
-    ![](../Images/lab21-w.png)
+    ![](../Images/maybelater.png)
 
 
 ## Support Contact

@@ -1,40 +1,43 @@
 # Getting Started with your AI-200: Develop AI cloud solutions on Azure
 
-This course teaches developers how to create, monitor, and troubleshoot AI solutions on Microsoft Azure. Students will learn how to implement Azure compute and containerization patterns to host applications, build serverless APIs with Azure Functions, and integrate services using event‑driven and message‑based architectures such as Azure Service Bus and Event Grid. The course also covers working with Azure data services that support AI workloads, including designing and querying solutions with Cosmos DB for NoSQL, Azure Database for PostgreSQL with pgvector, and Azure Managed Redis for caching, streaming, and vector search. By the end of the course, developers will be able to connect services, orchestrate AI workflows, and build secure, scalable, and observable AI‑driven applications on Azure.
+Welcome to your AI-200: Develop AI cloud solutions on Azure workshop! In this lab, you will build a pub/sub messaging solution with Azure Managed Redis and Python, using Redis channels and wildcard subscriptions to flow events between a publisher and a subscriber.
 
-## Lab 16: Build a pub/sub solution with Azure Managed Redis
+## Lab 16: Publish and subscribe to events in Azure Managed Redis 
 
 ### Overall Estimated Timing: 60 Minutes
 
 ## Overview
 
-In this hands-on lab,
+In this hands-on lab, you will provision Azure Managed Redis, connect Python applications using redis-py, and implement both publisher and subscriber logic. You will send messages on Redis channels, subscribe to channels and patterns, and validate the end-to-end Pub/Sub workflow with real-time message delivery.
 
 ## Objectives
 
-By the end of this lab, you will be able to:
+1. **Deploy Azure Managed Redis:** Provision a managed Redis cache and configure secure access for Python clients.
 
-1.
+2. **Implement publisher functionality:** Build a Python publisher app that sends JSON event messages to Redis channels.
 
-2.
+3. **Implement subscriber functionality:** Build a Python subscriber app that listens on channels and patterns and displays incoming messages.
 
-3.
+4. **Validate Pub/Sub communication:** Run both apps together and verify real-time message delivery using Azure Managed Redis.
 
 ## Pre-requisites
 
--
--
--
+- Basic familiarity with Redis Pub/Sub concepts and event-driven messaging.
+- Experience using Python, Visual Studio Code, and Azure CLI.
+- Access to an Azure subscription and the provided lab credentials.
+- Familiarity with running terminal commands in PowerShell or Bash.
 
 ## Architecture
 
-The lab architecture demonstrates ... :
+The lab architecture shows a Redis Pub/Sub solution using Azure Managed Redis. A publisher app sends events to one or more Redis channels, and a subscriber app listens for those events using direct and wildcard pattern subscriptions.
 
-1.
+1. **Azure Managed Redis:** Hosts the managed Redis cache used for pub/sub messaging.
 
-2.
+2. **Publisher application:** Sends event messages to Redis channels using redis-py.
 
-3.
+3. **Subscriber application:** Listens for published messages and displays them in real time.
+
+4. **Redis Pub/Sub messaging:** Demonstrates real-time event delivery across channels and pattern subscriptions.
 
 ## Architecture Diagram
 
@@ -42,13 +45,13 @@ The lab architecture demonstrates ... :
 
 ## Explanation of Components
 
-1.
+1. **Azure Managed Redis:** A managed Redis service that provides pub/sub messaging capabilities and secure client connectivity.
 
-2.
+2. **redis-py library:** The Python client used to connect to Redis and execute publish/subscribe commands.
 
-3.
+3. **Publisher app:** Sends JSON-formatted event messages to Redis channels.
 
-4.
+4. **Subscriber app:** Receives messages from subscribed channels and wildcard patterns, displaying them in real time.
 
 ## Accessing Your Lab Environment
 

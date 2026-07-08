@@ -4,7 +4,7 @@
 
 ## Overview
 
-In this lab, you will deploy a containerized application to Azure App Service by using a private Azure Container Registry (ACR). You will create an ACR, build and store a container image, and deploy it to a Linux Web App. You will also configure a system-assigned managed identity with the **AcrPull** role to securely access the private registry. Finally, you will configure the application, enable logging, and verify the deployment by testing the application and reviewing its logs.
+In this hands-on lab, you will deploy a containerized application to Azure App Service by using a private Azure Container Registry (ACR). You will create an ACR, build and store a container image, and deploy it to a Linux Web App. You will also configure a system-assigned managed identity with the **AcrPull** role to securely access the private registry. Finally, you will configure the application, enable logging, and verify the deployment by testing the application and reviewing its logs.
 
 ## Lab Overview
 

@@ -1,6 +1,6 @@
 # Getting Started with your AI-200: Develop AI cloud solutions on Azure
 
-This course teaches developers how to create, monitor, and troubleshoot AI solutions on Microsoft Azure. Students will learn how to implement Azure compute and containerization patterns to host applications, build serverless APIs with Azure Functions, and integrate services using event‑driven and message‑based architectures such as Azure Service Bus and Event Grid. The course also covers working with Azure data services that support AI workloads, including designing and querying solutions with Cosmos DB for NoSQL, Azure Database for PostgreSQL with pgvector, and Azure Managed Redis for caching, streaming, and vector search. By the end of the course, developers will be able to connect services, orchestrate AI workflows, and build secure, scalable, and observable AI‑driven applications on Azure.
+Welcome to your AI-200: Develop AI cloud solutions on Azure workshop! In this lab, you will implement semantic search using Azure Managed Redis and vector embeddings, learning how to store and query product data with semantic similarity.
 
 ## Lab 17: Implement semantic search in Azure Managed Redis
 
@@ -8,33 +8,38 @@ This course teaches developers how to create, monitor, and troubleshoot AI solut
 
 ## Overview
 
-In this hands-on lab,
+In this hands-on lab, you will provision Azure Managed Redis, connect a Python application using redis-py, and implement vector storage and semantic search functionality. You will load sample product data with embeddings, create a RediSearch vector index, and perform similarity searches to find related products based on cosine similarity.
 
 ## Objectives
 
 By the end of this lab, you will be able to:
 
-1.
+1. **Deploy Azure Managed Redis for vector search:** Provision a managed Redis cache and configure secure access for a Python application.
 
-2.
+2. **Store vector embeddings with metadata:** Load product data into Redis and store binary vector embeddings alongside metadata fields.
 
-3.
+3. **Create a RediSearch vector index:** Define a vector index for semantic search using HNSW and cosine similarity.
+
+4. **Perform semantic similarity searches:** Query Redis for products that are semantically similar based on vector embeddings.
 
 ## Pre-requisites
 
--
--
--
+- Basic familiarity with Redis, vector embeddings, and semantic search concepts.
+- Experience using Python, Visual Studio Code, and Azure CLI.
+- Access to an Azure subscription and the provided lab credentials.
+- Familiarity with running terminal commands in PowerShell or Bash.
 
 ## Architecture
 
-The lab architecture demonstrates ... :
+The lab architecture shows a Redis vector search solution built on Azure Managed Redis and RediSearch. The Python application stores product embeddings and metadata, then runs similarity searches using a vector index.
 
-1.
+1. **Azure Managed Redis:** Hosts the managed Redis cache with RediSearch module support.
 
-2.
+2. **Redis vector index:** Uses HNSW and cosine similarity to enable fast semantic searches over embeddings.
 
-3.
+3. **Python vector application:** Stores and queries products with embedding vectors and metadata.
+
+4. **Semantic search workflow:** Finds related products based on vector similarity instead of keyword matching.
 
 ## Architecture Diagram
 
@@ -42,13 +47,13 @@ The lab architecture demonstrates ... :
 
 ## Explanation of Components
 
-1.
+1. **Azure Managed Redis:** A managed cache service that supports the RediSearch module and vector search capabilities.
 
-2.
+2. **RediSearch vector index:** Adds vector search functionality to Redis, allowing KNN queries over embedding data.
 
-3.
+3. **Product metadata and embeddings:** Stores structured product fields with binary vector representations for semantic search.
 
-4.
+4. **Python application:** Connects to Redis, loads data, creates the vector index, and executes similarity searches.
 
 ## Accessing Your Lab Environment
 

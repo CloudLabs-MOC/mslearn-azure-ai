@@ -1,6 +1,6 @@
 # Getting Started with your AI-200: Develop AI cloud solutions on Azure
 
-This course teaches developers how to create, monitor, and troubleshoot AI solutions on Microsoft Azure. Students will learn how to implement Azure compute and containerization patterns to host applications, build serverless APIs with Azure Functions, and integrate services using event‑driven and message‑based architectures such as Azure Service Bus and Event Grid. The course also covers working with Azure data services that support AI workloads, including designing and querying solutions with Cosmos DB for NoSQL, Azure Database for PostgreSQL with pgvector, and Azure Managed Redis for caching, streaming, and vector search. By the end of the course, developers will be able to connect services, orchestrate AI workflows, and build secure, scalable, and observable AI‑driven applications on Azure.
+Welcome to your AI-200: Develop AI cloud solutions on Azure workshop! In this lab, you will query application telemetry using Kusto Query Language (KQL) in Azure Application Insights to investigate logs, requests, dependencies, and alerts for a distributed application.
 
 ## Lab 24: Query logs with KQL
 
@@ -8,33 +8,43 @@ This course teaches developers how to create, monitor, and troubleshoot AI solut
 
 ## Overview
 
-In this hands-on lab,
+In this hands-on lab, you will deploy an Azure Application Insights resource, generate telemetry from a Python application, and use the Azure portal Logs experience to write KQL queries. You will analyze failed requests, dependency latency, exceptions, and performance metrics, then configure proactive monitoring with an action group and scheduled query alert rule.
 
 ## Objectives
 
 By the end of this lab, you will be able to:
 
-1.
+1. **Deploy Application Insights:** Create an Application Insights resource and assign the Monitoring Metrics Publisher role so the app can send telemetry using Microsoft Entra authentication.
 
-2.
+2. **Generate telemetry data:** Run a Python application that produces request, dependency, and exception telemetry for analysis.
 
-3.
+3. **Query telemetry with KQL:** Write Kusto Query Language queries to analyze failed requests, performance trends, exceptions, and dependency latency.
+
+4. **Correlate telemetry types:** Join request and exception data to identify which operations produced errors.
+
+5. **Create alerts:** Configure an Azure Monitor action group and scheduled query alert rule to notify administrators when failure thresholds are exceeded.
 
 ## Pre-requisites
 
--
--
--
+- Basic knowledge of Azure services and Azure resource management.
+
+- Familiarity with Python programming and creating Python virtual environments.
+
+- Experience using Visual Studio Code, Azure CLI, and terminal commands (PowerShell or Bash).
+
+- Basic understanding of application monitoring, log analytics, and alerting.
 
 ## Architecture
 
-The lab architecture demonstrates ... :
+The lab architecture demonstrates how Azure Application Insights collects telemetry from a Python application, stores it for analysis, and enables proactive monitoring through alerts.
 
-1.
+1. **Azure Application Insights:** Collects request, dependency, and exception telemetry from the instrumented application.
 
-2.
+2. **Python telemetry generator:** Produces sample application telemetry that mimics real-world service behavior and failures.
 
-3.
+3. **Logs and KQL:** Queries telemetry data in Azure Monitor Logs to investigate performance and troubleshoot errors.
+
+4. **Alerting with Azure Monitor:** Uses action groups and scheduled query alerts to notify administrators when a telemetry-based condition is met.
 
 ## Architecture Diagram
 
@@ -42,13 +52,13 @@ The lab architecture demonstrates ... :
 
 ## Explanation of Components
 
-1.
+1. **Azure Application Insights:** A managed observability service that stores and indexes telemetry for monitoring and diagnostics.
 
-2.
+2. **Telemetry generator app:** A Python application that creates telemetry events such as requests, dependencies, and exceptions.
 
-3.
+3. **Kusto Query Language (KQL):** The query language used to explore and analyze telemetry data in the Azure portal.
 
-4.
+4. **Azure Monitor alerting:** A mechanism that triggers notifications when predefined telemetry conditions occur.
 
 ## Accessing Your Lab Environment
 

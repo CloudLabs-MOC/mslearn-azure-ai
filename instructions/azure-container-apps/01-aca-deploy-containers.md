@@ -4,7 +4,7 @@
 
 ## Overview
 
-In this lab, you will deploy a containerized backend API to Azure Container Apps using secure identity-based authentication. You will create a system-assigned managed identity to securely pull images from a private Azure Container Registry, configure secrets for sensitive API keys as environment variables, and verify the deployment by testing the API endpoints and reviewing application logs.
+In this hands-on lab, you will deploy a containerized backend API to Azure Container Apps using secure identity-based authentication. You will create a system-assigned managed identity to securely pull images from a private Azure Container Registry, configure secrets for sensitive API keys as environment variables, and verify the deployment by testing the API endpoints and reviewing application logs.
 
 ## Lab Overview
 

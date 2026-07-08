@@ -4,7 +4,7 @@
 
 ## Overview
 
-In this exercise, you use Azure Container Registry (ACR) Tasks to build and manage container images entirely in the cloud, without requiring a local Docker installation.
+In this hands-on lab, you use Azure Container Registry (ACR) Tasks to build and manage container images entirely in the cloud, without requiring a local Docker installation.
 
 ## Lab Objectives
 

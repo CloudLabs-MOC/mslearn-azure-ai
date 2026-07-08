@@ -4,7 +4,7 @@
 
 ## Lab overview
 
-In this exercise, you deploy Azure Event Grid Namespace resources and complete the event publishing and pull delivery logic for a Python application. The application publishes CloudEvents representing AI content moderation results, receives events from filtered subscriptions using pull delivery, acknowledges successfully processed events, and rejects events that cannot be processed. You implement Azure Event Grid operations using the Azure SDK for Python and Microsoft Entra authentication, then verify event routing, subscription filtering, and event lifecycle management through a web application.
+In this hands-on lab, you deploy Azure Event Grid Namespace resources and complete the event publishing and pull delivery logic for a Python application. The application publishes CloudEvents representing AI content moderation results, receives events from filtered subscriptions using pull delivery, acknowledges successfully processed events, and rejects events that cannot be processed. You implement Azure Event Grid operations using the Azure SDK for Python and Microsoft Entra authentication, then verify event routing, subscription filtering, and event lifecycle management through a web application.
 
 ## Lab objectives
 

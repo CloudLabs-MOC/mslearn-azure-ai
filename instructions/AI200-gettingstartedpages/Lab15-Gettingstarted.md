@@ -1,6 +1,6 @@
 # Getting Started with your AI-200: Develop AI cloud solutions on Azure
 
-This course teaches developers how to create, monitor, and troubleshoot AI solutions on Microsoft Azure. Students will learn how to implement Azure compute and containerization patterns to host applications, build serverless APIs with Azure Functions, and integrate services using event‑driven and message‑based architectures such as Azure Service Bus and Event Grid. The course also covers working with Azure data services that support AI workloads, including designing and querying solutions with Cosmos DB for NoSQL, Azure Database for PostgreSQL with pgvector, and Azure Managed Redis for caching, streaming, and vector search. By the end of the course, developers will be able to connect services, orchestrate AI workflows, and build secure, scalable, and observable AI‑driven applications on Azure.
+Welcome to your AI-200: Develop AI cloud solutions on Azure workshop! In this lab, you will perform Redis data operations using Azure Managed Redis and a Python console application. You will connect to the managed cache, store and retrieve hash data, manage key expiration, and delete cached values.
 
 ## Lab 15: Perform data operations in Azure Managed Redis
 
@@ -8,33 +8,38 @@ This course teaches developers how to create, monitor, and troubleshoot AI solut
 
 ## Overview
 
-In this hands-on lab,
+In this hands-on lab, you will create an Azure Managed Redis instance, configure the development environment, and update a Python console application to perform Redis data operations. You will validate the solution by storing hash data, retrieving it, setting expiration values, and deleting keys from the cache.
 
 ## Objectives
 
 By the end of this lab, you will be able to:
 
-1.
+1. **Deploy Azure Managed Redis:** Provision an Azure Managed Redis cache and configure access for your Python application.
 
-2.
+2. **Connect securely with redis-py:** Use environment variables and SSL to connect to Azure Managed Redis from Python.
 
-3.
+3. **Perform Redis data operations:** Store and retrieve hash data, set TTL values, and delete keys from the cache.
+
+4. **Validate cache behavior:** Verify that stored data is accessible, expires correctly, and can be removed when needed.
 
 ## Pre-requisites
 
--
--
--
+- Basic familiarity with Redis concepts and key-value data stores.
+- Experience using Python, Visual Studio Code, and Azure CLI.
+- Access to an Azure subscription and the provided lab credentials.
+- Familiarity with running terminal commands in PowerShell or Bash.
 
 ## Architecture
 
-The lab architecture demonstrates ... :
+The lab architecture shows a Python application connecting to Azure Managed Redis using secure redis-py connections. Redis stores hash data and TTL settings, and the application performs CRUD operations against the cache.
 
-1.
+1. **Azure Managed Redis:** Hosts the managed Redis cache used for fast key-value data operations.
 
-2.
+2. **Python console application:** Uses redis-py to connect to Azure Managed Redis securely and execute data operations.
 
-3.
+3. **Hash data operations:** Store and retrieve structured hash values in Redis.
+
+4. **TTL and delete operations:** Manage key expiration and remove cached data when it is no longer needed.
 
 ## Architecture Diagram
 
@@ -42,13 +47,13 @@ The lab architecture demonstrates ... :
 
 ## Explanation of Components
 
-1.
+1. **Azure Managed Redis:** A fully managed Redis cache service that provides high-performance key-value storage and supports secure access from applications.
 
-2.
+2. **redis-py library:** The Python client library used to connect to Redis, execute commands, and manage cache data.
 
-3.
+3. **Hash data storage:** Redis hash structures store multiple related fields under a single key, making it easy to save and retrieve structured data.
 
-4.
+4. **TTL and key deletion:** Time-To-Live settings control how long keys remain in the cache, while deletion operations remove keys immediately when no longer needed.
 
 ## Accessing Your Lab Environment
 

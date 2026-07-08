@@ -4,7 +4,7 @@
 
 ## Lab overview
 
-In this exercise, you deploy an Azure Application Insights resource and generate sample application telemetry using a Python application instrumented with OpenTelemetry. You then use the Logs experience in the Azure portal to analyze request, dependency, and exception telemetry by writing Kusto Query Language (KQL) queries. Finally, you configure proactive monitoring by creating an Azure Monitor Action Group and a scheduled query alert rule using the Azure CLI to detect application failures and notify administrators when predefined conditions are met.
+In this hands-on lab, you deploy an Azure Application Insights resource and generate sample application telemetry using a Python application instrumented with OpenTelemetry. You then use the Logs experience in the Azure portal to analyze request, dependency, and exception telemetry by writing Kusto Query Language (KQL) queries. Finally, you configure proactive monitoring by creating an Azure Monitor Action Group and a scheduled query alert rule using the Azure CLI to detect application failures and notify administrators when predefined conditions are met.
 
 ## Lab objectives
 

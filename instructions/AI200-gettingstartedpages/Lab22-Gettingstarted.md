@@ -1,40 +1,48 @@
 # Getting Started with your AI-200: Develop AI cloud solutions on Azure
- 
-This course teaches developers how to create, monitor, and troubleshoot AI solutions on Microsoft Azure. Students will learn how to implement Azure compute and containerization patterns to host applications, build serverless APIs with Azure Functions, and integrate services using event‑driven and message‑based architectures such as Azure Service Bus and Event Grid. The course also covers working with Azure data services that support AI workloads, including designing and querying solutions with Cosmos DB for NoSQL, Azure Database for PostgreSQL with pgvector, and Azure Managed Redis for caching, streaming, and vector search. By the end of the course, developers will be able to connect services, orchestrate AI workflows, and build secure, scalable, and observable AI‑driven applications on Azure.
 
-## Lab 22: Retrieve settings with Azure App Configuration
+Welcome to your AI-200: Develop AI cloud solutions on Azure workshop! In this lab, you will use Azure App Configuration to centralize application settings, resolve Key Vault references for secrets, and build a Python app that demonstrates configuration loading, listing, and dynamic refresh.
 
-### Overall Estimated Timing: 30 Minutes
+## Lab 22: Retrieve settings and secrets from Azure App Configuration 
+
+### Overall Estimated Timing: 60 Minutes
 
 ## Overview
 
-In this hands-on lab, 
+In this hands-on lab, you will deploy an Azure App Configuration store and a Key Vault, configure settings with labels and Key Vault references, and complete a Python Flask application that loads configuration values, lists stored settings, and refreshes configuration dynamically using a sentinel key.
 
 ## Objectives
 
 By the end of this lab, you will be able to:
 
-1. 
+1. **Deploy Azure App Configuration and Key Vault:** Create an App Configuration store and a Key Vault, assign roles, and store sample settings and secrets.
 
-2. 
+2. **Load and resolve configuration settings:** Retrieve application settings with label stacking and automatically resolve Key Vault references in the Python app.
 
-3. 
+3. **List App Configuration settings metadata:** Inspect setting metadata for audit and inventory purposes without exposing secret values.
+
+4. **Implement dynamic refresh:** Update configuration values and trigger a sentinel-based refresh so the app picks up changes without restarting.
 
 ## Pre-requisites
 
--
--
--
+- Basic knowledge of Azure services and Azure resource management.
+
+- Familiarity with Python programming and creating Python virtual environments.
+
+- Experience using Visual Studio Code, Azure CLI, and terminal commands (PowerShell or Bash).
+
+- Basic understanding of configuration management, Key Vault secrets, and Microsoft Entra authentication.
 
 ## Architecture
 
-The lab architecture demonstrates ... :
+The lab architecture demonstrates how Azure App Configuration centralizes application settings and resolves Key Vault references, while a Python application loads configuration values, lists settings metadata, and refreshes settings dynamically using a sentinel.
 
-1. 
+1. **Azure App Configuration:** Stores application settings with labels and enables configuration management separate from code.
 
-2. 
+2. **Azure Key Vault:** Stores sensitive secrets securely and provides referenced values to App Configuration.
 
-3. 
+3. **Python Flask application:** Loads configuration values, lists setting metadata, and triggers dynamic refresh.
+
+4. **Sentinel-based refresh:** Uses a special sentinel key to detect changes and refresh the app configuration without restarting.
 
 ## Architecture Diagram
 
@@ -42,13 +50,13 @@ The lab architecture demonstrates ... :
 
 ## Explanation of Components
 
-1. 
+1. **Azure App Configuration:** A centralized service for storing application settings, labels, and Key Vault references that help manage environment-specific configuration safely.
 
-2. 
+2. **Azure Key Vault:** Stores sensitive secrets and provides secure references that App Configuration resolves at runtime.
 
-3. 
+3. **Python Flask application:** Retrieves settings, lists metadata, and demonstrates how configuration values are consumed by an app using Azure SDKs.
 
-4. 
+4. **Dynamic refresh sentinel:** A configuration key that signals the app to refresh its loaded settings when the sentinel value changes.
 
 ## Accessing Your Lab Environment
  
@@ -64,7 +72,7 @@ Your virtual machine is your workhorse throughout the workshop. The lab guide is
  
 To get a better understanding of your lab resources and credentials, navigate to the **Environment** tab.
  
-![Explore Lab Resources; pending](../Images/envtab.png)
+![Explore Lab Resources; pending](../Images/lab07-envtab.png)
 
 ## Managing Your Virtual Machine
  
@@ -82,13 +90,13 @@ You can use the **Progress** tab to track your progress while working on the lab
  
 For convenience, you can open the lab guide in a separate window by selecting the **Split Window** button from the top right corner.
  
-![Use the Split Window Feature;pending](../Images/splitwindow.png)
+![Use the Split Window Feature;pending](../Images/lab07-splittab.png)
 
 ## Lab Guide Zoom In/Zoom Out
  
 To adjust the zoom level for the environment page, click the **A↕: 100%** icon located next to the timer in the lab environment.
 
-![pending](../Images/lab22-z.png)
+![pending](../Images/lab07-zoomtab.png)
 
 ## Let's Get Started with Azure Portal
  
@@ -112,7 +120,7 @@ To adjust the zoom level for the environment page, click the **A↕: 100%** icon
 
 1. If a **Welcome to Microsoft Azure** pop-up window appears, simply click **Maybe later** to skip the tour.
 
-    ![](../Images/lab22-w.png)
+    ![](../Images/maybelater.png)
 
 
 ## Support Contact

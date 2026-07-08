@@ -6,7 +6,7 @@
 
 AI applications depend on both non-sensitive configuration such as model endpoints and batch sizes, and sensitive credentials such as API keys. Azure App Configuration provides a centralized store for managing these settings with label-based environment overrides, Key Vault references for secrets, and sentinel-based dynamic refresh so applications can pick up configuration changes without restarting.
 
-In this exercise, you deploy an Azure App Configuration store and Key Vault pre-loaded with sample settings and build a Python Flask web application that demonstrates core configuration management patterns using the Azure SDK. You load settings with label stacking and automatic Key Vault reference resolution, list all setting properties and metadata, and trigger a sentinel-based refresh to pick up changes dynamically.
+In this hands-on lab, you deploy an Azure App Configuration store and Key Vault pre-loaded with sample settings and build a Python Flask web application that demonstrates core configuration management patterns using the Azure SDK. You load settings with label stacking and automatic Key Vault reference resolution, list all setting properties and metadata, and trigger a sentinel-based refresh to pick up changes dynamically.
 
 ## Lab Overview
 

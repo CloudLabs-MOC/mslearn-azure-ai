@@ -6,7 +6,7 @@
 
 AI applications typically depend on sensitive credentials such as API keys, connection strings, and certificates to access model endpoints and data stores. Azure Key Vault provides a centralized, secure store for these secrets with RBAC access control, automatic versioning, and audit logging so applications never need to embed credentials in code or configuration files.
 
-In this exercise, you deploy an Azure Key Vault pre-loaded with sample secrets and build a Python Flask web application that demonstrates core secret management patterns using the Azure SDK. You retrieve secrets and inspect their metadata, list all secret properties without exposing values, create a new secret version to simulate credential rotation, and implement a time-based cache to reduce Key Vault API calls.
+In this hands-on lab, you deploy an Azure Key Vault pre-loaded with sample secrets and build a Python Flask web application that demonstrates core secret management patterns using the Azure SDK. You retrieve secrets and inspect their metadata, list all secret properties without exposing values, create a new secret version to simulate credential rotation, and implement a time-based cache to reduce Key Vault API calls.
 
 ## Lab Objectives
 

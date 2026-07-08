@@ -4,7 +4,7 @@
 
 ## Overview 
 
-In this lab, you will diagnose and fix a failing container app deployment in Azure Container Apps. You will investigate deployment issues by reviewing revision status, checking application logs, and using the Azure CLI to isolate problems such as missing environment variables and ingress configuration errors. By the end of the lab, you will have practiced the troubleshooting workflow used to keep containerized AI applications healthy and running correctly.
+In this hands-on lab, you will diagnose and fix a failing container app deployment in Azure Container Apps. You will investigate deployment issues by reviewing revision status, checking application logs, and using the Azure CLI to isolate problems such as missing environment variables and ingress configuration errors. By the end of the lab, you will have practiced the troubleshooting workflow used to keep containerized AI applications healthy and running correctly.
 
 ## Lab Overview
 

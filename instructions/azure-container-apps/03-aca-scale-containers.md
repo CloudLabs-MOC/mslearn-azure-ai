@@ -4,7 +4,7 @@
 
 ## Overview 
 
-In this lab, you will configure autoscaling for a containerized application in Azure Container Apps using KEDA-based HTTP concurrency rules. You will deploy a mock agent API, create the required Azure Container Registry and Container Apps resources, and apply scaling policies that allow the app to scale out during periods of high demand and scale down when traffic decreases. You will also generate concurrent requests to observe replica changes in real time and update scaling behavior using YAML so the configuration is easier to manage and repeat.
+In this hands-on lab, you will configure autoscaling for a containerized application in Azure Container Apps using KEDA-based HTTP concurrency rules. You will deploy a mock agent API, create the required Azure Container Registry and Container Apps resources, and apply scaling policies that allow the app to scale out during periods of high demand and scale down when traffic decreases. You will also generate concurrent requests to observe replica changes in real time and update scaling behavior using YAML so the configuration is easier to manage and repeat.
 
 ## Lab Overview
 

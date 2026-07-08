@@ -1,6 +1,6 @@
 # Getting Started with your AI-200: Develop AI cloud solutions on Azure
 
-This course teaches developers how to create, monitor, and troubleshoot AI solutions on Microsoft Azure. Students will learn how to implement Azure compute and containerization patterns to host applications, build serverless APIs with Azure Functions, and integrate services using event‑driven and message‑based architectures such as Azure Service Bus and Event Grid. The course also covers working with Azure data services that support AI workloads, including designing and querying solutions with Cosmos DB for NoSQL, Azure Database for PostgreSQL with pgvector, and Azure Managed Redis for caching, streaming, and vector search. By the end of the course, developers will be able to connect services, orchestrate AI workflows, and build secure, scalable, and observable AI‑driven applications on Azure.
+Welcome to your AI-200: Develop AI cloud solutions on Azure workshop! In this lab, you will process messages using Azure Service Bus and build reliable messaging workflows with queues, dead-letter handling, and topic-based routing.
 
 ## Lab 18: Process messages with Azure Service Bus
 
@@ -8,33 +8,38 @@ This course teaches developers how to create, monitor, and troubleshoot AI solut
 
 ## Overview
 
-In this hands-on lab,
+In this hands-on lab, you will provision Azure Service Bus, create the required messaging entities, and complete a Python app that demonstrates queue processing, dead-letter handling, and topic subscription filtering. You will send valid and malformed messages, process them using peek-lock delivery, inspect dead-lettered messages, and verify topic routing with subscription filters.
 
 ## Objectives
 
 By the end of this lab, you will be able to:
 
-1.
+1. **Deploy Azure Service Bus resources:** Provision a Service Bus namespace, queue, topic, and subscriptions with appropriate role assignment.
 
-2.
+2. **Implement queue messaging and dead-letter handling:** Send messages, process them with peek-lock delivery, and move malformed messages to the dead-letter queue.
 
-3.
+3. **Implement topic routing with filters:** Publish messages to a Service Bus topic and verify delivery to subscriptions with SQL filters.
+
+4. **Validate messaging workflows:** Run the Python application and confirm message delivery, processing, and dead-letter behavior.
 
 ## Pre-requisites
 
--
--
--
+- Basic knowledge of messaging patterns and Azure Service Bus concepts.
+- Experience using Python, Visual Studio Code, and Azure CLI.
+- Access to an Azure subscription and the provided lab credentials.
+- Familiarity with running terminal commands in PowerShell or Bash.
 
 ## Architecture
 
-The lab architecture demonstrates ... :
+The lab architecture shows an Azure Service Bus messaging solution where a Python app sends messages to a queue and a topic. Queue messages are processed with peek-lock and invalid messages are dead-lettered, while topic messages are delivered to subscriptions based on SQL filters.
 
-1.
+1. **Azure Service Bus queue:** Receives messages for processing and dead-letter handling.
 
-2.
+2. **Dead-letter queue:** Stores invalid or failed messages for diagnostics and replay.
 
-3.
+3. **Azure Service Bus topic and subscriptions:** Routes published messages to subscriptions using filters.
+
+4. **Python messaging app:** Sends messages, processes queue deliveries, inspects dead-lettered entries, and validates topic routing.
 
 ## Architecture Diagram
 
@@ -42,13 +47,13 @@ The lab architecture demonstrates ... :
 
 ## Explanation of Components
 
-1.
+1. **Azure Service Bus namespace:** Provides the messaging backbone for queues, topics, and subscriptions that support reliable asynchronous communication.
 
-2.
+2. **Service Bus queue:** Receives messages from the application and supports peek-lock processing for safe, at-least-once delivery.
 
-3.
+3. **Dead-letter queue:** Captures messages that cannot be processed successfully so you can inspect failures and handle them separately.
 
-4.
+4. **Service Bus topic and subscriptions:** Routes published messages to multiple subscribers and uses SQL filters to deliver only relevant messages to each subscription.
 
 ## Accessing Your Lab Environment
 
