@@ -4,7 +4,7 @@ Welcome to your AI-200: Develop AI cloud solutions on Azure workshop! In this la
 
 ## Lab 12: Build an agent tool backend on Azure Database for PostgreSQL
 
-### Overall Estimated Timing: 30 Minutes
+### Overall Estimated Timing: 60 Minutes
 
 ## Overview
 
@@ -57,7 +57,7 @@ The lab architecture demonstrates an AI agent tool backend built on Azure Databa
  
 Once you're ready to dive in, your virtual machine and **Guide** will be right at your fingertips within your web browser.
  
-![Access Your VM and Lab Guide; pending](../Images/lab12-vm.png)
+![Access Your VM and Lab Guide; pending](../Images/ai200-lab12-vm.png)
 
 ## Virtual Machine & Lab Guide
  

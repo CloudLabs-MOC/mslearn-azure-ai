@@ -62,7 +62,7 @@ The lab architecture demonstrates how Azure App Configuration centralizes applic
  
 Once you're ready to dive in, your virtual machine and **Guide** will be right at your fingertips within your web browser.
  
-![Access Your VM and Lab Guide; pending](../Images/lab22-vm.png)
+![Access Your VM and Lab Guide; pending](../Images/ai200-lab21-vm.png)
 
 ## Virtual Machine & Lab Guide
  

@@ -59,7 +59,7 @@ The lab architecture shows a vector search workload running on Azure Database fo
  
 Once you're ready to dive in, your virtual machine and **Guide** will be right at your fingertips within your web browser.
  
-![Access Your VM and Lab Guide; pending](../Images/lab14-vm.png)
+![Access Your VM and Lab Guide; pending](../Images/ai200-lab14-vm.png)
 
 ## Virtual Machine & Lab Guide
  
