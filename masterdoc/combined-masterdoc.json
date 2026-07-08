@@ -1,0 +1,108 @@
+[
+  {
+    "Name": "AI-200: Azure AI Cloud Developer Associate",
+    "Language": "English",
+    "Files": [
+      {
+        "RawFilePath": "https://raw.githubusercontent.com/CloudLabs-MOC/mslearn-azure-ai/refs/heads/Prod/instructions/AI200-gettingstartedpages/Lab01-Gettingstarted.md",
+        "Order": 1
+      },
+      {
+        "RawFilePath": "https://raw.githubusercontent.com/CloudLabs-MOC/mslearn-azure-ai/refs/heads/Prod/instructions/container-hosting/01-acr-tasks.md",
+        "Order": 2
+      },
+      {
+        "RawFilePath": "https://raw.githubusercontent.com/CloudLabs-MOC/mslearn-azure-ai/refs/heads/Prod/instructions/container-hosting/02-app-svc-container.md",
+        "Order": 3
+      },
+      {
+        "RawFilePath": "https://raw.githubusercontent.com/CloudLabs-MOC/mslearn-azure-ai/refs/heads/Prod/instructions/azure-container-apps/01-aca-deploy-containers.md",
+        "Order": 4
+      },
+      {
+        "RawFilePath": "https://raw.githubusercontent.com/CloudLabs-MOC/mslearn-azure-ai/refs/heads/Prod/instructions/azure-container-apps/02-aca-manage-containers.md",
+        "Order": 5
+      },
+      {
+        "RawFilePath": "https://raw.githubusercontent.com/CloudLabs-MOC/mslearn-azure-ai/refs/heads/Prod/instructions/azure-container-apps/03-aca-scale-containers.md",
+        "Order": 6
+      },
+      {
+        "RawFilePath": "https://raw.githubusercontent.com/CloudLabs-MOC/mslearn-azure-ai/refs/heads/Prod/instructions/azure-kubernetes-service/01-aks-deploy-container.md",
+        "Order": 7
+      },
+      {
+        "RawFilePath": "https://raw.githubusercontent.com/CloudLabs-MOC/mslearn-azure-ai/refs/heads/Prod/instructions/azure-kubernetes-service/02-aks-configure-container.md",
+        "Order": 8
+      },
+      {
+        "RawFilePath": "https://raw.githubusercontent.com/CloudLabs-MOC/mslearn-azure-ai/refs/heads/Prod/instructions/azure-kubernetes-service/03-aks-troubleshoot-container.md",
+        "Order": 9
+      },
+      {
+        "RawFilePath": "https://raw.githubusercontent.com/CloudLabs-MOC/mslearn-azure-ai/refs/heads/Prod/instructions/cosmosdb/01-build-rag-document-store.md",
+        "Order": 10
+      },
+      {
+        "RawFilePath": "https://raw.githubusercontent.com/CloudLabs-MOC/mslearn-azure-ai/refs/heads/Prod/instructions/cosmosdb/02-build-semantic-search.md",
+        "Order": 11
+      },
+      {
+        "RawFilePath": "https://raw.githubusercontent.com/CloudLabs-MOC/mslearn-azure-ai/refs/heads/Prod/instructions/cosmosdb/03-optimize-query-performance.md",
+        "Order": 12
+      },
+      {
+        "RawFilePath": "https://raw.githubusercontent.com/CloudLabs-MOC/mslearn-azure-ai/refs/heads/Prod/instructions/azure-database-postgresql/01-build-agent-tool-backend.md",
+        "Order": 13
+      },
+      {
+        "RawFilePath": "https://raw.githubusercontent.com/CloudLabs-MOC/mslearn-azure-ai/refs/heads/Prod/instructions/azure-database-postgresql/02-implement-vector-search.md",
+        "Order": 14
+      },
+      {
+        "RawFilePath": "https://raw.githubusercontent.com/CloudLabs-MOC/mslearn-azure-ai/refs/heads/Prod/instructions/azure-database-postgresql/03-optimize-vector-search.md",
+        "Order": 15
+      },
+      {
+        "RawFilePath": "https://raw.githubusercontent.com/CloudLabs-MOC/mslearn-azure-ai/refs/heads/Prod/instructions/azure-managed-redis/01-amr-data-operations.md",
+        "Order": 16
+      },
+      {
+        "RawFilePath": "https://raw.githubusercontent.com/CloudLabs-MOC/mslearn-azure-ai/refs/heads/Prod/instructions/azure-managed-redis/02-amr-pub-sub.md",
+        "Order": 17
+      },
+      {
+        "RawFilePath": "https://raw.githubusercontent.com/CloudLabs-MOC/mslearn-azure-ai/refs/heads/Prod/instructions/azure-managed-redis/03-amr-vector-storage.md",
+        "Order": 18
+      },
+      {
+        "RawFilePath": "https://raw.githubusercontent.com/CloudLabs-MOC/mslearn-azure-ai/refs/heads/Prod/instructions/integrate-services/01-svcbus-process-messages.md",
+        "Order": 19
+      },
+      {
+        "RawFilePath": "https://raw.githubusercontent.com/CloudLabs-MOC/mslearn-azure-ai/refs/heads/Prod/instructions/integrate-services/02-eventgrid-publish-receive-events.md",
+        "Order": 20
+      },
+      {
+        "RawFilePath": "https://raw.githubusercontent.com/CloudLabs-MOC/mslearn-azure-ai/refs/heads/Prod/instructions/integrate-services/03-azure-functions-mcp-server.md",
+        "Order": 21
+      },
+      {
+        "RawFilePath": "https://raw.githubusercontent.com/CloudLabs-MOC/mslearn-azure-ai/refs/heads/Prod/instructions/app-sec-config/01-aks-retrieve-secrets.md",
+        "Order": 22
+      },
+      {
+        "RawFilePath": "https://raw.githubusercontent.com/CloudLabs-MOC/mslearn-azure-ai/refs/heads/Prod/instructions/app-sec-config/02-exercise-retrieve-settings.md",
+        "Order": 23
+      },
+      {
+        "RawFilePath": "https://raw.githubusercontent.com/CloudLabs-MOC/mslearn-azure-ai/refs/heads/Prod/instructions/instrument-observe/01-instrument-app-opentelemetry.md",
+        "Order": 24
+      },
+      {
+        "RawFilePath": "https://raw.githubusercontent.com/CloudLabs-MOC/mslearn-azure-ai/refs/heads/Prod/instructions/instrument-observe/02-query-logs-kql.md",
+        "Order": 25
+      }
+    ]
+  }
+]
