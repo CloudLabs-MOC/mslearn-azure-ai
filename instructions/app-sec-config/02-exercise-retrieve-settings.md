@@ -157,6 +157,14 @@ In this task, you'll prepare the development environment, deploy Azure App Confi
 
     >**Note:** Keep the terminal open. If you close it and create a new terminal, you need to run this command again to reload the environment variables.
 
+> **Congratulations** on completing the task! Now, it's time to validate it. Here are the steps:
+>
+> - If you receive a success message, you can proceed to the next task.
+> - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
+> - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help you out.
+
+<validation step="641e5038-efa1-4fc2-b10c-add8651c62f4" />
+
 ## Task 2: Complete the app
 
 In this task, you'll implement the Python application to load configuration settings, list setting properties, and perform sentinel-based dynamic configuration refresh using the Azure App Configuration SDK.

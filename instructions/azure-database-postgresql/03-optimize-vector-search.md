@@ -135,6 +135,14 @@ In this task, you'll deploy an Azure Database for PostgreSQL Flexible Server wit
 
     >**IMPORTANT:** Leave the terminal running the deployment open for the duration of the exercise. You can move on to the next section of the exercise while the deployment continues in the terminal.
 
+> **Congratulations** on completing the task! Now, it's time to validate it. Here are the steps:
+>
+> - If you receive a success message, you can proceed to the next task.
+> - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
+> - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help you out.
+
+<validation step="8b6c2a97-574a-413e-b599-c4c497050079" />
+
 ## Task 3: Review vector index concepts
 
 In this task, you'll review the concepts, trade-offs, and tuning parameters of IVFFlat and HNSW indexes for vector search workloads.

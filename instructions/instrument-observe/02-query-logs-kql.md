@@ -164,6 +164,14 @@ In this task, you'll prepare the development environment, configure the deployme
 
    > **Note:** Keep the terminal open. If you close it and create a new terminal, you need to run this command again to reload the environment variables.
 
+> **Congratulations** on completing the task! Now, it's time to validate it. Here are the steps:
+>
+> - If you receive a success message, you can proceed to the next task.
+> - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
+> - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help you out.
+
+<validation step="bb87927b-657d-47af-89be-0744376f9501" />
+
 ## Task 2: Generate telemetry data
 
 In this task, you'll configure a Python virtual environment, install the required dependencies, and run a pre-built telemetry generator that uses OpenTelemetry to publish request, dependency, and exception telemetry to Application Insights.

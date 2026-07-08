@@ -214,7 +214,7 @@ In this task, you will create the Azure resources required for the lab by runnin
 > - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
 > - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help you out.
 
-<validation step="" />
+<validation step="273bf03b-16ca-4c8a-9a97-325131d8e196" />
 
 ## Task 2: Configure an HTTP concurrency scale rule 
 

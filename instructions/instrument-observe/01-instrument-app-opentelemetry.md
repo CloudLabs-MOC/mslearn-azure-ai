@@ -164,6 +164,14 @@ In this task, you'll prepare the development environment, configure the deployme
 
    > **Note:** Keep the terminal open. If you close it and create a new terminal, you need to run this command again to reload the environment variables.
 
+> **Congratulations** on completing the task! Now, it's time to validate it. Here are the steps:
+>
+> - If you receive a success message, you can proceed to the next task.
+> - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
+> - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help you out.
+
+<validation step="830f7ddc-7462-406d-a3a0-9d36f63c2789" />
+
 ## Task 2: Complete the app
 
 In this task, you'll complete the OpenTelemetry instrumentation for the Flask application by configuring the Azure Monitor OpenTelemetry Distro, implementing a traced document processing pipeline, and creating parent and child spans with custom attributes to capture document metadata and application performance information.
