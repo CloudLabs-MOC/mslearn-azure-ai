@@ -1,34 +1,27 @@
-# Create an MCP server with Azure Functions
+# Lab 20: Create an MCP server with Azure Functions
 
-The Model Context Protocol (MCP) is an open standard that defines how AI agents and language models discover and invoke external tools. Azure Functions includes an MCP extension that lets you expose function apps as MCP servers, where each function becomes a tool that MCP clients can call.
+### Estimated Duration : 60 Minutes
 
-In this exercise, you create an Azure Functions project with the MCP extension, define tool trigger functions for document processing, configure the MCP server settings, and test the server locally by connecting to it from GitHub Copilot in agent mode.
+## Lab overview
 
-> **Note:** This exercise uses the Azure Functions MCP extension, which is actively evolving. Visit the [Azure Functions MCP extension documentation](/azure/azure-functions/functions-bindings-mcp-trigger) for the most up-to-date setup instructions, API surface, and configuration options.
+In this exercise, you create an Azure Functions project that exposes tools through the Model Context Protocol (MCP). You configure the Azure Functions MCP extension, define MCP tool trigger functions for document summarization and classification, verify the Python development environment, and test the MCP server locally by connecting to it from GitHub Copilot in Agent mode. This demonstrates how Azure Functions can be used to build MCP-compatible tool servers that AI agents can discover and invoke.
 
-Tasks performed in this exercise:
+## Lab objectives
 
-- Create a new Azure Functions project with the MCP extension
-- Configure the MCP server settings in _host.json_
-- Define MCP tool trigger functions in _function_app.py_
-- Verify the Python environment
-- Test the MCP server locally using GitHub Copilot in agent mode
+In this lab, you'll perform the following tasks:
 
-This exercise takes approximately **25** minutes to complete.
+- **Task 1:** Create an Azure Functions project and configure the MCP server
+- **Task 2:** Implement MCP tool trigger functions
+- **Task 3:** Verify the Python development environment
+- **Task 4:** Test the MCP server locally using GitHub Copilot
 
-## Before you start
+> ### **Note:** This lab uses the Azure Functions MCP extension, which is currently in preview and continues to evolve. Features, configuration options, and APIs may change over time. Refer to the latest Azure Functions MCP extension documentation for the most up-to-date guidance.
 
-To complete the exercise, you need:
-
-- [Visual Studio Code](https://code.visualstudio.com/) on one of the [supported platforms](https://code.visualstudio.com/docs/supporting/requirements#_platforms).
-- The [Azure Functions extension](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurefunctions) for Visual Studio Code.
-- [Azure Functions Core Tools](https://learn.microsoft.com/azure/azure-functions/functions-run-local) v4 or later.
-- [Python 3.9](https://www.python.org/downloads/) or later.
-- The [GitHub Copilot](https://marketplace.visualstudio.com/items?itemName=GitHub.copilot) extension for Visual Studio Code.
+> ### **Note:** To complete this lab, you must sign in to **GitHub Copilot** using your **personal GitHub account**. GitHub Copilot is used to connect to the local MCP server, discover the MCP tools exposed by the Azure Functions app, and invoke those tools during the testing exercises.
 
 ## Task 1: Create a new Functions project with the MCP extension
 
-In this section you create a new Azure Functions project in Visual Studio Code using the Azure Functions extension and configure the MCP server settings in _host.json_. The extension scaffolds the project structure, generates the _.vscode_ configuration files for integrated debugging, and sets up the Python v2 programming model.
+In this task, you'll create a new Azure Functions project using the Python programming model, configure the Azure Functions MCP extension, and register a local MCP server for development and testing.
 
 You can use the following instruction in your lab guide:
 
@@ -92,11 +85,9 @@ You can use the following instruction in your lab guide:
 
    ![](../Images/lab20-t1p11.png)
 
-1. When prompted to select a Python interpreter, choose **Skip virtual environment**.
+1. When prompted to select a Python interpreter, choose **python 3.12.10**.
 
-   > **Note:** You will create and configure the Python virtual environment later in this lab.
-
-   ![](../Images/lab20-t1p13.png)
+   ![](<../Images/lab20-t1p10(1).png>)
 
 1. When prompted to select the first function template, choose **HTTP trigger**.
 
@@ -173,7 +164,7 @@ You can use the following instruction in your lab guide:
 
 ## Task 2: Define MCP tool trigger functions
 
-In this section you define two MCP tool trigger functions that become discoverable tools for MCP clients. Each function uses the **@app.generic_trigger()** decorator with the **mcpToolTrigger** type. You define the tool name, description, and input properties through the trigger configuration, and the function receives tool invocation requests from connected MCP clients.
+In this task you define two MCP tool trigger functions that become discoverable tools for MCP clients. Each function uses the **@app.generic_trigger()** decorator with the **mcpToolTrigger** type. You define the tool name, description, and input properties through the trigger configuration, and the function receives tool invocation requests from connected MCP clients.
 
 1. Open **function_app.py** in the Visual Studio Code Explorer sidebar and replace its contents with the following code that defines two MCP tool trigger functions:
 
@@ -251,21 +242,15 @@ In this section you define two MCP tool trigger functions that become discoverab
 
 ## Task 3: Verify the Python environment
 
-In this section you verify that Visual Studio Code is using the Python interpreter from the virtual environment that the Azure Functions extension created during project setup.
+In this task you verify that Visual Studio Code is using the Python interpreter from the virtual environment that the Azure Functions extension created during project setup.
 
 1. Press **Ctrl+Shift+P** to open the Command Palette and run the **Python: Select Interpreter** command.
 
    ![](../Images/lab20-t1p22.png)
 
-1. In the **Select Interpreter** window, click **Create Virtual Environment...**.
+1. In the **Select Interpreter** window, click on **.venv (3.12.10)**.
 
-   ![](../Images/lab20-t1p23.png)
-
-1. When prompted to select an environment manager, choose **Quick Create** to create a virtual environment in the project workspace using the recommended Python interpreter.
-
-   ![](../Images/lab20-t1p24.png)
-
-   > **Note:** Visual Studio Code creates a **.venv** folder in the project directory, installs the project dependencies, and automatically configures it as the active Python interpreter for the workspace.
+   ![](<../Images/lab20-t1p10(2).png>)
 
 1. Select the interpreter from the **.venv** folder in the project directory (for example, **./.venv/bin/python**). This ensures the debugger and terminal use the correct environment when you start the Functions runtime with **F5**.
 
@@ -273,7 +258,9 @@ In this section you verify that Visual Studio Code is using the Python interpret
 
 ## Task 4: Test the MCP server locally
 
-In this section you start the local Functions runtime and connect to the MCP server from GitHub Copilot in agent mode to verify that the tools are discoverable and return the expected results.
+> ### **Note:** In this task, you will sign in to **GitHub Copilot** using your **personal GitHub account**. You will then connect GitHub Copilot (Agent mode) to the locally running MCP server, verify that the exposed tools are discovered successfully, and test tool invocation using both explicit and natural language prompts.
+
+In this task, you'll start the Azure Functions runtime, connect GitHub Copilot in Agent mode to the local MCP server, verify that the MCP tools are discovered successfully, and test tool invocation using both explicit and natural language prompts.
 
 1. Press **F5** to start the Functions runtime with the debugger attached. If you receive a warning about a required storage account, select **Skip for now** . Visual Studio Code launches Core Tools, attaches the debugger, and opens the terminal panel showing the function endpoints.
 
@@ -293,9 +280,31 @@ In this section you start the local Functions runtime and connect to the MCP ser
 
    ![](../Images/lab20-t4p2.png)
 
-1. Visual Studio Code detects the _.vscode/mcp.json_ file you created earlier and connects to the MCP server. Open GitHub Copilot chat and switch to **Agent** mode. Select the tools icon (wrench) and look for the **document-tools-local** group — this matches the server key name from _.vscode/mcp.json_. Verify that both **summarize_text** and **classify_document** appear under that group with their descriptions.
+1. Visual Studio Code detects the _.vscode/mcp.json_ file you created earlier and connects to the MCP server.
 
-### Test with explicit prompts
+1. Open GitHub Copilot chat by selecting from top **Toggle chat**.
+
+   ![](<../Images/lab20-t4p1(1).png>)
+
+1. In the GitHub Copilot Chat pane, switch to **Agent (1)** mode. Select the **Tools icon (wrench) (2)**, expand the **document-tools-local (3)** tool group (which corresponds to the server configured in .vscode/mcp.json), and click Update **(4)**. Verify that the **summarize_text** and **classify_document** tools **(5)** are displayed with their descriptions, then select **OK (6)**.
+
+   ![](../Images/lab20-t4p3.png)
+
+   ![](../Images/lab20-t4p4.png)
+
+1. Sign in to **GitHub Copilot** using your personal GitHub account by selecting **Continue with GitHub**.
+
+   ![](../Images/lab20-t4p5.png)
+
+1. After entering your personal GitHub account credentials, the **Authorize Visual Studio Code** window opens. Select **Continue** to authorize Visual Studio Code.
+
+   ![](../Images/lab20-t4p6.png)
+
+1. When the **This site is trying to open Visual Studio Code.** dialog appears, select **Continue** to launch Visual Studio Code and complete the sign-in process.
+
+   ![](<../Images/lab20-t4p5(1).png>)
+
+### Task 4.1: Test with explicit prompts
 
 Explicit prompts that name a tool directly are the most reliable way to trigger an MCP tool. The model will usually invoke the tool, but it may still rephrase or summarize the tool's raw output in its response. If a tool is not invoked, check the terminal output to confirm, then try submitting the prompt again.
 
@@ -305,7 +314,11 @@ Explicit prompts that name a tool directly are the most reliable way to trigger 
    Use the classify_document tool to classify this text: 'This agreement is entered into by Party A and Party B'  with categories: contract, invoice, memo
    ```
 
+   ![](../Images/lab20-t4p7.png)
+
    Copilot invokes the tool and returns a response. Verify the result contains a classification of **contract**. The stub implementation selects the first category from the comma-separated list, so the result matches the first category you provided in the prompt. Check the terminal output for the function invocation log entry.
+
+   ![](../Images/lab20-t4p8.png)
 
 1. Test the **summarize_text** tool by entering the following prompt in the Copilot chat.
 
@@ -313,9 +326,13 @@ Explicit prompts that name a tool directly are the most reliable way to trigger 
    Use the summarize_text tool to summarize this text: 'Azure Functions is a serverless compute service that lets you run event-triggered code without having to explicitly provision or manage infrastructure.'
    ```
 
+   ![](../Images/lab20-t4p9.png)
+
    Verify the result contains a summary string starting with **Summary of** followed by the word count and a truncated preview of the input text.
 
-### Test with natural language prompts
+   ![](../Images/lab20-t4p10.png)
+
+### Task 4.2: Test with natural language prompts
 
 Natural language prompts are more likely to answer a prompt directly without invoking a tool, since the model must decide on its own whether a tool is relevant. Check the terminal output for logging entries to confirm whether a tool was actually invoked. If it was not, try rephrasing the prompt or explicitly naming the tool.
 
@@ -326,7 +343,16 @@ Natural language prompts are more likely to answer a prompt directly without inv
    'Invoice B1234 for services rendered in January 2026. Total amount due: $5,000.'
    ```
 
+   **Alternate prompt:**
+
+   ```
+   Use one of your available tools to classify this text: Is the following text an invoice, contract, or memo?
+   'Invoice B1234 for services rendered in January 2026. Total amount due: $5,000.'
+   ```
+
    Copilot should recognize that the **classify_document** tool matches this request and invoke it automatically. Verify the result returns a classification. Check the terminal output to confirm the function was invoked.
+
+   ![](../Images/lab20-t4p15.png)
 
 1. Enter the following prompt to test natural tool discovery for the **summarize_text** tool:
 
@@ -334,37 +360,24 @@ Natural language prompts are more likely to answer a prompt directly without inv
    Give me a brief summary of this text: 'Machine learning models require large datasets for training. The quality of the training data directly impacts model accuracy. Data preprocessing steps include cleaning, normalization, and feature extraction.'
    ```
 
+   **Alternate Prompt:**
+
+   ```
+   Use one of your available tools to summarize this text: 'Machine learning models require large datasets for training. The quality of the training data directly impacts model accuracy. Data preprocessing steps include cleaning, normalization, and feature extraction.'
+   ```
+
    Copilot should invoke the **summarize_text** tool and return a summary. Verify the terminal output shows the function invocation.
+
+   ![](../Images/lab20-t4p13.png)
 
 1. Press **Shift+F5** to stop the debugger and shut down the Functions runtime.
 
-## Next steps
+### Next steps
 
 In a production scenario, you would deploy the function app to Azure using the Flex Consumption plan, authenticate MCP client connections with the **mcp_extension** system key, and replace the placeholder logic in each tool function with calls to Azure AI services using **DefaultAzureCredential** and the function app's managed identity. For more details, see the [Azure Functions MCP extension documentation](/azure/azure-functions/functions-bindings-mcp-trigger).
 
-## Troubleshooting
+## Summary
 
-If you encounter issues while completing this exercise, try the following troubleshooting steps:
+In this lab, you created an Azure Functions project that acts as an MCP server by using the Azure Functions MCP extension. You configured the MCP server, implemented custom MCP tool trigger functions, verified the Python development environment, and tested the server locally through GitHub Copilot in Agent mode. By the end of the exercise, you successfully exposed Azure Functions as discoverable MCP tools and validated that AI clients could invoke them to perform document processing tasks.
 
-**Azure Functions Core Tools not starting**
-
-- Confirm that Azure Functions Core Tools v4 or later is installed by running **func --version** in the terminal.
-- Verify that port 7071 is not in use by another process.
-- Ensure _local.settings.json_ exists in the project root. The Azure Functions extension generates this file during project creation.
-
-**MCP tools not appearing in Copilot**
-
-- Verify that _.vscode/mcp.json_ is saved and the URL matches the local endpoint (`http://localhost:7071/runtime/webhooks/mcp/sse`).
-- Confirm the Functions runtime is running and shows both tool trigger functions in the terminal output.
-- Try restarting Visual Studio Code if the MCP server configuration is not detected after saving the file.
-
-**Function invocation returns errors**
-
-- Check the terminal output for Python exceptions or stack traces.
-- Verify _function_app.py_ has correct indentation and that all code was entered as shown.
-- Confirm the virtual environment is activated and all dependencies from _requirements.txt_ are installed.
-
-**Check Python environment and dependencies**
-
-- Confirm that Visual Studio Code is using the Python interpreter from the _.venv_ folder by running the **Python: Select Interpreter** command.
-- Verify that all packages from _requirements.txt_ were installed successfully by running **pip list** in the integrated terminal.
+## You have successfully completed the Hands-on Lab!
