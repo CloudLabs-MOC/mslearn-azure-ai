@@ -12,8 +12,6 @@ In this hands-on lab, you will deploy an Azure Application Insights resource, co
 
 ## Objectives
 
-By the end of this lab, you will be able to:
-
 1. **Deploy Application Insights:** Create an Application Insights resource and assign the required Monitoring Metrics Publisher role for Entra-based telemetry export.
 
 2. **Configure OpenTelemetry tracing:** Use the Azure Monitor OpenTelemetry Distro to instrument a Python Flask app and export telemetry using Microsoft Entra authentication.
@@ -48,7 +46,7 @@ The lab architecture demonstrates how Azure Application Insights and OpenTelemet
 
 ## Architecture Diagram
 
-![pending](../Images/lab23-arch.png)
+![pending](../Images/lab23-archdiagram.png)
 
 ## Explanation of Components
 

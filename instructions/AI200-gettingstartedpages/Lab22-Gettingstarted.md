@@ -12,8 +12,6 @@ In this hands-on lab, you will deploy an Azure App Configuration store and a Key
 
 ## Objectives
 
-By the end of this lab, you will be able to:
-
 1. **Deploy Azure App Configuration and Key Vault:** Create an App Configuration store and a Key Vault, assign roles, and store sample settings and secrets.
 
 2. **Load and resolve configuration settings:** Retrieve application settings with label stacking and automatically resolve Key Vault references in the Python app.
@@ -46,7 +44,7 @@ The lab architecture demonstrates how Azure App Configuration centralizes applic
 
 ## Architecture Diagram
 
-![pending](../Images/lab22-arch.png)
+![pending](../Images/lab22-archdiagram.png)
 
 ## Explanation of Components
 

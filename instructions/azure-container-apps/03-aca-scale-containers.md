@@ -8,6 +8,8 @@ In this hands-on lab, you will configure autoscaling for a containerized applica
 
 ## Lab Objective
 
+In this lab, you'll perform the following tasks:
+
 - **Task 1:** Create Azure Container Registry and Container Apps resources
 - **Task 2:** Configure an HTTP concurrency scale rule using KEDA
 - **Task 3:**  Generate load and observe scaling

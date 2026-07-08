@@ -12,8 +12,6 @@ In this hands-on lab, you will provision Azure Managed Redis, connect a Python a
 
 ## Objectives
 
-By the end of this lab, you will be able to:
-
 1. **Deploy Azure Managed Redis for vector search:** Provision a managed Redis cache and configure secure access for a Python application.
 
 2. **Store vector embeddings with metadata:** Load product data into Redis and store binary vector embeddings alongside metadata fields.
@@ -43,7 +41,7 @@ The lab architecture shows a Redis vector search solution built on Azure Managed
 
 ## Architecture Diagram
 
-![pending](../Images/lab17-arch.png)
+![pending](../Images/lab17-archdiagram.png)
 
 ## Explanation of Components
 

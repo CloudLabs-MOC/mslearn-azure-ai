@@ -459,6 +459,6 @@ With the Python environment configured and dependencies installed, you can now r
 
 ## Summary
 
-In this lab, you provisioned Azure Container Registry (ACR) and Azure Kubernetes Service (AKS), built and deployed a containerized API, and configured the application using Kubernetes ConfigMaps, Secrets, and PersistentVolumeClaims (PVCs). You applied the Kubernetes manifests to deploy the application, exposed it through a LoadBalancer, and used a Python client application to validate the deployment by testing API endpoints, verifying configuration and secret values, and reviewing application logs stored on persistent storage.
+In this lab, you provisioned **Azure Container Registry (ACR)** and **Azure Kubernetes Service (AKS)**, built and deployed a containerized API, and configured the application using **Kubernetes ConfigMaps, Secrets, and PersistentVolumeClaims (PVCs)**. You applied the Kubernetes manifests to deploy the application, exposed it through a LoadBalancer, and used a Python client application to validate the deployment by testing API endpoints, verifying configuration and secret values, and reviewing application logs stored on persistent storage.
 
 ## You have successfully completed the Hands-on Lab!

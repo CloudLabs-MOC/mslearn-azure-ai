@@ -41,7 +41,7 @@ The lab architecture shows a Redis Pub/Sub solution using Azure Managed Redis. A
 
 ## Architecture Diagram
 
-![pending](../Images/lab16-arch.png)
+![pending](../Images/lab16-archdiagram.png)
 
 ## Explanation of Components
 

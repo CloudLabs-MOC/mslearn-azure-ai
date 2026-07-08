@@ -12,8 +12,6 @@ In this hands-on lab, you will deploy an Azure Key Vault with RBAC authorization
 
 ## Objectives
 
-By the end of this lab, you will be able to:
-
 1. **Deploy Azure Key Vault with RBAC authorization:** Create a vault, assign the Key Vault Secrets Officer role, and store sample secrets for the application.
 
 2. **Retrieve secrets securely using Microsoft Entra:** Access secret values and metadata from the Python app with DefaultAzureCredential.
@@ -50,7 +48,7 @@ The lab architecture demonstrates how Azure Key Vault provides secure secret sto
 
 ## Architecture Diagram
 
-![pending](../Images/lab21-arch.png)
+![pending](../Images/lab21-archdiagram.png)
 
 ## Explanation of Components
 

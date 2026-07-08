@@ -12,8 +12,6 @@ In this hands-on lab, you will learn how to build an event-driven application us
 
 ## Objectives
 
-By the end of this lab, you will be able to:
-
 1. **Deploy and configure Azure Event Grid resources:** Create an Event Grid Namespace, namespace topic, and event subscriptions using deployment scripts, and configure Microsoft Entra permissions for event publishing and consumption.
 
 2. **Publish CloudEvents using the Azure SDK for Python:** Implement event publishing logic to send CloudEvents to an Event Grid namespace topic using the CloudEvents v1.0 schema and Microsoft Entra authentication.

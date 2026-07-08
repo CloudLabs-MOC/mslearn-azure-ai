@@ -43,7 +43,7 @@ The lab architecture shows a Python application connecting to Azure Managed Redi
 
 ## Architecture Diagram
 
-![pending](../Images/lab15-arch.png)
+![pending](../Images/lab15-archdiagram.png)
 
 ## Explanation of Components
 

@@ -12,8 +12,6 @@ In this hands-on lab, you will deploy an Azure Database for PostgreSQL instance,
 
 ## Objectives
 
-By the end of this lab, you will be able to:
-
 1. **Deploy PostgreSQL for vector search:** Provision Azure Database for PostgreSQL and configure Microsoft Entra authentication.
 
 2. **Create vector search schema and test data:** Build tables with vector embeddings and generate a large dataset for performance testing.
@@ -43,7 +41,7 @@ The lab architecture shows a vector search workload running on Azure Database fo
 
 ## Architecture Diagram
 
-![pending](../Images/lab14-arch.png)
+![](../Images/lab14-archdiagram.png)
 
 ## Explanation of Components
 

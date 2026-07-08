@@ -2,13 +2,13 @@
 
 ### Estimated Duration : 60 Minutes
 
-## Overview 
-
-AI applications depend on both non-sensitive configuration such as model endpoints and batch sizes, and sensitive credentials such as API keys. Azure App Configuration provides a centralized store for managing these settings with label-based environment overrides, Key Vault references for secrets, and sentinel-based dynamic refresh so applications can pick up configuration changes without restarting.
+## Lab Overview 
 
 In this hands-on lab, you deploy an Azure App Configuration store and Key Vault pre-loaded with sample settings and build a Python Flask web application that demonstrates core configuration management patterns using the Azure SDK. You load settings with label stacking and automatic Key Vault reference resolution, list all setting properties and metadata, and trigger a sentinel-based refresh to pick up changes dynamically.
 
 ## Lab Overview
+
+In this lab, you'll perform the following tasks:
 
 - **Task 1:** Prepare the environment
 
@@ -20,7 +20,11 @@ In this hands-on lab, you deploy an Azure App Configuration store and Key Vault 
 
 ## Task 1: Prepare the environment
 
+<<<<<<< Updated upstream
 In this task, you'll prepare the development environment, deploy Azure App Configuration and Azure Key Vault, assign the required roles, store sample settings and secrets, and configure the application environment.
+=======
+In this task you download the starter files for the app and use a script to deploy an Azure App Configuration store and Key Vault with sample settings to your subscription.
+>>>>>>> Stashed changes
 
 1. Launch **Visual Studio Code** (VS Code) from desktop.
 
@@ -157,6 +161,7 @@ In this task, you'll prepare the development environment, deploy Azure App Confi
 
     >**Note:** Keep the terminal open. If you close it and create a new terminal, you need to run this command again to reload the environment variables.
 
+<<<<<<< Updated upstream
 > **Congratulations** on completing the task! Now, it's time to validate it. Here are the steps:
 >
 > - If you receive a success message, you can proceed to the next task.
@@ -168,6 +173,11 @@ In this task, you'll prepare the development environment, deploy Azure App Confi
 ## Task 2: Complete the app
 
 In this task, you'll implement the Python application to load configuration settings, list setting properties, and perform sentinel-based dynamic configuration refresh using the Azure App Configuration SDK.
+=======
+## Task 2: Complete the app
+
+In this task you add code to the *appconfig_functions.py* file to complete the App Configuration management functions. The Flask app in *app.py* calls these functions and displays the results in the browser. You run the app later in the exercise.
+>>>>>>> Stashed changes
 
 1. Open the *client/appconfig_functions.py* file to begin adding code.
 
@@ -177,7 +187,11 @@ In this task, you'll implement the Python application to load configuration sett
 
 ### Task 2.1: Add code to load settings
 
+<<<<<<< Updated upstream
 In this task, you will add code to load all configuration settings from the App Configuration store with label stacking and automatic Key Vault reference resolution. The function creates a provider that merges unlabeled default values with Production-labeled overrides and resolves Key Vault references transparently.
+=======
+In this task, you add code to load all configuration settings from the App Configuration store with label stacking and automatic Key Vault reference resolution. The function creates a provider that merges unlabeled default values with Production-labeled overrides and resolves Key Vault references transparently.
+>>>>>>> Stashed changes
 
 The function calls **load()** with two **SettingSelector** entries: the first selects all unlabeled settings (using the null label filter **\0**), and the second selects all Production-labeled settings. Because the Production selector appears second, its values override the defaults for any matching keys. The **AzureAppConfigurationKeyVaultOptions** parameter tells the provider to resolve Key Vault references automatically using the same credential, so the application receives the actual secret value rather than a reference URI.
 
@@ -229,7 +243,11 @@ The function calls **load()** with two **SettingSelector** entries: the first se
 
 ### Task 2.2: Add code to list setting properties
 
+<<<<<<< Updated upstream
 In this task, you will add code to list the properties of all settings in the App Configuration store. Unlike the **load()** function which merges labels and resolves Key Vault references, this function shows the raw storage view with every individual setting entry, including all labels and content types.
+=======
+In this task, you add code to list the properties of all settings in the App Configuration store. Unlike the **load()** function which merges labels and resolves Key Vault references, this function shows the raw storage view with every individual setting entry, including all labels and content types.
+>>>>>>> Stashed changes
 
 The function calls **list_configuration_settings()** on the management client, which returns an iterable of setting objects with metadata such as key, label, content type, last modified timestamp, and read-only status. This is useful for inventory and audit operations where you need to see exactly what is stored, including the separate unlabeled and Production-labeled entries.
 
@@ -262,7 +280,11 @@ The function calls **list_configuration_settings()** on the management client, w
 
 ### Task 2.3: Add code for dynamic refresh
 
+<<<<<<< Updated upstream
 In this task, you will add code that demonstrates sentinel-based dynamic refresh. The function updates a setting and sets a new sentinel value, then calls **refresh()** on the provider to reload configuration without restarting the application.
+=======
+In this task, you add code that demonstrates sentinel-based dynamic refresh. The function updates a setting and sets a new sentinel value, then calls **refresh()** on the provider to reload configuration without restarting the application.
+>>>>>>> Stashed changes
 
 The function captures the current provider values, then uses the management client to update **Pipeline:BatchSize** with a new random value and set the **Sentinel** key to a new timestamp value. The sentinel acts as a change signal: the provider watches it, and when its value changes, a call to **refresh()** triggers a reload of all settings. The function waits briefly for the refresh interval to elapse, then calls **refresh()** and compares the before and after values to confirm the update propagated.
 
@@ -344,7 +366,11 @@ The function captures the current provider values, then uses the management clie
 
 ## Task 3: Configure the Python environment
 
+<<<<<<< Updated upstream
 In this task, you will navigate to the client app directory, create the Python environment, and install the dependencies.
+=======
+In this task, you navigate to the client app directory, create the Python environment, and install the dependencies.
+>>>>>>> Stashed changes
 
 1. Run the following command in the VS Code terminal to navigate to the *client* directory.
 
@@ -382,7 +408,11 @@ In this task, you will navigate to the client app directory, create the Python e
 
 ## Task 4: Run the app
 
+<<<<<<< Updated upstream
 In this task, you'll run the Flask application and validate configuration loading, metadata retrieval, and dynamic refresh through the web interface.
+=======
+In this task, you run the completed Flask application to perform various App Configuration management operations. The app provides a web interface that lets you load settings, list their properties, and test dynamic refresh.
+>>>>>>> Stashed changes
 
 1. Run the following command in the terminal to start the app. Refer to the commands from earlier in the exercise to activate the environment, if needed, before running the command. If you navigated away from the *client* directory, run **cd client** first.
 
@@ -408,8 +438,14 @@ In this task, you'll run the Flask application and validate configuration loadin
 
     ![](../Images/ai200-l22-19.png)
 
+<<<<<<< Updated upstream
 ### Summary
 
 In this lab, you deployed Azure App Configuration and Azure Key Vault and built a Python Flask application to demonstrate centralized configuration management. You loaded configuration settings with label stacking and automatic Key Vault reference resolution, listed setting metadata, and implemented sentinel-based dynamic refresh to apply configuration changes without restarting the application. Finally, you configured the Python environment, ran the application, and validated each configuration management operation through the web interface.
+=======
+## Summary
+
+In this lab, you deployed **Azure App Configuration** and **Azure Key Vault**, built a **Python Flask** app to load settings with label stacking and resolve Key Vault references automatically. You also listed **App Configuration** setting metadata and demonstrated sentinel-based dynamic refresh so the application could pick up configuration changes without restarting.
+>>>>>>> Stashed changes
 
 ## You have successfully completed the Hands-on Lab!

@@ -2,11 +2,13 @@
 
 ### Estimated Duration : 60 Minutes
 
-## Overview 
+## Lab Overview 
 
 In this hands-on lab, you create an Azure Database for PostgreSQL instance that serves as a tool backend for an AI agent. The database stores conversation context and task state that an agent can read and write during operation. You design a schema for agent memory, build Python functions that serve as agent tools, and test the complete workflow. This pattern provides a foundation for building AI agents that maintain persistent memory across sessions and can resume interrupted tasks.
 
 ## Lab Objective
+
+In this lab, you'll perform the following tasks:
 
 - **Task 1:** Prepare the environment
 
@@ -22,7 +24,7 @@ In this hands-on lab, you create an Azure Database for PostgreSQL instance that 
 
 - **Task 7:** Query conversation context
 
-> ### **Note:** This lab includes deployment scripts for both **PowerShell** and **Bash**. You may choose either scripting language based on your preference or environment. Once you make your choice, use the corresponding commands and script throughout the entire lab, as all subsequent steps provide instructions for both PowerShell and Bash.
+> **Note:** This lab includes deployment scripts for both **PowerShell** and **Bash**. You may choose either scripting language based on your preference or environment. Once you make your choice, use the corresponding commands and script throughout the entire lab, as all subsequent steps provide instructions for both PowerShell and Bash.
 
 ## Task 1: Prepare the environment
 
@@ -112,7 +114,11 @@ In this task, you'll prepare the development environment, configure the deployme
 
 ## Task 2: Create resources in Azure
 
+<<<<<<< Updated upstream
 In this task, you'll deploy an Azure Database for PostgreSQL Flexible Server with Microsoft Entra authentication and validate the resource deployment.
+=======
+In this task you run the deployment script to create the PostgreSQL server and related Azure resources for the lab.
+>>>>>>> Stashed changes
 
 1. Make sure you are in the root directory of the project and run the appropriate command in the terminal to launch the deployment script.
 

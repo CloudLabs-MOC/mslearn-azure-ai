@@ -12,8 +12,6 @@ In this hands-on lab, you will provision Azure Database for PostgreSQL, enable t
 
 ## Objectives
 
-By the end of this lab, you will be able to:
-
 1. **Deploy PostgreSQL and enable pgvector:** Create an Azure Database for PostgreSQL server and configure the pgvector extension for vector storage.
 
 2. **Create a vector-enabled schema:** Build a products table with a vector column and HNSW index to support efficient similarity queries.
@@ -31,7 +29,7 @@ By the end of this lab, you will be able to:
 
 ## Architecture Diagram
 
-![pending](../Images/lab13-arch.png)
+![](../Images/lab13-archdiagram.png)
 
 ## Architecture
 

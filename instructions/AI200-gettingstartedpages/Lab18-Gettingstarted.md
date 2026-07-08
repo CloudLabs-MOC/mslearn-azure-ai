@@ -12,8 +12,6 @@ In this hands-on lab, you will provision Azure Service Bus, create the required 
 
 ## Objectives
 
-By the end of this lab, you will be able to:
-
 1. **Deploy Azure Service Bus resources:** Provision a Service Bus namespace, queue, topic, and subscriptions with appropriate role assignment.
 
 2. **Implement queue messaging and dead-letter handling:** Send messages, process them with peek-lock delivery, and move malformed messages to the dead-letter queue.
@@ -43,7 +41,7 @@ The lab architecture shows an Azure Service Bus messaging solution where a Pytho
 
 ## Architecture Diagram
 
-![pending](../Images/lab18-arch.png)
+![pending](../Images/lab18-archdiagram.png)
 
 ## Explanation of Components
 

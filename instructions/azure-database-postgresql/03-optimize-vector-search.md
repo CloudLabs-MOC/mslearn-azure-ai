@@ -8,6 +8,8 @@ In this hands-on lab, you deploy an Azure Database for PostgreSQL instance and o
 
 ## Lab Objectives
 
+In this lab, you'll perform the following tasks:
+
 - **Task 1:** Prepare the environment
 
 - **Task 2:** Create resources in Azure
@@ -26,7 +28,11 @@ In this hands-on lab, you deploy an Azure Database for PostgreSQL instance and o
 
 ## Task 1: Prepare the environment
 
+<<<<<<< Updated upstream
 In this task, you'll prepare the development environment, configure the deployment script, and authenticate to Azure to begin deploying the required resources.
+=======
+In this task, you download the project starter files and use a script to deploy the necessary services to your Azure subscription. The PostgreSQL server deployment takes a few minutes to complete.
+>>>>>>> Stashed changes
 
 1. Launch **Visual Studio Code** (VS Code) from desktop.
 
@@ -113,7 +119,11 @@ In this task, you'll prepare the development environment, configure the deployme
 
 ## Task 2: Create resources in Azure
 
+<<<<<<< Updated upstream
 In this task, you'll deploy an Azure Database for PostgreSQL Flexible Server with Microsoft Entra authentication and validate the resource deployment.
+=======
+In this task, you run the deployment script to deploy the PostgreSQL server and configure authentication.
+>>>>>>> Stashed changes
 
 1. Make sure you are in the root directory of the project and run the appropriate command in the terminal to launch the deployment script.
 
@@ -145,7 +155,11 @@ In this task, you'll deploy an Azure Database for PostgreSQL Flexible Server wit
 
 ## Task 3: Review vector index concepts
 
+<<<<<<< Updated upstream
 In this task, you'll review the concepts, trade-offs, and tuning parameters of IVFFlat and HNSW indexes for vector search workloads.
+=======
+In this task, you review the key concepts for vector indexing that you apply later in the exercise. Understanding these trade-offs helps you make informed decisions when optimizing vector search.
+>>>>>>> Stashed changes
 
 ### 1. IVFFlat indexes
 
@@ -180,7 +194,11 @@ Key parameters:
 
 ## Task 4: Complete the Azure resource deployment
 
+<<<<<<< Updated upstream
 In this task, you'll complete the Azure resource deployment, configure Microsoft Entra authentication, and retrieve the database connection information.
+=======
+In this task, you return to the deployment script to configure the Microsoft Entra administrator and retrieve the connection information for the PostgreSQL server.
+>>>>>>> Stashed changes
 
 1. When the **Create PostgreSQL server with Entra authentication** operation has completed, enter **2** to launch the **Configure Microsoft Entra administrator** option. This sets your Azure account as the database administrator.
 
@@ -216,7 +234,11 @@ In this task, you'll complete the Azure resource deployment, configure Microsoft
 
 ## Task 5: Create the database schema and test data
 
+<<<<<<< Updated upstream
 In this task, you'll enable the pgvector extension, create the database schema, and generate sample data with vector embeddings for performance testing.
+=======
+In this task you connect to the PostgreSQL server and create a table with product data and vector embeddings for testing.
+>>>>>>> Stashed changes
 
 1. Run the following command to connect to the server using the environment variables. The **PGPASSWORD** environment variable is automatically used for authentication.
 
@@ -289,7 +311,11 @@ In this task, you'll enable the pgvector extension, create the database schema, 
 
 ## Task 6: Analyze baseline performance
 
+<<<<<<< Updated upstream
 In this task, you'll measure the performance of vector similarity queries without indexes to establish a baseline for comparison.
+=======
+In this task you measure vector search performance without any indexes to establish a baseline.
+>>>>>>> Stashed changes
 
 1. Run the following command to execute a vector similarity query and capture the execution plan.
 
@@ -309,7 +335,11 @@ In this task, you'll measure the performance of vector similarity queries withou
 
 ## Task 7: Create and compare IVFFlat and HNSW indexes
 
+<<<<<<< Updated upstream
 In this task, you'll create IVFFlat and HNSW indexes, tune their search parameters, and compare their performance and accuracy.
+=======
+In this task you create both index types and compare their performance.
+>>>>>>> Stashed changes
 
 ### Task 7.1: Create an IVFFlat index
 
@@ -422,7 +452,11 @@ Compare your execution times across the different configurations. You should obs
 
 ## Task 8: Implement metadata filtering with indexes
 
+<<<<<<< Updated upstream
 In this task, you'll combine vector similarity searches with metadata filters and evaluate how additional indexes improve query performance.
+=======
+In this task you test queries that combine vector similarity with metadata filters. In production applications, pure vector search is rare - you typically filter by category, date range, price, or other attributes before finding similar items. Optimizing these combined queries requires understanding how PostgreSQL uses multiple index types together.
+>>>>>>> Stashed changes
 
 1. Run the following command to create a B-tree index on the category column.
 
@@ -475,6 +509,20 @@ In this task, you'll combine vector similarity searches with metadata filters an
 
 ## Summary
 
+<<<<<<< Updated upstream
 In this lab, you optimized vector search performance in Azure Database for PostgreSQL using the pgvector extension. You created a large dataset with vector embeddings, analyzed baseline query performance, compared IVFFlat and HNSW indexes, and tuned their parameters to balance speed and accuracy. Finally, you implemented metadata filtering with B-tree indexes to optimize hybrid vector search queries for production AI applications.
 
+=======
+In this lab, you:
+
+- Deployed an **Azure Database** for **PostgreSQL** Flexible Server with Microsoft Entra authentication.
+- Created a test dataset with 100,000 vector embeddings.
+- Established baseline performance for vector queries without indexes.
+- Created and compared **IVFFlat** and **HNSW** indexes.
+- Tuned index parameters (**probes** and **ef_search**) to balance accuracy and speed.
+- Implemented metadata filtering with B-tree indexes.
+
+These techniques enable you to optimize Azure Database for PostgreSQL for production vector search workloads.
+
+>>>>>>> Stashed changes
 ## You have successfully completed the Hands-on Lab!

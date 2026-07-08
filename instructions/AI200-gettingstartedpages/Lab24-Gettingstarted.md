@@ -12,8 +12,6 @@ In this hands-on lab, you will deploy an Azure Application Insights resource, ge
 
 ## Objectives
 
-By the end of this lab, you will be able to:
-
 1. **Deploy Application Insights:** Create an Application Insights resource and assign the Monitoring Metrics Publisher role so the app can send telemetry using Microsoft Entra authentication.
 
 2. **Generate telemetry data:** Run a Python application that produces request, dependency, and exception telemetry for analysis.

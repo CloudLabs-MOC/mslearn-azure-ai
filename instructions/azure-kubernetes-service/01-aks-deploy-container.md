@@ -15,7 +15,7 @@ In this lab, you'll perform the following tasks:
 - **Task 3:** Complete the YAML deployment files and deploy to AKS
 - **Task 4:** Run the client app
 
-> ### **Note:** This lab includes deployment scripts for both **PowerShell** and **Bash**. You may choose either scripting language based on your preference or environment. Once you make your choice, use the corresponding commands and script throughout the entire lab, as all subsequent steps provide instructions for both PowerShell and Bash.
+> **Note:** This lab includes deployment scripts for both **PowerShell** and **Bash**. You may choose either scripting language based on your preference or environment. Once you make your choice, use the corresponding commands and script throughout the entire lab, as all subsequent steps provide instructions for both PowerShell and Bash.
 
 ## Task 1: Prepare the environment and deploy Azure resources
 
@@ -258,7 +258,7 @@ In this task, you'll complete the Kubernetes deployment and service manifests, d
 
 ### Task 3.2: Apply the manifests to AKS
 
-In this section you use the deployment script to apply the manifests to AKS.
+In this task you use the deployment script to apply the manifests to AKS.
 
 1. Install kubectl and add it to your current terminal session by running the following commands. Execute both commands in sequence.
 
@@ -377,8 +377,8 @@ Now it's time to run the client application to perform various operations on the
 
 1. When you're finished enter **5** to exit the app.
 
-### Summary
+## Summary
 
-In this lab, you deployed a containerized AI inference API to Azure Kubernetes Service (AKS) by provisioning the required Azure resources, including a Microsoft Foundry model, Azure Container Registry (ACR), and an AKS cluster. You configured Kubernetes deployment and service manifests, deployed the API to AKS, and validated the deployment by using a Python client application to perform health checks, readiness validation, and AI inference requests.
+In this lab, you deployed a containerized AI inference API to **Azure Kubernetes Service (AKS)** by provisioning the required Azure resources, including a **Microsoft Foundry model**, **Azure Container Registry (ACR)**, and an **AKS cluster**. You configured Kubernetes deployment and service manifests, deployed the API to AKS, and validated the deployment by using a Python client application to perform health checks, readiness validation, and AI inference requests.
 
 ## You have successfully completed the Hands-on Lab!
