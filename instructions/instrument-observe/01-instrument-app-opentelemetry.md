@@ -275,7 +275,6 @@ The **enrich_document** function also includes a deliberate latency issue. Docum
 
        return {"status": "valid", "duration_ms": round(random.uniform(50, 150))}
 
-
    def enrich_document(doc_id):
        """Enrich a document with metadata and record a traced span."""
        tracer = get_tracer()
@@ -303,7 +302,6 @@ The **enrich_document** function also includes a deliberate latency issue. Docum
            "duration_ms": round(delay * 1000),
            "slow": doc_id in ("DOC-0003", "DOC-0005")
        }
-
 
    def store_document(doc_id):
        """Store a document and record a traced span."""

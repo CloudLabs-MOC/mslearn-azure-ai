@@ -349,7 +349,7 @@ In this task, you'll use the Azure CLI to create an Azure Monitor action group a
    **Bash**
 
    ```bash
-   az monitor scheduled-query create \
+   MSYS_NO_PATHCONV=1 az monitor scheduled-query create \
        --resource-group $RESOURCE_GROUP \
        --name high-failure-rate-alert \
        --scopes $APPINSIGHTS_RESOURCE_ID \
@@ -392,6 +392,8 @@ In this task, you'll use the Azure CLI to create an Azure Monitor action group a
        --output table
    ```
 
+   ![](<../Images/lab24-t4p2(1).png>)
+
    **PowerShell**
 
    ```powershell
@@ -415,6 +417,8 @@ In this task, you'll use the Azure CLI to create an Azure Monitor action group a
        --resource-group $RESOURCE_GROUP \
        --output table
    ```
+
+   ![](<../Images/lab24-t4p3(1).png>)
 
    **PowerShell**
 
