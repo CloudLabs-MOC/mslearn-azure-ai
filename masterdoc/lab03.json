@@ -1,16 +1,20 @@
 [
-    {
-        "Name": "Lab 03: Deploy a containerized backend API to Container Apps",
-        "Language": "English",
-        "Files": [
-            {
-                "RawFilePath": "https://raw.githubusercontent.com/CloudLabs-MOC/mslearn-azure-ai/refs/heads/Prod/instructions/AI200-gettingstartedpages/Lab03-Gettingstarted.md",
-                "Order": 1
-            },
-            {
-                "RawFilePath": "https://raw.githubusercontent.com/CloudLabs-MOC/mslearn-azure-ai/refs/heads/Prod/instructions/azure-container-apps/01-aca-deploy-containers.md",
-                "Order": 2
-            }
-        ]
-    }
+  {
+    "Name": "Lab 03: Deploy a containerized backend API to Container Apps",
+    "Language": "English",
+    "Files": [
+      {
+        "RawFilePath": "https://raw.githubusercontent.com/CloudLabs-MOC/mslearn-azure-ai/refs/heads/Prod/instructions/AI200-gettingstartedpages/Lab03-Gettingstarted.md",
+        "Order": 1
+      },
+      {
+        "RawFilePath": "https://raw.githubusercontent.com/CloudLabs-MOC/mslearn-azure-ai/refs/heads/Prod/instructions/azure-container-apps/01-aca-deploy-containers.md",
+        "Order": 2
+      },
+      {
+        "RawFilePath": "https://raw.githubusercontent.com/CloudLabs-MOC/mslearn-azure-ai/refs/heads/Prod/instructions/azure-container-apps/01-aca-deploy-containers-1.md",
+        "Order": 3
+      }
+    ]
+  }
 ]
