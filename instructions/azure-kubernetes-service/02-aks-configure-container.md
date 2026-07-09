@@ -16,7 +16,7 @@ In this lab, you'll perform the following tasks:
 - **Task 4:** Apply the Kubernetes manifests to AKS
 - **Task 5:** Run the client app
 
-> ### **Note:** This lab includes deployment scripts for both **PowerShell** and **Bash**. You may choose either scripting language based on your preference or environment. Once you make your choice, use the corresponding commands and script throughout the entire lab, as all subsequent steps provide instructions for both PowerShell and Bash.
+### <span style="color:maroon">**Note:** This lab includes deployment scripts for both **Bash** and **PowerShell**. Click on the drop-down arrow ▶ to expand the commands for your preferred shell. Once you make your choice, use the corresponding commands throughout the entire lab.</span>
 
 > **IMPORTANT:** The persistent storage implementation in this exercise is for demonstration purposes only. For logging, production applications should use a centralized logging solution like Azure Monitor or Application Insights instead of storing logs on persistent volumes. If persistent storage is required, implement log rotation policies to prevent storage from filling up, which can cause container failures and pod evictions.
 
@@ -65,11 +65,14 @@ In this task, you'll prepare the deployment environment, configure the deploymen
 
 1. Run the following command in the terminal to allow PowerShell scripts to run. This command is only required if you are using PowerShell. If you are using Bash, skip this step.
 
+   <details>
+     <summary>PowerShell</summary>
    ```
    Set-ExecutionPolicy -ExecutionPolicy bypass -Force
    ```
 
    ![](../Images/Lab01-Task1-9.png)
+   </details>
 
 1. Run the **following command (1)** to login to your Azure account. Next, **minimize the VS Code window (2)** to view the login window opened in background.
 
@@ -105,33 +108,45 @@ In this task, you'll prepare the deployment environment, configure the deploymen
 
 1. Install kubectl and add it to your current terminal session by running the following commands. Execute both commands in sequence.
 
-   **Bash**
+   <details>
+     <summary>Bash</summary>
 
    ```bash
    az aks install-cli
    export PATH=$PATH:/c/Users/azureuser/.azure-kubectl
    ```
 
-   **PowerShell**
+   </details>
+
+   <details>
+     <summary>PowerShell</summary>
 
    ```powershell
    az aks install-cli
    $env:PATH += ";$env:USERPROFILE\.azure-kubectl"
    ```
 
+   </details>
+
 1. Make sure you are in the root directory of the project and run the appropriate command in the terminal to launch the deployment script.
 
-   **Bash**
+   <details>
+     <summary>Bash</summary>
 
    ```bash
    MSYS_NO_PATHCONV=1 bash azdeploy.sh
    ```
 
-   **PowerShell**
+   </details>
+
+   <details>
+     <summary>PowerShell</summary>
 
    ```powershell
    ./azdeploy.ps1
    ```
+
+   </details>
 
 ## Task 2: Deploy resources to Azure
 
@@ -350,17 +365,23 @@ In this section, you create the Python environment and install the dependencies.
 
 1. Run the following command to activate the Python environment.
 
-   **Bash**
+   <details>
+     <summary>Bash</summary>
 
    ```bash
    source .venv/Scripts/activate
    ```
 
-   **PowerShell**
+   </details>
+
+   <details>
+     <summary>PowerShell</summary>
 
    ```powershell
    .\.venv\Scripts\Activate.ps1
    ```
+
+   </details>
 
 1. Run the following command in the VS Code terminal to install the dependencies.
 

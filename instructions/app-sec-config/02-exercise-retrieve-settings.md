@@ -2,7 +2,7 @@
 
 ### Estimated Duration : 60 Minutes
 
-## Lab Overview 
+## Lab Overview
 
 In this hands-on lab, you deploy an Azure App Configuration store and Key Vault pre-loaded with sample settings and build a Python Flask web application that demonstrates core configuration management patterns using the Azure SDK. You load settings with label stacking and automatic Key Vault reference resolution, list all setting properties and metadata, and trigger a sentinel-based refresh to pick up changes dynamically.
 
@@ -18,7 +18,7 @@ In this lab, you'll perform the following tasks:
 
 - **Task 4:** Run the app
 
-> **Note:** This lab includes deployment scripts for both **PowerShell** and **Bash**. You may choose either scripting language based on your preference or environment. Once you make your choice, use the corresponding commands and script throughout the entire lab, as all subsequent steps provide instructions for both PowerShell and Bash.
+### <span style="color:maroon">**Note:** This lab includes deployment scripts for both **Bash** and **PowerShell**. Click on the drop-down arrow ▶ to expand the commands for your preferred shell. Once you make your choice, use the corresponding commands throughout the entire lab.</span>
 
 ## Task 1: Prepare the environment
 
@@ -60,16 +60,19 @@ In this task, you'll prepare the development environment, deploy Azure App Confi
    ![](../Images/ai200-l12-7.png)
 
    > **NOTE:** If you are using Bash, after the terminal opens, click on the **+ (1)** icon to open a new terminal and select **Git Bash (2)** from the drop-down. If you are using PowerShell, skip this step.
-   
+
    ![](../Images/lab06-t1p5.png)
 
 1. Run the following command in the terminal to allow PowerShell scripts to run. This command is only required if you are using PowerShell. If you are using Bash, skip this step.
 
+    <details>
+     <summary>PowerShell</summary>
    ```
    Set-ExecutionPolicy -ExecutionPolicy bypass -Force
    ```
 
    ![](../Images/Lab01-Task1-9.png)
+   </details>
 
 1. Run the **following command (1)** to login to your Azure account. Next, **minimize the VS Code window (2)** to view the login window opened in background.
 
@@ -105,59 +108,67 @@ In this task, you'll prepare the development environment, deploy Azure App Confi
 
 1. Run the appropriate command in the terminal to launch the script.
 
-    **Bash**
-    ```bash
-    MSYS_NO_PATHCONV=1 bash azdeploy.sh
-    ```
+   <details>
+    <summary>Bash</summary>
+   ```bash
+   MSYS_NO_PATHCONV=1 bash azdeploy.sh
+   ```
+   </details>
 
-    **PowerShell**
-    ```powershell
-    ./azdeploy.ps1
-    ```
+   <details>
+    <summary>PowerShell</summary>
+   ```powershell
+   ./azdeploy.ps1
+   ```
 
-    ![](../Images/ai200-l22-3.png)
+   ![](../Images/ai200-l22-3.png)
+   </details>
 
 1. When the script is running, enter **1** to launch the **1. Create App Configuration** option.
 
-    ![](../Images/ai200-l22-4.png)
+   ![](../Images/ai200-l22-4.png)
 
-    This option creates the resource group if it doesn't already exist and deploys an Azure App Configuration store. App Configuration provides a centralized service for managing application settings separately from code.
+   This option creates the resource group if it doesn't already exist and deploys an Azure App Configuration store. App Configuration provides a centralized service for managing application settings separately from code.
 
 1. Enter **2** to run the **2. Create Key Vault** option. This creates an Azure Key Vault with RBAC authorization enabled. The Key Vault stores sensitive values such as API keys that App Configuration references securely.
 
-     ![](../Images/ai200-l22-5.png)
+   ![](../Images/ai200-l22-5.png)
 
 1. Enter **3** to run the **3. Assign roles** option. This assigns the App Configuration Data Owner role and the Key Vault Secrets Officer role to your account so you can read, create, and update settings and secrets using Microsoft Entra authentication.
 
-    ![](../Images/ai200-l22-6.png)
+   ![](../Images/ai200-l22-6.png)
 
 1. Enter **4** to run the **4. Store settings** option. This stores configuration settings in the App Configuration store including default (unlabeled) values and Production-labeled overrides for environment-specific settings. It also stores a secret in Key Vault and creates a Key Vault reference in App Configuration that points to the secret. Finally, it creates a sentinel key used for dynamic refresh.
 
-    ![](../Images/ai200-l22-7.png)
+   ![](../Images/ai200-l22-7.png)
 
 1. Enter **5** to run the **5. Check deployment status** option. Verify the App Configuration store and Key Vault both show **Succeeded**, the roles are assigned, and the settings are stored before continuing. If resources are still provisioning, wait a moment and try again.
 
-    ![](../Images/ai200-l22-8.png)
+   ![](../Images/ai200-l22-8.png)
 
 1. Enter **6** to run the **6. Retrieve connection info** option. This creates the environment variable file with the App Configuration endpoint URL needed by the app.
 
-    ![](../Images/ai200-l22-9.png)
+   ![](../Images/ai200-l22-9.png)
 
 1. Enter **7** to exit the deployment script.
 
 1. Run the appropriate command to load the environment variables into your terminal session from the file created in a previous step.
 
-    **Bash**
-    ```bash
-    source .env
-    ```
+   <details>
+    <summary>Bash</summary>
+   ```bash
+   source .env
+   ```
+   </details>
 
-    **PowerShell**
-    ```powershell
-    . .\.env.ps1
-    ```
+   <details>
+    <summary>PowerShell</summary>
+   ```powershell
+   . .\.env.ps1
+   ```
+   </details>
 
-    >**Note:** Keep the terminal open. If you close it and create a new terminal, you need to run this command again to reload the environment variables.
+   > **Note:** Keep the terminal open. If you close it and create a new terminal, you need to run this command again to reload the environment variables.
 
 > **Congratulations** on completing the task! Now, it's time to validate it. Here are the steps:
 >
@@ -171,12 +182,11 @@ In this task, you'll prepare the development environment, deploy Azure App Confi
 
 In this task, you'll implement the Python application to load configuration settings, list setting properties, and perform sentinel-based dynamic configuration refresh using the Azure App Configuration SDK.
 
+1. Open the _client/appconfig_functions.py_ file to begin adding code.
 
-1. Open the *client/appconfig_functions.py* file to begin adding code.
+   ![](../Images/ai200-l22-10.png)
 
-    ![](../Images/ai200-l22-10.png)
-
-    >**Note:** The code blocks you add to the application should align with the comment for that section of the code.
+   > **Note:** The code blocks you add to the application should align with the comment for that section of the code.
 
 ### Task 2.1: Add code to load settings
 
@@ -186,47 +196,47 @@ The function calls **load()** with two **SettingSelector** entries: the first se
 
 1. Locate the **# BEGIN LOAD SETTINGS FUNCTION** comment and add the following code under the comment. Be sure to check for proper code alignment.
 
-    ```python
-    def load_settings():
-        """Load all settings with label stacking and Key Vault reference resolution."""
-        provider = get_provider()
-        results = []
+   ```python
+   def load_settings():
+       """Load all settings with label stacking and Key Vault reference resolution."""
+       provider = get_provider()
+       results = []
 
-        # The provider resolves Key Vault references automatically and
-        # applies label stacking: Production-labeled values override
-        # unlabeled defaults for matching keys
-        known_keys = [
-            "OpenAI:Endpoint",
-            "OpenAI:DeploymentName",
-            "OpenAI:ApiKey",
-            "Pipeline:BatchSize",
-            "Pipeline:RetryCount",
-            "Sentinel"
-        ]
+       # The provider resolves Key Vault references automatically and
+       # applies label stacking: Production-labeled values override
+       # unlabeled defaults for matching keys
+       known_keys = [
+           "OpenAI:Endpoint",
+           "OpenAI:DeploymentName",
+           "OpenAI:ApiKey",
+           "Pipeline:BatchSize",
+           "Pipeline:RetryCount",
+           "Sentinel"
+       ]
 
-        for key in known_keys:
-            try:
-                value = provider[key]
-                is_secret = key == "OpenAI:ApiKey"
-                display_value = value[:10] + "..." if is_secret and len(value) > 10 else value
-                results.append({
-                    "key": key,
-                    "value": display_value,
-                    "type": "Key Vault reference" if is_secret else "configuration",
-                    "status": "loaded"
-                })
-            except KeyError:
-                results.append({
-                    "key": key,
-                    "value": None,
-                    "type": "unknown",
-                    "status": "not found"
-                })
+       for key in known_keys:
+           try:
+               value = provider[key]
+               is_secret = key == "OpenAI:ApiKey"
+               display_value = value[:10] + "..." if is_secret and len(value) > 10 else value
+               results.append({
+                   "key": key,
+                   "value": display_value,
+                   "type": "Key Vault reference" if is_secret else "configuration",
+                   "status": "loaded"
+               })
+           except KeyError:
+               results.append({
+                   "key": key,
+                   "value": None,
+                   "type": "unknown",
+                   "status": "not found"
+               })
 
-        return results
-    ```
+       return results
+   ```
 
-     ![](../Images/ai200-l22-11.png)
+   ![](../Images/ai200-l22-11.png)
 
 1. Take a few minutes to review the code.
 
@@ -238,28 +248,28 @@ The function calls **list_configuration_settings()** on the management client, w
 
 1. Locate the **# BEGIN LIST SETTINGS FUNCTION** comment and add the following code under the comment. Be sure to check for proper code alignment.
 
-    ```python
-    def list_setting_properties():
-        """List all setting properties from the App Configuration store."""
-        client = get_client()
-        results = []
+   ```python
+   def list_setting_properties():
+       """List all setting properties from the App Configuration store."""
+       client = get_client()
+       results = []
 
-        # list_configuration_settings returns every setting in the store
-        # including all labels, showing the raw storage view rather than
-        # the merged view that load() provides
-        for setting in client.list_configuration_settings():
-            results.append({
-                "key": setting.key,
-                "label": setting.label or "(no label)",
-                "content_type": setting.content_type or "—",
-                "last_modified": str(setting.last_modified) if setting.last_modified else "—",
-                "read_only": setting.read_only
-            })
+       # list_configuration_settings returns every setting in the store
+       # including all labels, showing the raw storage view rather than
+       # the merged view that load() provides
+       for setting in client.list_configuration_settings():
+           results.append({
+               "key": setting.key,
+               "label": setting.label or "(no label)",
+               "content_type": setting.content_type or "—",
+               "last_modified": str(setting.last_modified) if setting.last_modified else "—",
+               "read_only": setting.read_only
+           })
 
-        return results
-    ```
+       return results
+   ```
 
-    ![](../Images/ai200-l22-12.png)
+   ![](../Images/ai200-l22-12.png)
 
 1. Save your changes and take a few minutes to review the code.
 
@@ -271,77 +281,77 @@ The function captures the current provider values, then uses the management clie
 
 1. Locate the **# BEGIN REFRESH CONFIGURATION FUNCTION** comment and add the following code under the comment. Be sure to check for proper code alignment.
 
-    ```python
-    def refresh_configuration():
-        """Demonstrate sentinel-based dynamic refresh of configuration settings."""
-        provider = get_provider()
-        client = get_client()
+   ```python
+   def refresh_configuration():
+       """Demonstrate sentinel-based dynamic refresh of configuration settings."""
+       provider = get_provider()
+       client = get_client()
 
-        # Capture current values before the change
-        tracked_keys = ["Pipeline:BatchSize"]
-        before = {}
-        for key in tracked_keys:
-            try:
-                before[key] = provider[key]
-            except KeyError:
-                before[key] = "—"
+       # Capture current values before the change
+       tracked_keys = ["Pipeline:BatchSize"]
+       before = {}
+       for key in tracked_keys:
+           try:
+               before[key] = provider[key]
+           except KeyError:
+               before[key] = "—"
 
-        # Update Pipeline:BatchSize with a new value to simulate a
-        # configuration change, then increment the Sentinel key to
-        # signal the provider that settings have changed
-        import random
-        new_batch = str(random.randint(100, 999))
+       # Update Pipeline:BatchSize with a new value to simulate a
+       # configuration change, then increment the Sentinel key to
+       # signal the provider that settings have changed
+       import random
+       new_batch = str(random.randint(100, 999))
 
-        setting = ConfigurationSetting(
-            key="Pipeline:BatchSize",
-            value=new_batch,
-            label="Production",
-            content_type="text/plain"
-        )
-        client.set_configuration_setting(setting)
+       setting = ConfigurationSetting(
+           key="Pipeline:BatchSize",
+           value=new_batch,
+           label="Production",
+           content_type="text/plain"
+       )
+       client.set_configuration_setting(setting)
 
-        # Update the Sentinel to signal the provider that settings have changed.
-        # Using a timestamp ensures the value is always different from whatever
-        # the provider has cached, even if settings were reset externally.
-        new_sentinel = str(int(time.time()))
+       # Update the Sentinel to signal the provider that settings have changed.
+       # Using a timestamp ensures the value is always different from whatever
+       # the provider has cached, even if settings were reset externally.
+       new_sentinel = str(int(time.time()))
 
-        sentinel_setting = ConfigurationSetting(
-            key="Sentinel",
-            value=new_sentinel
-        )
-        client.set_configuration_setting(sentinel_setting)
+       sentinel_setting = ConfigurationSetting(
+           key="Sentinel",
+           value=new_sentinel
+       )
+       client.set_configuration_setting(sentinel_setting)
 
-        # Wait briefly for the refresh interval to elapse, then call
-        # refresh() to reload settings from the store
-        time.sleep(2)
-        provider.refresh()
+       # Wait briefly for the refresh interval to elapse, then call
+       # refresh() to reload settings from the store
+       time.sleep(2)
+       provider.refresh()
 
-        # Capture values after the refresh
-        after = {}
-        for key in tracked_keys:
-            try:
-                after[key] = provider[key]
-            except KeyError:
-                after[key] = "—"
+       # Capture values after the refresh
+       after = {}
+       for key in tracked_keys:
+           try:
+               after[key] = provider[key]
+           except KeyError:
+               after[key] = "—"
 
-        settings = []
-        for key in tracked_keys:
-            settings.append({
-                "key": key,
-                "before": before[key],
-                "after": after[key],
-                "changed": before[key] != after[key]
-            })
+       settings = []
+       for key in tracked_keys:
+           settings.append({
+               "key": key,
+               "before": before[key],
+               "after": after[key],
+               "changed": before[key] != after[key]
+           })
 
-        return {
-            "settings": settings,
-            "sentinel_value": new_sentinel,
-            "new_batch_size": new_batch,
-            "batch_size_updated": after["Pipeline:BatchSize"] == new_batch
-        }
-    ```
+       return {
+           "settings": settings,
+           "sentinel_value": new_sentinel,
+           "new_batch_size": new_batch,
+           "batch_size_updated": after["Pipeline:BatchSize"] == new_batch
+       }
+   ```
 
-    ![](../Images/ai200-l22-13.png)
+   ![](../Images/ai200-l22-13.png)
 
 1. Save your changes and take a few minutes to review the code.
 
@@ -349,68 +359,71 @@ The function captures the current provider values, then uses the management clie
 
 In this task, you will navigate to the client app directory, create the Python environment, and install the dependencies.
 
-1. Run the following command in the VS Code terminal to navigate to the *client* directory.
+1. Run the following command in the VS Code terminal to navigate to the _client_ directory.
 
-    ```
-    cd client
-    ```
+   ```
+   cd client
+   ```
 
 1. Run the following command to create the Python environment.
 
-    ```
-    python -m venv .venv
-    ```
+   ```
+   python -m venv .venv
+   ```
 
-1. Run the following command to activate the Python environment. 
+1. Run the following command to activate the Python environment.
 
-    **Bash**
-    ```bash
-    source .venv/Scripts/activate
-    ```
+   <details>
+    <summary>Bash</summary>
+   ```bash
+   source .venv/Scripts/activate
+   ```
+   </details>
 
-    **PowerShell**
-    ```powershell
-    .\.venv\Scripts\Activate.ps1
-    ```
+   <details>
+    <summary>PowerShell</summary>
+   ```powershell
+   .\.venv\Scripts\Activate.ps1
+   ```
 
-    ![](../Images/ai200-l22-14.png)
+   ![](../Images/ai200-l22-14.png)
+   </details>
 
-    > **Note:** On Linux/macOS, use the Bash command, use **source .venv/bin/activate**.
+   > **Note:** On Linux/macOS, use the Bash command, use **source .venv/bin/activate**.
 
 1. Run the following command in the VS Code terminal to install the dependencies.
 
-    ```
-    pip install -r requirements.txt
-    ```
+   ```
+   pip install -r requirements.txt
+   ```
 
 ## Task 4: Run the app
 
 In this task, you'll run the Flask application and validate configuration loading, metadata retrieval, and dynamic refresh through the web interface.
 
+1. Run the following command in the terminal to start the app. Refer to the commands from earlier in the exercise to activate the environment, if needed, before running the command. If you navigated away from the _client_ directory, run **cd client** first.
 
-1. Run the following command in the terminal to start the app. Refer to the commands from earlier in the exercise to activate the environment, if needed, before running the command. If you navigated away from the *client* directory, run **cd client** first.
+   ```
+   python app.py
+   ```
 
-    ```
-    python app.py
-    ```
-
-    ![](../Images/ai200-l22-15.png)
+   ![](../Images/ai200-l22-15.png)
 
 1. Open a browser and navigate to `http://localhost:5000` to access the app.
 
-    ![](../Images/ai200-l22-16.png)
+   ![](../Images/ai200-l22-16.png)
 
 1. Select **Load Settings** in the left panel. This loads all configuration settings with label stacking and Key Vault reference resolution. The results show each setting's key, value, and type. Settings labeled as **configuration** are regular App Configuration values, while **Key Vault reference** indicates the value was resolved from a Key Vault secret.
 
-    ![](../Images/ai200-l22-17.png)
+   ![](../Images/ai200-l22-17.png)
 
 1. Select **List Setting Properties**. This lists every individual setting entry in the store, including both unlabeled defaults and Production-labeled overrides as separate rows. The results show each setting's key, label, content type, last modified timestamp, and read-only status. Notice that **Pipeline:BatchSize** appears twice: once with no label (value 10) and once with the **Production** label (value 200). The **Load Settings** results showed 200 because the Production-labeled override took precedence over the unlabeled default.
 
-    ![](../Images/ai200-l22-18.png)
+   ![](../Images/ai200-l22-18.png)
 
 1. Select **Refresh Configuration**. This demonstrates sentinel-based dynamic refresh. The function updates **Pipeline:BatchSize** with a new random value, sets the **Sentinel** key to a new timestamp, waits briefly, and then calls **refresh()** on the provider. The results show the before and after values for tracked settings, confirming that the provider picked up the change without restarting the application.
 
-    ![](../Images/ai200-l22-19.png)
+   ![](../Images/ai200-l22-19.png)
 
 ### Summary
 

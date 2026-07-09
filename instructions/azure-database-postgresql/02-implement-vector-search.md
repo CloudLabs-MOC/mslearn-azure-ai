@@ -2,7 +2,7 @@
 
 ### Estimated Duration : 60 Minutes
 
-## Lab Overview 
+## Lab Overview
 
 In this hands-on lab, you build a product similarity search application using Azure Database for PostgreSQL and the pgvector extension. You enable vector storage capabilities, create a database schema for products with embeddings, load sample data through a Flask web application, and perform similarity searches to find related products. This pattern provides a foundation for building recommendation systems, semantic search features, and other AI-powered applications.
 
@@ -24,7 +24,7 @@ In this lab, you'll perform the following tasks:
 
 - **Task 7:** Add new products and observe changes
 
-> **Note:** This lab includes deployment scripts for both **PowerShell** and **Bash**. You may choose either scripting language based on your preference or environment. Once you make your choice, use the corresponding commands and script throughout the entire lab, as all subsequent steps provide instructions for both PowerShell and Bash.
+### <span style="color:maroon">**Note:** This lab includes deployment scripts for both **Bash** and **PowerShell**. Click on the drop-down arrow ▶ to expand the commands for your preferred shell. Once you make your choice, use the corresponding commands throughout the entire lab.</span>
 
 ## Task 1: Prepare the environment
 
@@ -48,7 +48,7 @@ In this task, you'll prepare the development environment, configure the deployme
 
 1. Once the folder opens in VS Code, select **Explorer (1)** and then **azdeploy.ps1 (2)**.
 
-    ![](../Images/ai200-l13-4.png)
+   ![](../Images/ai200-l13-4.png)
 
 1. The project contains deployment scripts for both Bash (_azdeploy.sh_) and PowerShell (_azdeploy.ps1_). Open the appropriate file for your environment and change the two values: **Resource group name** as **<inject key="ResourceGroupName" enableCopy="false"/>** and **Azure Region** as **<inject key="Region" enableCopy="false"/>** at the top of the script to meet your needs.
 
@@ -70,16 +70,20 @@ In this task, you'll prepare the development environment, configure the deployme
    ![](../Images/ai200-l13-6.png)
 
    > **NOTE:** If you are using Bash, after the terminal opens, click on the **+ (1)** icon to open a new terminal and select **Git Bash (2)** from the drop-down. If you are using PowerShell, skip this step.
-   
+
    ![](../Images/lab06-t1p5.png)
 
 1. Run the following command in the terminal to allow PowerShell scripts to run. This command is only required if you are using PowerShell. If you are using Bash, skip this step.
 
+    <details>
+     <summary>PowerShell</summary>
    ```
    Set-ExecutionPolicy -ExecutionPolicy bypass -Force
    ```
 
    ![](../Images/Lab01-Task1-9.png)
+
+   </details>
 
 1. Run the **following command (1)** to login to your Azure account. Next, **minimize the VS Code window (2)** to view the login window opened in background.
 
@@ -106,6 +110,7 @@ In this task, you'll prepare the development environment, configure the deployme
 1. Next, select **No, this app only** and navigate back to VS Code to continue.
 
    ![](../Images/Lab01-Task1-14.png)
+
 1. Answer the prompts to select your Azure account and subscription for the exercise.
 
    ![](../Images/Lab01-Task1-15.png)
@@ -118,23 +123,27 @@ In this task, you'll deploy an Azure Database for PostgreSQL Flexible Server wit
 
 1. Make sure you are in the root directory of the project and run the appropriate command in the terminal to launch the deployment script.
 
-    **Bash**
-    ```bash
-    MSYS_NO_PATHCONV=1 bash azdeploy.sh
-    ```
+   <details>
+    <summary>Bash</summary>
+   ```bash
+   MSYS_NO_PATHCONV=1 bash azdeploy.sh
+   ```
+   </details>
 
-    **PowerShell**
-    ```powershell
-    ./azdeploy.ps1
-    ```
+   <details>
+    <summary>PowerShell</summary>
+   ```powershell
+   ./azdeploy.ps1
+   ```
 
-    ![](../Images/ai200-l13-7.png)
+   ![](../Images/ai200-l13-7.png)
+   </details>
 
 1. When the script menu appears, enter **1** to launch the **Create PostgreSQL server with Entra authentication** option. This creates the server with Entra-only authentication enabled. **Note:** Deployment can take 5-10 minutes to complete.
 
-    ![](../Images/ai200-l13-8.png)
+   ![](../Images/ai200-l13-8.png)
 
-    >**IMPORTANT:** Leave the terminal running the deployment open for the duration of the exercise. You can move on to the next section of the exercise while the deployment continues in the terminal.
+   > **IMPORTANT:** Leave the terminal running the deployment open for the duration of the exercise. You can move on to the next section of the exercise while the deployment continues in the terminal.
 
 > **Congratulations** on completing the task! Now, it's time to validate it. Here are the steps:
 >
@@ -148,166 +157,166 @@ In this task, you'll deploy an Azure Database for PostgreSQL Flexible Server wit
 
 In this task, you'll implement the Flask application to load product data, perform vector similarity searches, and add new products to the PostgreSQL database.
 
-1. Open the *client/app.py* file in VS Code.
+1. Open the _client/app.py_ file in VS Code.
 
-    ![](../Images/ai200-l13-9.png)
+   ![](../Images/ai200-l13-9.png)
 
 1. Search for the **BEGIN LOAD DATA SECTION** comment and add the following code directly after the comment. This route loads products from a JSON file and inserts them into the database with their embeddings.
 
-    ```python
-    @app.route("/load-data", methods=["POST"])
-    def load_data():
-        """Load sample products into the database."""
-        try:
-            products = load_json_file("sample_products.json")
+   ```python
+   @app.route("/load-data", methods=["POST"])
+   def load_data():
+       """Load sample products into the database."""
+       try:
+           products = load_json_file("sample_products.json")
 
-            with get_connection() as conn:
-                with conn.cursor() as cur:
-                    for product in products:
-                        # Check if product already exists
-                        cur.execute("SELECT id FROM products WHERE name = %s", (product["name"],))
-                        if cur.fetchone():
-                            continue
+           with get_connection() as conn:
+               with conn.cursor() as cur:
+                   for product in products:
+                       # Check if product already exists
+                       cur.execute("SELECT id FROM products WHERE name = %s", (product["name"],))
+                       if cur.fetchone():
+                           continue
 
-                        # Format embedding as PostgreSQL array (pgvector expects bracket notation)
-                        embedding_str = "[" + ",".join(str(x) for x in product["embedding"]) + "]"
+                       # Format embedding as PostgreSQL array (pgvector expects bracket notation)
+                       embedding_str = "[" + ",".join(str(x) for x in product["embedding"]) + "]"
 
-                        cur.execute("""
-                            INSERT INTO products (name, category, description, price, embedding)
-                            VALUES (%s, %s, %s, %s, %s)
-                        """, (
-                            product["name"],
-                            product["category"],
-                            product["description"],
-                            product["price"],
-                            embedding_str
-                        ))
-                    # Commit all inserts in a single transaction
-                    conn.commit()
+                       cur.execute("""
+                           INSERT INTO products (name, category, description, price, embedding)
+                           VALUES (%s, %s, %s, %s, %s)
+                       """, (
+                           product["name"],
+                           product["category"],
+                           product["description"],
+                           product["price"],
+                           embedding_str
+                       ))
+                   # Commit all inserts in a single transaction
+                   conn.commit()
 
-            flash(f"Successfully loaded {len(products)} sample products!", "success")
-        except Exception as e:
-            flash(f"Error loading data: {str(e)}", "error")
+           flash(f"Successfully loaded {len(products)} sample products!", "success")
+       except Exception as e:
+           flash(f"Error loading data: {str(e)}", "error")
 
-        return redirect(url_for("index"))
-    ```
+       return redirect(url_for("index"))
+   ```
 
-    ![](../Images/ai200-l13-10.png)
+   ![](../Images/ai200-l13-10.png)
 
 1. Search for the **BEGIN SEARCH SECTION** comment and add the following code directly after the comment. This route retrieves the embedding for a selected product and finds similar products using cosine distance.
 
-    ```python
-    @app.route("/search", methods=["POST"])
-    def search():
-        """Find products similar to the selected product using vector similarity."""
-        product_id = request.form.get("product_id")
+   ```python
+   @app.route("/search", methods=["POST"])
+   def search():
+       """Find products similar to the selected product using vector similarity."""
+       product_id = request.form.get("product_id")
 
-        if not product_id:
-            flash("Please select a product", "error")
-            return redirect(url_for("index"))
+       if not product_id:
+           flash("Please select a product", "error")
+           return redirect(url_for("index"))
 
-        try:
-            with get_connection() as conn:
-                with conn.cursor() as cur:
-                    # Get the embedding for the selected product
-                    cur.execute("SELECT embedding FROM products WHERE id = %s", (product_id,))
-                    row = cur.fetchone()
+       try:
+           with get_connection() as conn:
+               with conn.cursor() as cur:
+                   # Get the embedding for the selected product
+                   cur.execute("SELECT embedding FROM products WHERE id = %s", (product_id,))
+                   row = cur.fetchone()
 
-                    if not row:
-                        flash("Product not found", "error")
-                        return redirect(url_for("index"))
-                    cur.execute("""
-                        SELECT id, name, category, description, price
-                        FROM products
-                        WHERE id = %s
-                    """, (product_id,))
+                   if not row:
+                       flash("Product not found", "error")
+                       return redirect(url_for("index"))
+                   cur.execute("""
+                       SELECT id, name, category, description, price
+                       FROM products
+                       WHERE id = %s
+                   """, (product_id,))
 
-                    p = cur.fetchone()
+                   p = cur.fetchone()
 
-                    searched_product = {
-                        "id": p[0],
-                        "name": p[1],
-                        "category": p[2],
-                        "description": p[3],
-                        "price": p[4]
-                    }
+                   searched_product = {
+                       "id": p[0],
+                       "name": p[1],
+                       "category": p[2],
+                       "description": p[3],
+                       "price": p[4]
+                   }
 
-                    # Find similar products using cosine distance
-                    # The <=> operator is pgvector's cosine distance operator
-                    # Lower distance = more similar (0 = identical, 2 = opposite)
-                    cur.execute("""
-                        SELECT id, name, category, description, price, embedding <=> %s AS distance
-                        FROM products
-                        WHERE id != %s
-                        ORDER BY distance
-                        LIMIT 5
-                    """, (row[0], product_id))
+                   # Find similar products using cosine distance
+                   # The <=> operator is pgvector's cosine distance operator
+                   # Lower distance = more similar (0 = identical, 2 = opposite)
+                   cur.execute("""
+                       SELECT id, name, category, description, price, embedding <=> %s AS distance
+                       FROM products
+                       WHERE id != %s
+                       ORDER BY distance
+                       LIMIT 5
+                   """, (row[0], product_id))
 
-                    results = [
-                        {"id": r[0], "name": r[1], "category": r[2], "description": r[3], "price": r[4], "distance": r[5]}
-                        for r in cur.fetchall()
-                    ]
+                   results = [
+                       {"id": r[0], "name": r[1], "category": r[2], "description": r[3], "price": r[4], "distance": r[5]}
+                       for r in cur.fetchall()
+                   ]
 
-            products = get_products()
-            new_products = get_new_products()
-            return render_template("index.html", products=products, new_products=new_products, results=results, searched_product=searched_product)
+           products = get_products()
+           new_products = get_new_products()
+           return render_template("index.html", products=products, new_products=new_products, results=results, searched_product=searched_product)
 
-        except Exception as e:
-            flash(f"Error searching: {str(e)}", "error")
-            return redirect(url_for("index"))
-    ```
+       except Exception as e:
+           flash(f"Error searching: {str(e)}", "error")
+           return redirect(url_for("index"))
+   ```
 
-    ![](../Images/ai200-l13-28.png)
+   ![](../Images/ai200-l13-28.png)
 
-1. Search for the **BEGIN ADD PRODUCT SECTION** comment and add the following code directly after the comment. This route adds a product from the *new_products.json* file to the database.
+1. Search for the **BEGIN ADD PRODUCT SECTION** comment and add the following code directly after the comment. This route adds a product from the _new_products.json_ file to the database.
 
-    ```python
-    @app.route("/add-product", methods=["POST"])
-    def add_product():
-        """Add a new product from the new_products.json file."""
-        product_index = request.form.get("product_index")
+   ```python
+   @app.route("/add-product", methods=["POST"])
+   def add_product():
+       """Add a new product from the new_products.json file."""
+       product_index = request.form.get("product_index")
 
-        if product_index is None or product_index == "":
-            flash("Please select a product to add", "error")
-            return redirect(url_for("index"))
+       if product_index is None or product_index == "":
+           flash("Please select a product to add", "error")
+           return redirect(url_for("index"))
 
-        try:
-            new_products = load_json_file("new_products.json")
-            product = new_products[int(product_index)]
+       try:
+           new_products = load_json_file("new_products.json")
+           product = new_products[int(product_index)]
 
-            with get_connection() as conn:
-                with conn.cursor() as cur:
-                    # Check if product already exists
-                    cur.execute("SELECT id FROM products WHERE name = %s", (product["name"],))
-                    if cur.fetchone():
-                        flash(f"Product '{product['name']}' already exists", "error")
-                        return redirect(url_for("index"))
+           with get_connection() as conn:
+               with conn.cursor() as cur:
+                   # Check if product already exists
+                   cur.execute("SELECT id FROM products WHERE name = %s", (product["name"],))
+                   if cur.fetchone():
+                       flash(f"Product '{product['name']}' already exists", "error")
+                       return redirect(url_for("index"))
 
-                    # Format embedding as PostgreSQL array
-                    embedding_str = "[" + ",".join(str(x) for x in product["embedding"]) + "]"
+                   # Format embedding as PostgreSQL array
+                   embedding_str = "[" + ",".join(str(x) for x in product["embedding"]) + "]"
 
-                    cur.execute("""
-                        INSERT INTO products (name, category, description, price, embedding)
-                        VALUES (%s, %s, %s, %s, %s)
-                    """, (
-                        product["name"],
-                        product["category"],
-                        product["description"],
-                        product["price"],
-                        embedding_str
-                    ))
-                    conn.commit()
+                   cur.execute("""
+                       INSERT INTO products (name, category, description, price, embedding)
+                       VALUES (%s, %s, %s, %s, %s)
+                   """, (
+                       product["name"],
+                       product["category"],
+                       product["description"],
+                       product["price"],
+                       embedding_str
+                   ))
+                   conn.commit()
 
-            flash(f"Successfully added '{product['name']}'!", "success")
-        except Exception as e:
-            flash(f"Error adding product: {str(e)}", "error")
+           flash(f"Successfully added '{product['name']}'!", "success")
+       except Exception as e:
+           flash(f"Error adding product: {str(e)}", "error")
 
-        return redirect(url_for("index"))
-    ```
+       return redirect(url_for("index"))
+   ```
 
-    ![](../Images/ai200-l13-12.png)
+   ![](../Images/ai200-l13-12.png)
 
-1. Save your changes to the *app.py* file by using **Ctrl + S**.
+1. Save your changes to the _app.py_ file by using **Ctrl + S**.
 
 1. Take a few minutes to review all of the code in the app. Notice how each route uses the **get_connection()** function to connect to PostgreSQL with Microsoft Entra authentication, and how the **\<=>** operator performs cosine distance calculations for similarity search.
 
@@ -319,140 +328,151 @@ In this task you will enable the pgvector extension and create the products tabl
 
 1. In the deployment script menu, enter **2** to configure Microsoft Entra authentication. This sets your Azure account as the database administrator.
 
-    ![](../Images/ai200-l13-13.png)
+   ![](../Images/ai200-l13-13.png)
 
 1. When the previous operation completes, enter **3** to launch the **Check deployment status** option. This verifies the server is ready.
 
-    ![](../Images/ai200-l13-14.png)
+   ![](../Images/ai200-l13-14.png)
 
 1. Enter **4** to launch the **Retrieve connection info and access token** option. This creates a file with the necessary environment variables.
 
-     ![](../Images/ai200-l13-15.png)
+   ![](../Images/ai200-l13-15.png)
 
-     ![](../Images/ai200-l13-16.png)
+   ![](../Images/ai200-l13-16.png)
 
 1. Enter **5** to exit the deployment script.
 
 1. Run the following command to load the environment variables into your terminal session from the file created in a previous step.
 
-    **Bash**
-    ```bash
-    source .env
-    ```
+   <details>
+    <summary>Bash</summary>
+   ```bash
+   source .env
+   ```
+   </details>
 
-    **PowerShell**
-    ```powershell
-    . .\.env.ps1
-    ```
+   <details>
+    <summary>PowerShell</summary>
+   ```powershell
+   . .\.env.ps1
+   ```
+   </details>
 
 1. Run the following command to connect to the PostgreSQL server using **psql**. The command uses the environment variables you loaded in the previous step.
 
-    **Bash**
-    ```bash
-    psql "host=$DB_HOST dbname=$DB_NAME user=$DB_USER sslmode=require"
-    ```
+   <details>
+    <summary>Bash</summary>
+   ```bash
+   psql "host=$DB_HOST dbname=$DB_NAME user=$DB_USER sslmode=require"
+   ```
+   </details>
 
-    **PowerShell**
-    ```powershell
-    psql "host=$env:DB_HOST port=5432 dbname=$env:DB_NAME user=$env:DB_USER sslmode=require"
-    ```
+   <details>
+    <summary>PowerShell</summary>
+   ```powershell
+   psql "host=$env:DB_HOST port=5432 dbname=$env:DB_NAME user=$env:DB_USER sslmode=require"
+   ```
 
-    ![](../Images/ai200-l12-18.png)
+   ![](../Images/ai200-l12-18.png)
+   </details>
 
 1. Enable the pgvector extension. This extension must be enabled before you can use vector data types.
 
-    ```sql
-    CREATE EXTENSION IF NOT EXISTS vector;
-    ```
+   ```sql
+   CREATE EXTENSION IF NOT EXISTS vector;
+   ```
 
 1. Create the products table with a vector column for embeddings. The embeddings column uses 384 dimensions, which matches common sentence transformer models.
 
-    ```sql
-    CREATE TABLE products (
-        id SERIAL PRIMARY KEY,
-        name TEXT NOT NULL,
-        category TEXT,
-        description TEXT,
-        price NUMERIC(10, 2),
-        embedding vector(330)
-    );
-    ```
+   ```sql
+   CREATE TABLE products (
+       id SERIAL PRIMARY KEY,
+       name TEXT NOT NULL,
+       category TEXT,
+       description TEXT,
+       price NUMERIC(10, 2),
+       embedding vector(330)
+   );
+   ```
 
 1. Create an HNSW index to enable fast similarity searches. This index type is optimized for approximate nearest neighbor queries on vector data.
 
-    ```sql
-    CREATE INDEX products_embedding_idx
-    ON products USING hnsw (embedding vector_cosine_ops)
-    WITH (m = 16, ef_construction = 64);
-    ```
+   ```sql
+   CREATE INDEX products_embedding_idx
+   ON products USING hnsw (embedding vector_cosine_ops)
+   WITH (m = 16, ef_construction = 64);
+   ```
 
 1. Verify the table and index were created by listing the table structure.
 
-    ```sql
-    \d products
-    ```
+   ```sql
+   \d products
+   ```
 
-    You should see the table structure with columns for id, name, category, description, price, and embedding, plus the HNSW index.
+   You should see the table structure with columns for id, name, category, description, price, and embedding, plus the HNSW index.
 
-    ![](../Images/ai200-l13-17.png)
+   ![](../Images/ai200-l13-17.png)
 
 1. Enter **quit** to exit the session.
 
-
 ## Task 5: Set up and run the Flask application
-
 
 In this Task you will install the Python dependencies and run the Flask web application. The application provides a browser interface for loading products, searching for similar items, and adding new products to the database.
 
-1. Run the following command to navigate to the *client* folder.
+1. Run the following command to navigate to the _client_ folder.
 
-    ```
-    cd client
-    ```
+   ```
+   cd client
+   ```
 
 1. Run the following command to create a Python virtual environment. Depending on your environment the command might be **python** or **python3**.
 
-    ```
-    python -m venv .venv
-    ```
+   ```
+   python -m venv .venv
+   ```
 
 1. Run the following command to activate the Python environment. **Note:** On Linux/macOS, use the Bash command. On Windows, use the PowerShell command. If using Git Bash on Windows, use **source .venv/Scripts/activate**.
 
-    **Bash**
-    ```bash
-    source .venv/Scripts/activate
-    ```
+   <details>
+    <summary>Bash</summary>
+   ```bash
+   source .venv/Scripts/activate
+   ```
+   </details>
 
-    **PowerShell**
-    ```powershell
-    .\.venv\Scripts\Activate.ps1
-    ```
+   <details>
+    <summary>PowerShell</summary>
+   ```powershell
+   .\.venv\Scripts\Activate.ps1
+   ```
 
-    ![](../Images/ai200-l13-18.png)
+   ![](../Images/ai200-l13-18.png)
+   </details>
 
-1. Run the following command to install the required Python packages. The *requirements.txt* file includes **flask** for the web framework, **psycopg** for PostgreSQL connectivity, and **azure-identity** for authentication.
+1. Run the following command to install the required Python packages. The _requirements.txt_ file includes **flask** for the web framework, **psycopg** for PostgreSQL connectivity, and **azure-identity** for authentication.
 
-    ```bash
-    pip install -r requirements.txt
-    ```
+   ```bash
+   pip install -r requirements.txt
+   ```
 
 1. Run the Flask application. The application starts on port 5000 and is accessible from your browser.
 
-    ```bash
-    python app.py
-    ```
+   ```bash
+   python app.py
+   ```
 
-    ![](../Images/ai200-l13-19.png)
+   ![](../Images/ai200-l13-19.png)
 
-    You should see output indicating the Flask server is running:
-    ```
-    * Running on all addresses (0.0.0.0)
-    * Running on http://127.0.0.1:5000
-    ```
+   You should see output indicating the Flask server is running:
+
+   ```
+   * Running on all addresses (0.0.0.0)
+   * Running on http://127.0.0.1:5000
+   ```
 
 1. Open a web browser and navigate to `http://127.0.0.1:5000`. You should see the Vector Search Demo page with an empty product list.
 
-    ![](../Images/ai200-l13-20.png)
+   ![](../Images/ai200-l13-20.png)
 
 ## Task 6: Load products and perform similarity searches
 
@@ -460,19 +480,19 @@ In this task you will use the web application to load sample products into the d
 
 1. On the web page, select **Load Sample Products**. This inserts 10 products with their embeddings into the database.
 
-    ![](../Images/ai200-l13-21.png)
+   ![](../Images/ai200-l13-21.png)
 
 1. You should see a success message and the product list now displays items like "Wireless Bluetooth Headphones", "Gaming Laptop", and "Running Shoes".
 
-    ![](../Images/ai200-l13-22.png)
+   ![](../Images/ai200-l13-22.png)
 
 1. In the **Find Similar Products** section, select **Wireless Bluetooth Headphones (1)** from the dropdown and select **Find Similar (2)**.
 
-    ![](../Images/ai200-l13-23.png)
+   ![](../Images/ai200-l13-23.png)
 
 1. The application queries the database using vector similarity and returns products ordered by their semantic closeness to the selected item. You should see "Noise Cancelling Earbuds" near the top of the results since it's semantically similar (both are audio devices).
 
-    ![](../Images/ai200-l13-24.png)
+   ![](../Images/ai200-l13-24.png)
 
 1. Try selecting different products and observe how the similar products change based on the selected item's category and description.
 
@@ -484,15 +504,15 @@ In this task you will add new products to the database and observe how they appe
 
 1. In the **Add New Product** section, select **Espresso Machine (1)** from the dropdown and select **Add Product (2)**.
 
-     ![](../Images/ai200-l13-25.png)
+   ![](../Images/ai200-l13-25.png)
 
 1. Now search for products similar to **Coffee Maker** by selecting it in the **Find Similar Products (1)** dropdown and selecting **Find Similar (2)**.
 
-     ![](../Images/ai200-l13-26.png)
+   ![](../Images/ai200-l13-26.png)
 
 1. Notice that "Espresso Machine" now appears in the results with a low distance score, since both products are semantically related (home coffee appliances).
 
-     ![](../Images/ai200-l13-27.png)
+   ![](../Images/ai200-l13-27.png)
 
 1. Add the remaining products from the dropdown (**Wireless Gaming Mouse** and **Fitness Tracker Band**) and observe how they appear in similarity searches for related products.
 

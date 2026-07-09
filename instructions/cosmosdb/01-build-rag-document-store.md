@@ -18,7 +18,7 @@ In this lab, you'll perform the following tasks:
 - **Task 6:** Test the RAG functions with the Flask app
 - **Task 7:** Query document context
 
-> ### **Note:** This lab includes deployment scripts for both **PowerShell** and **Bash**. You may choose either scripting language based on your preference or environment. Once you make your choice, use the corresponding commands and script throughout the entire lab, as all subsequent steps provide instructions for both PowerShell and Bash.
+### <span style="color:maroon">**Note:** This lab includes deployment scripts for both **Bash** and **PowerShell**. Click on the drop-down arrow ▶ to expand the commands for your preferred shell. Once you make your choice, use the corresponding commands throughout the entire lab.</span>
 
 ## Task 1: Prepare the environment
 
@@ -67,11 +67,14 @@ In this task, you'll prepare the deployment environment, configure the deploymen
 
 1. Run the following command in the terminal to allow PowerShell scripts to run. This command is only required if you are using PowerShell. If you are using Bash, skip this step.
 
+   <details>
+     <summary>PowerShell</summary>
    ```
    Set-ExecutionPolicy -ExecutionPolicy bypass -Force
    ```
 
    ![](../Images/Lab01-Task1-9.png)
+   </details>
 
 1. Run the **following command (1)** to login to your Azure account. Next, **minimize the VS Code window (2)** to view the login window opened in background.
 
@@ -111,19 +114,24 @@ In this task, you'll deploy an Azure Cosmos DB for NoSQL account, database, and 
 
 1. Make sure you are in the root directory of the project and run the appropriate command in the terminal to launch the deployment script.
 
-   **Bash**
+   <details>
+     <summary>Bash</summary>
 
    ```bash
    MSYS_NO_PATHCONV=1 bash azdeploy.sh
    ```
 
-   **PowerShell**
+   </details>
+
+   <details>
+     <summary>PowerShell</summary>
 
    ```powershell
    ./azdeploy.ps1
    ```
 
    ![](../Images/lab09-t2p1.png)
+   </details>
 
 1. When the script menu appears, enter **1** to launch the **Create Cosmos DB account** option. This creates the Cosmos DB for NoSQL account with a database and container. **Note:** Deployment can take 5-10 minutes to complete.
 
@@ -359,17 +367,23 @@ In this task, you'll finalize the Azure resource deployment by configuring Micro
 
 1. Run the following command to load the environment variables into your terminal session from the file created in a previous step.
 
-   **Bash**
+   <details>
+     <summary>Bash</summary>
 
    ```bash
    source .env
    ```
 
-   **PowerShell**
+   </details>
+
+   <details>
+     <summary>PowerShell</summary>
 
    ```powershell
    . .\.env.ps1
    ```
+
+   </details>
 
    > **Note:** Keep the terminal open. If you close it and create a new terminal, you might need to run the command to create the environment variable again.
 
@@ -416,19 +430,24 @@ In this task, you'll configure the Python environment, run the Flask application
 
 1. Run the following command to activate the Python environment.
 
-   **Bash**
+   <details>
+     <summary>Bash</summary>
 
    ```bash
    source .venv/Scripts/activate
    ```
 
-   **PowerShell**
+   </details>
+
+   <details>
+     <summary>PowerShell</summary>
 
    ```powershell
    .\.venv\Scripts\Activate.ps1
    ```
 
    ![](../Images/lab09-t6p1.png)
+   </details>
 
 1. Run the following command to install the Python dependencies for the app. This installs the **flask** and **azure-cosmos** libraries.
 

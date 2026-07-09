@@ -15,7 +15,7 @@ In this lab, you'll perform the following tasks:
 - **Task 3:** Query telemetry in the Azure portal
 - **Task 4:** Create an action group and alert rule
 
-> ### **Note:** This lab includes deployment scripts for both **PowerShell** and **Bash**. You may choose either scripting language based on your preference or environment. Once you make your choice, use the corresponding commands and script throughout the entire lab, as all subsequent steps provide instructions for both PowerShell and Bash.
+### <span style="color:maroon">**Note:** This lab includes deployment scripts for both **Bash** and **PowerShell**. Click on the drop-down arrow ▶ to expand the commands for your preferred shell. Once you make your choice, use the corresponding commands throughout the entire lab.</span>
 
 ## Task 1: Prepare the environment and deploy Azure Application Insights
 
@@ -64,11 +64,14 @@ In this task, you'll prepare the development environment, configure the deployme
 
 1. Run the following command in the terminal to allow PowerShell scripts to run. This command is only required if you are using PowerShell. If you are using Bash, skip this step.
 
+   <details>
+     <summary>PowerShell</summary>
    ```
    Set-ExecutionPolicy -ExecutionPolicy bypass -Force
    ```
 
    ![](../Images/Lab01-Task1-9.png)
+   </details>
 
 1. Run the **following command (1)** to login to your Azure account. Next, **minimize the VS Code window (2)** to view the login window opened in background.
 
@@ -112,19 +115,24 @@ In this task, you'll prepare the development environment, configure the deployme
 
 1. Run the appropriate command in the terminal to launch the script.
 
-   **Bash**
+   <details>
+     <summary>Bash</summary>
 
    ```bash
    MSYS_NO_PATHCONV=1 bash azdeploy.sh
    ```
 
-   **PowerShell**
+   </details>
+
+   <details>
+     <summary>PowerShell</summary>
 
    ```powershell
    ./azdeploy.ps1
    ```
 
    ![](../Images/lab24-t1p3.png)
+   </details>
 
 1. When the script is running, enter **1** to launch the **1. Create Application Insights** option.
 
@@ -150,17 +158,23 @@ In this task, you'll prepare the development environment, configure the deployme
 
 1. Run the appropriate command to load the environment variables into your terminal session from the file created in a previous step.
 
-   **Bash**
+   <details>
+     <summary>Bash</summary>
 
    ```bash
    source .env
    ```
 
-   **PowerShell**
+   </details>
+
+   <details>
+     <summary>PowerShell</summary>
 
    ```powershell
    . .\.env.ps1
    ```
+
+   </details>
 
    > **Note:** Keep the terminal open. If you close it and create a new terminal, you need to run this command again to reload the environment variables.
 
@@ -190,17 +204,23 @@ In this task, you'll configure a Python virtual environment, install the require
 
 1. Run the following command to activate the Python environment.
 
-   **Bash**
+   <details>
+     <summary>Bash</summary>
 
    ```bash
    source .venv/Scripts/activate
    ```
 
-   **PowerShell**
+   </details>
+
+   <details>
+     <summary>PowerShell</summary>
 
    ```powershell
    .\.venv\Scripts\Activate.ps1
    ```
+
+   </details>
 
 1. Run the following command to install the dependencies.
 
@@ -328,7 +348,8 @@ In this task, you'll use the Azure CLI to create an Azure Monitor action group a
 
 1. Run the following command in the VS Code terminal to create an action group with an email notification. The **ALERT_EMAIL** variable was populated from your Azure account when you ran the **Retrieve connection info** option in the deployment script.
 
-   **Bash**
+   <details>
+     <summary>Bash</summary>
 
    ```bash
    az monitor action-group create \
@@ -338,7 +359,10 @@ In this task, you'll use the Azure CLI to create an Azure Monitor action group a
        --action email oncall-email $ALERT_EMAIL
    ```
 
-   **PowerShell**
+   </details>
+
+   <details>
+     <summary>PowerShell</summary>
 
    ```powershell
    az monitor action-group create `
@@ -348,13 +372,15 @@ In this task, you'll use the Azure CLI to create an Azure Monitor action group a
        --action email oncall-email $env:ALERT_EMAIL
    ```
 
-   This command creates an action group named **pipeline-alerts-ag** that sends email notifications when triggered.
-
    ![](../Images/lab24-t4p1.png)
+   </details>
+
+   This command creates an action group named **pipeline-alerts-ag** that sends email notifications when triggered.
 
 1. Run the following command to create a log search alert rule that monitors the Application Insights resource for failed requests. The rule evaluates the query over a five-minute window and fires if more than ten requests fail.
 
-   **Bash**
+   <details>
+     <summary>Bash</summary>
 
    ```bash
    MSYS_NO_PATHCONV=1 az monitor scheduled-query create \
@@ -369,7 +395,10 @@ In this task, you'll use the Azure CLI to create an Azure Monitor action group a
        --description "Alert when more than 10 requests fail in a 5-minute window"
    ```
 
-   **PowerShell**
+   </details>
+
+   <details>
+     <summary>PowerShell</summary>
 
    ```powershell
    az monitor scheduled-query create `
@@ -384,13 +413,16 @@ In this task, you'll use the Azure CLI to create an Azure Monitor action group a
        --description "Alert when more than 10 requests fail in a 5-minute window"
    ```
 
+   </details>
+
    The severity is set to one (Error) to indicate a significant but not outage-level problem. When the alert fires, it triggers the action group which sends an email.
 
    > **Note:** If prompted to install the scheduled-query Azure CLI extension, enter `y` and press Enter to continue. Wait for the extension to be installed before proceeding with the command.
 
 1. Run the following command to verify the alert rule was created and is enabled.
 
-   **Bash**
+   <details>
+     <summary>Bash</summary>
 
    ```bash
    az monitor scheduled-query show \
@@ -401,8 +433,10 @@ In this task, you'll use the Azure CLI to create an Azure Monitor action group a
    ```
 
    ![](<../Images/lab24-t4p2(1).png>)
+   </details>
 
-   **PowerShell**
+   <details>
+     <summary>PowerShell</summary>
 
    ```powershell
    az monitor scheduled-query show `
@@ -412,13 +446,15 @@ In this task, you'll use the Azure CLI to create an Azure Monitor action group a
        --output table
    ```
 
-   Confirm the **Enabled** column shows **True** and the severity, window, and frequency values match what you specified in the previous step.
-
    ![](../Images/lab24-t4p2.png)
+   </details>
+
+   Confirm the **Enabled** column shows **True** and the severity, window, and frequency values match what you specified in the previous step.
 
 1. Run the following command to list all scheduled query alert rules in the resource group.
 
-   **Bash**
+   <details>
+     <summary>Bash</summary>
 
    ```bash
    az monitor scheduled-query list \
@@ -427,8 +463,10 @@ In this task, you'll use the Azure CLI to create an Azure Monitor action group a
    ```
 
    ![](<../Images/lab24-t4p3(1).png>)
+   </details>
 
-   **PowerShell**
+   <details>
+     <summary>PowerShell</summary>
 
    ```powershell
    az monitor scheduled-query list `
@@ -436,9 +474,10 @@ In this task, you'll use the Azure CLI to create an Azure Monitor action group a
        --output table
    ```
 
-   You should see one rule named **high-failure-rate-alert**. Because you already generated telemetry with failed requests, the rule begins evaluating immediately on its five-minute cycle. If the number of failed requests in the window exceeds the threshold, Azure Monitor fires the alert and the action group sends an email notification to the email address you specified.
-
    ![](../Images/lab24-t4p3.png)
+   </details>
+
+   You should see one rule named **high-failure-rate-alert**. Because you already generated telemetry with failed requests, the rule begins evaluating immediately on its five-minute cycle. If the number of failed requests in the window exceeds the threshold, Azure Monitor fires the alert and the action group sends an email notification to the email address you specified.
 
 ## Summary
 

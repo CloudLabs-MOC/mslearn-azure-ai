@@ -17,7 +17,7 @@ In this lab, you'll perform the following tasks:
 - **Task 5:** Verify resource deployment
 - **Task 6:** Run the apps
 
-> ### **Note:** This lab includes deployment scripts for both **PowerShell** and **Bash**. You may choose either scripting language based on your preference or environment. Once you make your choice, use the corresponding commands and script throughout the entire lab, as all subsequent steps provide instructions for both PowerShell and Bash.
+### <span style="color:maroon">**Note:** This lab includes deployment scripts for both **Bash** and **PowerShell**. Click on the drop-down arrow ▶ to expand the commands for your preferred shell. Once you make your choice, use the corresponding commands throughout the entire lab.</span>
 
 ## Task 1: Prepare the environment and deploy Azure Managed Redis
 
@@ -66,11 +66,14 @@ In this task, you'll prepare the development environment, configure the deployme
 
 1. Run the following command in the terminal to allow PowerShell scripts to run. This command is only required if you are using PowerShell. If you are using Bash, skip this step.
 
+   <details>
+     <summary>PowerShell</summary>
    ```
    Set-ExecutionPolicy -ExecutionPolicy bypass -Force
    ```
 
    ![](../Images/Lab01-Task1-9.png)
+   </details>
 
 1. Run the **following command (1)** to login to your Azure account. Next, **minimize the VS Code window (2)** to view the login window opened in background.
 
@@ -114,19 +117,24 @@ In this task, you'll prepare the development environment, configure the deployme
 
 1. Run the appropriate command in the terminal to launch the script.
 
-   **Bash**
+   <details>
+     <summary>Bash</summary>
 
    ```bash
    bash azdeploy.sh
    ```
 
-   **PowerShell**
+   </details>
+
+   <details>
+     <summary>PowerShell</summary>
 
    ```powershell
    ./azdeploy.ps1
    ```
 
    ![](../Images/lab16-t1p3.png)
+   </details>
 
 1. When the script is running, enter **1** to launch the **1. Create Azure Managed Redis resource** option.
 
@@ -160,19 +168,24 @@ In this task, you'll create and activate a Python virtual environment, and insta
 
 1. Run the following command to activate the Python environment.
 
-   **Bash**
+   <details>
+     <summary>Bash</summary>
 
    ```bash
    source .venv/Scripts/activate
    ```
 
-   **PowerShell**
+   </details>
+
+   <details>
+     <summary>PowerShell</summary>
 
    ```powershell
    .\.venv\Scripts\Activate.ps1
    ```
 
    ![](../Images/lab15-t2p1.png)
+   </details>
 
 1. Run the following command in the VS Code terminal to install the dependencies.
 
@@ -466,17 +479,23 @@ In this task, you'll verify that the Azure Managed Redis deployment has complete
 
 1. Run the appropriate command in the terminal to start the deployment script. If you closed the previous terminal, use **Ctrl + ` (backtick)** to open a new one.
 
-   **Bash**
+   <details>
+     <summary>Bash</summary>
 
    ```bash
    bash azdeploy.sh
    ```
 
-   **PowerShell**
+   </details>
+
+   <details>
+     <summary>PowerShell</summary>
 
    ```powershell
    ./azdeploy.ps1
    ```
+
+   </details>
 
 1. When the deployment menu appears, enter **2** to run the **2. Check deployment status** option. If the status **Successful** returned proceed to the next step. If not, then wait a few minutes and try the option again.
 
@@ -520,17 +539,23 @@ You need to ensure the Python environment is running in both terminals. Refer to
    > python -m venv .venv
    > ```
    >
-   > **Bash**
+   > <details>
+   >  <summary>Bash</summary>
    >
    > ```bash
    > source .venv/Scripts/activate
    > ```
    >
-   > **PowerShell**
+   > </details>
+   >
+   > <details>
+   >  <summary>PowerShell</summary>
    >
    > ```powershell
    > .\.venv\Scripts\Activate.ps1
    > ```
+   >
+   > </details>
 
 ### Task 6.2: Launch the apps
 

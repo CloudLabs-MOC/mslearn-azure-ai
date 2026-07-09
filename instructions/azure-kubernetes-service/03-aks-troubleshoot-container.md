@@ -14,7 +14,7 @@ In this lab, you'll perform the following tasks:
 - **Task 2:** Deploy resources to Azure
 - **Task 3:** Troubleshoot the deployment
 
-> ### **Note:** This lab includes deployment scripts for both **PowerShell** and **Bash**. You may choose either scripting language based on your preference or environment. Once you make your choice, use the corresponding commands and script throughout the entire lab, as all subsequent steps provide instructions for both PowerShell and Bash.
+### <span style="color:maroon">**Note:** This lab includes deployment scripts for both **Bash** and **PowerShell**. Click on the drop-down arrow ▶ to expand the commands for your preferred shell. Once you make your choice, use the corresponding commands throughout the entire lab.</span>
 
 ## Task 1: Prepare the environment
 
@@ -61,11 +61,14 @@ In this task, you'll prepare the deployment environment, configure the deploymen
 
 1. Run the following command in the terminal to allow PowerShell scripts to run. This command is only required if you are using PowerShell. If you are using Bash, skip this step.
 
+   <details>
+     <summary>PowerShell</summary>
    ```
    Set-ExecutionPolicy -ExecutionPolicy bypass -Force
    ```
 
    ![](../Images/Lab01-Task1-9.png)
+   </details>
 
 1. Run the **following command (1)** to login to your Azure account. Next, **minimize the VS Code window (2)** to view the login window opened in background.
 
@@ -101,33 +104,45 @@ In this task, you'll prepare the deployment environment, configure the deploymen
 
 1. Install kubectl and add it to your current terminal session by running the following commands. Execute both commands in sequence.
 
-   **Bash**
+   <details>
+     <summary>Bash</summary>
 
    ```bash
    az aks install-cli
    export PATH=$PATH:/c/Users/azureuser/.azure-kubectl
    ```
 
-   **PowerShell**
+   </details>
+
+   <details>
+     <summary>PowerShell</summary>
 
    ```powershell
    az aks install-cli
    $env:PATH += ";$env:USERPROFILE\.azure-kubectl"
    ```
 
+   </details>
+
 1. Make sure you are in the root directory of the project and run the appropriate command in the terminal to launch the deployment script.
 
-   **Bash**
+   <details>
+     <summary>Bash</summary>
 
    ```bash
    MSYS_NO_PATHCONV=1 bash azdeploy.sh
    ```
 
-   **PowerShell**
+   </details>
+
+   <details>
+     <summary>PowerShell</summary>
 
    ```powershell
    ./azdeploy.ps1
    ```
+
+   </details>
 
 ## Task 2: Deploy resources to Azure
 
@@ -211,17 +226,23 @@ In this section you confirm the application deployed by the setup script is runn
 
 1. Run the following command to test the connection. You should receive a JSON response with **"status": "healthy"**.
 
+   <details>
+     <summary>Bash</summary>
    ```bash
    # Bash
    curl http://localhost:8080/healthz
    ```
+   </details>
 
+   <details>
+     <summary>PowerShell</summary>
    ```powershell
    # PowerShell
    Invoke-RestMethod http://localhost:8080/healthz
    ```
 
    ![](../Images/lab08-t3p5.png)
+   </details>
 
 1. Switch back to the terminal where **port-forward** is running and enter **ctrl+c** to exit the command.
 
@@ -405,13 +426,18 @@ After completing all troubleshooting scenarios, you confirm the application is f
 
 1. Run the following commands to test all endpoints.
 
+   <details>
+     <summary>Bash</summary>
    ```bash
    # Bash
    curl http://localhost:8080/healthz
    curl http://localhost:8080/readyz
    curl http://localhost:8080/api/info
    ```
+   </details>
 
+   <details>
+     <summary>PowerShell</summary>
    ```powershell
    # PowerShell
    Invoke-RestMethod http://localhost:8080/healthz
@@ -420,6 +446,7 @@ After completing all troubleshooting scenarios, you confirm the application is f
    ```
 
    ![](../Images/lab08-t3p20.png)
+   </details>
 
 1. Run the following command to check the pod logs to see the requests.
 

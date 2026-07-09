@@ -15,7 +15,7 @@ In this lab, you'll perform the following tasks:
 - **Task 3:** Configure the Python environment
 - **Task 4:** Run the app
 
-> ### **Note:** This lab includes deployment scripts for both **PowerShell** and **Bash**. You may choose either scripting language based on your preference or environment. Once you make your choice, use the corresponding commands and script throughout the entire lab, as all subsequent steps provide instructions for both PowerShell and Bash.
+### <span style="color:maroon">**Note:** This lab includes deployment scripts for both **Bash** and **PowerShell**. Click on the drop-down arrow ▶ to expand the commands for your preferred shell. Once you make your choice, use the corresponding commands throughout the entire lab.</span>
 
 ## Task 1: Prepare the environment and deploy Azure Application Insights
 
@@ -64,11 +64,14 @@ In this task, you'll prepare the development environment, configure the deployme
 
 1. Run the following command in the terminal to allow PowerShell scripts to run. This command is only required if you are using PowerShell. If you are using Bash, skip this step.
 
+   <details>
+     <summary>PowerShell</summary>
    ```
    Set-ExecutionPolicy -ExecutionPolicy bypass -Force
    ```
 
    ![](../Images/Lab01-Task1-9.png)
+   </details>
 
 1. Run the **following command (1)** to login to your Azure account. Next, **minimize the VS Code window (2)** to view the login window opened in background.
 
@@ -112,19 +115,24 @@ In this task, you'll prepare the development environment, configure the deployme
 
 1. Run the appropriate command in the terminal to launch the script.
 
-   **Bash**
+   <details>
+     <summary>Bash</summary>
 
    ```bash
    MSYS_NO_PATHCONV=1 bash azdeploy.sh
    ```
 
-   **PowerShell**
+   </details>
+
+   <details>
+     <summary>PowerShell</summary>
 
    ```powershell
    ./azdeploy.ps1
    ```
 
    ![](../Images/lab23-t1p4.png)
+   </details>
 
 1. When the script is running, enter **1** to launch the **1. Create Application Insights** option.
 
@@ -150,17 +158,23 @@ In this task, you'll prepare the development environment, configure the deployme
 
 1. Run the appropriate command to load the environment variables into your terminal session from the file created in a previous step.
 
-   **Bash**
+   <details>
+     <summary>Bash</summary>
 
    ```bash
    source .env
    ```
 
-   **PowerShell**
+   </details>
+
+   <details>
+     <summary>PowerShell</summary>
 
    ```powershell
    . .\.env.ps1
    ```
+
+   </details>
 
    > **Note:** Keep the terminal open. If you close it and create a new terminal, you need to run this command again to reload the environment variables.
 
@@ -350,17 +364,23 @@ In this task, you'll create a Python virtual environment, install the required d
 
 1. Run the following command to activate the Python environment.
 
-   **Bash**
+   <details>
+     <summary>Bash</summary>
 
    ```bash
    source .venv/Scripts/activate*
    ```
 
-   **PowerShell**
+   </details>
+
+   <details>
+     <summary>PowerShell</summary>
 
    ```powershell
    .\.venv\Scripts\Activate.ps1
    ```
+
+   </details>
 
 1. Run the following command in the VS Code terminal to install the dependencies.
 

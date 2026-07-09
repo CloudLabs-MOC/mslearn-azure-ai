@@ -17,8 +17,6 @@ In this lab, you'll perform the following tasks:
 
 > ### **Note:** This lab uses the Azure Functions MCP extension, which is currently in preview and continues to evolve. Features, configuration options, and APIs may change over time. Refer to the latest Azure Functions MCP extension documentation for the most up-to-date guidance.
 
-> ### **Note:** This lab includes deployment scripts for both **PowerShell** and **Bash**. You may choose either scripting language based on your preference or environment. Once you make your choice, use the corresponding commands and script throughout the entire lab, as all subsequent steps provide instructions for both PowerShell and Bash.
-
 > ### **Note:** To complete this lab, you must sign in to **GitHub Copilot** using your **personal GitHub account**. GitHub Copilot is used to connect to the local MCP server, discover the MCP tools exposed by the Azure Functions app, and invoke those tools during the testing exercises.
 
 ## Task 1: Create a new Functions project with the MCP extension

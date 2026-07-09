@@ -18,7 +18,7 @@ In this lab, you'll perform the following tasks:
 
 - **Task 4:** Run the app
 
-> **Note:** This lab includes deployment scripts for both **PowerShell** and **Bash**. You may choose either scripting language based on your preference or environment. Once you make your choice, use the corresponding commands and script throughout the entire lab, as all subsequent steps provide instructions for both PowerShell and Bash.
+### <span style="color:maroon">**Note:** This lab includes deployment scripts for both **Bash** and **PowerShell**. Click on the drop-down arrow ▶ to expand the commands for your preferred shell. Once you make your choice, use the corresponding commands throughout the entire lab.</span>
 
 ## Task 1: Prepare the environment
 
@@ -60,16 +60,19 @@ In this task, you'll prepare the development environment, deploy an Azure Key Va
    ![](../Images/ai200-l12-7.png)
 
    > **NOTE:** If you are using Bash, after the terminal opens, click on the **+ (1)** icon to open a new terminal and select **Git Bash (2)** from the drop-down. If you are using PowerShell, skip this step.
-   
+
    ![](../Images/lab06-t1p5.png)
 
 1. Run the following command in the terminal to allow PowerShell scripts to run. This command is only required if you are using PowerShell. If you are using Bash, skip this step.
 
+    <details>
+     <summary>PowerShell</summary>
    ```
    Set-ExecutionPolicy -ExecutionPolicy bypass -Force
    ```
 
    ![](../Images/Lab01-Task1-9.png)
+   </details>
 
 1. Run the **following command (1)** to login to your Azure account. Next, **minimize the VS Code window (2)** to view the login window opened in background.
 
@@ -105,55 +108,63 @@ In this task, you'll prepare the development environment, deploy an Azure Key Va
 
 1. Run the appropriate command in the terminal to launch the script.
 
-    **Bash**
-    ```bash
-    MSYS_NO_PATHCONV=1 bash azdeploy.sh
-    ```
+   <details>
+    <summary>Bash</summary>
+   ```bash
+   MSYS_NO_PATHCONV=1 bash azdeploy.sh
+   ```
+   </details>
 
-    **PowerShell**
-    ```powershell
-    ./azdeploy.ps1
-    ```
+   <details>
+    <summary>PowerShell</summary>
+   ```powershell
+   ./azdeploy.ps1
+   ```
 
-    ![](../Images/ai200-l21-4.png)
+   ![](../Images/ai200-l21-4.png)
+   </details>
 
 1. When the script is running, enter **1** to launch the **1. Create Key Vault** option.
 
-    ![](../Images/ai200-l21-5.png)
+   ![](../Images/ai200-l21-5.png)
 
-    This option creates the resource group if it doesn't already exist, and deploys an Azure Key Vault with RBAC authorization enabled. RBAC authorization is the recommended model for controlling access to vault secrets instead of legacy access policies.
+   This option creates the resource group if it doesn't already exist, and deploys an Azure Key Vault with RBAC authorization enabled. RBAC authorization is the recommended model for controlling access to vault secrets instead of legacy access policies.
 
 1. Enter **2** to run the **2. Assign role** option. This assigns the Key Vault Secrets Officer role to your account so you can read, create, update, and delete secrets using Microsoft Entra authentication.
 
-    ![](../Images/ai200-l21-6.png)
+   ![](../Images/ai200-l21-6.png)
 
 1. Enter **3** to run the **3. Store secrets** option. This stores two sample secrets in the vault: an API key for a model endpoint (**openai-api-key**) and a database connection string (**cosmosdb-connection-string**). Both are tagged with metadata for environment and service identification.
 
-    ![](../Images/ai200-l21-7.png)
+   ![](../Images/ai200-l21-7.png)
 
 1. Enter **4** to run the **4. Check deployment status** option. Verify the vault status shows **Succeeded**, the role is assigned, and the secrets are stored before continuing. If the vault is still provisioning, wait a moment and try again.
 
-    ![](../Images/ai200-l21-8.png)
+   ![](../Images/ai200-l21-8.png)
 
 1. Enter **5** to run the **5. Retrieve connection info** option. This creates the environment variable file with the Key Vault URL needed by the app.
 
-    ![](../Images/ai200-l21-9.png)
+   ![](../Images/ai200-l21-9.png)
 
 1. Enter **6** to exit the deployment script.
 
 1. Run the appropriate command to load the environment variables into your terminal session from the file created in a previous step.
 
-    **Bash**
-    ```bash
-    source .env
-    ```
+   <details>
+    <summary>Bash</summary>
+   ```bash
+   source .env
+   ```
+   </details>
 
-    **PowerShell**
-    ```powershell
-    . .\.env.ps1
-    ```
+   <details>
+    <summary>PowerShell</summary>
+   ```powershell
+   . .\.env.ps1
+   ```
+   </details>
 
-    >**Note:** Keep the terminal open. If you close it and create a new terminal, you need to run this command again to reload the environment variables.
+   > **Note:** Keep the terminal open. If you close it and create a new terminal, you need to run this command again to reload the environment variables.
 
 > **Congratulations** on completing the task! Now, it's time to validate it. Here are the steps:
 >
@@ -165,13 +176,13 @@ In this task, you'll prepare the development environment, deploy an Azure Key Va
 
 ## Task 2: Complete the app
 
-In this task you add code to the *keyvault_functions.py* file to complete the Key Vault secret management functions. The Flask app in *app.py* calls these functions and displays the results in the browser. You run the app later in the exercise.
+In this task you add code to the _keyvault_functions.py_ file to complete the Key Vault secret management functions. The Flask app in _app.py_ calls these functions and displays the results in the browser. You run the app later in the exercise.
 
 1. Open the **client/keyvault_functions.py** file to begin adding code.
 
-    ![](../Images/ai200-l21-10.png)
+   ![](../Images/ai200-l21-10.png)
 
->**Note:** The code blocks you add to the application should align with the comment for that section of the code.
+> **Note:** The code blocks you add to the application should align with the comment for that section of the code.
 
 ### Task 2.1: Add code to retrieve secrets
 
@@ -181,53 +192,53 @@ The function calls **get_secret()** for each secret name, which returns both the
 
 1. Locate the **# BEGIN RETRIEVE SECRETS FUNCTION** comment and add the following code under the comment. Be sure to check for proper code alignment.
 
-    ```python
-    def retrieve_secrets():
-        """Retrieve secrets and display their metadata."""
-        client = get_client()
-        results = []
+   ```python
+   def retrieve_secrets():
+       """Retrieve secrets and display their metadata."""
+       client = get_client()
+       results = []
 
-        secret_names = ["openai-api-key", "cosmosdb-connection-string"]
+       secret_names = ["openai-api-key", "cosmosdb-connection-string"]
 
-        for name in secret_names:
-            try:
-                # get_secret returns the secret value and its properties,
-                # including version, content type, creation date, and tags
-                secret = client.get_secret(name)
-                results.append({
-                    "name": secret.name,
-                    "value": secret.value[:20] + "..." if len(secret.value) > 20 else secret.value,
-                    "version": secret.properties.version,
-                    "content_type": secret.properties.content_type,
-                    "created_on": str(secret.properties.created_on),
-                    "tags": secret.properties.tags or {},
-                    "status": "retrieved"
-                })
-            except ResourceNotFoundError:
-                results.append({
-                    "name": name,
-                    "value": None,
-                    "version": None,
-                    "content_type": None,
-                    "created_on": None,
-                    "tags": {},
-                    "status": "not found"
-                })
-            except HttpResponseError as e:
-                results.append({
-                    "name": name,
-                    "value": None,
-                    "version": None,
-                    "content_type": None,
-                    "created_on": None,
-                    "tags": {},
-                    "status": f"error: {e.message}"
-                })
+       for name in secret_names:
+           try:
+               # get_secret returns the secret value and its properties,
+               # including version, content type, creation date, and tags
+               secret = client.get_secret(name)
+               results.append({
+                   "name": secret.name,
+                   "value": secret.value[:20] + "..." if len(secret.value) > 20 else secret.value,
+                   "version": secret.properties.version,
+                   "content_type": secret.properties.content_type,
+                   "created_on": str(secret.properties.created_on),
+                   "tags": secret.properties.tags or {},
+                   "status": "retrieved"
+               })
+           except ResourceNotFoundError:
+               results.append({
+                   "name": name,
+                   "value": None,
+                   "version": None,
+                   "content_type": None,
+                   "created_on": None,
+                   "tags": {},
+                   "status": "not found"
+               })
+           except HttpResponseError as e:
+               results.append({
+                   "name": name,
+                   "value": None,
+                   "version": None,
+                   "content_type": None,
+                   "created_on": None,
+                   "tags": {},
+                   "status": f"error: {e.message}"
+               })
 
-        return results
-    ```
+       return results
+   ```
 
-    ![](../Images/ai200-l21-11.png)
+   ![](../Images/ai200-l21-11.png)
 
 1. Take a few minutes to review the code.
 
@@ -239,28 +250,28 @@ The function calls **list_properties_of_secrets()**, which returns an iterable o
 
 1. Locate the **# BEGIN LIST SECRETS FUNCTION** comment and add the following code under the comment. Be sure to check for proper code alignment.
 
-    ```python
-    def list_secret_properties():
-        """List all secret properties without retrieving values."""
-        client = get_client()
-        results = []
+   ```python
+   def list_secret_properties():
+       """List all secret properties without retrieving values."""
+       client = get_client()
+       results = []
 
-        # list_properties_of_secrets returns metadata for every secret
-        # in the vault without exposing the secret values, which follows
-        # the principle of least privilege
-        for prop in client.list_properties_of_secrets():
-            results.append({
-                "name": prop.name,
-                "enabled": prop.enabled,
-                "content_type": prop.content_type,
-                "created_on": str(prop.created_on),
-                "updated_on": str(prop.updated_on)
-            })
+       # list_properties_of_secrets returns metadata for every secret
+       # in the vault without exposing the secret values, which follows
+       # the principle of least privilege
+       for prop in client.list_properties_of_secrets():
+           results.append({
+               "name": prop.name,
+               "enabled": prop.enabled,
+               "content_type": prop.content_type,
+               "created_on": str(prop.created_on),
+               "updated_on": str(prop.updated_on)
+           })
 
-        return results
-    ```
+       return results
+   ```
 
-    ![](../Images/ai200-l21-12.png)
+   ![](../Images/ai200-l21-12.png)
 
 1. Save your changes and take a few minutes to review the code.
 
@@ -272,45 +283,45 @@ The function uses **set_secret()** to write a new value for an existing secret n
 
 1. Locate the **# BEGIN CREATE SECRET VERSION FUNCTION** comment and add the following code under the comment. Be sure to check for proper code alignment.
 
-    ```python
-    def create_secret_version(secret_name, new_value):
-        """Create a new version of a secret and verify the update."""
-        client = get_client()
+   ```python
+   def create_secret_version(secret_name, new_value):
+       """Create a new version of a secret and verify the update."""
+       client = get_client()
 
-        # Retrieve the current version before updating
-        try:
-            current = client.get_secret(secret_name)
-            old_version = current.properties.version
-            old_value = current.value[:20] + "..." if len(current.value) > 20 else current.value
-        except ResourceNotFoundError:
-            old_version = None
-            old_value = None
+       # Retrieve the current version before updating
+       try:
+           current = client.get_secret(secret_name)
+           old_version = current.properties.version
+           old_value = current.value[:20] + "..." if len(current.value) > 20 else current.value
+       except ResourceNotFoundError:
+           old_version = None
+           old_value = None
 
-        # set_secret creates a new version of the secret. The previous
-        # version is preserved and can still be retrieved by version ID.
-        client.set_secret(
-            secret_name,
-            new_value,
-            content_type="text/plain",
-            tags={"environment": "development", "rotated": "true"}
-        )
+       # set_secret creates a new version of the secret. The previous
+       # version is preserved and can still be retrieved by version ID.
+       client.set_secret(
+           secret_name,
+           new_value,
+           content_type="text/plain",
+           tags={"environment": "development", "rotated": "true"}
+       )
 
-        # Confirm the update by retrieving the secret again —
-        # get_secret always returns the latest version
-        confirmed = client.get_secret(secret_name)
+       # Confirm the update by retrieving the secret again —
+       # get_secret always returns the latest version
+       confirmed = client.get_secret(secret_name)
 
-        return {
-            "name": secret_name,
-            "old_version": old_version,
-            "old_value": old_value,
-            "new_version": confirmed.properties.version,
-            "new_value": confirmed.value[:20] + "..." if len(confirmed.value) > 20 else confirmed.value,
-            "created_on": str(confirmed.properties.created_on),
-            "tags": confirmed.properties.tags or {}
-        }
-    ```
+       return {
+           "name": secret_name,
+           "old_version": old_version,
+           "old_value": old_value,
+           "new_version": confirmed.properties.version,
+           "new_value": confirmed.value[:20] + "..." if len(confirmed.value) > 20 else confirmed.value,
+           "created_on": str(confirmed.properties.created_on),
+           "tags": confirmed.properties.tags or {}
+       }
+   ```
 
-    ![](../Images/ai200-l21-13.png)
+   ![](../Images/ai200-l21-13.png)
 
 1. Save your changes and take a few minutes to review the code.
 
@@ -322,134 +333,139 @@ The function creates a dictionary-based cache with a 30-second TTL using **time.
 
 1. Locate the **# BEGIN CACHED RETRIEVAL FUNCTION** comment and add the following code under the comment. Be sure to check for proper code alignment.
 
-    ```python
-    def cached_retrieval():
-        """Demonstrate time-based caching to reduce Key Vault API calls."""
-        client = get_client()
-        cache = {}
-        cache_ttl = 30
-        vault_calls = 0
-        access_log = []
+   ```python
+   def cached_retrieval():
+       """Demonstrate time-based caching to reduce Key Vault API calls."""
+       client = get_client()
+       cache = {}
+       cache_ttl = 30
+       vault_calls = 0
+       access_log = []
 
-        secret_names = ["openai-api-key", "cosmosdb-connection-string"]
+       secret_names = ["openai-api-key", "cosmosdb-connection-string"]
 
-        # Simulate five rounds of secret access. The first round fetches
-        # from Key Vault (cache miss), and subsequent rounds return the
-        # cached value if the TTL has not expired.
-        for i in range(5):
-            for name in secret_names:
-                cached = cache.get(name)
-                now = time.monotonic()
+       # Simulate five rounds of secret access. The first round fetches
+       # from Key Vault (cache miss), and subsequent rounds return the
+       # cached value if the TTL has not expired.
+       for i in range(5):
+           for name in secret_names:
+               cached = cache.get(name)
+               now = time.monotonic()
 
-                if cached and (now - cached["timestamp"]) < cache_ttl:
-                    access_log.append({
-                        "round": i + 1,
-                        "secret": name,
-                        "result": "cache hit",
-                        "value": cached["value"]
-                    })
-                else:
-                    secret = client.get_secret(name)
-                    vault_calls += 1
-                    truncated = secret.value[:20] + "..." if len(secret.value) > 20 else secret.value
-                    cache[name] = {
-                        "value": truncated,
-                        "timestamp": now
-                    }
-                    access_log.append({
-                        "round": i + 1,
-                        "secret": name,
-                        "result": "cache miss",
-                        "value": truncated
-                    })
+               if cached and (now - cached["timestamp"]) < cache_ttl:
+                   access_log.append({
+                       "round": i + 1,
+                       "secret": name,
+                       "result": "cache hit",
+                       "value": cached["value"]
+                   })
+               else:
+                   secret = client.get_secret(name)
+                   vault_calls += 1
+                   truncated = secret.value[:20] + "..." if len(secret.value) > 20 else secret.value
+                   cache[name] = {
+                       "value": truncated,
+                       "timestamp": now
+                   }
+                   access_log.append({
+                       "round": i + 1,
+                       "secret": name,
+                       "result": "cache miss",
+                       "value": truncated
+                   })
 
-        return {
-            "access_log": access_log,
-            "vault_calls": vault_calls,
-            "total_accesses": len(access_log),
-            "cache_ttl_seconds": cache_ttl
-        }
-    ```
+       return {
+           "access_log": access_log,
+           "vault_calls": vault_calls,
+           "total_accesses": len(access_log),
+           "cache_ttl_seconds": cache_ttl
+       }
+   ```
 
-    ![](../Images/ai200-l21-14.png)
+   ![](../Images/ai200-l21-14.png)
 
 1. Save your changes and take a few minutes to review the code.
 
 ## Task 3: Configure the Python environment
+
 In this task, you navigate to the client app directory, create the Python environment, and install the dependencies.
 
-1. Run the following command in the VS Code terminal to navigate to the *client* directory.
+1. Run the following command in the VS Code terminal to navigate to the _client_ directory.
 
-    ```
-    cd client
-    ```
+   ```
+   cd client
+   ```
 
 1. Run the following command to create the Python environment.
 
-    ```
-    python -m venv .venv
-    ```
+   ```
+   python -m venv .venv
+   ```
 
 1. Run the following command to activate the Python environment.
 
-    **Bash**
-    ```bash
-    source .venv/Scripts/activate
-    ```
+   <details>
+    <summary>Bash</summary>
+   ```bash
+   source .venv/Scripts/activate
+   ```
+   </details>
 
-    **PowerShell**
-    ```powershell
-    .\.venv\Scripts\Activate.ps1
-    ```
+   <details>
+    <summary>PowerShell</summary>
+   ```powershell
+   .\.venv\Scripts\Activate.ps1
+   ```
 
-    ![](../Images/ai200-l21-15.png)
+   ![](../Images/ai200-l21-15.png)
+   </details>
 
-    > **Note:** On Linux/macOS, use the Bash command, use **source .venv/bin/activate**.
+   > **Note:** On Linux/macOS, use the Bash command, use **source .venv/bin/activate**.
 
 1. Run the following command in the VS Code terminal to install the dependencies.
 
-    ```
-    pip install -r requirements.txt
-    ```
+   ```
+   pip install -r requirements.txt
+   ```
 
 ## Task 4: Run the app
+
 In this task, you run the completed Flask application to perform various Key Vault secret management operations. The app provides a web interface that lets you retrieve secrets, list their properties, create new versions, and test cached retrieval.
 
-1. Run the following command in the terminal to start the app. Refer to the commands from earlier in the exercise to activate the environment, if needed, before running the command. If you navigated away from the *client* directory, run **cd client** first.
+1. Run the following command in the terminal to start the app. Refer to the commands from earlier in the exercise to activate the environment, if needed, before running the command. If you navigated away from the _client_ directory, run **cd client** first.
 
-    ```
-    python app.py
-    ```
+   ```
+   python app.py
+   ```
 
-    ![](../Images/ai200-l21-16.png)
+   ![](../Images/ai200-l21-16.png)
 
 1. Open a browser and navigate to `http://localhost:5000` to access the app.
 
-    ![](../Images/ai200-l21-17.png)
+   ![](../Images/ai200-l21-17.png)
 
 1. Select **Retrieve Secrets (1)** in the left panel. This retrieves the two secrets stored in the vault and displays their metadata in the right panel, including the secret name, a truncated value, version identifier, content type, creation date, and any custom tags. Both secrets should show a status of **retrieved (2)**.
 
-     ![](../Images/ai200-l21-18.png)
+   ![](../Images/ai200-l21-18.png)
 
 1. Select **List Secret Properties (1)**. This lists the properties of all secrets in the vault without exposing their values. The results show each secret's name, enabled status, content type, creation date, and last updated date **(2)**. This operation is useful for inventory and audit scenarios.
 
-    ![](../Images/ai200-l21-20.png)
+   ![](../Images/ai200-l21-20.png)
 
 1. Select **Create New Version (1)**. This creates a new version of the **openai-api-key** secret with a randomly generated value, simulating a credential rotation. The results show the previous version and value alongside the new version and value, confirming that **set_secret()** creates a new version while preserving the old one **(2)**.
 
-    ![](../Images/ai200-l21-19.png)
+   ![](../Images/ai200-l21-19.png)
 
 1. Select **Retrieve Secrets** in the left panel to verify the secret was updated.
 
-    ![](../Images/ai200-l21-21.png)
+   ![](../Images/ai200-l21-21.png)
 
 1. Select **Run Cached Retrieval**. This simulates five rounds of accessing both secrets with a 30-second TTL cache. The first round shows two cache misses (one per secret) as the values are fetched from Key Vault. The remaining rounds show cache hits because the TTL has not expired. The summary confirms that only 2 Key Vault API calls were made for 10 total accesses.
 
-    ![](../Images/ai200-l21-22.png)
+   ![](../Images/ai200-l21-22.png)
 
 ## Summary
 
 In this lab, you deployed an Azure Key Vault and built a **Python Flask application** to demonstrate secure secret management using the **Azure SDK**. You implemented secret retrieval, metadata inspection, secret versioning, and time-based caching to optimize access. Finally, you configured the Python environment, ran the application, and validated each operation through the web interface.
-
 
 ## You have successfully completed the Hands-on Lab!

@@ -14,7 +14,7 @@ In this lab, you'll perform the following tasks:
 - **Task 2:** Deploy the container app and configure secrets
 - **Task 3:** Verify the Deployment
 
-> **Note:** This lab includes deployment scripts for both **PowerShell** and **Bash**. You may choose either scripting language based on your preference or environment. Once you make your choice, use the corresponding commands and script throughout the entire lab, as all subsequent steps provide instructions for both PowerShell and Bash.
+### <span style="color:maroon">**Note:** This lab includes deployment scripts for both **Bash** and **PowerShell**. Click on the drop-down arrow ▶ to expand the commands for your preferred shell. Once you make your choice, use the corresponding commands throughout the entire lab.</span>
 
 ## Task 1: Deploy Azure Container Registry and Container App Environment
 
@@ -73,11 +73,16 @@ In this task, you will run the deployment script to create an Azure Container Re
 
 1. Run the following command in the terminal to allow PowerShell scripts to run. This step is required only if you are using PowerShell. If you are using Bash, skip this step.
 
-   ```
+   <details>
+     <summary>PowerShell</summary>
+
+   ```powershell
    Set-ExecutionPolicy -ExecutionPolicy bypass -Force
    ```
 
    ![](../Images/runcmd.png)
+
+   </details>
 
 1. Run the command **az login (1)** to sign in to your Azure account. Then **minimize the VS Code window (2)** to view the login window that opens in the background.
 
@@ -123,7 +128,8 @@ In this task, you will run the deployment script to create an Azure Container Re
 
 1. Make sure you are in the root directory of the project and run the appropriate command in the terminal to launch the deployment script. The deployment script will deploy ACR and create a file with environment variables needed.
 
-   **Bash**
+   <details>
+     <summary>Bash</summary>
 
    ```bash
    bash azdeploy.sh
@@ -131,13 +137,18 @@ In this task, you will run the deployment script to create an Azure Container Re
 
    ![](../Images/Lab03-Task2-1-bash.png)
 
-   **PowerShell**
+   </details>
+
+   <details>
+     <summary>PowerShell</summary>
 
    ```powershell
    ./azdeploy.ps1
    ```
 
    ![](../Images/Lab02-Task1-1.png)
+
+   </details>
 
 1. When the script is running, enter **1** to launch the **Create Azure Container Registry and build container image** option. This option creates the ACR service and uses ACR Tasks to build and push the image to the registry.
 
@@ -171,7 +182,8 @@ In this task, you will run the deployment script to create an Azure Container Re
 
 1. Run the appropriate command to load the environment variables into your terminal session from the file created in a previous step.
 
-   **Bash**
+   <details>
+     <summary>Bash</summary>
 
    ```bash
    source .env
@@ -179,13 +191,18 @@ In this task, you will run the deployment script to create an Azure Container Re
 
    ![](../Images/Lab03-Task2-3-bash.png)
 
-   **PowerShell**
+   </details>
+
+   <details>
+     <summary>PowerShell</summary>
 
    ```powershell
    . .\.env.ps1
    ```
 
    ![](../Images/Lab03-Task1-5.png)
+
+   </details>
 
    > **Note:** Keep the terminal open. If you close it and create a new terminal, you might need to run the command to create the environment variable again.
 
@@ -203,7 +220,8 @@ In this task, you will deploy the container API as a container app with external
 
 1. Create the container app with a system-assigned managed identity and configure registry authentication at create time. The **--registry-identity** flag tells Container Apps to use the app's managed identity to pull images from the specified registry. The CLI automatically assigns the **AcrPull** role when you use this flag with an Azure Container Registry.
 
-   **Bash**
+   <details>
+     <summary>Bash</summary>
 
    ```azurecli
    az containerapp create \
@@ -220,7 +238,10 @@ In this task, you will deploy the container API as a container app with external
 
    ![](../Images/Lab03-Task2-4-bash.png)
 
-   **PowerShell**
+   </details>
+
+   <details>
+     <summary>PowerShell</summary>
 
    ```powershell
    az containerapp create `
@@ -237,6 +258,8 @@ In this task, you will deploy the container API as a container app with external
 
    ![](../Images/Lab03-Task1-9.png)
 
+   </details>
+
 1. To verify that the deployment was successful, navigate to the Azure portal. In the search bar, type **Container Apps (1)** and select **Container Apps (2)** from the search results.
 
    ![](../Images/Lab03-Task2-15.png)
@@ -247,7 +270,8 @@ In this task, you will deploy the container API as a container app with external
 
 1. Create a secret and reference it from an environment variable.
 
-   **Bash**
+   <details>
+     <summary>Bash</summary>
 
    ```azurecli
    az containerapp secret set -n $CONTAINER_APP_NAME -g $RESOURCE_GROUP \
@@ -256,7 +280,10 @@ In this task, you will deploy the container API as a container app with external
 
    ![](../Images/Lab03-Task2-5-bash.png)
 
-   **PowerShell**
+   </details>
+
+   <details>
+     <summary>PowerShell</summary>
 
    ```powershell
    az containerapp secret set -n $env:CONTAINER_APP_NAME -g $env:RESOURCE_GROUP `
@@ -265,9 +292,12 @@ In this task, you will deploy the container API as a container app with external
 
    ![](../Images/Lab03-Task1-10.png)
 
+   </details>
+
 1. Reference the secret from an environment variable. This command creates a new revision, which restarts the app so the secret change takes effect.
 
-   **Bash**
+   <details>
+     <summary>Bash</summary>
 
    ```azurecli
    az containerapp update -n $CONTAINER_APP_NAME -g $RESOURCE_GROUP \
@@ -276,7 +306,10 @@ In this task, you will deploy the container API as a container app with external
 
    ![](../Images/Lab03-Task2-6-bash.png)
 
-   **PowerShell**
+   </details>
+
+   <details>
+     <summary>PowerShell</summary>
 
    ```powershell
    az containerapp update -n $env:CONTAINER_APP_NAME -g $env:RESOURCE_GROUP `
@@ -285,7 +318,12 @@ In this task, you will deploy the container API as a container app with external
 
    ![](../Images/Lab03-Task1-12.png)
 
+   </details>
+
 1. Run the following command to list the revisions to confirm a new revision was created.
+
+   <details>
+     <summary>Bash</summary>
 
    ```azurecli
    az containerapp revision list -n $CONTAINER_APP_NAME  -g $RESOURCE_GROUP -o table
@@ -293,7 +331,10 @@ In this task, you will deploy the container API as a container app with external
 
    ![](../Images/Lab03-Task2-7-bash.png)
 
-   **PowerShell**
+   </details>
+
+   <details>
+     <summary>PowerShell</summary>
 
    ```powershell
    az containerapp revision list `
@@ -303,6 +344,8 @@ In this task, you will deploy the container API as a container app with external
    ```
 
    ![](../Images/Lab03-Task1-13.png)
+
+   </details>
 
    > **Note:** The revision name ends with a suffix like `--0000002`, indicating this is the second revision. Container Apps creates a new revision whenever you change environment variables or secrets, which restarts the app with the updated configuration. Old inactive revisions may be pruned over time.
 
@@ -320,7 +363,8 @@ In this task, you will verify that the container app has started correctly and i
 
 1. Run the following command to retrieve the app FQDN and store the result to a variable.
 
-   **Bash**
+   <details>
+     <summary>Bash</summary>
 
    ```bash
    FQDN=$(az containerapp show -n $CONTAINER_APP_NAME -g $RESOURCE_GROUP \
@@ -331,7 +375,10 @@ In this task, you will verify that the container app has started correctly and i
 
    ![](../Images/Lab03-Task2-8-bash.png)
 
-   **PowerShell**
+   </details>
+
+   <details>
+     <summary>PowerShell</summary>
 
    ```powershell
    $FQDN = az containerapp show -n $env:CONTAINER_APP_NAME -g $env:RESOURCE_GROUP `
@@ -342,9 +389,12 @@ In this task, you will verify that the container app has started correctly and i
 
    ![](../Images/Lab03-Task1-14.png)
 
+   </details>
+
 1. Run the following command to call the health endpoint. The command should return **{"status": "healthy"}**.
 
-   **Bash**
+   <details>
+     <summary>Bash</summary>
 
    ```bash
    curl -s "https://$FQDN/health"
@@ -352,7 +402,10 @@ In this task, you will verify that the container app has started correctly and i
 
    ![](../Images/Lab03-Task2-9-bash.png)
 
-   **PowerShell**
+   </details>
+
+   <details>
+     <summary>PowerShell</summary>
 
    ```powershell
    Invoke-RestMethod -Uri "https://$FQDN/health"
@@ -360,9 +413,12 @@ In this task, you will verify that the container app has started correctly and i
 
    ![](../Images/Lab03-Task1-15.png)
 
+   </details>
+
 1. Run the following command to verify the secret is configured by calling the root endpoint. The endpoint returns JSON containing app information including the configured model name and whether the API key secret is configured.
 
-   **Bash**
+   <details>
+     <summary>Bash</summary>
 
    ```bash
    curl -s "https://$FQDN/"
@@ -370,7 +426,10 @@ In this task, you will verify that the container app has started correctly and i
 
    ![](../Images/Lab03-Task2-10-bash.png)
 
-   **PowerShell**
+   </details>
+
+   <details>
+     <summary>PowerShell</summary>
 
    ```powershell
    Invoke-RestMethod -Uri "https://$FQDN/"
@@ -378,9 +437,12 @@ In this task, you will verify that the container app has started correctly and i
 
    ![](../Images/Lab03-Task3-1.png)
 
+   </details>
+
 1. Run the following command to test the document processing endpoint. The command sends the _document.txt_ file to the endpoint. The operation returns JSON with mock data analysis information.
 
-   **Bash**
+   <details>
+     <summary>Bash</summary>
 
    ```bash
    curl -s -X POST "https://$FQDN/process" \
@@ -390,7 +452,10 @@ In this task, you will verify that the container app has started correctly and i
 
    ![](../Images/Lab03-Task2-11-bash.png)
 
-   **PowerShell**
+   </details>
+
+   <details>
+     <summary>PowerShell</summary>
 
    ```powershell
    Invoke-RestMethod -Uri "https://$FQDN/process" `
@@ -401,9 +466,12 @@ In this task, you will verify that the container app has started correctly and i
 
    ![](../Images/Lab03-Task3-2.png)
 
+   </details>
+
 1. Run the following command to review logs for startup and runtime signals. This command shows recent console output only. For historical logs and advanced troubleshooting, logs persist in the Log Analytics workspace associated with your Container Apps environment.
 
-   **Bash**
+   <details>
+     <summary>Bash</summary>
 
    ```azurecli
    az containerapp logs show -n $CONTAINER_APP_NAME -g $RESOURCE_GROUP
@@ -411,7 +479,10 @@ In this task, you will verify that the container app has started correctly and i
 
    ![](../Images/Lab03-Task2-12-bash.png)
 
-   **PowerShell**
+   </details>
+
+   <details>
+     <summary>PowerShell</summary>
 
    ```azurecli
    az containerapp logs show `
@@ -420,6 +491,8 @@ In this task, you will verify that the container app has started correctly and i
    ```
 
    ![](../Images/Lab03-Task3-3.png)
+
+   </details>
 
 ## Summary
 

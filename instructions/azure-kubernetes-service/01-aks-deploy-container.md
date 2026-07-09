@@ -15,7 +15,7 @@ In this lab, you'll perform the following tasks:
 - **Task 3:** Complete the YAML deployment files and deploy to AKS
 - **Task 4:** Run the client app
 
-> **Note:** This lab includes deployment scripts for both **PowerShell** and **Bash**. You may choose either scripting language based on your preference or environment. Once you make your choice, use the corresponding commands and script throughout the entire lab, as all subsequent steps provide instructions for both PowerShell and Bash.
+### <span style="color:maroon">**Note:** This lab includes deployment scripts for both **Bash** and **PowerShell**. Click on the drop-down arrow ▶ to expand the commands for your preferred shell. Once you make your choice, use the corresponding commands throughout the entire lab.</span>
 
 ## Task 1: Prepare the environment and deploy Azure resources
 
@@ -64,11 +64,14 @@ In this task, you'll prepare the deployment environment, configure the deploymen
 
 1. Run the following command in the terminal to allow PowerShell scripts to run. This command is only required if you are using PowerShell. If you are using Bash, skip this step.
 
+   <details>
+     <summary>PowerShell</summary>
    ```
    Set-ExecutionPolicy -ExecutionPolicy bypass -Force
    ```
 
    ![](../Images/Lab01-Task1-9.png)
+   </details>
 
 1. Run the **following command (1)** to login to your Azure account. Next, **minimize the VS Code window (2)** to view the login window opened in background.
 
@@ -104,17 +107,23 @@ In this task, you'll prepare the deployment environment, configure the deploymen
 
 1. Make sure you are in the root directory of the project and run the appropriate command in the terminal to launch the deployment script.
 
-   **Bash**
+   <details>
+     <summary>Bash</summary>
 
    ```bash
    MSYS_NO_PATHCONV=1 bash azdeploy.sh
    ```
 
-   **PowerShell**
+   </details>
+
+   <details>
+     <summary>PowerShell</summary>
 
    ```powershell
    ./azdeploy.ps1
    ```
+
+   </details>
 
 ## Task 2: Deploy resources to Azure
 
@@ -262,19 +271,25 @@ In this task you use the deployment script to apply the manifests to AKS.
 
 1. Install kubectl and add it to your current terminal session by running the following commands. Execute both commands in sequence.
 
-   **Bash**
+   <details>
+     <summary>Bash</summary>
 
    ```bash
    az aks install-cli
    export PATH=$PATH:/c/Users/azureuser/.azure-kubectl
    ```
 
-   **PowerShell**
+   </details>
+
+   <details>
+     <summary>PowerShell</summary>
 
    ```powershell
    az aks install-cli
    $env:PATH += ";$env:USERPROFILE\.azure-kubectl"
    ```
+
+   </details>
 
 1. Close the existing bash/powershell terminal by clicking on the **Kill(Delete)** and open a new bash/powershell terminal.
 
@@ -282,17 +297,23 @@ In this task you use the deployment script to apply the manifests to AKS.
 
 1. Make sure you are in the root directory of the project and run the appropriate command in the terminal to launch the deployment script.
 
-   **Bash**
+   <details>
+     <summary>Bash</summary>
 
    ```bash
    MSYS_NO_PATHCONV=1 bash azdeploy.sh
    ```
 
-   **PowerShell**
+   </details>
+
+   <details>
+     <summary>PowerShell</summary>
 
    ```powershell
    ./azdeploy.ps1
    ```
+
+   </details>
 
 1. Enter **7** to launch the **7. Deploy to AKS** option. This option performs several operations: it retrieves your AKS credentials and configures kubectl, assigns the **Cognitive Services OpenAI User** role to the AKS kubelet managed identity so the API can authenticate to Foundry using Microsoft Entra ID, updates the deployment manifest with your ACR endpoint and Foundry endpoint, and then uses **kubectl apply** to deploy both manifests to your AKS cluster. When the operation is complete, enter **8** to exit the deployment script.
 
@@ -331,17 +352,23 @@ In this section, you create the Python environment and install the dependencies.
 
 1. Run the following command to activate the Python environment.
 
-   **Bash**
+   <details>
+     <summary>Bash</summary>
 
    ```bash
    source .venv/Scripts/activate
    ```
 
-   **PowerShell**
+   </details>
+
+   <details>
+     <summary>PowerShell</summary>
 
    ```powershell
    .\.venv\Scripts\Activate.ps1
    ```
+
+   </details>
 
 1. Run the following command in the VS Code terminal to install the dependencies.
 
