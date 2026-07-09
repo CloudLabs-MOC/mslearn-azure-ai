@@ -85,9 +85,9 @@ In this task, you'll create a new Azure Functions project using the Python progr
 
    ![](../Images/lab20-t1p11.png)
 
-1. When prompted to select a Python interpreter, choose **python 3.12.10**.
+1. When prompted to select a Python interpreter, choose **Skip virtual environment**.
 
-   ![](<../Images/lab20-t1p10(1).png>)
+   ![](<../Images/lab20-t5p2(1).png>)
 
 1. When prompted to select the first function template, choose **HTTP trigger**.
 
@@ -248,9 +248,31 @@ In this task you verify that Visual Studio Code is using the Python interpreter 
 
    ![](../Images/lab20-t1p22.png)
 
-1. In the **Select Interpreter** window, click on **.venv (3.12.10)**.
+1. When prompted to select a Python interpreter, click **Create Virtual Environment...**.
 
-   ![](<../Images/lab20-t1p10(2).png>)
+   ![](../Images/lab20-t5p1.png)
+
+1. When prompted to select an environment manager, choose **venv**.
+
+   ![](../Images/lab20-t5p2.png)
+
+1. When prompted to select a Python environment, choose **Python 3.12 (64-bit)**.
+
+   ![](../Images/lab20-t5p3.png)
+
+   > **Note:** If multiple Python 3.12 installations are available, select the **Python 3.12 (64-bit)** interpreter.
+
+1. Accept the default virtual environment name **.venv** and press **Enter**.
+
+   ![](../Images/lab20-t5p4.png)
+
+1. When prompted to install project dependencies, select **Install project dependencies**.
+
+   ![](../Images/lab20-t5p7.png)
+
+1. Ensure **requirements.txt (1)** is selected, and then click **OK (2)** to install the required packages.
+
+   ![](../Images/lab20-t5p6.png)
 
 1. Select the interpreter from the **.venv** folder in the project directory (for example, **./.venv/bin/python**). This ensures the debugger and terminal use the correct environment when you start the Functions runtime with **F5**.
 
