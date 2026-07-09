@@ -63,11 +63,13 @@ In this task, you'll prepare the deployment environment, configure the deploymen
 
    <details>
      <summary>PowerShell</summary>
+     
    ```
    Set-ExecutionPolicy -ExecutionPolicy bypass -Force
    ```
 
    ![](../Images/Lab01-Task1-9.png)
+
    </details>
 
 1. Run the **following command (1)** to login to your Azure account. Next, **minimize the VS Code window (2)** to view the login window opened in background.
@@ -228,20 +230,24 @@ In this section you confirm the application deployed by the setup script is runn
 
    <details>
      <summary>Bash</summary>
+
    ```bash
    # Bash
    curl http://localhost:8080/healthz
    ```
+
    </details>
 
    <details>
      <summary>PowerShell</summary>
+
    ```powershell
    # PowerShell
    Invoke-RestMethod http://localhost:8080/healthz
    ```
 
    ![](../Images/lab08-t3p5.png)
+
    </details>
 
 1. Switch back to the terminal where **port-forward** is running and enter **ctrl+c** to exit the command.
@@ -428,16 +434,19 @@ After completing all troubleshooting scenarios, you confirm the application is f
 
    <details>
      <summary>Bash</summary>
+
    ```bash
    # Bash
    curl http://localhost:8080/healthz
    curl http://localhost:8080/readyz
    curl http://localhost:8080/api/info
    ```
+
    </details>
 
    <details>
      <summary>PowerShell</summary>
+
    ```powershell
    # PowerShell
    Invoke-RestMethod http://localhost:8080/healthz
@@ -446,6 +455,7 @@ After completing all troubleshooting scenarios, you confirm the application is f
    ```
 
    ![](../Images/lab08-t3p20.png)
+
    </details>
 
 1. Run the following command to check the pod logs to see the requests.

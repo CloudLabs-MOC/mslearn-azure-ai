@@ -79,11 +79,13 @@ In this task, you'll prepare the development environment, configure the deployme
 
     <details>
      <summary>PowerShell</summary>
+
    ```
    Set-ExecutionPolicy -ExecutionPolicy bypass -Force
    ```
 
    ![](../Images/Lab01-Task1-9.png)
+
    </details>
 
 1. Run the **following command (1)** to login to your Azure account. Next, **minimize the VS Code window (2)** to view the login window opened in background.
@@ -126,18 +128,22 @@ In this task, you'll deploy an Azure Database for PostgreSQL Flexible Server wit
 
    <details>
     <summary>Bash</summary>
+
    ```bash
    MSYS_NO_PATHCONV=1 bash azdeploy.sh
    ```
+
    </details>
 
    <details>
     <summary>PowerShell</summary>
+
    ```powershell
    ./azdeploy.ps1
    ```
 
    ![](../Images/ai200-l14-5.png)
+
    </details>
 
 1. When the script menu appears, enter **1** to launch the **Create PostgreSQL server with Entra authentication** option. This creates the server with Entra-only authentication enabled. **Note:** Deployment can take 5-10 minutes to complete.
@@ -213,16 +219,20 @@ In this task, you'll complete the Azure resource deployment, configure Microsoft
 
    <details>
     <summary>Bash</summary>
+
    ```bash
    source .env
    ```
+
    </details>
 
    <details>
     <summary>PowerShell</summary>
+
    ```powershell
    . .\.env.ps1
    ```
+
    </details>
 
    > **Note:** Keep the terminal open. If you close it and create a new terminal, you might need to run the command to load the environment variables again.
@@ -237,16 +247,20 @@ In this task, you'll enable the pgvector extension, create the database schema, 
 
    <details>
     <summary>Bash</summary>
+
    ```bash
    psql "host=$DB_HOST port=5432 dbname=$DB_NAME user=$DB_USER sslmode=require"
    ```
+
    </details>
 
    <details>
     <summary>PowerShell</summary>
+
    ```powershell
    psql "host=$env:DB_HOST port=5432 dbname=$env:DB_NAME user=$env:DB_USER sslmode=require"
    ```
+
    </details>
 
    > **Tip:** When query results are displayed, psql uses a pager if it can't fit the results in the current terminal window. If it does, press **q** to exit the pager and return to the psql prompt. Maximizing the terminal window will reduce this from happening, and make it easier to review the results from the commands.

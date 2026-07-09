@@ -66,11 +66,13 @@ In this task, you'll prepare the development environment, configure the deployme
 
    <details>
      <summary>PowerShell</summary>
+     
    ```
    Set-ExecutionPolicy -ExecutionPolicy bypass -Force
    ```
 
    ![](../Images/Lab01-Task1-9.png)
+
    </details>
 
 1. Run the **following command (1)** to login to your Azure account. Next, **minimize the VS Code window (2)** to view the login window opened in background.
@@ -132,6 +134,7 @@ In this task, you'll prepare the development environment, configure the deployme
    ```
 
    ![](../Images/lab19-t1p4.png)
+
    </details>
 
 1. When the script is running, enter **1** to launch the **1. Create Event Grid namespace and topic** option.

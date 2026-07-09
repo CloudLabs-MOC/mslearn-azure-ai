@@ -68,11 +68,13 @@ In this task, you use a script to deploy the necessary services to your Azure su
 
    <details>
     <summary>PowerShell</summary>
+
    ```
    Set-ExecutionPolicy -ExecutionPolicy bypass -Force
    ```
 
    ![](../Images/Lab01-Task1-9.png)
+
    </details>
 
 1. Run the **following command (1)** to login to your Azure account. Next, **minimize the VS Code window (2)** to view the login window opened in background.
@@ -111,20 +113,24 @@ In this task, you use a script to deploy the necessary services to your Azure su
 
    <details>
     <summary>Bash</summary>
+
    ```bash
    bash azdeploy.sh
    ```
 
    ![](../Images/Lab01-Task1-16-bash.png)
+
    </details>
 
    <details>
     <summary>PowerShell</summary>
+
    ```powershell
    ./azdeploy.ps1
    ```
 
    ![](../Images/Lab01-Task1-16.png)
+
    </details>
 
 1. To verify the deployment is successful, navigate to the Azure portal, in the search bar, type **Container registries (1)** and select **Container registries (2)** from the search results.
@@ -143,20 +149,24 @@ In this task, you use a script to deploy the necessary services to your Azure su
 
    <details>
     <summary>Bash</summary>
+
    ```bash
    source .env
    ```
 
    ![](../Images/Lab01-Task1-19-bash.png)
+
    </details>
 
    <details>
     <summary>PowerShell</summary>
+
    ```powershell
    . .\.env.ps1
    ```
 
    ![](../Images/Lab01-Task1-19.png)
+
    </details>
 
    > **Note:** Keep the terminal open. If you close it and create a new terminal, you might need to run the command to create the environment variable again.
@@ -171,26 +181,30 @@ In this task, you Use a quick task to build the image in Azure without requiring
 
     <details>
      <summary>Bash</summary>
-    ```bash
-    az acr build \
-        --registry $ACR_NAME \
-        --image inference-api:v1.0.0 \
-        ./api
-    ```
+
+   ```bash
+   az acr build \
+       --registry $ACR_NAME \
+       --image inference-api:v1.0.0 \
+       ./api
+   ```
 
    ![](../Images/Lab01-Task2-1-bash.png)
+
     </details>
 
    <details>
      <summary>PowerShell</summary>
-    ```powershell
-    az acr build `
-        --registry $env:ACR_NAME `
-        --image inference-api:v1.0.0 `
-        ./api
-    ```
+
+   ```powershell
+   az acr build `
+       --registry $env:ACR_NAME `
+       --image inference-api:v1.0.0 `
+       ./api
+   ```
 
    ![](../Images/Lab01-Task2-1.png)
+
     </details>
 
 1. Watch the output as ACR Tasks:
@@ -208,29 +222,35 @@ In this task, you confirm the image exists in your registry by listing repositor
 
    <details>
     <summary>Bash</summary>
+
    ```bash
    az acr repository list --name $ACR_NAME --output table
    ```
+
    ![](../Images/Lab01-Task3-1-bash.png)
+
    </details>
 
    The output shows the **inference-api** repository you created.
 
    <details>
     <summary>PowerShell</summary>
+
    ```powershell
    az acr repository list --name $env:ACR_NAME --output table
    ```
+
+   ![](../Images/Lab01-Task3-1.png)
+
    </details>
 
    The output shows the **inference-api** repository you created.
-
-   ![](../Images/Lab01-Task3-1.png)
 
 1. Run the following command to list tags for the **inference-api** repository.
 
    <details>
     <summary>Bash</summary>
+
    ```bash
    az acr repository show-tags \
        --name $ACR_NAME \
@@ -239,12 +259,14 @@ In this task, you confirm the image exists in your registry by listing repositor
    ```
 
    ![](../Images/Lab01-Task3-2-bash.png)
+
    </details>
 
    The output shows the **v1.0.0** tag you assigned during the build.
 
    <details>
     <summary>PowerShell</summary>
+
    ```powershell
    az acr repository show-tags `
        --name $env:ACR_NAME `
@@ -253,6 +275,7 @@ In this task, you confirm the image exists in your registry by listing repositor
    ```
 
    ![](../Images/Lab01-Task3-2.png)
+
    </details>
 
    The output shows the **v1.0.0** tag you assigned during the build.
@@ -261,6 +284,7 @@ In this task, you confirm the image exists in your registry by listing repositor
 
    <details>
     <summary>Bash</summary>
+
    ```bash
    az acr manifest list-metadata \
        --registry $ACR_NAME \
@@ -269,17 +293,21 @@ In this task, you confirm the image exists in your registry by listing repositor
    ```
 
    ![](../Images/Lab01-Task3-3-bash.png)
+
    </details>
 
    <details>
     <summary>PowerShell</summary>
+
    ```powershell
    az acr manifest list-metadata `
        --registry $env:ACR_NAME `
        --name inference-api `
        --output table
    ```
+
    ![](../Images/Lab01-Task3-3.png)
+
    </details>
 
    Note the digest value. This SHA-256 hash uniquely identifies your image regardless of tags.
@@ -300,6 +328,7 @@ In this task, you use the **az acr run** command to execute a command inside you
 
    <details>
     <summary>Bash</summary>
+
    ```bash
    MSYS_NO_PATHCONV=1 \
    az acr run \
@@ -309,16 +338,19 @@ In this task, you use the **az acr run** command to execute a command inside you
    ```
 
    ![](../Images/Lab01-Task4-1-bash.png)
+
    </details>
 
    <details>
     <summary>PowerShell</summary>
+
    ```powershell
    az acr run `
        --registry $env:ACR_NAME `
        --cmd "$env:ACR_NAME.azurecr.io/inference-api:v1.0.0 python -c 'from app import app'" `
        /dev/null
    ```
+
    </details>
 
    The output includes Docker pull progress as it downloads the image. A successful run ends with **Run ID: xxx was successful after n sec (2)**. This confirms the container runs correctly and the Flask application imports without errors.
@@ -335,6 +367,7 @@ In this task, you build a new version of the image with a different tag to see h
 
    <details>
     <summary>Bash</summary>
+
    ```bash
    az acr build \
        --registry $ACR_NAME \
@@ -343,16 +376,19 @@ In this task, you build a new version of the image with a different tag to see h
    ```
 
    ![](../Images/Lab01-Task5-1-bash.png)
+
    </details>
 
    <details>
     <summary>PowerShell</summary>
+
    ```powershell
    az acr build `
        --registry $env:ACR_NAME `
        --image inference-api:v1.1.0 `
        ./api
    ```
+
    </details>
 
    The output includes Docker build progress and ends with **Run ID: xxx was successful after n sec (2)**, confirming the new image is built and pushed to the registry.
@@ -363,6 +399,7 @@ In this task, you build a new version of the image with a different tag to see h
 
    <details>
     <summary>Bash</summary>
+
    ```bash
    az acr repository show-tags \
        --name $ACR_NAME \
@@ -371,10 +408,12 @@ In this task, you build a new version of the image with a different tag to see h
    ```
 
    ![](../Images/Lab01-Task5-2-bash.png)
+
    </details>
 
    <details>
     <summary>PowerShell</summary>
+
    ```powershell
    az acr repository show-tags `
        --name $env:ACR_NAME `
@@ -383,6 +422,7 @@ In this task, you build a new version of the image with a different tag to see h
    ```
 
    ![](../Images/Lab01-Task5-2.png)
+
    </details>
 
    Both **v1.0.0** and **v1.1.0** appear in the output, demonstrating how the registry maintains multiple versions.
@@ -395,6 +435,7 @@ In this task you review the **ACR** task run history and lock an image to protec
 
    <details>
     <summary>Bash</summary>
+
    ```bash
    az acr task list-runs \
        --registry $ACR_NAME \
@@ -402,15 +443,18 @@ In this task you review the **ACR** task run history and lock an image to protec
    ```
 
    ![](../Images/Lab01-Task6-1-bash.png)
+
    </details>
 
    <details>
     <summary>PowerShell</summary>
+
    ```powershell
    az acr task list-runs `
        --registry $env:ACR_NAME `
        --output table
    ```
+
    ![](../Images/Lab01-Task6-1.png)
 
    </details>
@@ -421,6 +465,7 @@ In this task you review the **ACR** task run history and lock an image to protec
 
    <details>
     <summary>Bash</summary>
+
    ```bash
    az acr repository update \
        --name $ACR_NAME \
@@ -429,10 +474,12 @@ In this task you review the **ACR** task run history and lock an image to protec
    ```
 
    ![](../Images/Lab01-Task6-2-bash.png)
+
    </details>
 
    <details>
     <summary>PowerShell</summary>
+
    ```powershell
    az acr repository update `
        --name $env:ACR_NAME `
@@ -441,12 +488,14 @@ In this task you review the **ACR** task run history and lock an image to protec
    ```
 
    ![](../Images/Lab01-Task6-2.png)
+
    </details>
 
 1. Run the following command to verify the lock is in place.
 
    <details>
     <summary>Bash</summary>
+
    ```bash
    az acr repository show \
        --name $ACR_NAME \
@@ -454,16 +503,20 @@ In this task you review the **ACR** task run history and lock an image to protec
    ```
 
    ![](../Images/Lab01-Task6-3-bash.png)
+
    </details>
 
    <details>
     <summary>PowerShell</summary>
+
    ```powershell
    az acr repository show `
        --name $env:ACR_NAME `
        --image inference-api:v1.0.0
    ```
+
    ![](../Images/Lab01-Task6-3.png)
+
    </details>
 
    The **writeEnabled** field shows **False**, indicating the image is protected.

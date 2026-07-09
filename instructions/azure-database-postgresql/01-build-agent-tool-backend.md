@@ -77,11 +77,13 @@ In this task, you'll prepare the development environment, configure the deployme
 
     <details>
      <summary>PowerShell</summary>
+
    ```
    Set-ExecutionPolicy -ExecutionPolicy bypass -Force
    ```
 
    ![](../Images/Lab01-Task1-9.png)
+
    </details>
 
 1. Run the **following command (1)** to login to your Azure account. Next, **minimize the VS Code window (2)** to view the login window opened in background.
@@ -139,6 +141,7 @@ In this task, you'll deploy an Azure Database for PostgreSQL Flexible Server wit
    ```
 
    ![](../Images/ai200-l12-8.png)
+
    </details>
 
 1. When the script menu appears, enter **1** to launch the **Create PostgreSQL server with Entra authentication** option. This creates the server with Entra-only authentication enabled. **Note:** Deployment can take 5-10 minutes to complete.
@@ -282,16 +285,20 @@ In this task, you'll configure the Microsoft Entra administrator, retrieve the d
 
    <details>
     <summary>Bash</summary>
+
    ```bash
    source .env
    ```
+
    </details>
 
    <details>
     <summary>PowerShell</summary>
+
    ```powershell
    . .\.env.ps1
    ```
+
    </details>
 
    > **Note:** Keep the terminal open. If you close it and create a new terminal, you might need to run the command to create the environment variable again.
@@ -308,18 +315,22 @@ In this task, you'll create the PostgreSQL database schema by defining tables, c
 
    <details>
     <summary>Bash</summary>
+
    ```bash
    psql "host=$DB_HOST port=5432 dbname=$DB_NAME user=$DB_USER sslmode=require"
    ```
+
    </details>
 
    <details>
     <summary>PowerShell</summary>
+
    ```powershell
    psql "host=$env:DB_HOST port=5432 dbname=$env:DB_NAME user=$env:DB_USER sslmode=require"
    ```
 
    ![](../Images/ai200-l12-18.png)
+
    </details>
 
 1. Run the following command to verify the connection by checking the PostgreSQL version.
@@ -426,18 +437,22 @@ In this task, you'll configure the Python environment, run the test application,
 
    <details>
     <summary>Bash</summary>
+
    ```bash
    source .venv/Scripts/activate
    ```
+
    </details>
 
    <details>
     <summary>PowerShell</summary>
+
    ```powershell
    .\.venv\Scripts\Activate.ps1
    ```
 
    ![](../Images/ai200-l12-22.png)
+
    </details>
 
 1. Run the following command to install the Python dependencies for the app. This installs the **psycopg** library for PostgreSQL connectivity and **azure-identity** for Microsoft Entra authentication.
@@ -466,16 +481,20 @@ In this task, you'll query the PostgreSQL database using SQL to explore conversa
 
    <details>
     <summary>Bash</summary>
+
    ```bash
    psql "host=$DB_HOST port=5432 dbname=agent_memory user=$DB_USER sslmode=require"
    ```
+
    </details>
 
    <details>
     <summary>PowerShell</summary>
+
    ```powershell
    psql "host=$env:DB_HOST port=5432 dbname=agent_memory user=$env:DB_USER sslmode=require"
    ```
+
    </details>
 
    > **Tip:** When query results are displayed, psql uses a pager if it can't fit the results in the current terminal window. If it does, press **q** to exit the pager and return to the psql prompt. Maximizing the terminal window will reduce this from happening, and make it easier to review the results from the commands.

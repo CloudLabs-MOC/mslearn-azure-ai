@@ -76,11 +76,13 @@ In this task, you will deploy an Azure Container Registry and a Container Apps e
 
     <details>
      <summary>PowerShell</summary>
+
    ```
    Set-ExecutionPolicy -ExecutionPolicy bypass -Force
    ```
 
    ![](../Images/runcmd.png)
+
    </details>
 
 1. Run the command **az login (1)** to sign in to your Azure account. Then **minimize the VS Code window (2)** to view the login window that opens in the background.
@@ -135,6 +137,7 @@ In this task, you will deploy an Azure Container Registry and a Container Apps e
    ```
 
    ![](../Images/Lab03-Task2-1-bash.png)
+
    </details>
 
    <details>
@@ -145,6 +148,7 @@ In this task, you will deploy an Azure Container Registry and a Container Apps e
    ```
 
    ![](../Images/Lab02-Task1-1.png)
+
    </details>
 
 1. When the script is running, enter **1** to launch the **Create Azure Container Registry and build container image** option. This option creates the ACR service and uses ACR Tasks to build and push the image to the registry.
@@ -191,6 +195,7 @@ In this task, you will deploy an Azure Container Registry and a Container Apps e
    ```
 
    ![](../Images/Lab03-Task2-3-bash.png)
+
    </details>
 
    <details>
@@ -201,6 +206,7 @@ In this task, you will deploy an Azure Container Registry and a Container Apps e
    ```
 
    ![](../Images/Lab03-Task1-5.png)
+
    </details>
 
    > **Note:** Keep the terminal open. If you close it and create a new terminal, you might need to run the command to create the environment variable again.
@@ -208,45 +214,55 @@ In this task, you will deploy an Azure Container Registry and a Container Apps e
 1. Run the following command to retrieve the app FQDN and store the result to a variable.
 
    <details>
-    <summary>Bash</summary>
+     <summary>Bash</summary>
+
    ```bash
    FQDN=$(az containerapp show -n $CONTAINER_APP_NAME -g $RESOURCE_GROUP \
        --query properties.configuration.ingress.fqdn -o tsv)
 
    echo "$FQDN"
+   ```
 
-   ````
-    ![](../Images/Lab04-Task1-10b.png)
-    </details>
+   ![](../Images/Lab04-Task1-10b.png)
+
+   </details>
 
    <details>
-    <summary>PowerShell</summary>
+     <summary>PowerShell</summary>
+
    ```powershell
    $FQDN = az containerapp show -n $env:CONTAINER_APP_NAME -g $env:RESOURCE_GROUP `
        --query properties.configuration.ingress.fqdn -o tsv
 
    Write-Output $FQDN
-   ````
+   ```
 
    ![](../Images/Lab04-Task1-7.png)
+
    </details>
 
 1. Run the following command to call the default endpoint to verify the app is running. The command should return some JSON. Look for the **model.name** field, it should be set to **gpt-4o-mini**.
 
    <details>
-    <summary>Bash</summary>
+     <summary>Bash</summary>
+
    ```bash
    curl -s "https://$FQDN/"
    ```
+
    ![](../Images/Lab04-Task1-11b.png)
+
    </details>
 
    <details>
-    <summary>PowerShell</summary>
+     <summary>PowerShell</summary>
+
    ```powershell
    Invoke-RestMethod -Uri "https://$FQDN/"
    ```
+
    ![](../Images/Lab04-Task1-9.png)
+
    </details>
 
 > **Congratulations** on completing the task! Now, it's time to validate it. Here are the steps:
@@ -265,120 +281,150 @@ In this task, you will introduce a configuration problem by removing a required 
 
    <details>
     <summary>Bash</summary>
+
    ```bash
    az containerapp update -n $CONTAINER_APP_NAME -g $RESOURCE_GROUP \
        --remove-env-vars MODEL_NAME
    ```
 
    ![](../Images/Lab04-Task2-12b.png)
+
    </details>
 
    <details>
     <summary>PowerShell</summary>
+
    ```powershell
    az containerapp update -n $env:CONTAINER_APP_NAME -g $env:RESOURCE_GROUP `
        --remove-env-vars MODEL_NAME
    ```
+
    ![](../Images/Lab04-Task1-8.png)
+
    </details>
 
 1. Run the following command to list revisions to confirm a new revision was created. Look for a new revision with a higher suffix number (for example, **ai-api--0000002**) and **TrafficWeight** of **100**, indicating it's now receiving all traffic.
 
    <details>
     <summary>Bash</summary>
+
    ```bash
    az containerapp revision list -n $CONTAINER_APP_NAME -g $RESOURCE_GROUP -o table
    ```
 
    ![](../Images/Lab04-Task2-13b.png)
+
    </details>
 
    <details>
     <summary>PowerShell</summary>
+
    ```powershell
    az containerapp revision list -n $env:CONTAINER_APP_NAME -g $env:RESOURCE_GROUP -o table
    ```
+
    ![](../Images/Lab04-Task2-1.png)
+
    </details>
 
 1. Run the following command to check the root endpoint to observe the symptom from the API consumer's perspective. The **model.name** field now shows the default value of **not-configured** instead of the configured value.
 
    <details>
     <summary>Bash</summary>
+
    ```bash
    curl -s "https://$FQDN/" | jq .model
    ```
 
    ![](../Images/Lab04-Task2-14b.png)
+
    </details>
 
    <details>
     <summary>PowerShell</summary>
+
    ```powershell
    (Invoke-RestMethod -Uri "https://$FQDN/").model
    ```
 
    ![](../Images/Lab04-Task2-4.png)
+
    </details>
 
 1. Run the following command to diagnose the root cause by viewing the container app's configuration. Run the following command to confirm the **MODEL_NAME** environment variable is missing.
 
    <details>
     <summary>Bash</summary>
+
    ```bash
    az containerapp show -n $CONTAINER_APP_NAME -g $RESOURCE_GROUP \
        --query "properties.template.containers[0].env" -o table
    ```
 
    ![](../Images/Lab04-Task2-15b.png)
+
    </details>
 
    <details>
     <summary>PowerShell</summary>
+
    ```powershell
    az containerapp show -n $env:CONTAINER_APP_NAME -g $env:RESOURCE_GROUP `
        --query "properties.template.containers[0].env" -o table
    ```
 
    ![](../Images/Lab04-Task2-5.png)
+
    </details>
 
 1. Run the following command to fix the issue by adding the `MODEL_NAME` environment variable back.
 
    <details>
     <summary>Bash</summary>
+
    ```bash
    az containerapp update -n $CONTAINER_APP_NAME -g $RESOURCE_GROUP \
        --set-env-vars MODEL_NAME=$MODEL_NAME
    ```
+
    ![](../Images/Lab04-Task2-16b.png)
+
    </details>
 
    <details>
     <summary>PowerShell</summary>
+
    ```powershell
    az containerapp update -n $env:CONTAINER_APP_NAME -g $env:RESOURCE_GROUP `
        --set-env-vars MODEL_NAME=$env:MODEL_NAME
    ```
+
    ![](../Images/Lab04-Task2-6.png)
+
    </details>
 
 1. Run the following command to verify the fix by checking the root endpoint again. This confirms the application now behaves correctly from an API consumer's perspective. The response should now show the configured model name.
 
    <details>
     <summary>Bash</summary>
+
    ```bash
    curl -s "https://$FQDN/" | jq .model
    ```
+
    ![](../Images/Lab04-Task2-17b.png)
+
    </details>
 
    <details>
     <summary>PowerShell</summary>
+
    ```powershell
    (Invoke-RestMethod -Uri "https://$FQDN/").model
    ```
+
    ![](../Images/Lab04-Task2-7.png)
+
    </details>
 
 You diagnosed and fixed a missing environment variable. Next, you diagnose a secret an ingress issue.
@@ -391,40 +437,50 @@ In this task, you will introduce an ingress-related problem by changing the targ
 
    <details>
     <summary>Bash</summary>
+
    ```bash
    az containerapp ingress update -n $CONTAINER_APP_NAME -g $RESOURCE_GROUP \
        --target-port 3000
    ```
 
    ![](../Images/Lab04-Task3-18b.png)
+
    </details>
 
    <details>
     <summary>PowerShell</summary>
+
    ```powershell
    az containerapp ingress update -n $env:CONTAINER_APP_NAME -g $env:RESOURCE_GROUP `
        --target-port 3000
    ```
+
    ![](../Images/Lab04-Task3-1.png)
+
    </details>
 
 1. Run the following command to try to access the health endpoint to observe the symptom from an API consumer's perspective.
 
    <details>
     <summary>Bash</summary>
+
    ```bash
    curl -s "https://$FQDN/health"
    ```
 
    ![](../Images/Lab04-Task3-19b.png)
+
    </details>
 
    <details>
     <summary>PowerShell</summary>
+
    ```powershell
    Invoke-RestMethod -Uri "https://$FQDN/health"
    ```
+
    ![](../Images/Lab04-Task3-2.png)
+
    </details>
 
    > **Note:** The request fails or times out because Container Apps is routing traffic to port 3000, but the application listens on port 8000.
@@ -435,69 +491,83 @@ In this task, you will introduce an ingress-related problem by changing the targ
 
    <details>
     <summary>Bash</summary>
+
    ```bash
    az containerapp show -n $CONTAINER_APP_NAME -g $RESOURCE_GROUP \
        --query "properties.configuration.ingress" -o yaml
    ```
 
    ![](../Images/Lab04-Task3-20b.png)
+
    </details>
 
    <details>
     <summary>PowerShell</summary>
+
    ```powershell
    az containerapp show -n $env:CONTAINER_APP_NAME -g $env:RESOURCE_GROUP `
        --query "properties.configuration.ingress" -o yaml
    ```
 
    ![](../Images/Lab04-Task3-3.png)
+
    </details>
 
 1. Run the following command to check the container logs to see if the application is running. You should see gunicorn startup messages indicating the app is listening on port 8000, confirming the mismatch.
 
    <details>
     <summary>Bash</summary>
+
    ```bash
    az containerapp logs show -n $CONTAINER_APP_NAME -g $RESOURCE_GROUP
    ```
+
    ![](../Images/Lab04-Task3-21b.png)
+
    </details>
 
    <details>
     <summary>PowerShell</summary>
+
    ```powershell
    az containerapp logs show -n $env:CONTAINER_APP_NAME -g $env:RESOURCE_GROUP
    ```
 
    ![](../Images/Lab04-Task3-4.png)
+
    </details>
 
 1. Run the following command to fix the ingress configuration by setting the correct target port.
 
    <details>
     <summary>Bash</summary>
+
    ```bash
    az containerapp ingress update -n $CONTAINER_APP_NAME -g $RESOURCE_GROUP \
        --target-port 8000
    ```
 
    ![](../Images/Lab04-Task3-22b.png)
+
    </details>
 
    <details>
     <summary>PowerShell</summary>
+
    ```powershell
    az containerapp ingress update -n $env:CONTAINER_APP_NAME -g $env:RESOURCE_GROUP `
        --target-port 8000
    ```
 
    ![](../Images/Lab04-Task3-5.png)
+
    </details>
 
 1. Run the following command to verify the fix by calling the health endpoint. This confirms the application is accessible from an API consumer's perspective. You should see **{"status":"healthy"}**.
 
    <details>
     <summary>Bash</summary>
+
    ```bash
    curl -s "https://$FQDN/health"
    ```
@@ -508,6 +578,7 @@ In this task, you will introduce an ingress-related problem by changing the targ
 
    <details>
     <summary>PowerShell</summary>
+
    ```powershell
    Invoke-RestMethod -Uri "https://$FQDN/health"
    ```
@@ -556,6 +627,7 @@ In this task, you will use Log Analytics to review historical container logs and
 
    <details>
     <summary>Bash</summary>
+
    ```bash
    az monitor log-analytics query -w $WORKSPACE_ID \
        --analytics-query "ContainerAppConsoleLogs_CL | where ContainerAppName_s == '$CONTAINER_APP_NAME' | project TimeGenerated, Log_s | order by TimeGenerated desc | take 20" \
@@ -568,6 +640,7 @@ In this task, you will use Log Analytics to review historical container logs and
 
    <details>
     <summary>PowerShell</summary>
+
    ```powershell
    az monitor log-analytics query -w $WORKSPACE_ID `
        --analytics-query "ContainerAppConsoleLogs_CL | where ContainerAppName_s == '$env:CONTAINER_APP_NAME' | project TimeGenerated, Log_s | order by TimeGenerated desc | take 20" `
@@ -584,17 +657,20 @@ In this task, you will use Log Analytics to review historical container logs and
 
    <details>
     <summary>Bash</summary>
+
    ```bash
    az monitor log-analytics query -w $WORKSPACE_ID \
        --analytics-query "ContainerAppConsoleLogs_CL | where ContainerAppName_s == '$CONTAINER_APP_NAME' and Log_s contains 'error' | order by TimeGenerated desc | take 20" \
        -o table
    ```
+
    ![](../Images/Lab04-Task4-26b.png)
 
    </details>
 
    <details>
     <summary>PowerShell</summary>
+    
    ```powershell
    az monitor log-analytics query -w $WORKSPACE_ID `
        --analytics-query "ContainerAppConsoleLogs_CL | where ContainerAppName_s == '$env:CONTAINER_APP_NAME' and Log_s contains 'error' | order by TimeGenerated desc | take 20" `

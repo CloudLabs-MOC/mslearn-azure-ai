@@ -77,6 +77,7 @@ In this task, you'll prepare the development environment, configure the deployme
 
     <details>
      <summary>PowerShell</summary>
+
    ```
    Set-ExecutionPolicy -ExecutionPolicy bypass -Force
    ```
@@ -125,18 +126,22 @@ In this task, you'll deploy an Azure Database for PostgreSQL Flexible Server wit
 
    <details>
     <summary>Bash</summary>
+
    ```bash
    MSYS_NO_PATHCONV=1 bash azdeploy.sh
    ```
+
    </details>
 
    <details>
     <summary>PowerShell</summary>
+
    ```powershell
    ./azdeploy.ps1
    ```
 
    ![](../Images/ai200-l13-7.png)
+
    </details>
 
 1. When the script menu appears, enter **1** to launch the **Create PostgreSQL server with Entra authentication** option. This creates the server with Entra-only authentication enabled. **Note:** Deployment can take 5-10 minutes to complete.
@@ -346,34 +351,42 @@ In this task you will enable the pgvector extension and create the products tabl
 
    <details>
     <summary>Bash</summary>
+
    ```bash
    source .env
    ```
+
    </details>
 
    <details>
     <summary>PowerShell</summary>
+
    ```powershell
    . .\.env.ps1
    ```
+
    </details>
 
 1. Run the following command to connect to the PostgreSQL server using **psql**. The command uses the environment variables you loaded in the previous step.
 
    <details>
     <summary>Bash</summary>
+
    ```bash
    psql "host=$DB_HOST dbname=$DB_NAME user=$DB_USER sslmode=require"
    ```
+
    </details>
 
    <details>
     <summary>PowerShell</summary>
+
    ```powershell
    psql "host=$env:DB_HOST port=5432 dbname=$env:DB_NAME user=$env:DB_USER sslmode=require"
    ```
 
    ![](../Images/ai200-l12-18.png)
+
    </details>
 
 1. Enable the pgvector extension. This extension must be enabled before you can use vector data types.
@@ -435,18 +448,22 @@ In this Task you will install the Python dependencies and run the Flask web appl
 
    <details>
     <summary>Bash</summary>
+
    ```bash
    source .venv/Scripts/activate
    ```
+
    </details>
 
    <details>
     <summary>PowerShell</summary>
+
    ```powershell
    .\.venv\Scripts\Activate.ps1
    ```
 
    ![](../Images/ai200-l13-18.png)
+
    </details>
 
 1. Run the following command to install the required Python packages. The _requirements.txt_ file includes **flask** for the web framework, **psycopg** for PostgreSQL connectivity, and **azure-identity** for authentication.

@@ -69,11 +69,13 @@ In this task, you'll prepare the deployment environment, configure the deploymen
 
    <details>
      <summary>PowerShell</summary>
+
    ```
    Set-ExecutionPolicy -ExecutionPolicy bypass -Force
    ```
 
    ![](../Images/Lab01-Task1-9.png)
+
    </details>
 
 1. Run the **following command (1)** to login to your Azure account. Next, **minimize the VS Code window (2)** to view the login window opened in background.
@@ -131,6 +133,7 @@ In this task, you'll deploy an Azure Cosmos DB for NoSQL account, database, and 
    ```
 
    ![](../Images/lab09-t2p1.png)
+
    </details>
 
 1. When the script menu appears, enter **1** to launch the **Create Cosmos DB account** option. This creates the Cosmos DB for NoSQL account with a database and container. **Note:** Deployment can take 5-10 minutes to complete.
@@ -447,6 +450,7 @@ In this task, you'll configure the Python environment, run the Flask application
    ```
 
    ![](../Images/lab09-t6p1.png)
+
    </details>
 
 1. Run the following command to install the Python dependencies for the app. This installs the **flask** and **azure-cosmos** libraries.

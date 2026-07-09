@@ -76,11 +76,13 @@ In this task, you will create the Azure resources required for the lab by runnin
 
     <details>
      <summary>PowerShell</summary>
+     
    ```
    Set-ExecutionPolicy -ExecutionPolicy bypass -Force
    ```
 
    ![](../Images/runcmd.png)
+
    </details>
 
 1. Run the command **az login (1)** to sign in to your Azure account. Then **minimize the VS Code window (2)** to view the login window that opens in the background.
@@ -135,6 +137,7 @@ In this task, you will create the Azure resources required for the lab by runnin
    ```
 
    ![](../Images/Lab03-Task2-1-bash.png)
+
    </details>
 
    <details>
@@ -145,6 +148,7 @@ In this task, you will create the Azure resources required for the lab by runnin
    ```
 
    ![](../Images/Lab02-Task1-1.png)
+
    </details>
 
 1. When the script is running, enter **1** to launch **Create Azure Container Registry and build container image**.
@@ -191,6 +195,7 @@ In this task, you will create the Azure resources required for the lab by runnin
    ```
 
    ![](../Images/Lab03-Task2-3-bash.png)
+
    </details>
 
    <details>
@@ -201,6 +206,7 @@ In this task, you will create the Azure resources required for the lab by runnin
    ```
 
    ![](../Images/Lab03-Task1-5.png)
+
    </details>
 
    > **Note:** Keep the terminal open. If you close it and create a new terminal, you might need to run the command to create the environment variable again.
@@ -209,18 +215,24 @@ In this task, you will create the Azure resources required for the lab by runnin
 
    <details>
      <summary>Bash</summary>
-    ```bash
-    curl -sS "$CONTAINER_APP_URL/" | head
-    ```
-    ![](../Images/Lab05-Task1-1b.png)
+
+   ```bash
+   curl -sS "$CONTAINER_APP_URL/" | head
+   ```
+
+   ![](../Images/Lab05-Task1-1b.png)
+
     </details>
 
     <details>
      <summary>PowerShell</summary>
-    ```powershell
-    Invoke-RestMethod "$env:CONTAINER_APP_URL/"
-    ```
-    ![](../Images/Lab05-Task1-4.png)
+
+   ```powershell
+   Invoke-RestMethod "$env:CONTAINER_APP_URL/"
+   ```
+
+   ![](../Images/Lab05-Task1-4.png)
+
     </details>
 
    > **Note:** Keep the terminal open. If you close it and create a new terminal, you might need to run the command to create the environment variable again.
@@ -243,6 +255,7 @@ In this task, you will configure an HTTP scale rule that triggers autoscaling ba
 
    <details>
     <summary>Bash</summary>
+
    ```bash
    az containerapp update \
        --name $CONTAINER_APP_NAME \
@@ -253,11 +266,14 @@ In this task, you will configure an HTTP scale rule that triggers autoscaling ba
        --scale-rule-type http \
        --scale-rule-http-concurrency 10
    ```
+
    ![](../Images/Lab05-Task2-2b.png)
+
    </details>
 
    <details>
     <summary>PowerShell</summary>
+
    ```powershell
    az containerapp update `
        --name $env:CONTAINER_APP_NAME `
@@ -270,23 +286,28 @@ In this task, you will configure an HTTP scale rule that triggers autoscaling ba
    ```
 
    ![](../Images/Lab05-Task1-5.png)
+
    </details>
 
 1. Run the following command to verify the scale rule is configured. Look for the **http-scaling** rule in the output with **minReplicas** set to **0** and **maxReplicas** set to **10**.
 
    <details>
     <summary>Bash</summary>
+
    ```bash
    az containerapp show \
        --name $CONTAINER_APP_NAME \
        --resource-group $RESOURCE_GROUP \
        --query "properties.template.scale"
    ```
+
    ![](../Images/Lab05-Task2-3b.png)
+
    </details>
 
    <details>
     <summary>PowerShell</summary>
+
    ```powershell
    az containerapp show `
        --name $env:CONTAINER_APP_NAME `
@@ -295,6 +316,7 @@ In this task, you will configure an HTTP scale rule that triggers autoscaling ba
    ```
 
    ![](../Images/Lab05-Task1-6.png)
+
    </details>
 
 ## Task 3: Generate load and observe scaling
@@ -321,21 +343,26 @@ In this task, you will run a local dashboard that generates concurrent requests 
 
    <details>
     <summary>Bash</summary>
+
    ```bash
    source .venv/Scripts/activate
    ```
+
    ![](../Images/Lab05-Task3-5b.png)
+
    </details>
 
    > **Note:** On Linux/macOS, use the Bash command **source .venv/bin/activate**.
 
    <details>
     <summary>PowerShell</summary>
+
    ```powershell
    .\.venv\Scripts\Activate.ps1
    ```
 
    ![](../Images/Lab05-Task1-9.png)
+
    </details>
 
 1. Run the following command to install the dependencies for the client app.
@@ -382,24 +409,30 @@ In this task, you will update the container app scaling configuration by editing
 
    <details>
     <summary>Bash</summary>
+
    ```bash
    az containerapp show \
        --name $CONTAINER_APP_NAME \
        --resource-group $RESOURCE_GROUP \
        --output yaml > app-config.yaml
    ```
+
    ![](../Images/Lab05-Task4-6b.png)
+
    </details>
 
    <details>
     <summary>PowerShell</summary>
+
    ```powershell
    az containerapp show `
        --name $env:CONTAINER_APP_NAME `
        --resource-group $env:RESOURCE_GROUP `
        --output yaml > app-config.yaml
    ```
+
    ![](../Images/Lab05-Task4-1.png)
+
    </details>
 
 1. Navigate to **Explorer**, select the **app-config.yaml (1)**, then open the **app-config.yaml (2)** file in VS Code.
@@ -427,48 +460,60 @@ In this task, you will update the container app scaling configuration by editing
 
    <details>
     <summary>Bash</summary>
+
    ```bash
    az containerapp update \
        --name $CONTAINER_APP_NAME \
        --resource-group $RESOURCE_GROUP \
        --yaml app-config.yaml
    ```
+
    ![](../Images/Lab05-Task4-8b.png)
+
    </details>
 
    <details>
     <summary>PowerShell</summary>
+
    ```powershell
    az containerapp update `
        --name $env:CONTAINER_APP_NAME `
        --resource-group $env:RESOURCE_GROUP `
        --yaml app-config.yaml
    ```
+
    ![](../Images/Lab05-Task4-4.png)
+
    </details>
 
 1. Run the following command to verify the changes you just implemented.
 
    <details>
     <summary>Bash</summary>
+
    ```bash
    az containerapp show \
        --name $CONTAINER_APP_NAME \
        --resource-group $RESOURCE_GROUP \
        --query "properties.template.scale"
    ```
+
    ![](../Images/Lab05-Task4-9b.png)
+
    </details>
 
    <details>
     <summary>Powershell</summary>
+
    ```powershell
    az containerapp show `
        --name $env:CONTAINER_APP_NAME `
        --resource-group $env:RESOURCE_GROUP `
        --query "properties.template.scale"
    ```
+
    ![](../Images/Lab05-Task4-5.png)
+
    </details>
 
 ## Summary

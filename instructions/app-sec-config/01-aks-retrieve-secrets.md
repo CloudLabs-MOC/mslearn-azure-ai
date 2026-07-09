@@ -67,11 +67,13 @@ In this task, you'll prepare the development environment, deploy an Azure Key Va
 
     <details>
      <summary>PowerShell</summary>
+     
    ```
    Set-ExecutionPolicy -ExecutionPolicy bypass -Force
    ```
 
    ![](../Images/Lab01-Task1-9.png)
+
    </details>
 
 1. Run the **following command (1)** to login to your Azure account. Next, **minimize the VS Code window (2)** to view the login window opened in background.
@@ -110,18 +112,22 @@ In this task, you'll prepare the development environment, deploy an Azure Key Va
 
    <details>
     <summary>Bash</summary>
+
    ```bash
    MSYS_NO_PATHCONV=1 bash azdeploy.sh
    ```
+
    </details>
 
    <details>
     <summary>PowerShell</summary>
+
    ```powershell
    ./azdeploy.ps1
    ```
 
    ![](../Images/ai200-l21-4.png)
+
    </details>
 
 1. When the script is running, enter **1** to launch the **1. Create Key Vault** option.
@@ -152,16 +158,20 @@ In this task, you'll prepare the development environment, deploy an Azure Key Va
 
    <details>
     <summary>Bash</summary>
+
    ```bash
    source .env
    ```
+
    </details>
 
    <details>
     <summary>PowerShell</summary>
+
    ```powershell
    . .\.env.ps1
    ```
+
    </details>
 
    > **Note:** Keep the terminal open. If you close it and create a new terminal, you need to run this command again to reload the environment variables.
@@ -406,18 +416,22 @@ In this task, you navigate to the client app directory, create the Python enviro
 
    <details>
     <summary>Bash</summary>
+
    ```bash
    source .venv/Scripts/activate
    ```
+
    </details>
 
    <details>
     <summary>PowerShell</summary>
+
    ```powershell
    .\.venv\Scripts\Activate.ps1
    ```
 
    ![](../Images/ai200-l21-15.png)
+
    </details>
 
    > **Note:** On Linux/macOS, use the Bash command, use **source .venv/bin/activate**.

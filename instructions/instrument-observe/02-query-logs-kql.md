@@ -66,11 +66,13 @@ In this task, you'll prepare the development environment, configure the deployme
 
    <details>
      <summary>PowerShell</summary>
+
    ```
    Set-ExecutionPolicy -ExecutionPolicy bypass -Force
    ```
 
    ![](../Images/Lab01-Task1-9.png)
+
    </details>
 
 1. Run the **following command (1)** to login to your Azure account. Next, **minimize the VS Code window (2)** to view the login window opened in background.
@@ -132,6 +134,7 @@ In this task, you'll prepare the development environment, configure the deployme
    ```
 
    ![](../Images/lab24-t1p3.png)
+
    </details>
 
 1. When the script is running, enter **1** to launch the **1. Create Application Insights** option.
@@ -373,6 +376,7 @@ In this task, you'll use the Azure CLI to create an Azure Monitor action group a
    ```
 
    ![](../Images/lab24-t4p1.png)
+
    </details>
 
    This command creates an action group named **pipeline-alerts-ag** that sends email notifications when triggered.
@@ -433,6 +437,7 @@ In this task, you'll use the Azure CLI to create an Azure Monitor action group a
    ```
 
    ![](<../Images/lab24-t4p2(1).png>)
+
    </details>
 
    <details>
@@ -447,6 +452,7 @@ In this task, you'll use the Azure CLI to create an Azure Monitor action group a
    ```
 
    ![](../Images/lab24-t4p2.png)
+
    </details>
 
    Confirm the **Enabled** column shows **True** and the severity, window, and frequency values match what you specified in the previous step.
@@ -463,6 +469,7 @@ In this task, you'll use the Azure CLI to create an Azure Monitor action group a
    ```
 
    ![](<../Images/lab24-t4p3(1).png>)
+
    </details>
 
    <details>
